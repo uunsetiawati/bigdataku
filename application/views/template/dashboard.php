@@ -147,6 +147,18 @@
 							</div>
 						</div>
 						</a>
+						<a href="<?=site_url('jenisproduk')?>">						
+						<div id="accordionTwo1" class="accordion-body collapse" data-parent="#accordionParent2">
+							<div class="list-item">
+								<div class="list-label">
+									<div class="accordion-content">
+										<div class="list-title">Jenis Produk UKM</div>
+									</div>
+									<div class="list-after"><i class="icon ion-ios-arrow-forward" data-target="#accordionTwo1"></i></div>
+								</div>
+							</div>
+						</div>
+						</a>
 					</div>
 				</li>								
 				<li>
