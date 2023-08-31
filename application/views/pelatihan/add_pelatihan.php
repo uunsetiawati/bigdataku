@@ -17,19 +17,26 @@
 	<?=form_hidden('now',$now);?>
 		<div class="form-wrapper">            
 			<div class="input-wrap">
-				<input type="text" name="judul" class="form-control" placeholder="Judul Pelatihan" value="<?= set_value('judul'); ?>" class="form-control <?= (form_error('judul') == "" ? '':'is-invalid') ?>">
+				<input type="text" name="judul" class="form-control" placeholder="JUDUL PELATIHAN" value="<?= set_value('judul'); ?>" class="form-control <?= (form_error('judul') == "" ? '':'is-invalid') ?>">
 				<?= form_error('judul'); ?> 
 			</div>
 			<div class="input-wrap">
+				<?php
+                // cmb_dinamis(nama, tabelnya, fieldnya, pknya, selected, extra)
+                  echo cmb_dinamis('kode', 'tb_kodekegiatan', 'uraian', 'id',null);
+                ?> 
+				<?= form_error('kode'); ?>                
+			</div>
+			<div class="input-wrap">
 				<select name="divisi" class="form-control" required>
-					<option value="" selected disabled>Pilih Divisi</option>
+					<option value="" selected disabled>PILIH DIVISI</option>
 					<option value="PENGEMBANGAN">PENGEMBANGAN</option>
 					<option value="PENYELENGGARA">PENYELENGGARA</option>
 					<option value="DAK">DAK</option>
 				</select>
 			</div>
 			<div class="input-wrap">
-				<input type="text" name="alamat" class="form-control" placeholder="Tempat Pelatihan" value="<?= set_value('alamat'); ?>" class="form-control <?= (form_error('alamat') == "" ? '':'is-invalid') ?>">
+				<input type="text" name="alamat" class="form-control" placeholder="TEMPAT PELATIHAN" value="<?= set_value('alamat'); ?>" class="form-control <?= (form_error('alamat') == "" ? '':'is-invalid') ?>">
 				<?= form_error('alamat'); ?>
 			</div>
 			<div class="input-wrap">
@@ -40,7 +47,7 @@
 			</div>
 			<div class="input-wrap">
 				<select name="jenis" class="form-control" required>
-					<option value="" selected disabled>Pilih Jenis Pelatihan</option>
+					<option value="" selected disabled>PILIH JENIS PELATIHAN</option>
 					<option value="OFFLINE">OFFLINE</option>
 					<option value="ONLINE">ONLINE</option>
 				</select>
@@ -53,7 +60,7 @@
 			</div>
 			<div class="input-wrap">
 				<select name="status" class="form-control" required>
-					<option value="" selected disabled>Pilih Status</option>
+					<option value="" selected disabled>PILIH STATUS</option>
 					<option value="1">Aktif</option>
 					<option value="2">Tidak Aktif</option>
 				</select>

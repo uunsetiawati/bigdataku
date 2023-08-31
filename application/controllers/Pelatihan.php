@@ -23,6 +23,7 @@ class Pelatihan extends CI_Controller {
 		$columns    = array(
 			//tabel db(kolom di database) => dt(nama datatable di view)
 			array('db' => 'judul_pelatihan', 'dt' => 'judul'),
+			array('db' => 'kode', 'dt' 	=> 'kode'),
 			array('db' => 'divisi', 'dt' 	=> 'divisi'),
 			array('db' => 'name', 'dt' 	=> 'alamat'),
 	        array('db' => 'jenis_pelatihan', 'dt' => 'jenis'),
@@ -70,10 +71,9 @@ class Pelatihan extends CI_Controller {
 			// ]); // Unique Field
 
 			$this->form_validation->set_rules('judul', 'Judul', 'required'); // Unique Field
-
 			$this->form_validation->set_rules('alamat', 'Alamat', 'required'); // Unique Field
-
 			$this->form_validation->set_rules('kota', 'Kab/Kota', 'required'); // Unique Field
+			$this->form_validation->set_rules('kode', 'Kode Kegiatan', 'required'); // Unique Field
 
 			if ($this->form_validation->run() == FALSE)
 			{			
@@ -101,6 +101,8 @@ class Pelatihan extends CI_Controller {
 		$this->form_validation->set_rules('alamat', 'Alamat', 'required'); // Unique Field
 
 		$this->form_validation->set_rules('kota', 'Kab/Kota', 'required'); // Unique Field
+
+		$this->form_validation->set_rules('kode', 'Kode Kegiatan', 'required'); // Unique Field
 
 		if ($this->form_validation->run() == FALSE)
 		{			

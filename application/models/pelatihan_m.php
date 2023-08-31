@@ -12,6 +12,7 @@
 			$data = array(				
 				//tabel di database => name di form				
 				'divisi'   			=> $this->input->post('divisi', TRUE),
+				'kode_kegiatan'   	=> $this->input->post('kode', TRUE),
 				'judul_pelatihan'   => $this->input->post('judul', TRUE),
 				'alamat_pelatihan'  => $this->input->post('alamat', TRUE),
 				'jenis_pelatihan'   => $this->input->post('jenis', TRUE),
@@ -28,6 +29,7 @@
 		{
 			$data = array(
 				'divisi'   			=> $this->input->post('divisi', TRUE),
+				'kode_kegiatan'   	=> $this->input->post('kode', TRUE),
 				'judul_pelatihan'   => $this->input->post('judul', TRUE),
 				'alamat_pelatihan'  => $this->input->post('alamat', TRUE),
 				'kota'				=> $this->input->post('kota', TRUE),

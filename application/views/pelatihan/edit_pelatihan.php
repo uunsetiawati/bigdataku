@@ -23,7 +23,15 @@
 			</div>
 			<div class="input-wrap">
 				<?php
-					echo form_dropdown('divisi', array( 'PENGEMBANGAN'=>'PENGEMBANGAN', 'PENYELENGGARA'=>'PENYELENGGARA', 'DAK'=>'DAK'), $pelatihan['divisi'], "class='form-control'");
+                // cmb_dinamis(nama, tabelnya, fieldnya, pknya, selected, extra)
+                 	echo cmb_dinamis('kode', 'tb_kodekegiatan', 'kode', 'id',$this->input->post('kode') ?? $pelatihan['id_kode']);
+                ?>   
+				<?= form_error('kode'); ?>            
+				 
+			</div>
+			<div class="input-wrap">
+				<?php
+					echo form_dropdown('divisi', array('PENGEMBANGAN'=>'PENGEMBANGAN', 'PENYELENGGARA'=>'PENYELENGGARA', 'DAK'=>'DAK'), $pelatihan['divisi'], "class='form-control'");
 				?>
 			</div>
 			<div class="input-wrap">
@@ -56,6 +64,9 @@
 			</div>
 			<div class="button-default">
 				<button type="submit" name="simpan" class="button">Simpan</button>
+				<?php
+					echo anchor('pelatihan', 'Kembali', array('class'=>'button2'));
+				?>
 			</div>
 		</div>
 	</form>

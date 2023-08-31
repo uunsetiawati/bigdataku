@@ -3,8 +3,8 @@
 	function cmb_dinamis($name, $table, $field, $pk, $selected=null, $extra=null)
 	{
 		$ci   = get_instance();
-		$cmb  = "<select name='$name' class='custom-select' $extra>
-				<option value='' selected disabled>Pilih Kab/Kota</option>";
+		$cmb  = "<select name='$name' class='form-control' $extra>
+				<option value='' selected disabled>PILIH KODE</option>";
 
 		$data = $ci->db->get($table)->result();
 		foreach ($data as $row) {
@@ -59,7 +59,7 @@
 	{
 		$ci   = get_instance();
 		$cmb  = "<select name='$name' class='form-control' $extra required>
-				<option value='' selected disabled>Pilih Kab/Kota</option>";
+				<option value='' selected disabled>PILIH KAB/KOTA</option>";
 
 		$data = $ci->db->get_where($table, array('province_id' => $id_prov))->result();	
 		foreach ($data as $row) {
