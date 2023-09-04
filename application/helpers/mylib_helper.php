@@ -18,6 +18,24 @@
 		return $cmb;
 	}
 
+	function cmb_dinamiskop($name, $table, $field, $pk, $option,$selected=null, $extra=null)
+	{
+		$ci   = get_instance();
+		$cmb  = "<select name='$name' class='form-control' $extra required>
+				<option value='' selected disabled>$option</option>";
+
+		$data = $ci->db->get($table)->result();
+		foreach ($data as $row) {
+			$cmb .= "<option value='".$row->$pk."'";
+			//Apabila $selected bernilai sama dengan nilai $pk maka akan bernilai selected selain itu akan bernilai null
+			$cmb .= $selected == $row->$pk ? 'selected' : '';
+			$cmb .= ">".$row->$field."</option>";
+		}
+		$cmb .= "</select>";
+
+		return $cmb;
+	}
+
 	// ada kondisi sesuai dengan user login yaitu id_user
 	function cmb_dinamis2($name, $table, $field, $pk, $id_user,$selected=null, $extra=null)
 	{
@@ -72,12 +90,68 @@
 		return $cmb;
 	}
 
-	function cmb_dinamiskota2($name, $table, $field, $pk, $id_prov,$selected=null, $extra=null)
+	function cmb_dinamisprov($name, $table, $field, $pk, $id, $toggle, $selected=null, $extra=null)
 	{
 		$ci   = get_instance();
-		$cmb  = "<select name='$name' class='custom-select' $extra required>";
+		$cmb  = "<select name='$name' id='$id' class='form-control' onchange='$toggle' $extra required>
+		<option value='' selected disabled>PILIH PROVINSI</option>";
 
-		$data = $ci->db->get_where($table, array('province_id' => $id_prov))->result();	
+		$data = $ci->db->order_by('name','ASC')->get($table)->result();
+		// $data = $ci->db->order_by($pk,'ASC');
+		foreach ($data as $row) {
+			$cmb .= "<option value='".$row->$pk."'";
+			//Apabila $selected bernilai sama dengan nilai $pk maka akan bernilai selected selain itu akan bernilai null
+			$cmb .= $selected == $row->$pk ? 'selected' : '';
+			$cmb .= ">".$row->$field."</option>";
+		}
+		$cmb .= "</select>";
+		return $cmb;
+	}
+
+	function cmb_dinamiskab($name, $table, $field, $pk, $id, $toggle, $selected=null, $extra=null)
+	{
+		$ci   = get_instance();
+		$cmb  = "<select name='$name' id='$id' class='form-control' onchange='$toggle' $extra required disabled>
+		<option value='' selected disabled>PILIH KAB/KOTA</option>";
+
+		$data = $ci->db->get($table)->result();
+		// $data = $ci->db->order_by('id','ASC');
+		foreach ($data as $row) {
+			$cmb .= "<option value='".$row->$pk."'";
+			//Apabila $selected bernilai sama dengan nilai $pk maka akan bernilai selected selain itu akan bernilai null
+			$cmb .= $selected == $row->$pk ? 'selected' : '';
+			$cmb .= ">".$row->$field."</option>";
+		}
+		$cmb .= "</select>";
+		return $cmb;
+	}
+
+	function cmb_dinamiskec($name, $table, $field, $pk, $id, $toggle, $selected=null, $extra=null)
+	{
+		$ci   = get_instance();
+		$cmb  = "<select name='$name' id='$id' class='form-control' onchange='$toggle' $extra required disabled>
+		<option value='' selected disabled>PILIH KECAMATAN</option>";
+
+		$data = $ci->db->get($table)->result();
+		// $data = $ci->db->order_by('id','ASC');
+		foreach ($data as $row) {
+			$cmb .= "<option value='".$row->$pk."'";
+			//Apabila $selected bernilai sama dengan nilai $pk maka akan bernilai selected selain itu akan bernilai null
+			$cmb .= $selected == $row->$pk ? 'selected' : '';
+			$cmb .= ">".$row->$field."</option>";
+		}
+		$cmb .= "</select>";
+		return $cmb;
+	}
+
+	function cmb_dinamiskel($name, $table, $field, $pk,$id,$selected=null, $extra=null)
+	{
+		$ci   = get_instance();
+		$cmb  = "<select name='$name' id='$id' class='form-control' $extra required disabled>
+		<option value='' selected disabled>PILIH KELURAHAN</option>";
+
+		$data = $ci->db->get($table)->result();
+		// $data = $ci->db->order_by('id','ASC');
 		foreach ($data as $row) {
 			$cmb .= "<option value='".$row->$pk."'";
 			//Apabila $selected bernilai sama dengan nilai $pk maka akan bernilai selected selain itu akan bernilai null

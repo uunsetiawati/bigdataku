@@ -10,7 +10,8 @@
 			// date_default_timezone_set('Asia/Jakarta'); # add your city to set local time zone
 			// $now = date('Y-m-d H:i:s');
 			$data = array(				
-				//tabel di database => name di form				
+				//tabel di database => name di form
+				'kodeunik'			=> date("Ymdhi"),				
 				'divisi'   			=> $this->input->post('divisi', TRUE),
 				'kode_kegiatan'   	=> $this->input->post('kode', TRUE),
 				'judul_pelatihan'   => $this->input->post('judul', TRUE),
