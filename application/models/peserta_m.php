@@ -5,7 +5,7 @@
 
 		public $table ="tb_data_peserta";
 
-		function save()
+		function save($foto)
 		{
 			$data = array(
 				//tabel di database => name di form				
@@ -68,6 +68,7 @@
 				'lokasi_pemasaran'		=> $this->input->post('lokasi_pemasaran', TRUE),
 				'permasalahan'			=> $this->input->post('permasalahan', TRUE),
 				'jabatan'				=> $this->input->post('jabatan', TRUE),
+				'foto'					=> $foto,
 				'created'				=> $this->input->post('now', TRUE)
 			);
 			$this->db->insert($this->table, $data);

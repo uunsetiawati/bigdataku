@@ -130,11 +130,28 @@ class Peserta extends CI_Controller {
 		}
 		else
 		{   
-			$this->peserta_m->save();
+			$uploadFoto = $this->upload_foto();
+			$this->peserta_m->save($uploadFoto);
 			// redirect('peserta');
 			echo "sukses";
 		}
 	}	
+
+	function upload_foto()
+		{
+			$kodeunik = $this->uri->segment(3);
+			//validasi foto yang di upload
+			$config['upload_path']          = './uploads/peserta/';
+            $config['allowed_types']        = 'gif|jpg|png|jpeg';
+            $config['max_size']             = 3000;
+			$config['file_name'] 			= 'PESERTA'.'-'.$kodeunik.'-'.time();
+            $this->load->library('upload', $config);
+
+            //proses upload
+            $this->upload->do_upload('userfile');
+            $upload = $this->upload->data();
+            return $upload['file_name'];
+		}
 
 	
 	function noktp_check(){

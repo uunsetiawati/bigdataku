@@ -199,12 +199,21 @@
 				<?php $this->load->view('peserta/add_peserta_koperasi')?>
 			</div>
 
-			<div class="form-wrapper" id="ukm" style="display:none;">
+			<!-- <div class="form-wrapper" id="ukm" style="display:none;">
 				<?php $this->load->view('peserta/add_peserta_ukm')?>
 			</div>
 
 			<div class="form-wrapper" id="calon_wirausaha" style="display:none;">
 				<?php $this->load->view('peserta/add_peserta_calon_wirausaha')?>
+			</div> -->
+
+			<div class="form-wrapper" id="foto" style="display:none;">
+				<div class="input-wrap row">
+					<label class="col-3 col-form-label">UPLOAD FOTO DIRI</label>
+					<div class="col-9">
+					<input type="file" name="userfile" class="form-control" required>
+					</div>
+				</div>
 			</div>
 
 			<div class="button-default">
@@ -261,23 +270,15 @@
 			document.getElementById("ukm").style.display = 'none';
 			document.getElementById("calon_wirausaha").style.display = 'none';
             document.getElementById("btnsubmit").style.display = 'none';
+			document.getElementById("foto").style.display = 'none';
             
         }else if(x=="KOPERASI"){
             document.getElementById("koperasi").style.display = 'block';
-			document.getElementById("ukm").style.display = 'none';
-			document.getElementById("calon_wirausaha").style.display = 'none';
+			// document.getElementById("ukm").style.display = 'none';
+			// document.getElementById("calon_wirausaha").style.display = 'none';
+			document.getElementById("foto").style.display = 'block';
 			document.getElementById("btnsubmit").style.display = 'block';
-        }else if(x=="UKM"){            
-			document.getElementById("ukm").style.display = 'block';
-            document.getElementById("koperasi").style.display = 'none';
-			document.getElementById("calon_wirausaha").style.display = 'none';
-			document.getElementById("btnsubmit").style.display = 'block';
-        }else if(x=="calon_wirausaha"){
-			document.getElementById("ukm").style.display = 'none';
-            document.getElementById("koperasi").style.display = 'none';
-			document.getElementById("calon_wirausaha").style.display = 'block';
-			document.getElementById("btnsubmit").style.display = 'block';
-		}
+        }
         
     }
   $(document).ready(function(){
