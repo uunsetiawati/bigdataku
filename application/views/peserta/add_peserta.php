@@ -19,7 +19,7 @@
 
 
 <div class="container">
-	<form action="<?= site_url('peserta/add_peserta/'.$this->uri->segment('3')) ?>" enctype="multipart/form-data" method="post" id="add" class="form-outline">
+	<form action="<?= site_url('peserta/add_peserta/'.$this->uri->segment('3')) ?>" enctype="multipart/form-data" method="post" id="add" class="form-outline">	
 	<?php 
 	date_default_timezone_set('Asia/Jakarta'); # add your city to set local time zone
 	$now = date('Y-m-d H:i:s');
@@ -174,6 +174,7 @@
 				<?= form_error('no_telp'); ?>
 				</div>
 			</div>
+			
 
 			<!-- separator -->
 			<div class="separator-small"></div>
@@ -182,6 +183,7 @@
 			<!-- separator -->
 			<div class="separator-small"></div>
 			<!-- end separator -->
+			<!-- <?= form_close()?> -->
 			  
 			<div class="input-wrap row">
 				<label class="col-3 col-form-label">JENIS PESERTA</label>
@@ -194,18 +196,17 @@
 				</select>
 				</div>
 			</div>
+			
 
+			
 			<div class="form-wrapper" id="koperasi" style="display:none;">
-				<?php $this->load->view('peserta/add_peserta_koperasi')?>
+				<?php $this->load->view('peserta/add_peserta_koperasi')?>				
+				
 			</div>
 
-			<!-- <div class="form-wrapper" id="ukm" style="display:none;">
-				<?php $this->load->view('peserta/add_peserta_ukm')?>
+			<div class="form-wrapper" id="ukm" style="display:none;">
+				<?php $this->load->view('peserta/add_peserta_ukm')?>				
 			</div>
-
-			<div class="form-wrapper" id="calon_wirausaha" style="display:none;">
-				<?php $this->load->view('peserta/add_peserta_calon_wirausaha')?>
-			</div> -->
 
 			<div class="form-wrapper" id="foto" style="display:none;">
 				<div class="input-wrap row">
@@ -219,127 +220,11 @@
 			<div class="button-default">
 				<button type="submit" name="simpan" class="button" id="btnsubmit" style="display:none">Simpan</button>
 			</div>
-		</div>
-	</form>
+	</form>			
 </div>
 
 <!-- separator -->
 <div class="separator-large"></div>
 <!-- end separator -->
 
-<script type="text/javascript">
-	function toggleselect() {
-		var select1 = document.getElementById("provinsi");
-		var select2 = document.getElementById("kota");
-
-		// Periksa apakah select pertama dipilih
-		if (select1.value !== "") {
-			select2.disabled = false; // Aktifkan select kedua
-		} else {
-			select2.disabled = true; // Nonaktifkan select kedua
-		}
-	}
-	function toggleselect2() {
-		var select1 = document.getElementById("kota");
-		var select2 = document.getElementById("kecamatan");
-
-		// Periksa apakah select pertama dipilih
-		if (select1.value !== "") {
-			select2.disabled = false; // Aktifkan select kedua
-		} else {
-			select2.disabled = true; // Nonaktifkan select kedua
-		}
-	}
-	function toggleselect3() {
-		var select1 = document.getElementById("kecamatan");
-		var select2 = document.getElementById("kelurahan");
-
-		// Periksa apakah select pertama dipilih
-		if (select1.value !== "") {
-			select2.disabled = false; // Aktifkan select kedua
-		} else {
-			select2.disabled = true; // Nonaktifkan select kedua
-		}
-	}	
-	function ukmkoperasi()
-    {
-        var x = document.getElementById("pilihtipe").value;
-
-        if(x==""){
-            document.getElementById("koperasi").style.display = 'none';
-			document.getElementById("ukm").style.display = 'none';
-			document.getElementById("calon_wirausaha").style.display = 'none';
-            document.getElementById("btnsubmit").style.display = 'none';
-			document.getElementById("foto").style.display = 'none';
-            
-        }else if(x=="KOPERASI"){
-            document.getElementById("koperasi").style.display = 'block';
-			// document.getElementById("ukm").style.display = 'none';
-			// document.getElementById("calon_wirausaha").style.display = 'none';
-			document.getElementById("foto").style.display = 'block';
-			document.getElementById("btnsubmit").style.display = 'block';
-        }
-        
-    }
-  $(document).ready(function(){
-    $('#provinsi').change(function(){
-      var id=$(this).val();
-      $.ajax({
-        url : "<?php echo base_url('action/get_kota');?>",
-        method : "POST",
-        data : {id: id},
-        async : false,
-            dataType : 'json',
-        success: function(data){
-          var html = '';
-		  		html='<option value="" selected disabled>PILIH KAB/KOTA</option>';
-                var i;
-                for(i=0; i<data.length; i++){
-                    html += '<option value="'+data[i].id+'">'+data[i].name+'</option>';
-                }
-                $('#kota').html(html);         
-        }
-      });
-    });
-    $('#kota').change(function(){
-      var id=$(this).val();
-      $.ajax({
-        url : "<?php echo base_url('action/get_kecamatan');?>",
-        method : "POST",
-        data : {id: id},
-        async : false,
-            dataType : 'json',
-        success: function(data){
-          var html = '';
-		  		html='<option value="" selected disabled>PILIH KECAMATAN</option>';
-                var i;
-                for(i=0; i<data.length; i++){
-                    html += '<option value="'+data[i].id+'">'+data[i].name+'</option>';
-                }
-                $('#kecamatan').html(html);         
-        }
-      });
-    });
-    $('#kecamatan').change(function(){
-      var id=$(this).val();
-      $.ajax({
-        url : "<?php echo base_url('action/get_kelurahan');?>",
-        method : "POST",
-        data : {id: id},
-        async : false,
-            dataType : 'json',
-        success: function(data){
-          var html = '';
-                var i;
-				html='<option value="" selected disabled>PILIH KELURAHAN</option>';
-                for(i=0; i<data.length; i++){
-                    html += '<option value="'+data[i].id+'">'+data[i].name+'</option>';
-                }
-                $('#kelurahan').html(html);         
-        }
-      });
-    });	
-  });
-
- 
-</script>
+<?php $this->load->view('peserta/script_peserta')?>

@@ -130,8 +130,15 @@ class Peserta extends CI_Controller {
 		}
 		else
 		{   
+			
+			// $checkbox = $this->input->post('sosmed_usaha');
+			// $sosmed=implode(',',$checkbox);
+
 			$uploadFoto = $this->upload_foto();
+							
+			
 			$this->peserta_m->save($uploadFoto);
+			
 			// redirect('peserta');
 			echo "sukses";
 		}

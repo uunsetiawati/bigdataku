@@ -7,6 +7,7 @@
 
 		function save($foto)
 		{
+			$checkbox = $this->input->post('sosmed_usaha');
 			$data = array(
 				//tabel di database => name di form				
 				'id_pelatihan'          => $this->input->post('id_pel', TRUE),
@@ -61,7 +62,7 @@
 				'tokped'				=> $this->input->post('tokped', TRUE),
 				'bukalapak'				=> $this->input->post('bukalapak', TRUE),
 				'lazada'				=> $this->input->post('lazada', TRUE),
-				'sosmed_usaha'			=> $this->input->post('sosmed_usaha', TRUE),
+				'sosmed_usaha'			=> implode(',',$checkbox),
 				'market_usaha'			=> $this->input->post('market_usaha', TRUE),
 				'pengadaan'				=> $this->input->post('pengadaan', TRUE),
 				'izin_usaha'			=> $this->input->post('izin_usaha', TRUE),

@@ -76,3 +76,16 @@
     <input type="text" name="lazada" placeholder="AKUN LAZADA" value="<?= set_value('lazada'); ?>" class="form-control">
     </div>
 </div>	
+<div class="input-wrap row">
+    <label class="col-3 col-form-label">SOSIAL MEDIA</label>
+    <div class="col-9">
+    <label class="form-control2">
+    <input type="checkbox" name="sosmed_usaha[]" value="INSTAGRAM" />
+    INSTAGRAM
+    </label>
+    <label class="form-control2">
+    <input type="checkbox" name="sosmed_usaha[]" value="TIKTOK" />
+    TIKTOK
+    </label>
+    </div>				
+</div>
