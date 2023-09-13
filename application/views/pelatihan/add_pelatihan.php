@@ -17,52 +17,61 @@
 	<?=form_hidden('now',$now);?>
 		<div class="form-wrapper">            
 			<div class="input-wrap">
-				<input type="text" name="judul" class="form-control" placeholder="JUDUL PELATIHAN" value="<?= set_value('judul'); ?>" class="form-control <?= (form_error('judul') == "" ? '':'is-invalid') ?>">
+				<input type="text" name="judul" placeholder="JUDUL PELATIHAN" onkeyup="this.value = this.value.toUpperCase()" value="<?= set_value('judul'); ?>" class="form-control <?= (form_error('judul') == "" ? '':'is-invalid') ?>">
 				<?= form_error('judul'); ?> 
 			</div>
-			<div class="input-wrap">
-				<?php
-                // cmb_dinamis(nama, tabelnya, fieldnya, pknya, selected, extra)
-                  echo cmb_dinamis('kode', 'tb_kodekegiatan', 'uraian', 'id',null);
-                ?> 
-				<?= form_error('kode'); ?>                
+
+			<span class="section-subtitle"><code>Kode Anggaran</code></span>
+			
+			<div class="input-wrap">				
+				<input type="text" name="program" placeholder="KODE ANGGARAN PROGRAM" value="<?= set_value('program'); ?>" class="form-control <?= (form_error('program') == "" ? '':'is-invalid') ?>">
+				<?= form_error('program'); ?>					
 			</div>
+			<div class="input-wrap">
+				<input type="text" name="kegiatan" placeholder="KODE ANGGARAN KEGIATAN" value="<?= set_value('kegiatan'); ?>" class="form-control <?= (form_error('kegiatan') == "" ? '':'is-invalid') ?>">
+				<?= form_error('kegiatan'); ?>						
+			</div>
+			<div class="input-wrap">
+				<input type="text" name="subkegiatan" placeholder="KODE ANGGARAN SUB KEGIATAN" value="<?= set_value('subkegiatan'); ?>" class="form-control <?= (form_error('subkegiatan') == "" ? '':'is-invalid') ?>">
+				<?= form_error('subkegiatan'); ?>						
+			</div>
+			<hr>
 			<div class="input-wrap">
 				<select name="divisi" class="form-control" required>
 					<option value="" selected disabled>PILIH DIVISI</option>
-					<option value="PENGEMBANGAN">PENGEMBANGAN</option>
-					<option value="PENYELENGGARA">PENYELENGGARA</option>
-					<option value="DAK">DAK</option>
+					<option value="PENGEMBANGAN" <?=$this->input->post('divisi') == 'PENGEMBANGAN' ? 'selected':''?>>PENGEMBANGAN</option>
+					<option value="PENYELENGGARA" <?=$this->input->post('divisi') == 'PENYELENGGARA' ? 'selected':''?>>PENYELENGGARA</option>
+					<option value="DAK" <?=$this->input->post('divisi') == 'DAK' ? 'selected':''?>>PENYELENGGARA>DAK</option>
 				</select>
 			</div>
 			<div class="input-wrap">
-				<input type="text" name="alamat" class="form-control" placeholder="TEMPAT PELATIHAN" value="<?= set_value('alamat'); ?>" class="form-control <?= (form_error('alamat') == "" ? '':'is-invalid') ?>">
+				<input type="text" name="alamat" placeholder="TEMPAT PELATIHAN" onkeyup="this.value = this.value.toUpperCase()" value="<?= set_value('alamat'); ?>" class="form-control <?= (form_error('alamat') == "" ? '':'is-invalid') ?>">
 				<?= form_error('alamat'); ?>
 			</div>
 			<div class="input-wrap">
 				<?php
                 // cmb_dinamis(nama, tabelnya, fieldnya, pknya, selected, extra)
-                  echo cmb_dinamiskota('kota', 'regencies', 'name', 'id','35');
+                  echo cmb_dinamiskota('kota', 'regencies', 'name', 'id','35',$this->input->post('kota'));
                 ?>                
 			</div>
 			<div class="input-wrap">
 				<select name="jenis" class="form-control" required>
 					<option value="" selected disabled>PILIH JENIS PELATIHAN</option>
-					<option value="OFFLINE">OFFLINE</option>
-					<option value="ONLINE">ONLINE</option>
+					<option value="OFFLINE" <?=$this->input->post('jenis') == 'OFFLINE' ? 'selected':''?>>OFFLINE</option>
+					<option value="ONLINE" <?=$this->input->post('jenis') == 'ONLINE' ? 'selected':''?>>ONLINE</option>
 				</select>
 			</div>
 			<div class="input-wrap">
-				<input type="date" name="awal" placeholder="Tanggal Mulai Pelatihan" class="form-control" required="">
+				<input type="date" name="awal" value="<?= set_value('awal')?>" placeholder="Tanggal Mulai Pelatihan" class="form-control" required="">
 			</div>
 			<div class="input-wrap">
-				<input type="date" name="akhir" placeholder="Tanggal Akhir Pelatihan" class="form-control" required="">
+				<input type="date" name="akhir" value="<?= set_value('akhir')?>" placeholder="Tanggal Akhir Pelatihan" class="form-control" required="">
 			</div>
 			<div class="input-wrap">
 				<select name="status" class="form-control" required>
 					<option value="" selected disabled>PILIH STATUS</option>
-					<option value="1">Aktif</option>
-					<option value="2">Tidak Aktif</option>
+					<option value="1" <?=$this->input->post('status') == '1' ? 'selected':''?>>AKTIF</option>
+					<option value="2" <?=$this->input->post('status') == '2' ? 'selected':''?>>TIDAK AKTIF</option>
 				</select>
 			</div>
 			<div class="button-default">

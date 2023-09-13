@@ -12,8 +12,10 @@
 			$data = array(				
 				//tabel di database => name di form
 				'kodeunik'			=> date("Ymdhi"),				
-				'divisi'   			=> $this->input->post('divisi', TRUE),
-				'kode_kegiatan'   	=> $this->input->post('kode', TRUE),
+				'program'   		=> $this->input->post('program', TRUE),
+				'kegiatan'   		=> $this->input->post('kegiatan', TRUE),
+				'subkegiatan'   	=> $this->input->post('subkegiatan', TRUE),
+				'divisi'   			=> $this->input->post('divisi', TRUE),				
 				'judul_pelatihan'   => $this->input->post('judul', TRUE),
 				'alamat_pelatihan'  => $this->input->post('alamat', TRUE),
 				'jenis_pelatihan'   => $this->input->post('jenis', TRUE),
@@ -30,7 +32,9 @@
 		{
 			$data = array(
 				'divisi'   			=> $this->input->post('divisi', TRUE),
-				'kode_kegiatan'   	=> $this->input->post('kode', TRUE),
+				'program'   		=> $this->input->post('program', TRUE),
+				'kegiatan'   		=> $this->input->post('kegiatan', TRUE),
+				'subkegiatan'   	=> $this->input->post('subkegiatan', TRUE),
 				'judul_pelatihan'   => $this->input->post('judul', TRUE),
 				'alamat_pelatihan'  => $this->input->post('alamat', TRUE),
 				'kota'				=> $this->input->post('kota', TRUE),

@@ -36,7 +36,7 @@
 									<tr>
 										<th >No</th>
 										<th >Judul</th>
-                                        <th >Kode</th>
+                                        <th >Kode Program</th>
 										<th >KAB/KOTA</th>
 										<th >Jenis Pelatihan</th>
                                         <th >Mulai</th>
@@ -86,7 +86,7 @@
                         "data": "judul",
                     },
                     { 
-                        "data": "kode",
+                        "data": "program",
                     },
                     { 
                         "data": "alamat",

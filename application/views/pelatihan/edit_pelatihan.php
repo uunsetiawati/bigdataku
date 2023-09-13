@@ -18,15 +18,22 @@
 	<?=form_hidden('id',$pelatihan['id']);?>
 		<div class="form-wrapper">            
 			<div class="input-wrap">
-				<input type="text" name="judul" placeholder="Judul Pelatihan" value="<?= $this->input->post('judul') ?? $pelatihan['judul_pelatihan']; ?>" class="form-control <?= (form_error('judul') == "" ? '':'is-invalid') ?>">
+				<input type="text" name="judul" placeholder="Judul Pelatihan" onkeyup="this.value = this.value.toUpperCase()" value="<?= $this->input->post('judul') ?? $pelatihan['judul_pelatihan']; ?>" class="form-control <?= (form_error('judul') == "" ? '':'is-invalid') ?>">
 				<?= form_error('judul'); ?> 
 			</div>
 			<div class="input-wrap">
-				<?php
-                // cmb_dinamis(nama, tabelnya, fieldnya, pknya, selected, extra)
-                 	echo cmb_dinamis('kode', 'tb_kodekegiatan', 'kode', 'id',$this->input->post('kode') ?? $pelatihan['id_kode']);
-                ?>   
-				<?= form_error('kode'); ?>            
+				<input type="text" name="program" placeholder="KODE ANGGARAN PROGRAM" value="<?= $this->input->post('program') ?? $pelatihan['program']; ?>" class="form-control <?= (form_error('program') == "" ? '':'is-invalid') ?>">
+					<?= form_error('program'); ?>          
+				 
+			</div>
+			<div class="input-wrap">
+				<input type="text" name="kegiatan" placeholder="KODE ANGGARAN KEGIATAN" value="<?= $this->input->post('kegiatan') ?? $pelatihan['kegiatan']; ?>" class="form-control <?= (form_error('kegiatan') == "" ? '':'is-invalid') ?>">
+					<?= form_error('kegiatan'); ?>          
+				 
+			</div>
+			<div class="input-wrap">
+				<input type="text" name="subkegiatan" placeholder="KODE ANGGARAN SUB KEGIATAN" value="<?= $this->input->post('subkegiatan') ?? $pelatihan['subkegiatan']; ?>" class="form-control <?= (form_error('subkegiatan') == "" ? '':'is-invalid') ?>">
+					<?= form_error('subkegiatan'); ?>          
 				 
 			</div>
 			<div class="input-wrap">

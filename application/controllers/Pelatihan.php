@@ -23,7 +23,7 @@ class Pelatihan extends CI_Controller {
 		$columns    = array(
 			//tabel db(kolom di database) => dt(nama datatable di view)
 			array('db' => 'judul_pelatihan', 'dt' => 'judul'),
-			array('db' => 'kode', 'dt' 	=> 'kode'),
+			array('db' => 'program', 'dt' 	=> 'program'),
 			array('db' => 'divisi', 'dt' 	=> 'divisi'),
 			array('db' => 'name', 'dt' 	=> 'alamat'),
 	        array('db' => 'jenis_pelatihan', 'dt' => 'jenis'),
@@ -72,8 +72,10 @@ class Pelatihan extends CI_Controller {
 
 			$this->form_validation->set_rules('judul', 'Judul', 'required'); // Unique Field
 			$this->form_validation->set_rules('alamat', 'Alamat', 'required'); // Unique Field
-			$this->form_validation->set_rules('kota', 'Kab/Kota', 'required'); // Unique Field
-			$this->form_validation->set_rules('kode', 'Kode Kegiatan', 'required'); // Unique Field
+			$this->form_validation->set_rules('kota', 'Kab/Kota', 'required'); // Unique Field			
+			$this->form_validation->set_rules('program', 'Program Kode Anggaran', 'required'); // Unique Field
+			$this->form_validation->set_rules('kegiatan', 'Kegiatan Kode Anggaran', 'required'); // Unique Field
+			$this->form_validation->set_rules('subkegiatan', 'Sub Kegaitan Kode Anggaran', 'required'); // Unique Field
 
 			if ($this->form_validation->run() == FALSE)
 			{			
@@ -97,12 +99,11 @@ class Pelatihan extends CI_Controller {
 	{
 
 		$this->form_validation->set_rules('judul', 'Judul', 'required'); // Unique Field
-
 		$this->form_validation->set_rules('alamat', 'Alamat', 'required'); // Unique Field
-
 		$this->form_validation->set_rules('kota', 'Kab/Kota', 'required'); // Unique Field
-
-		$this->form_validation->set_rules('kode', 'Kode Kegiatan', 'required'); // Unique Field
+		$this->form_validation->set_rules('program', 'Program Kode Anggaran', 'required'); // Unique Field
+		$this->form_validation->set_rules('kegiatan', 'Kegiatan Kode Anggaran', 'required'); // Unique Field
+		$this->form_validation->set_rules('subkegiatan', 'Sub Kegaitan Kode Anggaran', 'required'); // Unique Field
 
 		if ($this->form_validation->run() == FALSE)
 		{			
