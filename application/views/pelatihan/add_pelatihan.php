@@ -68,6 +68,14 @@
 				<input type="date" name="akhir" value="<?= set_value('akhir')?>" placeholder="Tanggal Akhir Pelatihan" class="form-control" required="">
 			</div>
 			<div class="input-wrap">
+				<select name="sasaran" class="form-control" required>
+					<option value="" selected disabled>PILIH SASARAN PESERTA</option>
+					<option value="KOPERASI" <?=$this->input->post('sasaran') == 'KOPERASI' ? 'selected':''?>>KOPERASI</option>
+					<option value="UKM" <?=$this->input->post('sasaran') == 'UKM' ? 'selected':''?>>UKM</option>
+					<option value="CALON WIRAUSAHA" <?=$this->input->post('sasaran') == 'CALON WIRAUSAHA' ? 'selected':''?>>CALON WIRAUSAHA</option>
+				</select>
+			</div>
+			<div class="input-wrap">
 				<select name="status" class="form-control" required>
 					<option value="" selected disabled>PILIH STATUS</option>
 					<option value="1" <?=$this->input->post('status') == '1' ? 'selected':''?>>AKTIF</option>

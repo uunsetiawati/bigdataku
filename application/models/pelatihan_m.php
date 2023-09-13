@@ -22,6 +22,7 @@
 				'kota'				=> $this->input->post('kota', TRUE),
 				'tgl_mulai'        	=> $this->input->post('awal', TRUE),
 				'tgl_akhir'			=> $this->input->post('akhir', TRUE),
+				'sasaran'			=> $this->input->post('sasaran', TRUE),
 				'status'			=> $this->input->post('status', TRUE),
 				'created'			=> $this->input->post('now', TRUE)				
 			);
@@ -41,6 +42,7 @@
 				'jenis_pelatihan'   => $this->input->post('jenis', TRUE),				
 				'tgl_mulai'        	=> $this->input->post('awal', TRUE),
 				'tgl_akhir'			=> $this->input->post('akhir', TRUE),
+				'sasaran'			=> $this->input->post('sasaran', TRUE),
 				'status'			=> $this->input->post('status', TRUE),
 				'modified'			=> $this->input->post('now', TRUE)
 			);
