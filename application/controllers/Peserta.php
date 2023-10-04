@@ -125,7 +125,17 @@ class Peserta extends CI_Controller {
 			
 			// $kodeunik = $this->uri->segment(3);
 			$data['peserta'] = $this->db->get_where('tb_data_pelatihan', array('kodeunik' => $kodeunik,'status'=>'1'))->row_array();
-			$this->templateadmin->load('template/dashboard', 'peserta/add_peserta',$data);	
+			$data['izin'] = $this->db->get('tb_izin_usaha')->result();
+			$data['masalah'] = $this->db->get('tb_permasalahan')->result();
+			$data['kebutuhan'] = $this->db->get('tb_kebutuhan_diklat')->result();
+			$data['sertifikasi'] = $this->db->get('tb_sertifikasi')->result();
+			$datapelatihan=$this->db->get_where('tb_data_pelatihan', array('kodeunik' => $kodeunik,'status'=>'1'))->row_array();
+			if($datapelatihan > 0){
+				$this->templateadmin->load('template/dashboard_p', 'peserta/add_peserta',$data);	
+			}else{
+				echo 'Tidak ada pelatihan/pendaftaran pelatihan sudah memenuhi kuota';
+			}
+			
 						
 		}
 		else
@@ -135,9 +145,18 @@ class Peserta extends CI_Controller {
 			// $sosmed=implode(',',$checkbox);
 
 			$uploadFoto = $this->upload_foto();
+			$uploadKtp = $this->upload_ktp();
+
+			// if($uploadFoto && $uploadKtp){
+			// 	$data = [
+			// 		'foto' => $uploadFoto,
+        	// 		'ktp'  => $uploadKtp
+			// 	];
+			// 	$this->peserta_m->save($data);
+			// }
 							
 			
-			$this->peserta_m->save($uploadFoto);
+			$this->peserta_m->save($uploadFoto,$uploadKtp);
 			
 			// redirect('peserta');
 			echo "sukses";
@@ -151,11 +170,28 @@ class Peserta extends CI_Controller {
 			$config['upload_path']          = './uploads/peserta/';
             $config['allowed_types']        = 'gif|jpg|png|jpeg';
             $config['max_size']             = 3000;
-			$config['file_name'] 			= 'PESERTA'.'-'.$kodeunik.'-'.time();
+			$config['file_name'] 			= 'FOTOPESERTA'.'-'.$kodeunik.'-'.time();
             $this->load->library('upload', $config);
 
             //proses upload
-            $this->upload->do_upload('userfile');
+            $this->upload->do_upload('foto');
+            $upload = $this->upload->data();
+            return $upload['file_name'];
+		}
+
+	function upload_ktp()
+		{
+			$kodeunik = $this->uri->segment(3);
+			//validasi foto yang di upload
+			$config2['upload_path']          = './uploads/ktp/';
+            $config2['allowed_types']        = 'gif|jpg|png|jpeg';
+            $config2['max_size']             = 3000;
+			$config2['file_name'] 			= 'KTPPESERTA'.'-'.$kodeunik.'-'.time();
+            // $this->load->library('upload', $config2);
+			$this->upload->initialize($config2);
+
+            //proses upload
+            $this->upload->do_upload('foto_ktp');
             $upload = $this->upload->data();
             return $upload['file_name'];
 		}
