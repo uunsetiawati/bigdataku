@@ -161,3 +161,6 @@
 					?>
 					</div>
 				</div>
+				<div class="button-default">
+					<button type="submit" name="simpan" class="button" id="btnsubmit" style="display:block">Simpan</button>
+				</div>
