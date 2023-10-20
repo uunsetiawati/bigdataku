@@ -163,7 +163,7 @@
 			<div class="input-wrap">
 				<label class="col-form-label">MARKETPLACE USAHA<span class="section-subtitle"><code>*</code></span></label>
                 
-                <input type="text" value="<?= $peserta['market_usaha'] ?>" class="form-control" readonly/>LAINNYA
+                <input type="text" value="<?= $peserta['market_usaha'] ?>" class="form-control" readonly/>
                
 			</div>
 			<div class="input-wrap">

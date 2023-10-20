@@ -233,7 +233,6 @@ class Peserta extends CI_Controller {
 				$row = $query->row();
 				$data['pelatihan'] = $this->db->get_where('tb_data_pelatihan', array('id' => $row->id_pelatihan))->row_array();
 			}
-			
 			$data['peserta'] = $this->db->get_where('tb_data_peserta', array('id' => $id))->row_array();
 			$this->templateadmin->load('template/dashboard', 'peserta/edit_peserta', $data);			
 		}
