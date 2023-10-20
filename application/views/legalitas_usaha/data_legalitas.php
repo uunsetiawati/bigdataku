@@ -21,13 +21,12 @@
 
             <div class="content">
 				<div class="container">
-					<div class="row">
-                        <div class="col-3">
-                            <?php
-                                echo anchor('legalitas/add', '<button class="button button-fill button-small">Tambah Data</button>');
-                            ?>
-                        </div>                                                                                      
+                    <div class="button-default">
+                        <?php
+                            echo anchor('legalitas/add', '<button class="button">Tambah Data</button>');
+                        ?>
                     </div>
+                    <hr>
                     <div class="card">
 					<div class="card-body">
 						<div class="table-responsive">
