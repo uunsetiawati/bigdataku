@@ -12,31 +12,34 @@ class Peserta extends CI_Controller {
 		$this->form_validation->set_error_delimiters('<p class="invalid-feedback">', '</p>');
 	}
 
-	function data()
+	function data($kodeunik)
 	{
 		check_not_login();
+
 		// nama table
-		$table      = 'tb_data_peserta';
+		$table      = 'view_peserta';
 		// nama PK
-		$primaryKey = 'NO';
+		$primaryKey = 'id';
 		// list field yang mau ditampilkan
 		$columns    = array(
 			//tabel db(kolom di database) => dt(nama datatable di view)
-			array('db' => 'KAB_KOTA_PELATIHAN', 'dt' => 'kabkota'),
-			array('db' => 'NAMA_KOPERASI_UKM', 'dt' => 'namakopukm'),
-	        array('db' => 'NAMA_PESERTA', 'dt' => 'nama_peserta'),
+			array('db' => 'no_urut', 'dt' => 'no_urut'),
+			array('db' => 'nama_peserta', 'dt' => 'nama_peserta'),
+			array('db' => 'no_ktp', 'dt' => 'nik'),
+			array('db' => 'kabupaten', 'dt' => 'kabupaten'),
+	        array('db' => 'no_telp', 'dt' => 'no_telp'),
 	        //untuk menampilkan aksi(edit/delete dengan parameter kode mapel)
 	        array(
-	              'db' => 'NO',
+	              'db' => 'id',
 	              'dt' => 'aksi',
 	              'formatter' => function($d) {
-	               		return anchor('peserta/edit/'.$d, '<i class="fa fa-edit"></i>', 'class="btn btn-xs btn-primary" data-placement="top" title="Edit"').' 
-	               		'.anchor('peserta/delete/'.$d, '<i class="fa fa-times fa fa-white"></i>', 'class="btn btn-xs btn-danger" onclick="return confirm(\'apa anda yakin untuk menghapus data?\')" data-placement="top" title="Delete"');
+	               		return anchor('peserta/edit/'.$d, '<i class="fa fa-edit"></i>', 'class="btn btn-xs btn-primary" data-placement="top" title="Edit"');
 	            }
 	        )
 	    );
-
-		// $where = "id_user='".$this->session->userdata('id_user')."'";
+		// $kodeunik ="202310040949";
+		// $where = "kodeunik='".$this->session->userdata('id_user')."'";
+		$where = "kodeunik='".$kodeunik."'";
 		$sql_details = array(
 			'user' => $this->db->username,
 			'pass' => $this->db->password,
@@ -44,20 +47,29 @@ class Peserta extends CI_Controller {
 			'host' => $this->db->hostname
 	    );
 		
-	    // echo json_encode(
-	    //  	SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, $where)
-	    //  );
-
 	    echo json_encode(
-		     	SSP::simple($_GET, $sql_details, $table, $primaryKey, $columns)
-		     );
+	     	SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, $where)
+	     );
+
+	    // echo json_encode(
+		//      	SSP::simple($_GET, $sql_details, $table, $primaryKey, $columns)
+		//      );
 
 	}
 
-	public function index()
+	public function indexx()
 	{
 		// $this->load->view('view_peserta');
 		$this->templateadmin->load('template/dashboard', 'peserta/data_peserta');
+	
+	}
+	public function viewdatapeserta()
+	{
+		check_not_login();
+		// $this->load->view('view_peserta');
+		$kodeunik=$this->uri->segment(3);
+		$data['peserta']=$this->db->get_where('tb_data_pelatihan', array('kodeunik' => $kodeunik))->row_array();
+		$this->templateadmin->load('template/dashboard', 'peserta/data_peserta',$data);
 	
 	}
 
@@ -213,6 +225,23 @@ class Peserta extends CI_Controller {
 
 	function edit() 
 	{
+		if ($this->form_validation->run() == FALSE)
+		{		
+			$id = $this->uri->segment(3);	
+			$query = $this->db->query("SELECT * FROM tb_data_peserta WHERE id = $id");
+			if ($query->num_rows() > 0){
+				$row = $query->row();
+				$data['pelatihan'] = $this->db->get_where('tb_data_pelatihan', array('id' => $row->id_pelatihan))->row_array();
+			}
+			
+			$data['peserta'] = $this->db->get_where('tb_data_peserta', array('id' => $id))->row_array();
+			$this->templateadmin->load('template/dashboard', 'peserta/edit_peserta', $data);			
+		}
+		else
+		{   
+			$this->peserta_m->update();
+			redirect('peserta/viewdatapeserta');
+		}
 
 	}
 

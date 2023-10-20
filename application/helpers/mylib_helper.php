@@ -18,6 +18,23 @@
 		return $cmb;
 	}
 
+	function cb_dinamis($name, $table, $field, $pk, $checked=null, $extra=null)
+	{
+		$ci   = get_instance();
+		
+
+		$data = $ci->db->get($table)->result();
+		foreach ($data as $row) {
+			// $cb  = "<label class='form-control2'>";
+			$cb = "<label class='form-control2'><input type='checkbox' name='$name' value='".$row->$pk."' />".$row->$field."</label>" ;
+			//Apabila $selected bernilai sama dengan nilai $pk maka akan bernilai selected selain itu akan bernilai null
+			// $cb .= $checked == $row->$pk ? 'checked' : '';
+			// $cb .= "/>".$row->$field."</label>";
+		}
+
+		return $cb;
+	}
+
 	function cmb_dinamiskop($name, $table, $field, $pk, $option,$selected=null, $extra=null)
 	{
 		$ci   = get_instance();
@@ -116,6 +133,42 @@
 
 		$data = $ci->db->get($table)->result();
 		// $data = $ci->db->order_by('id','ASC');
+		foreach ($data as $row) {
+			$cmb .= "<option value='".$row->$pk."'";
+			//Apabila $selected bernilai sama dengan nilai $pk maka akan bernilai selected selain itu akan bernilai null
+			$cmb .= $selected == $row->$pk ? 'selected' : '';
+			$cmb .= ">".$row->$field."</option>";
+		}
+		$cmb .= "</select>";
+		return $cmb;
+	}
+
+	function cmb_dinamiskabupaten($name, $table, $field, $pk, $id, $toggle,$selected=null, $extra=null)
+	{
+		$ci   = get_instance();
+		$cmb  = "<select name='$name' id='$id' class='form-control' onchange='$toggle' $extra required>
+		<option value='' selected disabled>PILIH KAB/KOTA</option>";
+
+		// $data = $ci->db->get($table)->result();
+		$data = $ci->db->order_by('name', 'ASC')->get_where($table, array('province_id' => 35))->result();
+		// $data = $ci->db->order_by('id','ASC');
+		foreach ($data as $row) {
+			$cmb .= "<option value='".$row->$pk."'";
+			//Apabila $selected bernilai sama dengan nilai $pk maka akan bernilai selected selain itu akan bernilai null
+			$cmb .= $selected == $row->$pk ? 'selected' : '';
+			$cmb .= ">".$row->$field."</option>";
+		}
+		$cmb .= "</select>";
+		return $cmb;
+	}
+
+	function cmb_dinamiseditkota($name, $table, $field, $pk, $id_prov,$selected=null, $extra=null)
+	{
+		$ci   = get_instance();
+		$cmb  = "<select name='$name' class='form-control' $extra required>
+				<option value='' selected disabled>PILIH KAB/KOTA</option>";
+
+		$data = $ci->db->get_where($table, array('province_id' => $id_prov))->result();	
 		foreach ($data as $row) {
 			$cmb .= "<option value='".$row->$pk."'";
 			//Apabila $selected bernilai sama dengan nilai $pk maka akan bernilai selected selain itu akan bernilai null

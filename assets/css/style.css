@@ -62,8 +62,8 @@ Table of Content:
 
 /* general */
 body {
-    font-family: 'Roboto', sans-serif;
-    color: #111;
+    font-family: 'verdana', sans-serif;
+    color: #555;
     font-size: 14px;
     font-weight: 400;
     line-height: 1.5;
@@ -110,6 +110,12 @@ h5 > p {
 
 h6 {
     font-size: 16px;
+}
+h7 {
+    font-size: 12px;
+    font-style: italic;
+    font-weight: bold;
+    color: #444;
 }
 
 a {
