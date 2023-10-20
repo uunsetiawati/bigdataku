@@ -21,12 +21,21 @@
 
             <div class="content">
 				<div class="container">
-					<div class="row">
-                        <div class="col-3">
-                            <?php
-                                echo anchor('pelatihan/add', '<button class="button button-fill button-small">Tambah Data</button>');
-                            ?>
-                        </div>                                                                                      
+					<div class="row">                        
+                        <div class="col-6">
+                            <div class="button-default">
+                                <?php
+                                    echo anchor('pelatihan/add', '<button class="button">Tambah Data</button>');
+                                ?>
+                            </div>
+                        </div>  
+                        <div class="col-6">                           
+                            <div class="button-default">   
+                                <?php
+                                    echo anchor('dashboard', 'Kembali', array('class'=>'button2'));
+                                ?>
+                            </div>
+                        </div> 
                     </div>
                     <div class="card">
 					<div class="card-body">
@@ -36,12 +45,13 @@
 									<tr>
 										<th >No</th>
 										<th >Judul</th>
-                                        <th >Kode Program</th>
+                                        <th >Divisi</th>
 										<th >KAB/KOTA</th>
-										<th >Jenis Pelatihan</th>
-                                        <th >Mulai</th>
-                                        <th >Akhir</th>
-										<th >Aksi</th>
+										<th >Sasaran</th>
+                                        <th >Tanggal</th>
+										<th >#</th>
+                                        <th >#</th>
+                                        <th >#</th>
 									</tr>
 								</thead>								
 							</table>
@@ -70,29 +80,29 @@
                 // of the DataTable
                 "searching": true,
                 "ajax": '<?php echo site_url('pelatihan/data'); ?>',
-                "order": [[ 0, 'asc' ]],
+                "order": [[ 0, 'desc' ]],
                 "columns": [                    
                     {    
-                        "data": null,
-                        "width": "50px",
-                        "class": "text-center",
-                        "orderable": true, 
-                        "sortable": true,  
-                        render: function (data, type, row, meta) {
-		                 return meta.row + meta.settings._iDisplayStart + 1;
-		                }                     
+                        "data": "id",
+                        // "width": "50px",
+                        // "class": "text-center",
+                        // "orderable": true, 
+                        // "sortable": true,  
+                        // render: function (data, type, row, meta) {
+		                //  return meta.row + meta.settings._iDisplayStart + 1;
+		                // }                     
                     },
                     { 
                         "data": "judul",
                     },
                     { 
-                        "data": "program",
+                        "data": "divisi",
                     },
                     { 
                         "data": "alamat",
                     },
                     { 
-                        "data": "jenis",
+                        "data": "sasaran",
                     }, 
                     { 
                         "data": "tanggalmulai",
@@ -101,18 +111,20 @@
                             var month = date.getMonth() + 1;
                             return date.getDate() + "-" + (month.toString().length > 1 ? month : "0" + month) + "-" +  date.getFullYear();
                         }
-                    }, 
-                    { 
-                        "data": "tanggalakhir",
-                        "render": function (data) {
-                            var date = new Date(data);
-                            var month = date.getMonth() + 1;
-                            return date.getDate() + "-" + (month.toString().length > 1 ? month : "0" + month) + "-" +  date.getFullYear();
-                        }
                     },                    
                     { 
                         "data": "aksi",
-                        "width": "80px",
+                        "width": "20px",
+                        "class": "text-center"
+                    },
+                    { 
+                        "data": "share",
+                        "width": "20px",
+                        "class": "text-center"
+                    },
+                    { 
+                        "data": "lihat",
+                        "width": "20px",
                         "class": "text-center"
                     },
                 ]
@@ -120,4 +132,10 @@
             });
             
         });
+
+        function copyText() {  
+            var copyText = document.getElementById("text-copy");  
+            copyText.select();  
+            document.execCommand("copy");
+        }
     </script>

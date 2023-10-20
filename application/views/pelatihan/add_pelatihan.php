@@ -21,7 +21,7 @@
 				<?= form_error('judul'); ?> 
 			</div>
 
-			<span class="section-subtitle"><code>Kode Anggaran</code></span>
+			<span class="section-subtitle"><code>.Kode Anggaran</code></span>
 			
 			<div class="input-wrap">				
 				<input type="text" name="program" placeholder="KODE ANGGARAN PROGRAM" value="<?= set_value('program'); ?>" class="form-control <?= (form_error('program') == "" ? '':'is-invalid') ?>">
@@ -41,7 +41,7 @@
 					<option value="" selected disabled>PILIH DIVISI</option>
 					<option value="PENGEMBANGAN" <?=$this->input->post('divisi') == 'PENGEMBANGAN' ? 'selected':''?>>PENGEMBANGAN</option>
 					<option value="PENYELENGGARA" <?=$this->input->post('divisi') == 'PENYELENGGARA' ? 'selected':''?>>PENYELENGGARA</option>
-					<option value="DAK" <?=$this->input->post('divisi') == 'DAK' ? 'selected':''?>>PENYELENGGARA>DAK</option>
+					<option value="DAK" <?=$this->input->post('divisi') == 'DAK' ? 'selected':''?>>DAK</option>
 				</select>
 			</div>
 			<div class="input-wrap">

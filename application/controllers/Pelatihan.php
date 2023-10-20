@@ -22,21 +22,35 @@ class Pelatihan extends CI_Controller {
 		// list field yang mau ditampilkan
 		$columns    = array(
 			//tabel db(kolom di database) => dt(nama datatable di view)
+			array('db' => 'id', 'dt' => 'id'),
 			array('db' => 'judul_pelatihan', 'dt' => 'judul'),
 			array('db' => 'program', 'dt' 	=> 'program'),
 			array('db' => 'divisi', 'dt' 	=> 'divisi'),
 			array('db' => 'name', 'dt' 	=> 'alamat'),
-	        array('db' => 'jenis_pelatihan', 'dt' => 'jenis'),
+	        array('db' => 'sasaran', 'dt' => 'sasaran'),
 			array('db' => 'tgl_mulai', 'dt' => 'tanggalmulai'),
-			array('db' => 'tgl_akhir', 'dt' => 'tanggalakhir'),
 	        //untuk menampilkan aksi(edit/delete dengan parameter kode mapel)
 	        array(
 	              'db' => 'id',
 	              'dt' => 'aksi',
 	              'formatter' => function($d) {
-	               		return anchor('pelatihan/edit/'.$d, '<i class="icon ion-ios-create"></i>','class="btn btn-xs btn-primary" data-placement="top" title="Edit"');
+	               		return anchor('pelatihan/edit/'.$d, '<i class="icon ion-ios-create"></i>','class="btn btn-xs btn-success" data-placement="top" title="Edit"');
 	            }
-	        )
+	        ),
+			array(
+				'db' => 'kodeunik',
+				'dt' => 'share',
+				'formatter' => function($d) {
+						 return anchor('peserta/add_peserta/'.$d, '<i class="icon ion-ios-share"></i>','class="btn btn-xs btn-primary" id="text-copy" onclick="copyText()" data-placement="top" title="Share Form"');
+			  }
+		  	),
+			  array(
+				'db' => 'kodeunik',
+				'dt' => 'lihat',
+				'formatter' => function($d) {
+						 return anchor('peserta/viewdatapeserta/'.$d, '<i class="icon ion-ios-eye"></i>','class="btn btn-xs btn-warning" data-placement="top" title="Lihat Peserta"');
+			  }
+		  	)
 	    );
 
 		// $where = "id_user='".$this->session->userdata('id_user')."'";
