@@ -55,7 +55,7 @@ class Kode extends CI_Controller {
 	public function index()
 	{
 		// $this->load->view('view_peserta');
-		$this->templateadmin->load('template/dashboard', 'Kode/data_kode');
+		$this->templateadmin->load('template/dashboard', 'kode/data_kode');
 	
 	}
 
