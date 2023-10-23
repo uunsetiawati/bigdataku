@@ -5,7 +5,7 @@
 </div>
 <!-- end section title -->
 
-<?php $this->load->view('_FlashAlert\flash_alert.php') ?>
+<?php $this->load->view('_FlashAlert/flash_alert') ?>
 
 
 <div class="container">
