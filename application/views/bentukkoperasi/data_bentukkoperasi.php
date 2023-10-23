@@ -25,7 +25,7 @@
                         <div class="col-6">
                             <div class="button-default">
                                 <?php
-                                    echo anchor('bentukkoperasi/add', '<button class="button button-fill button-small">Tambah Data</button>');
+                                    echo anchor('bentukkoperasi/add', '<button class="button">Tambah Data</button>');
                                 ?>
                             </div>
                         </div>
