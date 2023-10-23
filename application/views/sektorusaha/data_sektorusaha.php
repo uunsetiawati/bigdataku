@@ -22,11 +22,21 @@
             <div class="content">
 				<div class="container">
 					<div class="row">
-                        <div class="col-3">
-                            <?php
-                                echo anchor('sektorusaha/add', '<button class="button button-fill button-small">Tambah Data</button>');
-                            ?>
-                        </div>                                                                                      
+                        <div class="col-6">
+                            <div class="button-default">
+                                <?php
+                                    echo anchor('sektorusaha/add', '<button class="butto">Tambah Data</button>');
+                                ?>
+                            </div>  
+                        </div> 
+                        <div class="col-6">                           
+                            <div class="button-default">   
+                                <?php
+                                    echo anchor('dashboard', 'Kembali', array('class'=>'button2'));
+                                ?>
+                            </div>
+                        </div>
+                            
                     </div>
                     <div class="card">
 					<div class="card-body">
