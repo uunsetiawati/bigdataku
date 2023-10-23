@@ -21,11 +21,23 @@
 
             <div class="content">
 				<div class="container">
-                    <div class="button-default">
-                        <?php
-                            echo anchor('legalitas/add', '<button class="button">Tambah Data</button>');
-                        ?>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="button-default">
+                                <?php
+                                    echo anchor('legalitas/add', '<button class="button">Tambah Data</button>');
+                                ?>
+                            </div>
+                        </div>
+                        <div class="col-6">                           
+                            <div class="button-default">   
+                                <?php
+                                    echo anchor('dashboard', 'Kembali', array('class'=>'button2'));
+                                ?>
+                            </div>
+                        </div> 
                     </div>
+                        
                     <hr>
                     <div class="card">
 					<div class="card-body">
