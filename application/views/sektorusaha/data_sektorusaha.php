@@ -25,7 +25,7 @@
                         <div class="col-6">
                             <div class="button-default">
                                 <?php
-                                    echo anchor('sektorusaha/add', '<button class="butto">Tambah Data</button>');
+                                    echo anchor('sektorusaha/add', '<button class="button">Tambah Data</button>');
                                 ?>
                             </div>  
                         </div> 
