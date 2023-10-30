@@ -142,7 +142,8 @@
 		{			
 			$nama_peserta = $this->input->post('nama_peserta', TRUE);
 			$data = array(
-				//tabel di database => name di form					
+				//tabel di database => name di form	
+								
 				'no_urut'          		=> $this->input->post('no_urut', TRUE),		
 				'no_ktp'          		=> $this->input->post('no_ktp', TRUE),
 				'nama_peserta'        	=> addslashes($nama_peserta),
