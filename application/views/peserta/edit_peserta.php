@@ -140,14 +140,14 @@
 			<div class="form-wrapper" id="foto" style="display:block;">
 				<div class="input-wrap">
 					<label class="col-form-label">UPLOAD FOTO DIRI<span class="section-subtitle"><code>*</code></span><h7> (Maksimal file ukuran 3MB)</h7></label>
-					<input type="hidden" name="foto" value="<?=$peserta['foto']?>" class="form-control" required>
+					<input type="hidden" name="foto" value="<?=$this->input->post('foto') ?? $peserta['foto']?>" class="form-control" required>
 					<img src="<?=base_url('uploads/peserta/'.$peserta['foto'])?>" style="width: 144px;height: 211px;">
 				</div>
 			</div>
 			<div class="form-wrapper" id="foto_ktp" style="display:block;">
 				<div class="input-wrap">
 					<label class="col-form-label">UPLOAD FOTO KTP<span class="section-subtitle"><code>*</code></span><h7> (Maksimal file ukuran 3MB)</h7></label>
-					<input type="hidden" name="foto_ktp" value="<?=$peserta['ktp']?>" class="form-control" required>
+					<input type="hidden" name="foto_ktp" value="<?=$this->input->post('foto_ktp') ?? $peserta['ktp']?>" class="form-control" required>
 					<img src="<?=base_url('uploads/ktp/'.$peserta['ktp'])?>" style="width:323.52px;height:204.01px;">
 				</div>
 			</div>
