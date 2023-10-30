@@ -17,5 +17,6 @@ application/logs/*
 !application/logs/.htaccess
 /vendor/
 /uploads/
+/third_party/
 
 application/config/
