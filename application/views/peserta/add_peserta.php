@@ -120,18 +120,15 @@
 				<label class="col-form-label">KAB/KOTA<span class="section-subtitle"><code>*</code></span></label>				
 				<?php
                 //function cmb_dinamisprov($name, $table, $field, $pk, $id, $selected=null, $extra=null)
-                  echo cmb_dinamiskabupaten('kota', 'regencies', 'name', 'id','kota','toggleselect2()', $this->input->post('kota'));
-				
+                  echo cmb_dinamiskabupaten('kota', 'regencies', 'name', 'id','kota','toggleselect2()');				
                 ?>				
-				<?= form_error('kota'); ?>
 			</div>
 			<div class="input-wrap">
 				<label class="col-form-label">KECAMATAN<span class="section-subtitle"><code>*</code></span></label>				
 				<?php
                 //function cmb_dinamisprov($name, $table, $field, $pk, $id, $selected=null, $extra=null)
                   echo cmb_dinamiskec('kecamatan', 'districts', 'id', 'id','kecamatan','toggleselect3()');
-                ?> 								
-				<?= form_error('kecamatan'); ?>
+                ?> 							
 			</div>
 			<div class="input-wrap">
 				<label class="col-form-label">KELURAHAN<span class="section-subtitle"><code>*</code></span></label>
@@ -139,11 +136,10 @@
                 //function cmb_dinamisprov($name, $table, $field, $pk, $id, $selected=null, $extra=null)
                   echo cmb_dinamiskel('kelurahan', 'villages', 'id', 'id','kelurahan');
                 ?> 
-				<?= form_error('kelurahan'); ?>
 			</div>
 			<div class="input-wrap">
 				<label class="col-form-label">NO.TELP/WA<span class="section-subtitle"><code>*</code></span></label>
-				<input type="number" name="no_telp" placeholder="NOMOR TELEPON (Cth:081331220006)" value="<?= set_value('no_telp'); ?>" class="form-control <?= (form_error('no_telp') == "" ? '':'is-invalid') ?>">
+				<input type="text" name="no_telp" placeholder="NOMOR TELEPON (Cth:081331220006)" value="<?= set_value('no_telp'); ?>" class="form-control <?= (form_error('no_telp') == "" ? '':'is-invalid') ?>">
 				<?= form_error('no_telp'); ?>
 			</div>
 			<div class="input-wrap">

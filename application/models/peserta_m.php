@@ -139,59 +139,11 @@
 		}
 
 		function update()
-		{
+		{			
 			$nama_peserta = $this->input->post('nama_peserta', TRUE);
-			$sosmed = $this->input->post('sosmed', TRUE);
-			if(is_array($sosmed)){
-				$sosmed = implode(',',$sosmed);
-			}else{
-				$sosmed;
-			}
-
-			$izin = $this->input->post('izin', TRUE);
-			if(is_array($izin)){
-				$izin = implode(',',$izin);
-			}else{
-				$izin;
-			}
-
-			$market = $this->input->post('market', TRUE);
-			if(is_array($market)){
-				$market = implode(',',$market);
-			}else{
-				$market;
-			}
-
-			$masalah = $this->input->post('masalah', TRUE);
-			if(is_array($masalah)){
-				$masalah = implode(',',$masalah);
-			}else{
-				$masalah;
-			}
-
-			$kebutuhan = $this->input->post('kebutuhan', TRUE);
-			if(is_array($kebutuhan)){
-				$kebutuhan = implode(',',$kebutuhan);
-			}else{
-				$kebutuhan;
-			}
-
-			$sertifikasi = $this->input->post('sertifikasi', TRUE);
-			if(is_array($sertifikasi)){
-				$sertifikasi = implode(',',$sertifikasi);
-			}else{
-				$sertifikasi;
-			}
-
-			$pengadaan = $this->input->post('pengadaan', TRUE);
-			if(is_array($pengadaan)){
-				$pengadaan = implode(',',$pengadaan);
-			}else{
-				$pengadaan;
-			}
-			
 			$data = array(
-				//tabel di database => name di form							
+				//tabel di database => name di form					
+				'no_urut'          		=> $this->input->post('no_urut', TRUE),		
 				'no_ktp'          		=> $this->input->post('no_ktp', TRUE),
 				'nama_peserta'        	=> addslashes($nama_peserta),
 				'tempat_lahir'          => $this->input->post('tempat_lahir', TRUE),
@@ -204,12 +156,12 @@
 				'rt'            		=> $this->input->post('rt', TRUE),
 				'rw'            		=> $this->input->post('rw', TRUE),
 				'provinsi'            	=> $this->input->post('provinsi', TRUE),
-				'kabupaten'            	=> $this->input->post('kota', TRUE),
+				'kabupaten'            	=> $this->input->post('kabupaten', TRUE),
 				'kecamatan'            	=> $this->input->post('kecamatan', TRUE),
 				'kelurahan'            	=> $this->input->post('kelurahan', TRUE),
 				'no_telp'            	=> $this->input->post('no_telp', TRUE),
 				'disabilitas'			=> $this->input->post('disabilitas', TRUE),
-				'jenis_peserta'			=> $this->input->post('jenis_peserta', TRUE),
+				// 'jenis_peserta'			=> $this->input->post('jenis_peserta', TRUE),
 				'jabatan'				=> $this->input->post('jabatan', TRUE),
 				'nama_kop'				=> $this->input->post('nama_kop', TRUE),
 				'nik_koperasi'			=> $this->input->post('nik_koperasi', TRUE),
@@ -233,15 +185,15 @@
 				'jenis_produk'			=> $this->input->post('jenis_produk', TRUE),
 				'volume_usaha'			=> $this->input->post('volume_usaha', TRUE),
 				'status_usaha'			=> $this->input->post('status_usaha', TRUE),
-				'sertifikasi'			=> $sertifikasi,
+				// 'sertifikasi'			=> $sertifikasi,
 				'wil_pemasaran'			=> $this->input->post('wil_pemasaran', TRUE),
 				'nama_usaha'			=> $this->input->post('nama_usaha', TRUE),
 				'nib'					=> $this->input->post('nib', TRUE),
 				'jml_tenaga_kerja'		=> $this->input->post('jml_tenaga_kerja', TRUE),
-				'modal_usaha'			=> $this->input->post('modal_usaha', TRUE),
-				'nilai_modalusaha'		=> $this->input->post('nilai_modalusaha', TRUE),
-				'omzet_usaha'			=> $this->input->post('omzet_usaha', TRUE),
-				'nilai_omzetusaha'		=> $this->input->post('nilai_omzetusaha', TRUE),
+				// 'modal_usaha'			=> $this->input->post('modal_usaha', TRUE),
+				// 'nilai_modalusaha'		=> $this->input->post('nilai_modalusaha', TRUE),
+				// 'omzet_usaha'			=> $this->input->post('omzet_usaha', TRUE),
+				// 'nilai_omzetusaha'		=> $this->input->post('nilai_omzetusaha', TRUE),
 				'jml_tenaga_kerjal'		=> $this->input->post('jml_tenaga_kerjal', TRUE),
 				'jml_tenaga_kerjap'		=> $this->input->post('jml_tenaga_kerjap', TRUE),
 				'web_usaha'				=> $this->input->post('web_usaha', TRUE),
@@ -253,18 +205,18 @@
 				'tokped'				=> $this->input->post('tokped', TRUE),
 				'bukalapak'				=> $this->input->post('bukalapak', TRUE),
 				'lazada'				=> $this->input->post('lazada', TRUE),
-				'sosmed_usaha'			=> $sosmed,
-				'market_usaha'			=> $market,
-				'pengadaan'				=> $pengadaan,
-				'izin_usaha'			=> $izin,
+				// 'sosmed_usaha'			=> $sosmed,
+				// 'market_usaha'			=> $market,
+				// 'pengadaan'				=> $pengadaan,
+				// 'izin_usaha'			=> $izin,
 				'lokasi_pemasaran'		=> $this->input->post('lokasi_pemasaran', TRUE),
 				'idebisnis'				=> $this->input->post('idebisnis',TRUE),
-				'permasalahan'			=> $masalah,
-				'kebutuhan'				=> $kebutuhan,
+				// 'permasalahan'			=> $masalah,
+				// 'kebutuhan'				=> $kebutuhan,
 				'jabatan'				=> $this->input->post('jabatan', TRUE),
-				'foto'					=> $foto,
-				'ktp'					=> $ktp,
-				'created'				=> $this->input->post('now', TRUE)
+				// 'foto'					=> $foto,
+				// 'ktp'					=> $ktp,
+				'modified'				=> $this->input->post('now', TRUE)
 			);
 
 			$id	= $this->input->post('id');

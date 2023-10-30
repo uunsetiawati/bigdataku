@@ -129,11 +129,37 @@
 					</a>
 				</li>
 				<li>
+				<div class="accordion-item">
+					<a href="#">
+					<div class="list-item" data-toggle="collapse" data-target="#accordionTwo2">
+						<div class="list-media">
+							<i class="icon ion-ios-apps bg-yellow"></i>
+						</div>
+						<div class="list-label">
+							<div class="list-title">Pages</div>
+							<div class="list-after"><i class="icon ion-ios-arrow-down" data-target="#accordionTwo2"></i></div>
+						</div>
+					</div>
+					</a>
+					<a href="<?=site_url('pelatihan')?>">						
+						<div id="accordionTwo2" class="accordion-body collapse" data-parent="#accordionParent2">
+							<div class="list-item">
+								<div class="list-label">
+									<div class="accordion-content">
+										<div class="list-title">Data Pelatihan</div>
+									</div>
+									<div class="list-after"><i class="icon ion-ios-arrow-forward" data-target="#accordionTwo2"></i></div>
+								</div>
+							</div>
+						</div>
+					</a>
+				</li>
+				<li>
 					<div class="accordion-item">
 						<a href="#">
 						<div class="list-item" data-toggle="collapse" data-target="#accordionTwo1">
 							<div class="list-media">
-								<i class="icon ion-ios-home bg-blue"></i>
+								<i class="icon ion-ios-browsers bg-green"></i>
 							</div>
 							<div class="list-label">
 								<div class="list-title">Master</div>
@@ -153,7 +179,7 @@
 							</div>
 						</div>
 						</a>
-						<a href="<?=site_url('pelatihan')?>">						
+						<!-- <a href="<?=site_url('pelatihan')?>">						
 						<div id="accordionTwo1" class="accordion-body collapse" data-parent="#accordionParent2">
 							<div class="list-item">
 								<div class="list-label">
@@ -164,7 +190,7 @@
 								</div>
 							</div>
 						</div>
-						</a>
+						</a> -->
 						<a href="<?=site_url('legalitas')?>">						
 						<div id="accordionTwo1" class="accordion-body collapse" data-parent="#accordionParent2">
 							<div class="list-item">
@@ -250,8 +276,9 @@
 						</div>
 						</a>
 					</div>
-				</li>								
-				<li>
+				</li>
+												
+				<!-- <li>
 					<a href="pages.html" class="list-item">
 						<div class="list-media">
 							<i class="icon ion-ios-browsers bg-green"></i>
@@ -262,17 +289,7 @@
 						</div>
 					</a>
 				</li>
-				<li>
-					<a href="apps.html" class="list-item">
-						<div class="list-media">
-							<i class="icon ion-ios-apps bg-yellow"></i>
-						</div>
-						<div class="list-label">
-							<div class="list-title">Apps</div>
-							<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
-						</div>
-					</a>
-				</li>
+				
 				<li>
 					<a href="sign-in.html" class="list-item">
 						<div class="list-media">
@@ -294,7 +311,7 @@
 							<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
 						</div>
 					</a>
-				</li>
+				</li> -->
 			</ul>
 		</div>
 
@@ -305,7 +322,7 @@
 		<div class="list-view list-separate-two list-colored">
 			<ul>
 				<li>
-					<a href="about-us.html" class="list-item">
+					<a href="#" class="list-item">
 						<div class="list-media">
 							<i class="icon ion-ios-information-circle bg-lime"></i>
 						</div>
@@ -316,7 +333,7 @@
 					</a>
 				</li>
 				<li>
-					<a href="privacy.html" class="list-item">
+					<a href="#" class="list-item">
 						<div class="list-media">
 							<i class="icon ion-ios-lock bg-blue"></i>
 						</div>
@@ -327,7 +344,7 @@
 					</a>
 				</li>
 				<li>
-					<a href="#" class="list-item">
+					<a href="<?=site_url('auth/logout')?>" class="list-item">
 						<div class="list-media">
 							<i class="icon ion-ios-power bg-red"></i>
 						</div>
@@ -370,22 +387,18 @@
 		<div class="container">
 			<ul class="toolbar-bottom toolbar-wrap">
 				<li class="toolbar-item">
-					<a href="index.html" class="toolbar-link toolbar-link-active">
-						<i class="icon ion-ios-home"></i>
-					</a>
-				</li>
-				<li class="toolbar-item">
-					<a href="features.html" class="toolbar-link">
-						<i class="icon ion-ios-star"></i>
-					</a>
-				</li>
-				<li class="toolbar-item">
-					<a href="pages.html" class="toolbar-link">
+					<a href="<?=site_url('kode')?>" class="toolbar-link">
 						<i class="icon ion-ios-browsers"></i>
 					</a>
 				</li>
 				<li class="toolbar-item">
-					<a href="apps.html" class="toolbar-link">
+					<a href="<?=site_url('dashboard')?>" class="toolbar-link toolbar-link-active">
+						<i class="icon ion-ios-home"></i>
+					</a>
+				</li>
+				
+				<li class="toolbar-item">
+					<a href="<?=site_url('pelatihan')?>" class="toolbar-link">
 						<i class="icon ion-ios-apps"></i>
 					</a>
 				</li>

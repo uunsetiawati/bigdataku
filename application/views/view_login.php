@@ -72,13 +72,13 @@
 				<div class="separator-large"></div>
 				<!-- end separator -->
 
-				<div class="sign-with">
+				<!-- <div class="sign-with">
 					<ul>
 						<li>
 							<a href="<?=site_url('auth/google')?>"><i class="icon ion-logo-google mr-2"></i>Google</a>
 						</li>
 					</ul>
-				</div>
+				</div> -->
 			</div>
 		</div>
 		<!-- end sign in -->

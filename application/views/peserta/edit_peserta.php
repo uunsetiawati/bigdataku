@@ -20,18 +20,25 @@
 
 
 <div class="container">
-	<form action="<?= site_url('peserta/edit_peserta/'.$this->uri->segment('3')) ?>" enctype="multipart/form-data" method="post" id="add" class="form-outline">	
+	<form action="<?= site_url('peserta/edit/'.$this->uri->segment('3')) ?>" enctype="multipart/form-data" method="post" id="add" class="form-outline">	
 	<?php 
 	date_default_timezone_set('Asia/Jakarta'); # add your city to set local time zone
 	$now = date('Y-m-d H:i:s');
 	?>
 	<?=form_hidden('now',$now);?>
 	<?=form_hidden('id',$peserta['id']);?>
+	<?=form_hidden('id_pel',$peserta['id_pelatihan']);?>
+	<?=form_hidden('kodeunik',$peserta['kodeunik']);?>
 	
-		<div class="form-wrapper">            
+		<div class="form-wrapper">  
+			<div class="input-wrap">
+				<label class="col-form-label">NO. URUT<span class="section-subtitle"><code>*</code></span></label>
+				<input type="number" name="no_urut" placeholder="NOMOR URUT" value="<?= $this->input->post('no_urut') ?? $peserta['no_urut'];?>" class="form-control <?= (form_error('no_urut') == "" ? '':'is-invalid') ?>">
+				<?= form_error('no_urut'); ?>				
+			</div>          
 			<div class="input-wrap">
 				<label class="col-form-label">NO. KTP/NIK<span class="section-subtitle"><code>*</code></span></label>
-				<input type="text" name="no_ktp" placeholder="NO. KTP/NIK" value="<?= $this->input->post('no_ktp') ?? $peserta['no_ktp'];?>" class="form-control <?= (form_error('no_ktp') == "" ? '':'is-invalid') ?>">
+				<input type="number" name="no_ktp" placeholder="NO. KTP/NIK" value="<?= $this->input->post('no_ktp') ?? $peserta['no_ktp'];?>" class="form-control <?= (form_error('no_ktp') == "" ? '':'is-invalid') ?>">
 				<?= form_error('no_ktp'); ?>				
 			</div>
 			<div class="input-wrap">
@@ -111,7 +118,6 @@
                 //function cmb_dinamisprov($name, $table, $field, $pk, $id, $selected=null, $extra=null)
                   echo cmb_dinamiskec('kecamatan', 'districts', 'name', 'id','kecamatan','toggleselect3()', $this->input->post('kecamatan') ?? $peserta['kecamatan']);
                 ?> 								
-				<?= form_error('kecamatan'); ?>
 			</div>
 			<div class="input-wrap">
 				<label class="col-form-label">KELURAHAN<span class="section-subtitle"><code>*</code></span></label>
@@ -119,7 +125,6 @@
                 //function cmb_dinamisprov($name, $table, $field, $pk, $id, $selected=null, $extra=null)
                   echo cmb_dinamiskel('kelurahan', 'villages', 'name', 'id','kelurahan', $this->input->post('kelurahan') ?? $peserta['kelurahan']);
                 ?> 
-				<?= form_error('kelurahan'); ?>
 			</div>
 			<div class="input-wrap">
 				<label class="col-form-label">NO.TELP/WA<span class="section-subtitle"><code>*</code></span></label>
@@ -158,33 +163,33 @@
 			</div>
 			<div class="input-wrap">
 				<label class="col-form-label">MEDIA SOSIAL USAHA<span class="section-subtitle"><code>*</code></span></label>                
-				<input type="text" value="<?=$peserta['sosmed_usaha']?>" class="form-control" readonly />
+				<input type="text" name="sosmed_usaha" value="<?=$peserta['sosmed_usaha']?>" class="form-control" readonly />
 			</div>
 			<div class="input-wrap">
 				<label class="col-form-label">MARKETPLACE USAHA<span class="section-subtitle"><code>*</code></span></label>
                 
-                <input type="text" value="<?= $peserta['market_usaha'] ?>" class="form-control" readonly/>
+                <input type="text" name="market_usaha" value="<?= $peserta['market_usaha'] ?>" class="form-control" readonly/>
                
 			</div>
 			<div class="input-wrap">
 				<label class="col-form-label">APAKAH TERDAFTAR DI PLATFORM PENGADAAN BARANG JASA<span class="section-subtitle"><code>*</code></span></label>
-                <input type="text" value="<?= $peserta['pengadaan'] ?>" class="form-control"  readonly/>	
+                <input type="text" name="pengadaan" value="<?= $peserta['pengadaan'] ?>" class="form-control"  readonly/>	
 			</div>			
 			<hr>
 			<span class="section-subtitle"><code>.Transformasi Usaha</code></span>
 			<div class="input-wrap">
 				<label class="col-form-label">PERIZINAN USAHA YANG DIMILIKI<span class="section-subtitle"><code>*</code></span></label>					
-				<input type="text" value="<?=$peserta['izin_usaha'];?>" class="form-control" readonly />
+				<input type="text" name="izin_usaha" value="<?=$peserta['izin_usaha'];?>" class="form-control" readonly />
 			</div>
 			<hr>
 			<span class="section-subtitle"><code>.Informasi Lainnya</code></span>
 			<div class="input-wrap">
 				<label class="col-form-label">PERMASALAHAN YANG DIHADAPI<span class="section-subtitle"><code>*</code></span></label>
-				<input type="text" value="<?=$peserta['permasalahan'];?>" class="form-control" readonly />
+				<input type="text" name="permasalahan" value="<?=$peserta['permasalahan'];?>" class="form-control" readonly />
 			</div>
 			<div class="input-wrap">
 				<label class="col-form-label">KEBUTUHAN DIKLAT / PELATIHAN<span class="section-subtitle"><code>*</code></span></label>					
-					<input type="text" value="<?=$peserta['kebutuhan'];?>" class="form-control" readonly/>
+					<input type="text"name="kebutuhan"  value="<?=$peserta['kebutuhan'];?>" class="form-control" readonly/>
 			</div>
 			
 			

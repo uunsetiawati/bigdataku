@@ -127,9 +127,9 @@ class Peserta extends CI_Controller {
 		$this->form_validation->set_rules('alamat', 'Alamat', 'required'); // required
 		$this->form_validation->set_rules('rt', 'RT', 'required'); // required
 		$this->form_validation->set_rules('rw', 'RW', 'required'); // required
-		$this->form_validation->set_rules('kota', 'Kab/Kota', 'required'); // required
-		$this->form_validation->set_rules('kecamatan', 'Kecamatan', 'required'); // required
-		$this->form_validation->set_rules('kelurahan', 'Kelurahan', 'required'); // required
+		// $this->form_validation->set_rules('kota', 'Kab/Kota', 'required'); // required
+		// $this->form_validation->set_rules('kecamatan', 'Kecamatan', 'required'); // required
+		// $this->form_validation->set_rules('kelurahan', 'Kelurahan', 'required'); // required
 		$this->form_validation->set_rules('no_telp', 'No Telp/WA', 'required|min_length[10]|max_length[13]'); // required
 
 		if ($this->form_validation->run() == FALSE)
@@ -178,11 +178,13 @@ class Peserta extends CI_Controller {
 	function upload_foto()
 		{
 			$kodeunik = $this->uri->segment(3);
+			$ktp=$this->input->post('no_ktp');
+
 			//validasi foto yang di upload
 			$config['upload_path']          = './uploads/peserta/';
             $config['allowed_types']        = 'gif|jpg|png|jpeg';
             $config['max_size']             = 3000;
-			$config['file_name'] 			= 'FOTOPESERTA'.'-'.$kodeunik.'-'.time();
+			$config['file_name'] 			= $kodeunik.'-'.$ktp;
             $this->load->library('upload', $config);
 
             //proses upload
@@ -194,11 +196,12 @@ class Peserta extends CI_Controller {
 	function upload_ktp()
 		{
 			$kodeunik = $this->uri->segment(3);
+			$ktp=$this->input->post('no_ktp');
 			//validasi foto yang di upload
 			$config2['upload_path']          = './uploads/ktp/';
             $config2['allowed_types']        = 'gif|jpg|png|jpeg';
             $config2['max_size']             = 3000;
-			$config2['file_name'] 			= 'KTPPESERTA'.'-'.$kodeunik.'-'.time();
+			$config2['file_name'] 			 = $kodeunik.'-'.$ktp;
             // $this->load->library('upload', $config2);
 			$this->upload->initialize($config2);
 
@@ -222,9 +225,48 @@ class Peserta extends CI_Controller {
         }
     }
 
+	function noktp_check_edit(){
+        // $id_user= $this->session->userdata('id_user');
+        $post = $this->input->post(null, TRUE);
+		$query = $this->db->query("SELECT * FROM tb_data_peserta WHERE no_ktp = '$post[no_ktp]' AND id_pelatihan='$post[id_pel]' AND id != '$post[id]'");
+
+        if ($query->num_rows() > 0){
+            $this->form_validation->set_message('noktp_check_edit', '{field} ini sudah dipakai');
+            return FALSE;
+        }else {
+            return TRUE;
+        }
+    }
+
+	function nourut_check_edit(){
+        // $id_user= $this->session->userdata('id_user');
+        $post = $this->input->post(null, TRUE);
+		$query = $this->db->query("SELECT * FROM tb_data_peserta WHERE no_urut = '$post[no_urut]' AND id_pelatihan='$post[id_pel]' AND id != '$post[id]'");
+
+        if ($query->num_rows() > 0){
+            $this->form_validation->set_message('nourut_check_edit', '{field} ini sudah dipakai');
+            return FALSE;
+        }else {
+            return TRUE;
+        }
+    }
+
 
 	function edit() 
 	{
+		$this->form_validation->set_rules('no_urut', 'Nomor Urut', 'required|callback_nourut_check_edit', [
+			'is_unique' => '%s sudah ada. Silahkan isikan No. Urut lainnya',
+		]); // Unique Field 
+		$this->form_validation->set_rules('no_ktp', 'Nomor KTP', 'required|callback_noktp_check_edit|min_length[16]|max_length[16]', [
+			'is_unique' => '%s sudah terdaftar. Silahkan isikan No. KTP lainnya',
+		]); // Unique Field 
+		$this->form_validation->set_rules('nama_peserta', 'Nama Peserta', 'required'); // required
+		$this->form_validation->set_rules('tempat_lahir', 'Tempat Lahir', 'required'); // required 
+		$this->form_validation->set_rules('tgl_lahir', 'Tanggal Lahir', 'required'); // required
+		$this->form_validation->set_rules('alamat', 'Alamat', 'required'); // required
+		$this->form_validation->set_rules('rt', 'RT', 'required'); // required
+		$this->form_validation->set_rules('rw', 'RW', 'required'); // required
+		$this->form_validation->set_rules('no_telp', 'No Telp/WA', 'required|min_length[10]|max_length[13]'); // required
 		if ($this->form_validation->run() == FALSE)
 		{		
 			$id = $this->uri->segment(3);	
@@ -238,8 +280,10 @@ class Peserta extends CI_Controller {
 		}
 		else
 		{   
+			$kodeunik=$this->input->post('kodeunik');
 			$this->peserta_m->update();
-			redirect('peserta/viewdatapeserta');
+			redirect('peserta/viewdatapeserta/'.$kodeunik);
+			// echo $kodeunik;
 		}
 
 	}

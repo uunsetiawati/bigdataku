@@ -127,7 +127,7 @@
 	<!-- end page wrapper -->
 
 	<!-- toolbar bottom -->
-	<div class="toolbar">
+	<!-- <div class="toolbar">
 		<div class="container">
 			<ul class="toolbar-bottom toolbar-wrap">
 				<li class="toolbar-item">
@@ -152,7 +152,7 @@
 				</li>
 			</ul>
 		</div>
-	</div>
+	</div> -->
 	<!-- end toolbar bottom -->
 
 	<!-- <script src="<?=base_url('assets/js/jquery-3.4.1.min.js')?>"></script> -->

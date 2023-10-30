@@ -85,7 +85,7 @@
                 // of the DataTable
                 "searching": true,
                 "ajax": '<?php echo site_url('peserta/data/'.$this->uri->segment(3)); ?>',
-                "order": [[ 0, 'desc' ]],
+                "order": [[ 0, 'asc' ]],
                 "columns": [                    
                     {
                         "data": "no_urut",

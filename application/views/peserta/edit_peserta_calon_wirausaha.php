@@ -70,4 +70,7 @@
 
     <div class="button-default">
         <button type="submit" name="simpan" class="button" id="btnsubmit" style="display:block">Simpan</button>
+        <?php
+            echo anchor('peserta/viewdatapeserta/'.$peserta['kodeunik'], 'Kembali', array('class'=>'button2'));
+        ?>
     </div>

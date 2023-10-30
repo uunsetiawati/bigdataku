@@ -55,8 +55,8 @@
 								<i class="icon ion-ios-brush bg-blue"></i>
 							</div>
 							<div class="text">
-								<h5>Easy to Edit</h5>
-								<p>With a neat page layout and well arranged code</p>
+								<h5>Pelatihan Online</h5>
+								<p>Pelatihan yang dilaksanakan secara daring melalui aplikasi Zoom Meeting</p>
 							</div>
 						</div>
 					</div>
@@ -66,8 +66,8 @@
 								<i class="icon ion-ios-checkbox bg-green"></i>
 							</div>
 							<div class="text">
-								<h5>Complete Features</h5>
-								<p>Equipped with various features such as lists, buttons, and others</p>
+								<h5>Pelatihan Offline</h5>
+								<p>Pelatihan yang dilaksanakan secara klasikal di masing-masing daerah dan terbatas kuota peserta</p>
 							</div>
 						</div>
 					</div>
@@ -77,8 +77,8 @@
 								<i class="icon ion-ios-keypad bg-red"></i>
 							</div>
 							<div class="text">
-								<h5>Well Documented</h5>
-								<p>So that users easily use and customize this template</p>
+								<h5>Webinar</h5>
+								<p>Dilaksanakan dengan memanfaatkan aplikasi Zoom Meeting dan Streaming Youtube dengan kapasitas tak terbatas.</p>
 							</div>
 						</div>
 					</div>
@@ -117,13 +117,13 @@
 				<div class="row">
 					<div class="col-6">
 						<div class="content bg-blue text-center">
-							<h3 class="color-white">60</h3>
+							<h3 class="color-white"><?=$online?></h3>
 							<h5 class="color-white">PELATIHAN ONLINE</h5>
 						</div>
 					</div>
 					<div class="col-6">
 						<div class="content bg-red text-center">
-							<h3 class="color-white">28</h3>
+							<h3 class="color-white"><?=$offline?></h3>
 							<h5 class="color-white">PELATIHAN OFFLINE</h5>
 						</div>
 					</div>
@@ -131,13 +131,13 @@
 				<div class="row">
 					<div class="col-6">
 						<div class="content bg-yellow text-center">
-							<h3 class="color-white">28</h3>
+							<h3 class="color-white"><?=$total?></h3>
 							<h5 class="color-white">PESERTA PELATIHAN</h5>
 						</div>
 					</div>
 					<div class="col-6">
 						<div class="content bg-purple text-center">
-							<h3 class="color-white">109</h3>
+							<h3 class="color-white"><?=$webinar?></h3>
 							<h5 class="color-white">WEBINAR</h5>
 						</div>
 					</div>
@@ -187,34 +187,7 @@
 	</div>
 	<!-- end page wrapper -->
 
-	<!-- toolbar bottom -->
-	<div class="toolbar">
-		<div class="container">
-			<ul class="toolbar-bottom toolbar-wrap">
-				<li class="toolbar-item">
-					<a href="index.html" class="toolbar-link toolbar-link-active">
-						<i class="icon ion-ios-home"></i>
-					</a>
-				</li>
-				<li class="toolbar-item">
-					<a href="features.html" class="toolbar-link">
-						<i class="icon ion-ios-star"></i>
-					</a>
-				</li>
-				<li class="toolbar-item">
-					<a href="pages.html" class="toolbar-link">
-						<i class="icon ion-ios-browsers"></i>
-					</a>
-				</li>
-				<li class="toolbar-item">
-					<a href="apps.html" class="toolbar-link">
-						<i class="icon ion-ios-apps"></i>
-					</a>
-				</li>
-			</ul>
-		</div>
-	</div>
-	<!-- end toolbar bottom -->
+	
 
 	<script src="<?=base_url('assets/js/jquery-3.4.1.min.js')?>"></script>
 	<script src="<?=base_url('assets/js/bootstrap.bundle.min.js')?>"></script>
