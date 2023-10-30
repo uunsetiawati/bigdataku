@@ -105,12 +105,14 @@
 				</div>
 			</div> -->
 			<input type="hidden" name="provinsi" value="35">
+
 			<div class="input-wrap">
 				<label class="col-form-label">KAB/KOTA<span class="section-subtitle"><code>*</code></span></label>						
 				<?php
                 //function cmb_dinamisprov($name, $table, $field, $pk, $id, $selected=null, $extra=null)
-                  echo cmb_dinamiskabupaten('kabupaten', 'regencies', 'name', 'id','kota','toggleselect2()', $this->input->post('kabupaten') ?? $peserta['kabupaten']);				
+                  echo cmb_dinamiskabupaten('', 'regencies', 'name', 'id','kota','toggleselect2()', $this->input->post('kabupaten') ?? $peserta['kabupaten']);				
                 ?>	
+				<input type="text" name="kabupaten" value="<?=$this->input->post('kabupaten') ?? $peserta['kabupaten']?>">
 			</div>
 			<div class="input-wrap">
 				<label class="col-form-label">KECAMATAN<span class="section-subtitle"><code>*</code></span></label>				
