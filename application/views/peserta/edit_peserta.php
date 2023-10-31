@@ -110,16 +110,15 @@
 				<label class="col-form-label">KAB/KOTA<span class="section-subtitle"><code>*</code></span></label>						
 				<?php
                 //function cmb_dinamisprov($name, $table, $field, $pk, $id, $selected=null, $extra=null)
-                  echo cmb_dinamiskabupaten('', 'regencies', 'name', 'id','kota','toggleselect2()', $this->input->post('kabupaten') ?? $peserta['kabupaten']);				
-                ?>	
-				<input type="text" name="kabupaten" value="<?=$this->input->post('kabupaten') ?? $peserta['kabupaten']?>">
+                  echo cmb_dinamiskabupaten('kabupaten', 'regencies', 'name', 'id','kota','toggleselect2()', $this->input->post('kebupaten') ?? $peserta['kabupaten']);				
+                ?>					
 			</div>
 			<div class="input-wrap">
 				<label class="col-form-label">KECAMATAN<span class="section-subtitle"><code>*</code></span></label>				
 				<?php
                 //function cmb_dinamisprov($name, $table, $field, $pk, $id, $selected=null, $extra=null)
                   echo cmb_dinamiskec('kecamatan', 'districts', 'name', 'id','kecamatan','toggleselect3()', $this->input->post('kecamatan') ?? $peserta['kecamatan']);
-                ?> 								
+                ?> 
 			</div>
 			<div class="input-wrap">
 				<label class="col-form-label">KELURAHAN<span class="section-subtitle"><code>*</code></span></label>
