@@ -143,7 +143,12 @@ class Peserta extends CI_Controller {
 			$data['sertifikasi'] = $this->db->get('tb_sertifikasi')->result();
 			$datapelatihan=$this->db->get_where('tb_data_pelatihan', array('kodeunik' => $kodeunik,'status'=>'1'))->row_array();
 			if($datapelatihan > 0){
-				$this->templateadmin->load('template/dashboard_p', 'peserta/add_peserta',$data);	
+				if($datapelatihan['sasaran']=="UKM"){
+					$this->templateadmin->load('template/dashboard_p', 'peserta/add_pesertaukm',$data);
+				}else if($datapelatihan['sasaran']=="CALON WIRAUSAHA"){
+					$this->templateadmin->load('template/dashboard_p', 'peserta/add_pesertacalonwirausaha',$data);
+				}
+					
 			}else{
 				echo 'Tidak ada pelatihan/pendaftaran pelatihan sudah memenuhi kuota';
 			}
