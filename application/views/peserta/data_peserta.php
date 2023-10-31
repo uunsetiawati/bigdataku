@@ -30,21 +30,29 @@
             <div class="content">
 				<div class="container">
 					<div class="row">                        
-                        <div class="col-6">
+                        <div class="col-4">
                             <div class="button-default">
                                 <?php
                                     echo anchor('pelatihan/add', '<button class="button">Tambah Data</button>');
                                 ?>
                             </div>
                         </div>  
-                        <div class="col-6">                           
+                        <div class="col-4">                           
                             <div class="button-default">   
                                 <?php
+                                    echo anchor('export/export/'.$this->uri->segment(3), 'Export', array('class'=>'button3'));
+                                ?>
+                            </div>
+                        </div>
+                        <div class="col-4">                           
+                            <div class="button-default">   
+                                <?php                                    
                                     echo anchor('pelatihan', 'Kembali', array('class'=>'button2'));
                                 ?>
                             </div>
                         </div> 
                     </div>
+                    
                     <div class="card">
 					<div class="card-body">
 						<div class="table-responsive">

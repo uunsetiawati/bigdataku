@@ -10,10 +10,11 @@ class Export extends CI_Controller {
      public function __construct()
      {
           parent::__construct();
-         $this->load->model('export_model');
+          check_not_login();
+          $this->load->model('export_model');
      }
 
-     public function index()
+     public function indexX()
      {
           $data['semua_pengguna'] = $this->export_model->getAll()->result();
           $this->load->view('export', $data);
@@ -21,7 +22,8 @@ class Export extends CI_Controller {
 
      public function export()
      {
-          $semua_pengguna = $this->export_model->getAll()->result();
+          $kodeunik = $this->uri->segment(3);	
+          $semua_pengguna = $this->export_model->getAll($kodeunik)->result();
 
           $spreadsheet = new Spreadsheet;
           // $spreadsheet->getDefaultStyle('B')->getNumberFormat()->setFormatCode(NumberFormat::FORMAT_TEXT);
@@ -55,9 +57,14 @@ class Export extends CI_Controller {
           $writer = new Xlsx($spreadsheet);
 
           header('Content-Type: application/vnd.ms-excel');
-	  header('Content-Disposition: attachment;filename="Cetak.xlsx"');
-	  header('Cache-Control: max-age=0');
+          header('Content-Disposition: attachment;filename="Cetak.xlsx"');
+          header('Cache-Control: max-age=0');
 
 	  $writer->save('php://output');
+     }
+
+     function cek(){
+          $kodeunik = $this->uri->segment(3);
+          echo $kodeunik;	
      }
 }
