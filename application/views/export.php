@@ -23,7 +23,7 @@
                          <td style="width: 30%"><?php echo $pengguna->no_ktp; ?></td>
                          <td><?php echo $pengguna->nama_peserta; ?></td>
                          <td><?php echo date('j F Y', strtotime($pengguna->tempat_lahir)); ?></td>
-                         <td style="text-align: center;"><?php echo $pengguna->tgl_lahir; ?></td>
+                         <td style="text-align: center;"><?php echo date('d-m-Y', strtoTime($pengguna->tgl_lahir)); ?></td>
                     </tr>
                <?php endforeach; ?>
           </tbody>

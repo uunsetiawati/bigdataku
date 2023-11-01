@@ -62,7 +62,7 @@
 				'id_pelatihan'          => $this->input->post('id_pel', TRUE),
 				'kodeunik'          	=> $this->uri->segment(3),
 				'no_ktp'          		=> $this->input->post('no_ktp', TRUE),
-				'nama_peserta'        	=> escape_str($nama_peserta),
+				'nama_peserta'        	=> $nama_peserta,
 				'tempat_lahir'          => $this->input->post('tempat_lahir', TRUE),
 				'tgl_lahir'            	=> $this->input->post('tgl_lahir', TRUE),
 				'jk'            		=> $this->input->post('jk', TRUE),
@@ -146,7 +146,7 @@
 								
 				'no_urut'          		=> $this->input->post('no_urut', TRUE),		
 				'no_ktp'          		=> $this->input->post('no_ktp', TRUE),
-				'nama_peserta'        	=> escape_str($nama_peserta),
+				'nama_peserta'        	=> $this->input->post('nama_peserta', TRUE),
 				'tempat_lahir'          => $this->input->post('tempat_lahir', TRUE),
 				'tgl_lahir'            	=> $this->input->post('tgl_lahir', TRUE),
 				'jk'            		=> $this->input->post('jk', TRUE),
