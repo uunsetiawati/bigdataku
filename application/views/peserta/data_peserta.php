@@ -40,7 +40,7 @@
                         <div class="col-4">                           
                             <div class="button-default">   
                                 <?php
-                                    echo anchor('export/export/'.$this->uri->segment(3), 'Export', array('class'=>'button3'));
+                                    echo anchor('export/export1/'.$this->uri->segment(3), 'Export', array('class'=>'button3'));
                                 ?>
                             </div>
                         </div>

@@ -21,9 +21,19 @@ class Export extends CI_Controller {
           $this->load->view('export', $data);
      }
 
-     public function export()
+     public function export1(){
+          $kodeunik=$this->uri->segment(3);
+          $pelatihan=$this->db->get_where('tb_data_pelatihan', array('kodeunik' => $kodeunik))->row_array();          
+          if($pelatihan['sasaran']=='CALON WIRAUSAHA'){
+               $this->export($kodeunik);
+          }else if($pelatihan['sasaran']=='UKM'){
+               echo 'UKM';
+          }
+     }
+
+     public function export($kodeunik)
      {
-          $kodeunik = $this->uri->segment(3);	
+          // $kodeunik = $this->uri->segment(3);	
           $semua_pengguna = $this->export_model->getAll($kodeunik)->result();
 
           $spreadsheet = new Spreadsheet;
@@ -48,7 +58,10 @@ class Export extends CI_Controller {
                       ->setCellValue('P1', 'Kelurahan')
                       ->setCellValue('Q1', 'No. Telp')
                       ->setCellValue('R1', 'Disabilitas')
-                      ->setCellValue('S1', 'Jabatan');
+                      ->setCellValue('S1', 'Jabatan')
+                      ->setCellValue('T1', 'Alamat Kop/Ukm')
+                      ->setCellValue('U1', 'RT Kop/UKM')
+                      ->setCellValue('V1', 'RW Kop/UKM');
           
           $sheet = $spreadsheet->getActiveSheet();
           $sheet->getColumnDimension('A')->setWidth(8); // Set width kolom A
@@ -70,6 +83,9 @@ class Export extends CI_Controller {
           $sheet->getColumnDimension('Q')->setWidth(15); // Set width kolom NO. telp
           $sheet->getColumnDimension('R')->setWidth(15); // Set width kolom Disabilitas
           $sheet->getColumnDimension('S')->setWidth(10); // Set width kolom Jabatan
+          $sheet->getColumnDimension('T')->setWidth(30); // Set width kolom Alamat Kop/UKM
+          $sheet->getColumnDimension('U')->setWidth(8); // Set width kolom RT Kop/UKM
+          $sheet->getColumnDimension('V')->setWidth(8); // Set width kolom RW Kop/UKM
 
           $kolom = 2;
           $nomor = 1;
@@ -95,7 +111,10 @@ class Export extends CI_Controller {
                            ->setCellValue('P' . $kolom, $pengguna->kelurahan)
                            ->setCellValueExplicit('Q' . $kolom, $pengguna->no_telp, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
                            ->setCellValue('R' . $kolom, $pengguna->disabilitas)
-                           ->setCellValue('S' . $kolom, $pengguna->jabatan);
+                           ->setCellValue('S' . $kolom, $pengguna->jabatan)
+                           ->setCellValue('T' . $kolom, $pengguna->alamat_kopukm)
+                           ->setCellValueExplicit('U' . $kolom, $pengguna->rt_kopukm, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValueExplicit('V' . $kolom, $pengguna->rw_kopukm, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
 
                $kolom++;
                $nomor++;
