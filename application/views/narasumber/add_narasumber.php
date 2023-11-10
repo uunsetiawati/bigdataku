@@ -39,13 +39,11 @@
 				<hr>
 				<div class="input-wrap">
 					<label class="col-form-label">JENIS KELAMIN<span class="section-subtitle"><code>*</code></span></label>	
-					<?php
-					echo form_dropdown('jk', array( 'LAKI-LAKI'=>'LAKI-LAKI', 'PEREMPUAN'=>'PEREMPUAN'), $narsum['jk'], "class='form-control' selected disabled");		
-					?>
+					<input type="text" name="jk" placeholder="JENIS KELAMIN" value="<?= $narsum['jk']; ?>" class="form-control" required readonly>
 				</div>
 				<div class="input-wrap">
 					<label class="col-form-label">NO. TELP / HP<span class="section-subtitle"><code>*</code></span></label>	
-					<input type="number" name="hp" placeholder="NO. TELP/HP" value="<?= $narsum['hp']; ?>" class="form-control" reuired readonly>
+					<input type="number" name="hp" placeholder="NO. TELP/HP" value="<?= $narsum['hp']; ?>" class="form-control" required readonly>
 				</div>
 				<div class="input-wrap">
 					<label class="col-form-label">UPLOAD MATERI<span class="section-subtitle"><code>*</code></span><h7> (Maks file ukuran 10MB | pdf,ppt)</h7></label>

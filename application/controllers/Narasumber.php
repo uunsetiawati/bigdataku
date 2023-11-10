@@ -95,7 +95,7 @@ class Narasumber extends CI_Controller {
 
 			$this->form_validation->set_rules('hp', 'NO HP', 'required|min_length[10]|max_length[13]'); // Unique Field 
 
-			$this->form_validation->set_rules('materi', 'MATERI', 'callback_validate_materi2'); // penamaan callback, calback_nama fungsi
+			$this->form_validation->set_rules('materi', 'MATERI', 'callback_validate_materi'); // penamaan callback, calback_nama fungsi
 
 			$this->form_validation->set_rules('spt', 'SPT', 'callback_validate_spt'); // penamaan callback, calback_nama fungsi
 
@@ -471,35 +471,7 @@ class Narasumber extends CI_Controller {
         }
         return $check;
     }
-
-	public function validate_materi2()
-    {
-        $check = TRUE;
-        if ((!isset($_FILES['materi'])) || $_FILES['materi']['size'] == 0) {
-            $this->form_validation->set_message('validate_materi2', '{field} wajib diisi');
-            $check = FALSE;
-        } else if (isset($_FILES['materi']) && $_FILES['materi']['size'] != 0) {
-            $allowedExts = array("pdf", "ppt", "pptx", "PPT", "PDF", "PPT", "PPTX");
-            $extension = pathinfo($_FILES["materi"]["name"], PATHINFO_EXTENSION);
-			$allowedTypes = array('application/pdf','application/vnd.ms-powerpoint','application/vnd.openxmlformats-officedocument.presentationml.presentation');
-			$detectedType = get_mime_by_extension($_FILES['materi']['name']);
-            $type = $_FILES['materi']['type'];
-            if (!in_array($detectedType, $allowedTypes)) {
-                $this->form_validation->set_message('validate_materi2', 'Invalid Image Content!');
-                $check = FALSE;
-            }
-            if (filesize($_FILES['materi']['tmp_name']) > 10097152) {
-                $this->form_validation->set_message('validate_materi2', 'Ukuran file tidak boleh lebih dari 10MB!');
-                $check = FALSE;
-            }
-            if (!in_array($extension, $allowedExts)) {
-                $this->form_validation->set_message('validate_materi2', "Ekstensi .{$extension} salah , hanya boleh upload dengan ekstensi pdf|ppt|pptx");
-                $check = FALSE;
-            }
-        }
-        return $check;
-    }
-
+	
 	public function validate_spt()
     {
         $check = TRUE;
