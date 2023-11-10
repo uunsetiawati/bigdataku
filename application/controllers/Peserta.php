@@ -119,7 +119,7 @@ class Peserta extends CI_Controller {
 	{
 
 		$this->form_validation->set_rules('no_ktp', 'Nomor KTP', 'required|callback_noktp_check|min_length[16]|max_length[16]', [
-			'is_unique' => '%s sudah terdaftar. Silahkan isikan Pemasaran lainnya',
+			'is_unique' => '%s sudah terdaftar. Silahkan isikan %S lainnya',
 		]); // Unique Field 
 		$this->form_validation->set_rules('nama_peserta', 'Nama Peserta', 'required'); // required
 		$this->form_validation->set_rules('tempat_lahir', 'Tempat Lahir', 'required'); // required 
@@ -150,7 +150,9 @@ class Peserta extends CI_Controller {
 				}
 					
 			}else{
-				echo 'Tidak ada pelatihan/pendaftaran pelatihan sudah memenuhi kuota';
+				// echo 'Tidak ada pelatihan/pendaftaran pelatihan sudah memenuhi kuota';
+				$this->templateadmin->load('template/dashboard_p', 'peserta/noevent');
+				
 			}
 			
 						
@@ -176,7 +178,8 @@ class Peserta extends CI_Controller {
 			$this->peserta_m->save($uploadFoto,$uploadKtp);
 			
 			// redirect('peserta');
-			echo "sukses";
+			// echo "sukses";
+			$this->thankyou($kodeunik);
 		}
 	}	
 
@@ -297,4 +300,18 @@ class Peserta extends CI_Controller {
 	{
 
 	}
+
+	function thankyou($kodeunik)
+	{
+		$data['pelatihan'] = $this->db->get_where('tb_data_pelatihan', array('kodeunik' => $kodeunik,'status'=>'1'))->row_array();
+		$this->templateadmin->load('template/dashboard_p', 'peserta/thankyou',$data);
+	}
+
+	function cek($kodeunik)
+	{
+		$data['pelatihan'] = $this->db->get_where('tb_data_pelatihan', array('kodeunik' => $kodeunik,'status'=>'1'))->row_array();
+		$this->templateadmin->load('template/dashboard_p', 'peserta/noevent');
+	}
+
+
 }

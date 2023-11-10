@@ -9,7 +9,15 @@
                     <div class="container">
                         <div class="social-media-icon socmed-for-about shadow-sm">
                             <div class="coming-soon-word text-center">
-                                <h4>DATA PELATIHAN</h4>
+                                <h4>DATA NARASUMBER</h4>
+                                <?=$pelatihan['judul_pelatihan']?> DI <?=$pelatihan['alamat_pelatihan'];?>
+                                <?php
+                                $tglmulai = new DateTime($pelatihan['tgl_mulai']);
+                                $tglakhir = new DateTime($pelatihan['tgl_akhir']);
+                                ?>
+                                <h6>Tanggal Pelatihan : <?=$tglmulai->format("d-m-Y");?> s.d <?=$tglakhir->format("d-m-Y")?></h6>
+                                <h6>Peserta : <?=$pelatihan['sasaran'];?></h6>
+                                
                             </div>                          
                         </div>
                     </div>
@@ -25,14 +33,17 @@
                         <div class="col-6">
                             <div class="button-default">
                                 <?php
-                                    echo anchor('pelatihan/add', '<button class="button">Tambah Data</button>');
+                                    form_hidden('kodeunik',$this->uri->segment(3));
+                                    // echo anchor('narasumber/add/'.$this->uri->segment(3), '<button class="button" target="_blank">Tambah Data</button>');
+                                    echo anchor('narasumber/searchindex/'. $this->uri->segment(3), 'Tambah Data', 'class="button" target="_blank"');
+
                                 ?>
                             </div>
                         </div>  
                         <div class="col-6">                           
                             <div class="button-default">   
                                 <?php
-                                    echo anchor('dashboard', 'Kembali', array('class'=>'button2'));
+                                    echo anchor('pelatihan', 'Kembali', array('class'=>'button2'));
                                 ?>
                             </div>
                         </div> 
@@ -44,13 +55,9 @@
 								<thead class="table-success">
 									<tr>
 										<th >No</th>
-										<th >Judul</th>
-                                        <th >Divisi</th>
-										<th >KAB/KOTA</th>
-										<th >Sasaran</th>
-                                        <th >Tanggal</th>
+										<th >Nama</th>
+                                        <th >Judul</th>
 										<th >#</th>
-                                        <th >#</th>
                                         <th >#</th>
                                         <th >#</th>
 									</tr>
@@ -80,39 +87,25 @@
                 // Enable the searching
                 // of the DataTable
                 "searching": true,
-                "ajax": '<?php echo site_url('pelatihan/data'); ?>',
-                "order": [[ 0, 'desc' ]],
+                "ajax": '<?php echo site_url('narasumber/data/'.$this->uri->segment(3)); ?>',
+                "order": [[ 0, 'asc' ]],
                 "columns": [                    
                     {    
-                        "data": "id",
-                        // "width": "50px",
-                        // "class": "text-center",
-                        // "orderable": true, 
-                        // "sortable": true,  
-                        // render: function (data, type, row, meta) {
-		                //  return meta.row + meta.settings._iDisplayStart + 1;
-		                // }                     
+                        "data": "",
+                        "width": "50px",
+                        "class": "text-center",
+                        "orderable": true, 
+                        "sortable": true,  
+                        render: function (data, type, row, meta) {
+		                 return meta.row + meta.settings._iDisplayStart + 1;
+		                }                     
+                    },
+                    { 
+                        "data": "nama",
                     },
                     { 
                         "data": "judul",
-                    },
-                    { 
-                        "data": "divisi",
-                    },
-                    { 
-                        "data": "alamat",
-                    },
-                    { 
-                        "data": "sasaran",
-                    }, 
-                    { 
-                        "data": "tanggalmulai",
-                        "render": function (data) {
-                            var date = new Date(data);
-                            var month = date.getMonth() + 1;
-                            return date.getDate() + "-" + (month.toString().length > 1 ? month : "0" + month) + "-" +  date.getFullYear();
-                        }
-                    },                    
+                    },                   
                     { 
                         "data": "aksi",
                         "width": "20px",
@@ -125,11 +118,6 @@
                     },
                     { 
                         "data": "lihat",
-                        "width": "20px",
-                        "class": "text-center"
-                    },
-                    { 
-                        "data": "narsum",
                         "width": "20px",
                         "class": "text-center"
                     },

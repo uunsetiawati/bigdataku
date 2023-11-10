@@ -48,7 +48,14 @@ class Pelatihan extends CI_Controller {
 				'db' => 'kodeunik',
 				'dt' => 'lihat',
 				'formatter' => function($d) {
-						 return anchor('peserta/viewdatapeserta/'.$d, '<i class="icon ion-ios-eye"></i>','class="btn btn-xs btn-warning" data-placement="top" title="Lihat Peserta"');
+						 return anchor('peserta/viewdatapeserta/'.$d, '<i class="icon ion-ios-people"></i>','class="btn btn-xs btn-warning" data-placement="top" title="Lihat Peserta"');
+			  }
+		  	),
+			  array(
+				'db' => 'kodeunik',
+				'dt' => 'narsum',
+				'formatter' => function($d) {
+						 return anchor('narasumber/viewdatanarsum/'.$d, '<i class="icon ion-ios-person"></i>','class="btn btn-xs btn-danger" data-placement="top" title="Narasumber"');
 			  }
 		  	)
 	    );
