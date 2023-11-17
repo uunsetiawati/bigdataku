@@ -30,7 +30,7 @@
 		<div class="form-wrapper">            
 			<div class="input-wrap">
 				<label class="col-form-label">NO. KTP/NIK<span class="section-subtitle"><code>*</code></span></label>
-				<input type="text" name="no_ktp" placeholder="NO. KTP/NIK" value="<?= set_value('no_ktp'); ?>" class="form-control <?= (form_error('no_ktp') == "" ? '':'is-invalid') ?>">
+				<input type="number" name="no_ktp" placeholder="NO. KTP/NIK" value="<?= set_value('no_ktp'); ?>" class="form-control <?= (form_error('no_ktp') == "" ? '':'is-invalid') ?>">
 				<?= form_error('no_ktp'); ?>				
 			</div>
 			<div class="input-wrap">
@@ -139,7 +139,7 @@
 			</div>
 			<div class="input-wrap">
 				<label class="col-form-label">NO.TELP/WA<span class="section-subtitle"><code>*</code></span></label>
-				<input type="text" name="no_telp" placeholder="NOMOR TELEPON (Cth:081331220006)" value="<?= set_value('no_telp'); ?>" class="form-control <?= (form_error('no_telp') == "" ? '':'is-invalid') ?>">
+				<input type="number" name="no_telp" placeholder="NOMOR TELEPON (Cth:081331220006)" value="<?= set_value('no_telp'); ?>" class="form-control <?= (form_error('no_telp') == "" ? '':'is-invalid') ?>">
 				<?= form_error('no_telp'); ?>
 			</div>
 			<div class="input-wrap">
