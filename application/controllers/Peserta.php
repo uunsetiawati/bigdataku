@@ -183,6 +183,76 @@ class Peserta extends CI_Controller {
 		}
 	}	
 
+	function add_pesertadewan($kodeunik)
+	{
+
+		$this->form_validation->set_rules('no_ktp', 'Nomor KTP', 'required|callback_noktp_check|min_length[16]|max_length[16]', [
+			'is_unique' => '%s sudah terdaftar. Silahkan isikan %S lainnya',
+		]); // Unique Field 
+		$this->form_validation->set_rules('nama_peserta', 'Nama Peserta', 'required'); // required
+		$this->form_validation->set_rules('tempat_lahir', 'Tempat Lahir', 'required'); // required 
+		$this->form_validation->set_rules('tgl_lahir', 'Tanggal Lahir', 'required'); // required
+		$this->form_validation->set_rules('alamat', 'Alamat', 'required'); // required
+		$this->form_validation->set_rules('rt', 'RT', 'required'); // required
+		$this->form_validation->set_rules('rw', 'RW', 'required'); // required
+		// $this->form_validation->set_rules('kota', 'Kab/Kota', 'required'); // required
+		// $this->form_validation->set_rules('kecamatan', 'Kecamatan', 'required'); // required
+		// $this->form_validation->set_rules('kelurahan', 'Kelurahan', 'required'); // required
+		$this->form_validation->set_rules('no_telp', 'No Telp/WA', 'required|min_length[10]|max_length[13]'); // required
+		$this->form_validation->set_rules('foto', 'FOTO', 'callback_validate_foto'); // penamaan callback, calback_nama fungsi
+		$this->form_validation->set_rules('foto_ktp', 'KTP', 'callback_validate_foto_ktp'); // penamaan callback, calback_nama fungsi
+
+		if ($this->form_validation->run() == FALSE)
+		{			
+			
+			// $kodeunik = $this->uri->segment(3);
+			$data['peserta'] = $this->db->get_where('tb_data_pelatihan', array('kodeunik' => $kodeunik,'status'=>'1'))->row_array();
+			$data['izin'] = $this->db->get('tb_izin_usaha')->result();
+			$data['masalah'] = $this->db->get('tb_permasalahan')->result();
+			$data['kebutuhan'] = $this->db->get('tb_kebutuhan_diklat')->result();
+			$data['sertifikasi'] = $this->db->get('tb_sertifikasi')->result();
+			$datapelatihan=$this->db->get_where('tb_data_pelatihan', array('kodeunik' => $kodeunik,'status'=>'1'))->row_array();
+			if($datapelatihan > 0){
+				if($datapelatihan['sasaran']=="UKM"){
+					$this->templateadmin->load('template/dashboard_p', 'peserta/add_pesertaukmdewan',$data);
+				}else if($datapelatihan['sasaran']=="CALON WIRAUSAHA"){
+					$this->templateadmin->load('template/dashboard_p', 'peserta/add_pesertacalonwirausaha',$data);
+				}
+					
+			}else{
+				// echo 'Tidak ada pelatihan/pendaftaran pelatihan sudah memenuhi kuota';
+				$this->templateadmin->load('template/dashboard_p', 'peserta/noevent');
+				
+			}
+			
+						
+		}
+		else
+		{   
+			
+			// $checkbox = $this->input->post('sosmed_usaha');
+			// $sosmed=implode(',',$checkbox);
+
+			$uploadFoto = $this->upload_foto();
+			$uploadKtp = $this->upload_ktp();
+
+			// if($uploadFoto && $uploadKtp){
+			// 	$data = [
+			// 		'foto' => $uploadFoto,
+        	// 		'ktp'  => $uploadKtp
+			// 	];
+			// 	$this->peserta_m->save($data);
+			// }
+							
+			
+			$this->peserta_m->savedewan($uploadFoto,$uploadKtp);
+			
+			// redirect('peserta');
+			// echo "sukses";
+			$this->thankyou($kodeunik);
+		}
+	}	
+
 	function upload_foto()
 		{
 			$kodeunik = $this->uri->segment(3);
@@ -259,9 +329,66 @@ class Peserta extends CI_Controller {
         }
     }
 
+	public function validate_foto_ktp()
+    {
+        $check = TRUE;
+        if ((!isset($_FILES['foto_ktp'])) || $_FILES['foto_ktp']['size'] == 0) {
+            $this->form_validation->set_message('validate_foto_ktp', '{field} wajib diisi');
+            $check = FALSE;
+        } else if (isset($_FILES['foto_ktp']) && $_FILES['foto_ktp']['size'] != 0) {
+            $allowedExts = array("gif", "jpeg", "jpg", "png", "JPG", "JPEG", "GIF", "PNG");
+            $extension = pathinfo($_FILES["foto_ktp"]["name"], PATHINFO_EXTENSION);
+			$allowedTypes = array('image/gif','image/jpeg','image/pjpeg','image/png','image/x-png');
+			$detectedType = get_mime_by_extension($_FILES['foto_ktp']['name']);
+            $type = $_FILES['foto_ktp']['type'];
+            if (!in_array($detectedType, $allowedTypes)) {
+                $this->form_validation->set_message('validate_foto_ktp', 'Invalid Image Content!');
+                $check = FALSE;
+            }
+            if (filesize($_FILES['foto_ktp']['tmp_name']) > 3097152) {
+                $this->form_validation->set_message('validate_foto_ktp', 'Ukuran gambar tidak boleh lebih dari 3MB!');
+                $check = FALSE;
+            }
+            if (!in_array($extension, $allowedExts)) {
+                $this->form_validation->set_message('validate_foto_ktp', "Ekstensi .{$extension} salah , hanya boleh upload dengan ekstensi jpg|jpeg|png");
+                $check = FALSE;
+            }
+        }
+        return $check;
+    }
+
+	public function validate_foto()
+    {
+        $check = TRUE;
+        if ((!isset($_FILES['foto'])) || $_FILES['foto']['size'] == 0) {
+            $this->form_validation->set_message('validate_foto', '{field} wajib diisi');
+            $check = FALSE;
+        } else if (isset($_FILES['foto']) && $_FILES['foto']['size'] != 0) {
+            $allowedExts = array("gif", "jpeg", "jpg", "png", "JPG", "JPEG", "GIF", "PNG");
+            $extension = pathinfo($_FILES["foto"]["name"], PATHINFO_EXTENSION);
+			$allowedTypes = array('image/gif','image/jpeg','image/pjpeg','image/png','image/x-png');
+			$detectedType = get_mime_by_extension($_FILES['foto']['name']);
+            $type = $_FILES['foto']['type'];
+            if (!in_array($detectedType, $allowedTypes)) {
+                $this->form_validation->set_message('validate_foto', 'Invalid Image Content!');
+                $check = FALSE;
+            }
+            if (filesize($_FILES['foto']['tmp_name']) > 3097152) {
+                $this->form_validation->set_message('validate_foto', 'Ukuran gambar tidak boleh lebih dari 3MB!');
+                $check = FALSE;
+            }
+            if (!in_array($extension, $allowedExts)) {
+                $this->form_validation->set_message('validate_foto', "Ekstensi .{$extension} salah , hanya boleh upload dengan ekstensi jpg|jpeg|png");
+                $check = FALSE;
+            }
+        }
+        return $check;
+    }
+
 
 	function edit() 
 	{
+		check_not_login();
 		$this->form_validation->set_rules('no_urut', 'Nomor Urut', 'required|callback_nourut_check_edit', [
 			'is_unique' => '%s sudah ada. Silahkan isikan No. Urut lainnya',
 		]); // Unique Field 
@@ -284,7 +411,7 @@ class Peserta extends CI_Controller {
 				$data['pelatihan'] = $this->db->get_where('tb_data_pelatihan', array('id' => $row->id_pelatihan))->row_array();
 			}
 			$data['peserta'] = $this->db->get_where('tb_data_peserta', array('id' => $id))->row_array();
-			$this->templateadmin->load('template/dashboard', 'peserta/edit_peserta', $data);			
+			$this->templateadmin->load('template/dashboard', 'peserta/edit_pesertadewan', $data);			
 		}
 		else
 		{   

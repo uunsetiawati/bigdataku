@@ -138,6 +138,115 @@
 			$this->db->insert($this->table, $data);
 		}
 
+		function savedewan($foto,$ktp)
+		{
+			
+
+			$izin = $this->input->post('izin', TRUE);
+			if(is_array($izin)){
+				$izin = implode(',',$izin);
+			}else{
+				$izin;
+			}
+
+			$kebutuhan = $this->input->post('kebutuhan', TRUE);
+			if(is_array($kebutuhan)){
+				$kebutuhan = implode(',',$kebutuhan);
+			}else{
+				$kebutuhan;
+			}
+
+			$masalah = $this->input->post('masalah', TRUE);
+			if(is_array($masalah)){
+				$masalah = implode(',',$masalah);
+			}else{
+				$masalah;
+			}
+
+			$sertifikasi = $this->input->post('sertifikasi', TRUE);
+			if(is_array($sertifikasi)){
+				$sertifikasi = implode(',',$sertifikasi);
+			}else{
+				$sertifikasi;
+			}
+			
+			$data = array(
+				//tabel di database => name di form				
+				'id_pelatihan'          => $this->input->post('id_pel', TRUE),
+				'kodeunik'          	=> $this->uri->segment(3),
+				'no_ktp'          		=> $this->input->post('no_ktp', TRUE),
+				'nama_peserta'        	=> $this->input->post('nama_peserta', TRUE),
+				'tempat_lahir'          => $this->input->post('tempat_lahir', TRUE),
+				'tgl_lahir'            	=> $this->input->post('tgl_lahir', TRUE),
+				'jk'            		=> $this->input->post('jk', TRUE),
+				'status'            	=> $this->input->post('status', TRUE),
+				'pendidikan'            => $this->input->post('pendidikan', TRUE),
+				'agama'            		=> $this->input->post('agama', TRUE),
+				'alamat'           		=> $this->input->post('alamat', TRUE),
+				'rt'            		=> $this->input->post('rt', TRUE),
+				'rw'            		=> $this->input->post('rw', TRUE),
+				'provinsi'            	=> $this->input->post('provinsi', TRUE),
+				'kabupaten'            	=> $this->input->post('kota', TRUE),
+				'kecamatan'            	=> $this->input->post('kecamatan', TRUE),
+				'kelurahan'            	=> $this->input->post('kelurahan', TRUE),
+				'no_telp'            	=> $this->input->post('no_telp', TRUE),
+				'disabilitas'			=> $this->input->post('disabilitas', TRUE),
+				'jabatan'				=> $this->input->post('jabatan', TRUE),
+				'nama_kop'				=> $this->input->post('nama_kop', TRUE),
+				'nik_koperasi'			=> $this->input->post('nik_koperasi', TRUE),
+				'no_badan_hukum'		=> $this->input->post('no_badan_hukum', TRUE),
+				'alamat_kopukm	'		=> $this->input->post('alamat_kopukm', TRUE),
+				'rt_kopukm	'			=> $this->input->post('rt_kopukm', TRUE),
+				'rw_kopukm	'			=> $this->input->post('rw_kopukm', TRUE),
+				'prov_kopukm'			=> $this->input->post('prov_kopukm', TRUE),
+				'kota_kopukm'			=> $this->input->post('kota_kopukm', TRUE),
+				'kec_kopukm'			=> $this->input->post('kec_kopukm', TRUE),
+				'kel_kopukm'			=> $this->input->post('kel_kopukm', TRUE),
+				'kodepos_kopukm'		=> $this->input->post('kodepos_kopukm', TRUE),
+				'jml_anggota'			=> $this->input->post('jml_anggota', TRUE),
+				'anggota_l'				=> $this->input->post('anggota_l', TRUE),
+				'anggota_p'				=> $this->input->post('anggota_p', TRUE),
+				'bentuk_koperasi'		=> $this->input->post('bentuk_koperasi', TRUE),
+				'jenis_koperasi'		=> $this->input->post('jenis_koperasi', TRUE),
+				'kelompok_koperasi'		=> $this->input->post('kelompok_koperasi', TRUE),
+				'sektor_usaha'			=> $this->input->post('sektor_usaha', TRUE),
+				'bidang_usaha'			=> $this->input->post('bidang_usaha', TRUE),
+				'jenis_produk'			=> $this->input->post('jenis_produk', TRUE),
+				'volume_usaha'			=> $this->input->post('volume_usaha', TRUE),
+				'status_usaha'			=> $this->input->post('status_usaha', TRUE),
+				'sertifikasi'			=> $sertifikasi,
+				'wil_pemasaran'			=> $this->input->post('wil_pemasaran', TRUE),
+				'nama_usaha'			=> $this->input->post('nama_usaha', TRUE),
+				'nib'					=> $this->input->post('nib', TRUE),
+				'jml_tenaga_kerja'		=> $this->input->post('jml_tenaga_kerja', TRUE),
+				'modal_usaha'			=> $this->input->post('modal_usaha', TRUE),
+				'nilai_modalusaha'		=> $this->input->post('nilai_modalusaha', TRUE),
+				'omzet_usaha'			=> $this->input->post('omzet_usaha', TRUE),
+				'nilai_omzetusaha'		=> $this->input->post('nilai_omzetusaha', TRUE),
+				'jml_tenaga_kerjal'		=> $this->input->post('jml_tenaga_kerjal', TRUE),
+				'jml_tenaga_kerjap'		=> $this->input->post('jml_tenaga_kerjap', TRUE),
+				'web_usaha'				=> $this->input->post('web_usaha', TRUE),
+				'ig_usaha'				=> $this->input->post('ig_usaha', TRUE),
+				'fb_usaha'				=> $this->input->post('fb_usaha', TRUE),
+				'tiktok_usaha'			=> $this->input->post('tiktok_usaha', TRUE),
+				'email_usaha'			=> $this->input->post('email_usaha', TRUE),
+				'shopee'				=> $this->input->post('shopee', TRUE),
+				'tokped'				=> $this->input->post('tokped', TRUE),
+				'bukalapak'				=> $this->input->post('bukalapak', TRUE),
+				'lazada'				=> $this->input->post('lazada', TRUE),
+				'izin_usaha'			=> $izin,
+				'lokasi_pemasaran'		=> $this->input->post('lokasi_pemasaran', TRUE),
+				'idebisnis'				=> $this->input->post('idebisnis',TRUE),
+				'permasalahan'			=> $masalah,
+				'kebutuhan'				=> $kebutuhan,
+				'jabatan'				=> $this->input->post('jabatan', TRUE),
+				'foto'					=> $foto,
+				'ktp'					=> $ktp,
+				'created'				=> $this->input->post('now', TRUE)
+			);
+			$this->db->insert($this->table, $data);
+		}
+
 		function update()
 		{			
 			$nama_peserta = $this->input->post('nama_peserta', TRUE);

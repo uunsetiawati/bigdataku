@@ -9,7 +9,7 @@
 						<h4 class="mb-1">Terimakasih</h4>
 						<span class="text-small"></span>
 					</div>
-					<p>Telah mendaftar pada pelatihan <?=$pelatihan['judul_pelatihan']?></p>
+					<p>Telah mendaftar pada <?=$pelatihan['judul_pelatihan']?></p>
                     <p>Yang diadakan di <?=$pelatihan['alamat_pelatihan']?></p>
                     <p>Pada <?=$pelatihan['tgl_mulai']?> s.d <?=$pelatihan['tgl_akhir']?></p>
                     <h6>Apabila mengundurkan diri harap menghubungi panitia di nomor berikut H-2 sebelum tanggal kegiatan</h6>

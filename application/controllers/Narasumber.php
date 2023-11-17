@@ -87,7 +87,7 @@ class Narasumber extends CI_Controller {
 	}
 
 	function add($kodeunik)//butuh form validation untuk menghindari nik yang sama
-		{
+		{	
 			// check_not_login();
 			$this->form_validation->set_rules('nik', 'NIK', 'required|callback_nik_check|min_length[16]|max_length[16]', [
 				'is_unique' => '%s sudah terdaftar',
@@ -124,10 +124,12 @@ class Narasumber extends CI_Controller {
 				$data['pelatihan'] = $this->db->get_where('tb_data_pelatihan', array('kodeunik' => $kodeunik,'status'=>'1'))->row_array();
 				$this->templateadmin->load('template/dashboard_p', 'narasumber/thankyou',$data);
 			}
+		
 		}
 
 	function add2($kodeunik)//butuh form validation untuk menghindari nik yang sama
 	{
+		
 		// check_not_login();
 		$this->form_validation->set_rules('nik', 'NIK', 'required|callback_nik_check|min_length[16]|max_length[16]', [
 			'is_unique' => '%s sudah terdaftar',
@@ -176,6 +178,7 @@ class Narasumber extends CI_Controller {
 			$data['pelatihan'] = $this->db->get_where('tb_data_pelatihan', array('kodeunik' => $kodeunik,'status'=>'1'))->row_array();
 			$this->templateadmin->load('template/dashboard_p', 'narasumber/thankyou',$data);
 		}
+	
 	}
 
 	function upload_ktp()
@@ -575,9 +578,10 @@ class Narasumber extends CI_Controller {
         }
     }
 
-	public function searchindex($kodeunik) {
-
-        $this->templateadmin->load('template/dashboard_p', 'narasumber/search');
+	public function searchindex($kodeunik) 
+	{
+		$data['pelatihan']=$this->db->get_where('tb_data_pelatihan', array('kodeunik' => $kodeunik))->row_array();
+        $this->templateadmin->load('template/dashboard_p', 'narasumber/search',$data);
 		
     }
 

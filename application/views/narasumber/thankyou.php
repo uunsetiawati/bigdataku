@@ -4,7 +4,7 @@
 				<div class="container">
 					<img src="<?=base_url('assets/images/logoupt.png')?>" alt="image-demo">
 					<div class="about-title">
-						<h4 class="mb-1">Pengisian Form Narasumber Telah Berhasil</h4>
+						<h4 class="mb-1">Pengisian Form Data Narasumber Telah Berhasil</h4>
 						<span class="text-small"></span>
 					</div>
 					<p>Acara : <?=$pelatihan['judul_pelatihan']?></p>
