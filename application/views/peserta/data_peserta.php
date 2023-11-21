@@ -53,6 +53,23 @@
                             </div>
                         </div> 
                     </div>
+
+                    <div class="row">                        
+                        <div class="col-6">
+                            <div class="button-default">
+                                <?php
+                                    echo anchor('peserta/downloadFoto/'.$this->uri->segment(3), 'Download Foto', array('class'=>'button4'));
+                                ?>
+                            </div>
+                        </div>  
+                        <div class="col-6">                           
+                            <div class="button-default">   
+                                <?php
+                                    echo anchor('peserta/downloadKtp/'.$this->uri->segment(3), 'Download KTP', array('class'=>'button5'));
+                                ?>
+                            </div>
+                        </div>
+                    </div>
                     
                     <div class="card">
 					<div class="card-body">
@@ -111,6 +128,9 @@
                     },
                     { 
                         "data": "no_telp",
+                        "render": function(data, type, row) {
+                        return '<a href="https://wa.me/62' + data + '" target="_blank">' + data + '</a>';
+                        }
                     },                                     
                     { 
                         "data": "aksi",

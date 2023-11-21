@@ -440,5 +440,61 @@ class Peserta extends CI_Controller {
 		$this->templateadmin->load('template/dashboard_p', 'peserta/noevent');
 	}
 
+	public function downloadFoto($kodeunik)
+	{
+		// Load the ZIP library
+		$this->load->library('zip');
+
+		// Array of image file paths (change these to your image file paths)
+		$queryfoto = $this->db->get_where('tb_data_peserta', array('kodeunik' => $kodeunik))->result();
+		
+		
+
+		// Populate $imagePaths with image paths
+		foreach ($queryfoto as $query) {
+		$imagePaths[] = './uploads/peserta/' . $query->foto; // Add image paths to the array
+		}	
+		
+
+		// Add each image file to the ZIP archive
+		foreach ($imagePaths as $image) {
+			$this->zip->read_file($image);
+		}
+
+		// Name of the ZIP file to be downloaded
+		$zipFileName = 'images.zip';
+
+		// Create the ZIP file
+		$this->zip->download($zipFileName);
+	}
+
+	public function downloadKtp($kodeunik)
+	{
+		// Load the ZIP library
+		$this->load->library('zip');
+
+		// Array of image file paths (change these to your image file paths)
+		$queryfoto = $this->db->get_where('tb_data_peserta', array('kodeunik' => $kodeunik))->result();
+		
+		
+
+		// Populate $imagePaths with image paths
+		foreach ($queryfoto as $query) {
+		$imagePaths[] = './uploads/ktp/' . $query->ktp; // Add image paths to the array
+		}	
+		
+
+		// Add each image file to the ZIP archive
+		foreach ($imagePaths as $image) {
+			$this->zip->read_file($image);
+		}
+
+		// Name of the ZIP file to be downloaded
+		$zipFileName = 'images.zip';
+
+		// Create the ZIP file
+		$this->zip->download($zipFileName);
+	}
+
 
 }

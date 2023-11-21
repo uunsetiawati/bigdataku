@@ -231,7 +231,7 @@
                 ?>
 			</div>   
             <div class="input-wrap">
-				<label class="col-form-label">SERTIFIKASI USAHA<span class="section-subtitle"><code>*</code></span></label>
+				<label class="col-form-label">SERTIFIKASI USAHA</label>
 				<?php
 				foreach($sertifikasi as $row){?>
 					<label class="form-control2">
@@ -290,7 +290,7 @@
             </div>
             <div class="input-wrap">
 				<label class="col-form-label">KODEPOS<span class="section-subtitle"><code>*</code></span></label>
-				<input type="text" name="kodepos_kopukm" placeholder="KODE POS" value="<?= set_value('kodepos_kopukm'); ?>" class="form-control">
+				<input type="text" name="kodepos_kopukm" placeholder="KODE POS" value="<?= set_value('kodepos_kopukm'); ?>" class="form-control" required>
 			</div>
             <div class="input-wrap">
 				<label class="col-form-label">MODAL UMK PER TAHUN<span class="section-subtitle"><code>*</code></span></label>
