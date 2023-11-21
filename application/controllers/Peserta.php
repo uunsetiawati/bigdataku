@@ -257,12 +257,13 @@ class Peserta extends CI_Controller {
 		{
 			$kodeunik = $this->uri->segment(3);
 			$ktp=$this->input->post('no_ktp');
+			$nama = $this->input->post('nama_peserta');
 
 			//validasi foto yang di upload
 			$config['upload_path']          = './uploads/peserta/';
             $config['allowed_types']        = 'gif|jpg|png|jpeg';
             $config['max_size']             = 3000;
-			$config['file_name'] 			= $kodeunik.'-'.$ktp;
+			$config['file_name'] 			= $nama.'-'.$kodeunik.'-'.$ktp;
             $this->load->library('upload', $config);
 
             //proses upload
@@ -275,11 +276,12 @@ class Peserta extends CI_Controller {
 		{
 			$kodeunik = $this->uri->segment(3);
 			$ktp=$this->input->post('no_ktp');
+			$nama = $this->input->post('nama_peserta');
 			//validasi foto yang di upload
 			$config2['upload_path']          = './uploads/ktp/';
             $config2['allowed_types']        = 'gif|jpg|png|jpeg';
             $config2['max_size']             = 3000;
-			$config2['file_name'] 			 = $kodeunik.'-'.$ktp;
+			$config2['file_name'] 			 = $nama.'-'.$kodeunik.'-'.$ktp;
             // $this->load->library('upload', $config2);
 			$this->upload->initialize($config2);
 
@@ -462,7 +464,7 @@ class Peserta extends CI_Controller {
 		}
 
 		// Name of the ZIP file to be downloaded
-		$zipFileName = 'images.zip';
+		$zipFileName = 'Foto-'.$kodeunik.'.zip';
 
 		// Create the ZIP file
 		$this->zip->download($zipFileName);
@@ -490,7 +492,7 @@ class Peserta extends CI_Controller {
 		}
 
 		// Name of the ZIP file to be downloaded
-		$zipFileName = 'images.zip';
+		$zipFileName = 'KTP-'.$kodeunik.'.zip';
 
 		// Create the ZIP file
 		$this->zip->download($zipFileName);
