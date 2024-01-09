@@ -118,13 +118,13 @@
 					<div class="col-6">
 						<div class="content bg-blue text-center">
 							<h3 class="color-white"><?=$online?></h3>
-							<h5 class="color-white">PELATIHAN ONLINE</h5>
+							<h5 class="color-white">PESERTA PELATIHAN ONLINE</h5>
 						</div>
 					</div>
 					<div class="col-6">
 						<div class="content bg-red text-center">
 							<h3 class="color-white"><?=$offline?></h3>
-							<h5 class="color-white">PELATIHAN OFFLINE</h5>
+							<h5 class="color-white">PESERTA PELATIHAN OFFLINE</h5>
 						</div>
 					</div>
 				</div>

@@ -16,7 +16,7 @@ class Narasumber extends CI_Controller {
 		check_not_login();
 
 		// nama table
-		$table      = 'view_narasumber';
+		$table      = 'tb_data_narsum';
 		// nama PK
 		$primaryKey = 'id';
 		// list field yang mau ditampilkan
@@ -24,13 +24,13 @@ class Narasumber extends CI_Controller {
 			//tabel db(kolom di database) => dt(nama datatable di view)
 			array('db' => 'id', 'dt' => 'id'),
 			array('db' => 'nama', 'dt' => 'nama'),
-			array('db' => 'judul', 'dt' 	=> 'judul'),
+			array('db' => 'materi_judul', 'dt' 	=> 'judul'),
 	        //untuk menampilkan aksi(edit/delete dengan parameter kode mapel)
 	        array(
 	              'db' => 'id',
 	              'dt' => 'aksi',
 	              'formatter' => function($d) {
-	               		return anchor('pelatihan/edit/'.$d, '<i class="icon ion-ios-create"></i>','class="btn btn-xs btn-success" data-placement="top" title="Edit"');
+	               		return anchor('narasumber/edit/'.$d, '<i class="icon ion-ios-create"></i>','class="btn btn-xs btn-success" data-placement="top" title="Edit"');
 	            }
 	        ),
 			array(
@@ -101,12 +101,11 @@ class Narasumber extends CI_Controller {
 
 			if ($this->form_validation->run() == FALSE)
 			{			
-				$datapelatihan=$this->db->get_where('tb_data_pelatihan', array('kodeunik' => $kodeunik,'status'=>'1'))->row_array();
+				$datapelatihan=$this->db->get_where('tb_data_pelatihan', array('kodeunik' => $kodeunik))->row_array();
 
 				if($datapelatihan > 0){
-
-					$data['narsum'] = $this->db->get('tb_data_narsum')->row_array();
-					
+					$data['pelatihan']=$this->db->get_where('tb_data_pelatihan', array('kodeunik' => $kodeunik))->row_array();
+					$data['narsum'] = $this->db->get('tb_data_narsum')->row_array();					
 					$this->templateadmin->load('template/dashboard_p', 'narasumber/add_narasumber',$data);
 						
 				}else{
@@ -121,7 +120,7 @@ class Narasumber extends CI_Controller {
 				$this->narasumber_m->simpan($uploadMateri,$uploadSpt);
 				// redirect('narasumber/viewdatanarsum/'.$kodeunik);
 				// echo "SUKSES MENGISI DATA NARASUMBER";
-				$data['pelatihan'] = $this->db->get_where('tb_data_pelatihan', array('kodeunik' => $kodeunik,'status'=>'1'))->row_array();
+				$data['pelatihan'] = $this->db->get_where('tb_data_pelatihan', array('kodeunik' => $kodeunik))->row_array();
 				$this->templateadmin->load('template/dashboard_p', 'narasumber/thankyou',$data);
 			}
 		
@@ -175,7 +174,7 @@ class Narasumber extends CI_Controller {
 			$this->narasumber_m->save($uploadKtp,$uploadNpwp,$uploadCv,$uploadMateri,$uploadSpt,$uploadRekening);
 			// redirect('narasumber/viewdatanarsum/'.$kodeunik);
 			// echo "SUKSES MENGISI DATA NARASUMBER";
-			$data['pelatihan'] = $this->db->get_where('tb_data_pelatihan', array('kodeunik' => $kodeunik,'status'=>'1'))->row_array();
+			$data['pelatihan'] = $this->db->get_where('tb_data_pelatihan', array('kodeunik' => $kodeunik))->row_array();
 			$this->templateadmin->load('template/dashboard_p', 'narasumber/thankyou',$data);
 		}
 	
@@ -543,13 +542,13 @@ class Narasumber extends CI_Controller {
 
 		if ($this->form_validation->run() == FALSE)
 		{			
-			$id = $this->uri->segment(3);
-			$data['pelatihan'] = $this->db->get_where('view_pelatihan', array('id' => $id))->row_array();
-			$this->templateadmin->load('template/dashboard', 'pelatihan/edit_pelatihan', $data);			
+			$id = $this->uri->segment(3);			
+			$data['narsum'] = $this->db->get_where('tb_data_narsum', array('id' => $id))->row_array();
+			$this->templateadmin->load('template/dashboard', 'narasumber/edit_narasumber', $data);			
 		}
 		else
 		{   
-			$this->pelatihan_m->update();
+			$this->narasumber_m->update();
 			redirect('pelatihan');
 		}
 
@@ -597,10 +596,12 @@ class Narasumber extends CI_Controller {
 		$narsum=$this->db->get_where('tb_data_narsum', array('nik' => $nik))->row_array();
 
 			if($narsum > 0){
+				$data['pelatihan']=$this->db->get_where('tb_data_pelatihan', array('kodeunik' => $kodeunik))->row_array();
 				$data['narsum']=$this->db->get_where('tb_data_narsum', array('nik' => $nik))->row_array();
 				$this->templateadmin->load('template/dashboard_p', 'narasumber/add_narasumber',$data);
 					
 			}else{				
+				$data['pelatihan']=$this->db->get_where('tb_data_pelatihan', array('kodeunik' => $kodeunik))->row_array();
 				$this->templateadmin->load('template/dashboard_p', 'narasumber/add_narasumber2',$data);
 			}
 
