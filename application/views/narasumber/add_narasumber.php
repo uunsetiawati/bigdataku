@@ -1,7 +1,16 @@
 <!--section title -->
-<div class="section-title">
-	<h6>Data Narasumber</h6>
-	<span class="section-subtitle"><code>Tambah Data Narasumber</code></span>
+<div class="section-title">	
+	<h4>Form Data Narasumber</h4>
+	<h6><?=$pelatihan['judul_pelatihan'];?> DI <?=$pelatihan['alamat_pelatihan'];?></h6>
+	<?php
+	$tglmulai = new DateTime($pelatihan['tgl_mulai']);
+	$tglakhir = new DateTime($pelatihan['tgl_akhir']);
+	?>
+	<h6>Tanggal Pelatihan : <?=$tglmulai->format("d-m-Y");?> s.d <?=$tglakhir->format("d-m-Y")?></h6>
+	<h6>Peserta : <?=$pelatihan['sasaran'];?></h6>
+	<hr>
+	
+	<span class="section-subtitle"><code>Cari Data Narasumber</code></span>
 </div>
 <!-- end section title -->
 
@@ -20,17 +29,17 @@
 			<div class="form-wrapper">				
 				<div class="input-wrap">
 					<label class="col-form-label">NIK NARASUMBER<span class="section-subtitle"><code>*</code></span></label>	
-					<input type="number" name="nik" placeholder="NIK / NO. KTP" value="<?= $narsum['nik'] ?>" class="form-control <?= (form_error('nik') == "" ? '':'is-invalid') ?>">
+					<input type="number" name="nik" placeholder="NIK / NO. KTP" value="<?= $this->input->post('nik') ?? $narsum['nik'] ?>" class="form-control <?= (form_error('nik') == "" ? '':'is-invalid') ?>">
 					<?= form_error('nik'); ?>					
 				</div>            
 				<div class="input-wrap">
 					<label class="col-form-label">NAMA NARASUMBER<span class="section-subtitle"><code>*</code></span></label>
-					<input type="text" name="nama" placeholder="NAMA" onkeyup="this.value = this.value.toUpperCase()" value="<?= $narsum['nama'] ?>" class="form-control" required readonly> 
+					<input type="text" name="nama" placeholder="NAMA" onkeyup="this.value = this.value.toUpperCase()" value="<?= $this->input->post('nama') ?? $narsum['nama']; ?>" class="form-control" required readonly> 
 				</div>		
 				
 				<div class="input-wrap">	
 					<label class="col-form-label">INSTANSI NARASUMBER<span class="section-subtitle"><code>*</code></span></label>			
-					<input type="text" name="instansi" placeholder="ASAL INSTANSI" onkeyup="this.value = this.value.toUpperCase()" value="<?= $narsum['instansi'] ?>" class="form-control" required readonly>					
+					<input type="text" name="instansi" placeholder="ASAL INSTANSI" onkeyup="this.value = this.value.toUpperCase()" value="<?= $this->input->post('instansi') ?? $narsum['instansi'] ?>" class="form-control" required readonly>					
 				</div>
 				<div class="input-wrap">
 					<label class="col-form-label">JUDUL MATERI<span class="section-subtitle"><code>*</code></span></label>	
@@ -39,11 +48,11 @@
 				<hr>
 				<div class="input-wrap">
 					<label class="col-form-label">JENIS KELAMIN<span class="section-subtitle"><code>*</code></span></label>	
-					<input type="text" name="jk" placeholder="JENIS KELAMIN" value="<?= $narsum['jk']; ?>" class="form-control" required readonly>
+					<input type="text" name="jk" placeholder="JENIS KELAMIN" value="<?= $this->input->post('jk') ?? $narsum['jk']; ?>" class="form-control" required readonly>
 				</div>
 				<div class="input-wrap">
 					<label class="col-form-label">NO. TELP / HP<span class="section-subtitle"><code>*</code></span></label>	
-					<input type="number" name="hp" placeholder="NO. TELP/HP" value="<?= $narsum['hp']; ?>" class="form-control" required readonly>
+					<input type="number" name="hp" placeholder="NO. TELP/HP" value="<?= $this->input->post('hp') ?? $narsum['hp']; ?>" class="form-control" required readonly>
 				</div>
 				<div class="input-wrap">
 					<label class="col-form-label">UPLOAD MATERI<span class="section-subtitle"><code>*</code></span><h7> (Maks file ukuran 10MB | pdf,ppt)</h7></label>

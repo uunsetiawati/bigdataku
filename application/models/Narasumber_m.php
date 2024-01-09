@@ -59,20 +59,24 @@
 
 		function update()
 		{
-			$data = array(
-				'divisi'   			=> $this->input->post('divisi', TRUE),
-				'program'   		=> $this->input->post('program', TRUE),
-				'kegiatan'   		=> $this->input->post('kegiatan', TRUE),
-				'subkegiatan'   	=> $this->input->post('subkegiatan', TRUE),
-				'judul_pelatihan'   => $this->input->post('judul', TRUE),
-				'alamat_pelatihan'  => $this->input->post('alamat', TRUE),
-				'kota'				=> $this->input->post('kota', TRUE),
-				'jenis_pelatihan'   => $this->input->post('jenis', TRUE),				
-				'tgl_mulai'        	=> $this->input->post('awal', TRUE),
-				'tgl_akhir'			=> $this->input->post('akhir', TRUE),
-				'sasaran'			=> $this->input->post('sasaran', TRUE),
-				'status'			=> $this->input->post('status', TRUE),
-				'modified'			=> $this->input->post('now', TRUE)
+			$data = array(				
+				//tabel di database => name di form
+				'kodeunik'          => $this->input->post('kodeunik', TRUE),				
+				'nama'   			=> $this->input->post('nama', TRUE),
+				'instansi'   		=> $this->input->post('instansi', TRUE),
+				'materi_judul'   	=> $this->input->post('materi_judul', TRUE),
+				'nik'   			=> $this->input->post('nik', TRUE),				
+				'jk'   				=> $this->input->post('jk', TRUE),
+				'hp'  				=> $this->input->post('hp', TRUE),
+				'jpl'   			=> $this->input->post('jpl', TRUE),
+				'jenis'				=> $this->input->post('jenis', TRUE),
+				'ktp'        	    => $ktp,
+				'npwp'				=> $npwp,
+				'cv'				=> $cv,
+				'materi'			=> $materi,
+				'spt'				=> $spt,
+				'rekening'			=> $rekening,
+				'created'			=> $this->input->post('now', TRUE)				
 			);
 
 			$id	= $this->input->post('id');
