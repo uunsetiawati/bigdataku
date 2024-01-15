@@ -4,7 +4,21 @@
 		<div class="social-media-icon socmed-for-about shadow-sm">
 			<div class="coming-soon-word text-center">
 				<img src="<?=base_url('assets/images/logoupt.png')?>" width="100px">
-				<h4>Form Data Diri Tenaga Pendamping 2024</h4>				
+				<h4>Form Data Diri Tenaga Pendamping 2024</h4>	
+				<h6>Yang Perlu dipersiapkan untuk upload berkas :</h6>
+				<span class="section-subtitle"><code>1. FOTO DIRI (FORMAL) | jpg,png</code></span><br>
+				<span class="section-subtitle"><code>2. FOTO KTP | jpg, png</code></span><br>
+				<span class="section-subtitle"><code>3. KK/KARTU KELUARGA | jpg, png, pdf</code></span><br>
+				<span class="section-subtitle"><code>4. SKCK TERBARU DAN MASIH BERLAKU| pdf</code></span><br>
+				<span class="section-subtitle"><code>5. IJAZAH | pdf</code></span><br>
+				<span class="section-subtitle"><code>6. BUKU REKENING BANK JATIM | jpg, png, pdf</code></span><br>
+				<span class="section-subtitle"><code>7. KARTU BPJS | jpg,png,pdf</code></span><br>
+				<span class="section-subtitle"><code>8. SURAT KETERANGKAN BISA MENGOPERASIKAN KOMPUTER | pdf</code></span><br>
+				<span class="section-subtitle"><code>9. SURAT KETERANGKAN KERJA / SURAT PENGALAMAN KERJA | pdf</code></span><br>
+				<span class="section-subtitle"><code>10. SERTIFIKAT KOMPETENSI | pdf</code></span><br>
+				<span class="section-subtitle"><code>11. SURAT PERNYATAAN TIDAK MENGIKUTI KEGIATAN PARTAI | pdf</code></span><br>
+				
+
 			</div>                          
 		</div>
 	</div>
@@ -145,7 +159,7 @@
 					<?php echo form_error('kk'); ?>
 				</div>
                 <div class="input-wrap">
-					<label class="col-form-label">UPLOAD SKCK TERBARU<span class="section-subtitle"><code>*</code></span><h7> (Mak file ukuran 3MB |pdf)</h7></label>
+					<label class="col-form-label">UPLOAD SKCK TERBARU DAN MASIH BERLAKU<span class="section-subtitle"><code>*</code></span><h7> (Mak file ukuran 3MB |pdf)</h7></label>
 					<input type="file" name="skck" class="form-control <?= (form_error('skck') == "" ? '':'is-invalid') ?>" required>
 					<?php echo form_error('skck'); ?>
 				</div>
@@ -155,7 +169,7 @@
 					<?php echo form_error('ijazah'); ?>
 				</div>
                 <div class="input-wrap">
-					<label class="col-form-label">UPLOAD REKENING BANK JATIM<span class="section-subtitle"><code>*</code></span><h7> (Mak file ukuran 3MB |jpg,png,pdf)</h7></label>
+					<label class="col-form-label">UPLOAD BUKU REKENING BANK JATIM<span class="section-subtitle"><code>*</code></span><h7> (Mak file ukuran 3MB |jpg,png,pdf)</h7></label>
 					<input type="file" name="rekening" class="form-control <?= (form_error('rekening') == "" ? '':'is-invalid') ?>" required>
 					<?php echo form_error('rekening'); ?>
 				</div>
