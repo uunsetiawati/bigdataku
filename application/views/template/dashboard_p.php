@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<link rel="icon" href="<?=base_url('assets/images/favicon.png')?>">
+	<link rel="icon" href="<?=base_url('assets/images/logoupt.png')?>">
 	<title>BIGDATA UPT</title>
 
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900&display=swap" rel="stylesheet">
@@ -97,6 +97,7 @@
 	<div class="navbar navbar-home navbar-highlight">
 		<div class="left">
 			<!-- <a href="#menu" class="link menu-link"><i class="icon ion-ios-menu"></i></a> -->
+			<!-- <img src="<?=base_url('assets/images/logoupt.png')?>" width="100px"> -->
 		</div>
 		<div class="title">
 			UPT PELATIHAN KOPERASI DAN UKM PROVINSI JAWA TIMUR
@@ -112,14 +113,12 @@
 	<div class="page-wrapper">
 
 		<!-- separator -->
-		<div class="separator-large"></div>
+		<div class="separator-small"></div>
 		<!-- end separator -->
 
 		<?= $contents?>			
 
-		<!-- separator -->
-		<div class="separator-small"></div>
-		<!-- end separator -->	
+		
 
 		
 
@@ -154,6 +153,38 @@
 		</div>
 	</div> -->
 	<!-- end toolbar bottom -->
+	<hr>
+
+	<!-- footer -->
+	<div class="footer">
+		<div class="container">
+			<div class="content-box shadow-sm">
+				<h4 class="mb-1">Follow Us</h4>
+				<!-- <span>Mobile Template</span> -->
+
+				<!-- separator -->
+				<div class="separator-small"></div>
+				<!-- end separator -->
+
+				<div class="social-media-icon">
+					<ul>
+						<li><a href="https://facebook.com/uptpkukmjatim/"><i class="icon ion-logo-facebook bg-facebook"></i></a></li>
+						<li><a href="https://www.instagram.com/uptkukmjatim/"><i class="icon ion-logo-instagram bg-instagram"></i></a></li>
+						<li><a href="https://www.youtube.com/@UPTPKUKMJATIM"><i class="icon ion-logo-youtube bg-youtube"></i></a></li>
+						<li><a href="https://wa.me/6281331220006"><i class="icon ion-logo-whatsapp bg-whatsapp"></i></a></li>
+					</ul>
+				</div>
+
+				<!-- separator -->
+				<div class="separator-small"></div>
+				<!-- end separator -->
+
+				<p class="made-by text-small">Made With <i class="icon ion-ios-heart"></i> UPTKUKM JATIM</p>
+			</div>
+		</div>
+	</div>
+
+	<!-- end footer -->
 
 	<!-- <script src="<?=base_url('assets/js/jquery-3.4.1.min.js')?>"></script> -->
 	<script src="<?=base_url('assets/js/bootstrap.bundle.min.js')?>"></script>

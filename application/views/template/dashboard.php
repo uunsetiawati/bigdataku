@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<link rel="icon" href="<?=base_url('assets/images/favicon.png')?>">
+	<link rel="icon" href="<?=base_url('assets/images/logoupt.png')?>">
 	<title>BIGDATA UPT</title>
 
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900&display=swap" rel="stylesheet">
@@ -128,190 +128,17 @@
 						</div>						
 					</a>
 				</li>
-				<li>
-				<div class="accordion-item">
-					<a href="#">
-					<div class="list-item" data-toggle="collapse" data-target="#accordionTwo2">
-						<div class="list-media">
-							<i class="icon ion-ios-apps bg-yellow"></i>
+				<li>				
+					<a href="<?=site_url('pelatihan')?>" class="list-item" id="accordionParent2">
+						<div class="list-media">	
+							<i class="icon ion-ios-home bg-yellow"></i>
 						</div>
 						<div class="list-label">
-							<div class="list-title">Pages</div>
-							<div class="list-after"><i class="icon ion-ios-arrow-down" data-target="#accordionTwo2"></i></div>
-						</div>
-					</div>
-					</a>
-					<a href="<?=site_url('pelatihan')?>">						
-						<div id="accordionTwo2" class="accordion-body collapse" data-parent="#accordionParent2">
-							<div class="list-item">
-								<div class="list-label">
-									<div class="accordion-content">
-										<div class="list-title">Data Pelatihan</div>
-									</div>
-									<div class="list-after"><i class="icon ion-ios-arrow-forward" data-target="#accordionTwo2"></i></div>
-								</div>
-							</div>
-						</div>
-					</a>
-				</li>
-				<li>
-					<div class="accordion-item">
-						<a href="#">
-						<div class="list-item" data-toggle="collapse" data-target="#accordionTwo1">
-							<div class="list-media">
-								<i class="icon ion-ios-browsers bg-green"></i>
-							</div>
-							<div class="list-label">
-								<div class="list-title">Master</div>
-								<div class="list-after"><i class="icon ion-ios-arrow-down" data-target="#accordionTwo1"></i></div>
-							</div>						
-						</div>
-						</a>
-						<a href="<?=site_url('kode')?>">						
-						<div id="accordionTwo1" class="accordion-body collapse" data-parent="#accordionParent2">
-							<div class="list-item">
-								<div class="list-label">
-									<div class="accordion-content">
-										<div class="list-title">Kode Kegiatan</div>
-									</div>
-									<div class="list-after"><i class="icon ion-ios-arrow-forward" data-target="#accordionTwo1"></i></div>
-								</div>
-							</div>
-						</div>
-						</a>
-						<!-- <a href="<?=site_url('pelatihan')?>">						
-						<div id="accordionTwo1" class="accordion-body collapse" data-parent="#accordionParent2">
-							<div class="list-item">
-								<div class="list-label">
-									<div class="accordion-content">
-										<div class="list-title">Data Pelatihan</div>
-									</div>
-									<div class="list-after"><i class="icon ion-ios-arrow-forward" data-target="#accordionTwo1"></i></div>
-								</div>
-							</div>
-						</div>
-						</a> -->
-						<a href="<?=site_url('legalitas')?>">						
-						<div id="accordionTwo1" class="accordion-body collapse" data-parent="#accordionParent2">
-							<div class="list-item">
-								<div class="list-label">
-									<div class="accordion-content">
-										<div class="list-title">Legalitas Usaha</div>
-									</div>
-									<div class="list-after"><i class="icon ion-ios-arrow-forward" data-target="#accordionTwo1"></i></div>
-								</div>
-							</div>
-						</div>
-						</a>
-						<a href="<?=site_url('sertifikasi')?>">						
-						<div id="accordionTwo1" class="accordion-body collapse" data-parent="#accordionParent2">
-							<div class="list-item">
-								<div class="list-label">
-									<div class="accordion-content">
-										<div class="list-title">Sertifikasi</div>
-									</div>
-									<div class="list-after"><i class="icon ion-ios-arrow-forward" data-target="#accordionTwo1"></i></div>
-								</div>
-							</div>
-						</div>
-						</a>
-						<a href="<?=site_url('sektorusaha')?>">						
-						<div id="accordionTwo1" class="accordion-body collapse" data-parent="#accordionParent2">
-							<div class="list-item">
-								<div class="list-label">
-									<div class="accordion-content">
-										<div class="list-title">Sektor Usaha</div>
-									</div>
-									<div class="list-after"><i class="icon ion-ios-arrow-forward" data-target="#accordionTwo1"></i></div>
-								</div>
-							</div>
-						</div>
-						</a>
-						<a href="<?=site_url('jenisproduk')?>">						
-						<div id="accordionTwo1" class="accordion-body collapse" data-parent="#accordionParent2">
-							<div class="list-item">
-								<div class="list-label">
-									<div class="accordion-content">
-										<div class="list-title">Jenis Produk UKM</div>
-									</div>
-									<div class="list-after"><i class="icon ion-ios-arrow-forward" data-target="#accordionTwo1"></i></div>
-								</div>
-							</div>
-						</div>
-						</a>
-						<a href="<?=site_url('pemasaran')?>">						
-						<div id="accordionTwo1" class="accordion-body collapse" data-parent="#accordionParent2">
-							<div class="list-item">
-								<div class="list-label">
-									<div class="accordion-content">
-										<div class="list-title">Pemasaran UKM</div>
-									</div>
-									<div class="list-after"><i class="icon ion-ios-arrow-forward" data-target="#accordionTwo1"></i></div>
-								</div>
-							</div>
-						</div>
-						</a>
-						<a href="<?=site_url('bentukkoperasi')?>">						
-						<div id="accordionTwo1" class="accordion-body collapse" data-parent="#accordionParent2">
-							<div class="list-item">
-								<div class="list-label">
-									<div class="accordion-content">
-										<div class="list-title">Bentuk Koperasi</div>
-									</div>
-									<div class="list-after"><i class="icon ion-ios-arrow-forward" data-target="#accordionTwo1"></i></div>
-								</div>
-							</div>
-						</div>
-						</a>
-						<a href="<?=site_url('kelompokkoperasi')?>">						
-						<div id="accordionTwo1" class="accordion-body collapse" data-parent="#accordionParent2">
-							<div class="list-item">
-								<div class="list-label">
-									<div class="accordion-content">
-										<div class="list-title">Kelompok Koperasi</div>
-									</div>
-									<div class="list-after"><i class="icon ion-ios-arrow-forward" data-target="#accordionTwo1"></i></div>
-								</div>
-							</div>
-						</div>
-						</a>
-					</div>
-				</li>
-												
-				<!-- <li>
-					<a href="pages.html" class="list-item">
-						<div class="list-media">
-							<i class="icon ion-ios-browsers bg-green"></i>
-						</div>
-						<div class="list-label">
-							<div class="list-title">Pages</div>
+							<div class="list-title" data-target="#accordionTwo1">Pelatihan</div>
 							<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
 						</div>
 					</a>
-				</li>
-				
-				<li>
-					<a href="sign-in.html" class="list-item">
-						<div class="list-media">
-							<i class="icon ion-ios-log-in bg-purple"></i>
-						</div>
-						<div class="list-label">
-							<div class="list-title">Sign In</div>
-							<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
-						</div>
-					</a>
-				</li>
-				<li>
-					<a href="settings.html" class="list-item">
-						<div class="list-media">
-							<i class="icon ion-ios-settings bg-orange"></i>
-						</div>
-						<div class="list-label">
-							<div class="list-title">Settings</div>
-							<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
-						</div>
-					</a>
-				</li> -->
+				</li>				
 			</ul>
 		</div>
 
@@ -320,29 +147,7 @@
 		<!-- end separator -->
 
 		<div class="list-view list-separate-two list-colored">
-			<ul>
-				<li>
-					<a href="#" class="list-item">
-						<div class="list-media">
-							<i class="icon ion-ios-information-circle bg-lime"></i>
-						</div>
-						<div class="list-label">
-							<div class="list-title">About</div>
-							<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
-						</div>
-					</a>
-				</li>
-				<li>
-					<a href="#" class="list-item">
-						<div class="list-media">
-							<i class="icon ion-ios-lock bg-blue"></i>
-						</div>
-						<div class="list-label">
-							<div class="list-title">Privacy</div>
-							<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
-						</div>
-					</a>
-				</li>
+			<ul>				
 				<li>
 					<a href="<?=site_url('auth/logout')?>" class="list-item">
 						<div class="list-media">
