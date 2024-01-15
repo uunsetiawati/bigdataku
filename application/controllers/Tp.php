@@ -255,6 +255,10 @@ class Tp extends CI_Controller {
 		{
 			$nik=$this->input->post('nik');
 			$nama = $this->input->post('nama');
+            $sertifikat_file_name = NULL;
+
+            // Cek apakah file 'sertifikat' diupload
+            if (!empty($_FILES['sertifikat']['name'])) {
 			//validasi foto yang di upload
 			$sertifikat['upload_path']          = './uploads/tp/sertifikat/';
             $sertifikat['allowed_types']        = 'pdf';
@@ -266,7 +270,9 @@ class Tp extends CI_Controller {
             //proses upload
             $this->upload->do_upload('sertifikat');
             $upload = $this->upload->data();
-            return $upload['file_name'];
+            $sertifikat_file_name = $upload['file_name'];
+            }
+            return $sertifikat_file_name;
 		}
 
         function upload_pernyataan()
@@ -544,10 +550,11 @@ class Tp extends CI_Controller {
     public function validate_sertifikat()
         {
             $check = TRUE;
-            if ((!isset($_FILES['sertifikat'])) || $_FILES['sertifikat']['size'] == 0) {
-                $this->form_validation->set_message('validate_sertifikat', '{field} wajib diisi');
-                $check = FALSE;
-            } else if (isset($_FILES['sertifikat']) && $_FILES['sertifikat']['size'] != 0) {
+            // if ((!isset($_FILES['sertifikat'])) || $_FILES['sertifikat']['size'] == 0) {
+            //     $this->form_validation->set_message('validate_sertifikat', '{field} wajib diisi');
+            //     $this->input->post('sertifikat')->null;
+            //     $check = FALSE;
+            if (isset($_FILES['sertifikat']) && $_FILES['sertifikat']['size'] != 0) {
                 $allowedExts = array("pdf", "PDF");
                 $extension = pathinfo($_FILES["sertifikat"]["name"], PATHINFO_EXTENSION);
                 $allowedTypes = array('application/pdf');

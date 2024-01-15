@@ -15,7 +15,7 @@
 				<span class="section-subtitle"><code>7. KARTU BPJS | jpg,png,pdf</code></span><br>
 				<span class="section-subtitle"><code>8. SURAT KETERANGKAN BISA MENGOPERASIKAN KOMPUTER | pdf</code></span><br>
 				<span class="section-subtitle"><code>9. SURAT KETERANGKAN KERJA / SURAT PENGALAMAN KERJA | pdf</code></span><br>
-				<span class="section-subtitle"><code>10. SERTIFIKAT KOMPETENSI | pdf</code></span><br>
+				<span class="section-subtitle"><code>10. SERTIFIKAT KOMPETENSI (JIKA ADA) | pdf</code></span><br>
 				<span class="section-subtitle"><code>11. SURAT PERNYATAAN TIDAK MENGIKUTI KEGIATAN PARTAI | pdf</code></span><br>
 				
 
@@ -189,8 +189,8 @@
 					<?php echo form_error('suket_kerja'); ?>
 				</div>
                 <div class="input-wrap">
-					<label class="col-form-label">UPLOAD SERTIFIKAT KOMPETENSI YANG SESUAI<span class="section-subtitle"><code>*</code></span><h7> (Mak file ukuran 3MB |pdf)</h7></label>
-					<input type="file" name="sertifikat" class="form-control <?= (form_error('sertifikat') == "" ? '':'is-invalid') ?>" required>
+					<label class="col-form-label">UPLOAD SERTIFIKAT KOMPETENSI (JIKA ADA)<h7> (Mak file ukuran 3MB |pdf)</h7></label>
+					<input type="file" name="sertifikat" class="form-control <?= (form_error('sertifikat') == "" ? '':'is-invalid') ?>">
 					<?php echo form_error('sertifikat'); ?>
 				</div>
                 <div class="input-wrap">
