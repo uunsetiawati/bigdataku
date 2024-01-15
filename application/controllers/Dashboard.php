@@ -11,16 +11,14 @@ class Dashboard extends CI_Controller {
 
 	public function index()
 	{
-		// $this->load->view('view_home');
-		$query = $this->db->get_where('view_peserta', array('jenis_pelatihan' => 'OFFLINE'))->result();
-		$queryonline=$this->db->get_where('view_peserta', array('jenis_pelatihan' => 'ONLINE'))->result();
-		$querywebinar=$this->db->get_where('view_peserta', array('jenis_pelatihan' => 'WEBINAR'))->result();
-		$offline=count($query);
-		$online=count($queryonline);
-		$data['offline']=count($query);
-		$data['online']=count($queryonline);
+		// $query = $this->db->get_where('view_peserta', array('jenis_pelatihan' => 'OFFLINE'))->result();
+		$offline = $this->db->get('view_home_offline')->num_rows();
+		$online=$this->db->get('view_home_online')->num_rows();
+		$webinar=$this->db->get('view_home_webinar')->num_rows();
+		$data['offline']=$offline;
+		$data['online']=$online;
 		$data['total']=$offline+$online;
-		$data['webinar']=count($querywebinar);
+		$data['webinar']=$webinar;
 
 		// echo $data;
 
