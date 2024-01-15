@@ -62,7 +62,8 @@ Table of Content:
 
 /* general */
 body {
-    font-family: 'verdana', sans-serif;
+    /* font-family: 'verdana', sans-serif; */
+    font-family: Raleway;
     color: #555;
     font-size: 14px;
     font-weight: 400;
@@ -77,7 +78,8 @@ h4,
 h5,
 h6 {
     line-height: 110%;
-    font-family: 'Roboto', sans-serif;
+    /* font-family: 'Roboto', sans-serif; */
+    font-family: Raleway;
     margin: 0;
     font-weight: 500;
     color: #333;
