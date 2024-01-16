@@ -272,7 +272,7 @@ class Tp extends CI_Controller {
             $bpjs_file_name = NULL;
 
             // Cek apakah file 'sertifikat' diupload
-            if (!empty($_FILES['sertifikat']['name'])) {
+            if (!empty($_FILES['bpjs']['name'])) {
 			//validasi foto yang di upload
 			$bpjs['upload_path']          = './uploads/tp/bpjs/';
             $bpjs['allowed_types']        = 'gif|jpg|png|jpeg|pdf';
