@@ -131,14 +131,25 @@
 				<li>				
 					<a href="<?=site_url('pelatihan')?>" class="list-item" id="accordionParent2">
 						<div class="list-media">	
-							<i class="icon ion-ios-home bg-yellow"></i>
+							<i class="icon ion-ios-star bg-yellow"></i>
 						</div>
 						<div class="list-label">
 							<div class="list-title" data-target="#accordionTwo1">Pelatihan</div>
 							<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
 						</div>
 					</a>
-				</li>				
+				</li>	
+				<li>				
+					<a href="<?=site_url('tp/viewdatatp')?>" class="list-item" id="accordionParent2">
+						<div class="list-media">	
+							<i class="icon ion-ios-browsers bg-green"></i>
+						</div>
+						<div class="list-label">
+							<div class="list-title" data-target="#accordionTwo1">TP</div>
+							<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
+						</div>
+					</a>
+				</li>			
 			</ul>
 		</div>
 

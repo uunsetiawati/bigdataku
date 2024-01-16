@@ -80,6 +80,7 @@ class Tp extends CI_Controller {
 		check_not_login();
 		$id=$this->uri->segment(3);
 		$data['tp']=$this->db->get_where('tb_tp', array('id' => $id))->row_array();
+        $data['prov']=$this->db->get_where('view_tpall', array('id' => $id))->row_array();
 		$this->templateadmin->load('template/dashboard', 'tp/data_tpview',$data);
 	
 	}
@@ -271,7 +272,7 @@ class Tp extends CI_Controller {
 			$nama = $this->input->post('nama');
             $bpjs_file_name = NULL;
 
-            // Cek apakah file 'sertifikat' diupload
+            // Cek apakah file 'bpjs' diupload
             if (!empty($_FILES['bpjs']['name'])) {
 			//validasi foto yang di upload
 			$bpjs['upload_path']          = './uploads/tp/bpjs/';
