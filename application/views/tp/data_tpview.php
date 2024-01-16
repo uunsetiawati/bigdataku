@@ -170,7 +170,7 @@
 					<?php if ($tp['sertifikat'] !== null): ?>
 					<embed type="application/pdf" src="<?=base_url('uploads/tp/sertifikat/'.$tp['sertifikat'])?>" width="600" height="400"></embed>
 					<?php else :?>
-						<span class="section-subtitle"><code>Tidak diupload SERIFIKAT KOMPETENSI</code></span>
+						<span class="section-subtitle"><code>Tidak upload SERIFIKAT KOMPETENSI</code></span>
 					<?php endif; ?>
 				</div>
                 <div class="input-wrap">

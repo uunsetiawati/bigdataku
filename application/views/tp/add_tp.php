@@ -139,7 +139,7 @@
 					<input type="number" name="no_rekening" placeholder="NOMOR REKENING BANK JATIM" value="<?= set_value('no_rekening'); ?>" class="form-control" required>
 				</div>
                 <div class="input-wrap">
-					<label class="col-form-label">NO. BPJS KESEHATAN<span class="section-subtitle"><code>*</code></span></label>	
+					<label class="col-form-label">NO. BPJS KESEHATAN</label>	
 					<input type="number" name="no_bpjs" placeholder="NOMOR BPJS KESEHATAN" value="<?= set_value('no_bpjs'); ?>" class="form-control">
 				</div>
 

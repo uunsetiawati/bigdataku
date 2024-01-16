@@ -30,7 +30,7 @@
             <div class="content">
 				<div class="container">
 					<div class="row">                        
-                        <div class="col-6">
+                        <div class="col-4">
                             <div class="button-default">
                                 <?php
                                     // echo anchor('narasumber/add/'.$this->uri->segment(3), '<button class="button" target="_blank">Tambah Data</button>');
@@ -39,7 +39,14 @@
                                 ?>
                             </div>
                         </div>  
-                        <div class="col-6">                           
+                        <div class="col-4">                           
+                            <div class="button-default">   
+                                <?php
+                                    echo anchor('export/exporttp/', 'Export', array('class'=>'button3'));
+                                ?>
+                            </div>
+                        </div>
+                        <div class="col-4">                           
                             <div class="button-default">   
                                 <?php
                                     echo anchor('tp/viewdatatp', 'Kembali', array('class'=>'button2'));

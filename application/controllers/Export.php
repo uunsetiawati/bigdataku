@@ -2,6 +2,8 @@
 
 require('./application/third_party/phpoffice/vendor/autoload.php');
 
+use PhpOffice\PhpSpreadsheet\Cell\Hyperlink;
+
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
@@ -46,7 +48,7 @@ class Export extends CI_Controller {
                       ->setCellValue('C1', 'Nama Peserta')
                       ->setCellValue('D1', 'Tempat Lahir')
                       ->setCellValue('E1', 'Tanggal Lahir')
-                      ->setCellValue('F1', 'JK')
+                      ->setCellValue('F1', 'Jenis Kelamin')
                       ->setCellValue('G1', 'Status')
                       ->setCellValue('H1', 'Pendidikan')
                       ->setCellValue('I1', 'Agama')
@@ -70,7 +72,7 @@ class Export extends CI_Controller {
           $sheet->getColumnDimension('C')->setWidth(25); // Set width kolom C
           $sheet->getColumnDimension('D')->setWidth(15); // Set width kolom D
           $sheet->getColumnDimension('E')->setWidth(15); // Set width kolom E
-          $sheet->getColumnDimension('F')->setWidth(5); // Set width kolom F
+          $sheet->getColumnDimension('F')->setWidth(10); // Set width kolom F
           $sheet->getColumnDimension('G')->setWidth(15); // Set width kolom G
           $sheet->getColumnDimension('H')->setWidth(10); // Set width kolom H
           $sheet->getColumnDimension('I')->setWidth(10); // Set width kolom I
@@ -296,5 +298,183 @@ class Export extends CI_Controller {
      function cek(){
           $kodeunik = $this->uri->segment(3);
           echo $kodeunik;	
+     }
+
+     public function exporttp()
+     {
+          check_not_login();
+          // $kodeunik = $this->uri->segment(3);	
+          $semua_pengguna = $this->export_model->getAllTp()->result();
+
+          $spreadsheet = new Spreadsheet;
+          // $spreadsheet->getDefaultStyle('B')->getNumberFormat()->setFormatCode(NumberFormat::FORMAT_TEXT);
+
+          $spreadsheet->getActiveSheet()
+                      ->setCellValue('A1', 'NO')
+                      ->setCellValue('B1', 'NAMA')
+                      ->setCellValue('C1', 'NIK')
+                      ->setCellValue('D1', 'TEMPAT LAHIR')
+                      ->setCellValue('E1', 'TANGGAL LAHIR')
+                      ->setCellValue('F1', 'JENIS KELAMIN')
+                      ->setCellValue('G1', 'EMAIL')
+                      ->setCellValue('H1', 'NO. TELP')
+                      ->setCellValue('I1', 'ALAMAT')
+                      ->setCellValue('J1', 'RT')
+                      ->setCellValue('K1', 'RW')
+                      ->setCellValue('L1', 'PROVINSI')
+                      ->setCellValue('M1', 'KABUPATEN')
+                      ->setCellValue('N1', 'KECAMATAN')
+                      ->setCellValue('O1', 'KELURAHAN')
+                      ->setCellValue('P1', 'PENDIDIKAN')
+                      ->setCellValue('Q1', 'JENIS TP')
+                      ->setCellValue('R1', 'NO. REKENING')
+                      ->setCellValue('S1', 'NO. BPJS')
+                      ->setCellValue('T1', 'FOTO')
+                      ->setCellValue('U1', 'KTP')
+                      ->setCellValue('V1', 'KK')
+                      ->setCellValue('W1', 'SKCK')
+                      ->setCellValue('X1', 'IJAZAH')
+                      ->setCellValue('Y1', 'REKENING')
+                      ->setCellValue('Z1', 'BPJS')
+                      ->setCellValue('AA1', 'SUKET KOM')
+                      ->setCellValue('AB1', 'SUKET KERJA')
+                      ->setCellValue('AC1', 'SERTIFIKAT')
+                      ->setCellValue('AD1', 'PERNYATAAN');
+          
+          $sheet = $spreadsheet->getActiveSheet();
+          $sheet->getColumnDimension('A')->setWidth(6); // Set width kolom A
+          $sheet->getColumnDimension('B')->setWidth(30); // Set width kolom B
+          $sheet->getColumnDimension('C')->setWidth(20); // Set width kolom C
+          $sheet->getColumnDimension('D')->setWidth(15); // Set width kolom D
+          $sheet->getColumnDimension('E')->setWidth(15); // Set width kolom E
+          $sheet->getColumnDimension('F')->setWidth(15); // Set width kolom F
+          $sheet->getColumnDimension('G')->setWidth(20); // Set width kolom G
+          $sheet->getColumnDimension('H')->setWidth(15); // Set width kolom H
+          $sheet->getColumnDimension('I')->setWidth(30); // Set width kolom I
+          $sheet->getColumnDimension('J')->setWidth(5); // Set width kolom J
+          $sheet->getColumnDimension('K')->setWidth(5); // Set width kolom K
+          $sheet->getColumnDimension('L')->setWidth(25); // Set width kolom L
+          $sheet->getColumnDimension('M')->setWidth(25); // Set width kolom Provinsi
+          $sheet->getColumnDimension('N')->setWidth(25); // Set width kolom Kabupaten
+          $sheet->getColumnDimension('O')->setWidth(25); // Set width kolom Kecamatan
+          $sheet->getColumnDimension('P')->setWidth(15); // Set width kolom Kelurahan
+          $sheet->getColumnDimension('Q')->setWidth(15); // Set width kolom NO. telp
+          $sheet->getColumnDimension('R')->setWidth(15); // Set width kolom Disabilitas
+          $sheet->getColumnDimension('S')->setWidth(18); // Set width kolom Jabatan
+          $sheet->getColumnDimension('T')->setWidth(15); // Set width kolom Alamat Kop/UKM
+          $sheet->getColumnDimension('U')->setWidth(15); // Set width kolom RT Kop/UKM
+          $sheet->getColumnDimension('V')->setWidth(15); // Set width kolom RW Kop/UKM
+          $sheet->getColumnDimension('W')->setWidth(15); // Set width kolom RW Kop/UKM
+          $sheet->getColumnDimension('X')->setWidth(15); // Set width kolom RW Kop/UKM
+          $sheet->getColumnDimension('Y')->setWidth(15); // Set width kolom RW Kop/UKM
+          $sheet->getColumnDimension('Z')->setWidth(15); // Set width kolom RW Kop/UKM
+          $sheet->getColumnDimension('AA')->setWidth(15); // Set width kolom RW Kop/UKM
+          $sheet->getColumnDimension('AB')->setWidth(15); // Set width kolom RW Kop/UKM
+          $sheet->getColumnDimension('AC')->setWidth(15); // Set width kolom RW Kop/UKM
+          $sheet->getColumnDimension('AD')->setWidth(15); // Set width kolom RW Kop/UKM
+
+          $kolom = 2;
+          $nomor = 1;
+          foreach($semua_pengguna as $pengguna) {
+
+               $spreadsheet->getActiveSheet()
+                           ->setCellValue('A' . $kolom, $nomor)
+                           ->setCellValue('B' . $kolom, $pengguna->nama)
+                           ->setCellValueExplicit('C' . $kolom, $pengguna->nik, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)                           
+                           ->setCellValue('D' . $kolom, $pengguna->tempat_lahir)
+                           ->setCellValue('E' . $kolom, date('d-m-Y',strtotime($pengguna->tgl_lahir)))
+                           ->setCellValue('F' . $kolom, $pengguna->jk)
+                           ->setCellValue('G' . $kolom, $pengguna->email)
+                           ->setCellValueExplicit('H' . $kolom, $pengguna->no_telp,\PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValue('I' . $kolom, $pengguna->alamat)
+                           ->setCellValueExplicit('J' . $kolom, $pengguna->rt, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValueExplicit('K' . $kolom, $pengguna->rw, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValue('L' . $kolom, $pengguna->provinsi)
+                           ->setCellValue('M' . $kolom, $pengguna->kabkota)
+                           ->setCellValue('N' . $kolom, $pengguna->kecamatan)
+                           ->setCellValue('O' . $kolom, $pengguna->kelurahan)
+                           ->setCellValue('P' . $kolom, $pengguna->pendidikan)
+                           ->setCellValue('Q' . $kolom, $pengguna->jenis_tp)
+                           ->setCellValue('R' . $kolom, $pengguna->no_rekening)
+                           ->setCellValue('S' . $kolom, $pengguna->no_bpjs)
+                           ->setCellValue('T' . $kolom, 'Lihat FOTO')
+                           ->setCellValue('U' . $kolom, 'Lihat KTP')
+                           ->setCellValue('V' . $kolom, 'Lihat KK')
+                           ->setCellValue('W' . $kolom, 'Lihat SKCK')
+                           ->setCellValue('X' . $kolom, 'Lihat IJAZAH')
+                           ->setCellValue('Y' . $kolom, 'Lihat REKENING')
+                           ->setCellValue('Z' . $kolom, 'Lihat BPJS')
+                           ->setCellValue('AA' . $kolom, 'Lihat SUKET_KOM')
+                           ->setCellValue('AB' . $kolom, 'Lihat SUKET_KERJA')
+                           ->setCellValue('AC' . $kolom, 'Lihat SERTIFIKAT')
+                           ->setCellValue('AD' . $kolom, 'Lihat PERNYATAAN');
+
+                         $hyperlink = new \PhpOffice\PhpSpreadsheet\Cell\Hyperlink();
+                         $hyperlink->setUrl(site_url('uploads/tp/foto/'.$pengguna->foto));
+                         $hyperlink->setTooltip('Klik untuk membuka');
+                         $spreadsheet->getActiveSheet()->getCell('T' . $kolom)->setHyperlink($hyperlink);
+
+                         $ktp = new \PhpOffice\PhpSpreadsheet\Cell\Hyperlink();
+                         $ktp->setUrl(site_url('uploads/tp/ktp/'.$pengguna->ktp));
+                         $ktp->setTooltip('Klik untuk membuka');
+                         $spreadsheet->getActiveSheet()->getCell('U' . $kolom)->setHyperlink($ktp);
+
+                         $kk = new \PhpOffice\PhpSpreadsheet\Cell\Hyperlink();
+                         $kk->setUrl(site_url('uploads/tp/kk/'.$pengguna->kk));
+                         $kk->setTooltip('Klik untuk membuka');
+                         $spreadsheet->getActiveSheet()->getCell('V' . $kolom)->setHyperlink($kk);
+
+                         $skck = new \PhpOffice\PhpSpreadsheet\Cell\Hyperlink();
+                         $skck->setUrl(site_url('uploads/tp/skck/'.$pengguna->skck));
+                         $skck->setTooltip('Klik untuk membuka');
+                         $spreadsheet->getActiveSheet()->getCell('W' . $kolom)->setHyperlink($skck);
+
+                         $ijazah = new \PhpOffice\PhpSpreadsheet\Cell\Hyperlink();
+                         $ijazah->setUrl(site_url('uploads/tp/ijazah/'.$pengguna->ijazah));
+                         $ijazah->setTooltip('Klik untuk membuka');
+                         $spreadsheet->getActiveSheet()->getCell('X' . $kolom)->setHyperlink($ijazah);
+
+                         $rekening = new \PhpOffice\PhpSpreadsheet\Cell\Hyperlink();
+                         $rekening->setUrl(site_url('uploads/tp/rekening/'.$pengguna->rekening));
+                         $rekening->setTooltip('Klik untuk membuka');
+                         $spreadsheet->getActiveSheet()->getCell('Y' . $kolom)->setHyperlink($rekening);
+
+                         $bpjs = new \PhpOffice\PhpSpreadsheet\Cell\Hyperlink();
+                         $bpjs->setUrl(site_url('uploads/tp/bpjs/'.$pengguna->bpjs));
+                         $bpjs->setTooltip('Klik untuk membuka');
+                         $spreadsheet->getActiveSheet()->getCell('Z' . $kolom)->setHyperlink($bpjs);
+
+                         $suket_kom = new \PhpOffice\PhpSpreadsheet\Cell\Hyperlink();
+                         $suket_kom->setUrl(site_url('uploads/tp/suket_kom/'.$pengguna->suket_kom));
+                         $suket_kom->setTooltip('Klik untuk membuka');
+                         $spreadsheet->getActiveSheet()->getCell('AA' . $kolom)->setHyperlink($suket_kom);
+
+                         $suket_kerja = new \PhpOffice\PhpSpreadsheet\Cell\Hyperlink();
+                         $suket_kerja->setUrl(site_url('uploads/tp/suket_kerja/'.$pengguna->suket_kerja));
+                         $suket_kerja->setTooltip('Klik untuk membuka');
+                         $spreadsheet->getActiveSheet()->getCell('AB' . $kolom)->setHyperlink($suket_kerja);
+
+                         $sertifikat = new \PhpOffice\PhpSpreadsheet\Cell\Hyperlink();
+                         $sertifikat->setUrl(site_url('uploads/tp/sertifikat/'.$pengguna->sertifikat));
+                         $sertifikat->setTooltip('Klik untuk membuka');
+                         $spreadsheet->getActiveSheet()->getCell('AC' . $kolom)->setHyperlink($sertifikat);
+
+                         $pernyataan = new \PhpOffice\PhpSpreadsheet\Cell\Hyperlink();
+                         $pernyataan->setUrl(site_url('uploads/tp/pernyataan/'.$pengguna->pernyataan));
+                         $pernyataan->setTooltip('Klik untuk membuka');
+                         $spreadsheet->getActiveSheet()->getCell('AD' . $kolom)->setHyperlink($pernyataan);
+
+               $kolom++;
+               $nomor++;
+
+          }          
+
+          $writer = new Xlsx($spreadsheet);
+
+          header('Content-Type: application/vnd.ms-excel');
+          header('Content-Disposition: attachment;filename="TP.xlsx"');
+          header('Cache-Control: max-age=0');
+
+	  $writer->save('php://output');
      }
 }

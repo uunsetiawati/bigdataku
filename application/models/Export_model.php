@@ -12,4 +12,11 @@ class Export_model extends CI_Model {
           return $this->db->get();
      }
 
+     public function getAllTp()
+     {
+          $this->db->select('*');
+          $this->db->from('view_tpall');
+          return $this->db->get();
+     }
+
 }
