@@ -9,11 +9,79 @@ class Tp extends CI_Controller {
 		$this->load->model('tp_m');
 		$this->form_validation->set_error_delimiters('<p class="invalid-feedback">', '</p>');
 	}
+
+    function data()
+	{
+		check_not_login();
+
+		// nama table
+		$table      = 'view_tp';
+		// nama PK
+		$primaryKey = 'id';
+		// list field yang mau ditampilkan
+		$columns    = array(
+			//tabel db(kolom di database) => dt(nama datatable di view)
+			array('db' => 'id', 'dt' => 'id'),
+			array('db' => 'nama', 'dt' => 'nama'),
+			array('db' => 'kota', 'dt' 	=> 'kota'),
+            array('db' => 'no_telp', 'dt' => 'no_telp'),
+	        //untuk menampilkan aksi(edit/delete dengan parameter kode mapel)
+	        array(
+	              'db' => 'id',
+	              'dt' => 'aksi',
+	              'formatter' => function($d) {
+	               		return anchor('tp/edit/'.$d, '<i class="icon ion-ios-create"></i>','class="btn btn-xs btn-success" data-placement="top" title="Edit"');
+	            }
+	        ),
+			array(
+				'db' => 'id',
+				'dt' => 'lihat',
+				'formatter' => function($d) {
+						 return anchor('tp/lihat/'.$d, '<i class="icon ion-ios-eye"></i>','class="btn btn-xs btn-warning" data-placement="top" title="Lihat Peserta" target="_blank"');
+			  }
+		  	)
+	    );
+
+		// $where = "kodeunik='".$kodeunik."'";
+		$sql_details = array(
+			'user' => $this->db->username,
+			'pass' => $this->db->password,
+			'db'   => $this->db->database,
+			'host' => $this->db->hostname
+	    );
+		
+	    // echo json_encode(
+	    //  	SSP::complex($_GET, $sql_details, $table, $primaryKey, $columns, $where)
+	    //  );
+
+	    echo json_encode(
+		     	SSP::simple($_GET, $sql_details, $table, $primaryKey, $columns)
+		);
+
+	}
+
 	public function index()
 	{
         $get_prov = $this->db->order_by('name','ASC')->select('*')->from('provinces')->get();
 		$data['provinsi'] = $get_prov->result();
 		$this->templateadmin->load('template/dashboard_p', 'tp/add_tp',$data);
+	}
+
+    public function viewdatatp()	
+	{
+		check_not_login();
+		// $this->load->view('view_peserta');
+		$this->templateadmin->load('template/dashboard', 'tp/data_tp');
+	
+	}
+
+    public function lihat()
+	{
+		check_not_login();
+		$id=$this->uri->segment(3);
+		$data['tp']=$this->db->get_where('tb_tp', array('id' => $id))->row_array();
+		$this->templateadmin->load('template/dashboard', 'tp/data_tpview',$data);
+	
 	}
 
     function add()//butuh form validation untuk menghindari nik yang sama
@@ -201,6 +269,10 @@ class Tp extends CI_Controller {
 		{
 			$nik=$this->input->post('nik');
 			$nama = $this->input->post('nama');
+            $bpjs_file_name = NULL;
+
+            // Cek apakah file 'sertifikat' diupload
+            if (!empty($_FILES['sertifikat']['name'])) {
 			//validasi foto yang di upload
 			$bpjs['upload_path']          = './uploads/tp/bpjs/';
             $bpjs['allowed_types']        = 'gif|jpg|png|jpeg|pdf';
@@ -212,7 +284,9 @@ class Tp extends CI_Controller {
             //proses upload
             $this->upload->do_upload('bpjs');
             $upload = $this->upload->data();
-            return $upload['file_name'];
+            $bpjs_file_name = $upload['file_name'];
+            }
+            return $bpjs_file_name;
 		}
 
         function upload_suketkom()

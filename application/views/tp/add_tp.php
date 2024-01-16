@@ -12,7 +12,7 @@
 				<span class="section-subtitle"><code>4. SKCK TERBARU DAN MASIH BERLAKU| pdf</code></span><br>
 				<span class="section-subtitle"><code>5. IJAZAH | pdf</code></span><br>
 				<span class="section-subtitle"><code>6. BUKU REKENING BANK JATIM | jpg, png, pdf</code></span><br>
-				<span class="section-subtitle"><code>7. KARTU BPJS | jpg,png,pdf</code></span><br>
+				<span class="section-subtitle"><code>7. KARTU BPJS KESEHATAN| jpg,png,pdf</code></span><br>
 				<span class="section-subtitle"><code>8. SURAT KETERANGKAN BISA MENGOPERASIKAN KOMPUTER | pdf</code></span><br>
 				<span class="section-subtitle"><code>9. SURAT KETERANGKAN KERJA / SURAT PENGALAMAN KERJA | pdf</code></span><br>
 				<span class="section-subtitle"><code>10. SERTIFIKAT KOMPETENSI (JIKA ADA) | pdf</code></span><br>
@@ -140,7 +140,7 @@
 				</div>
                 <div class="input-wrap">
 					<label class="col-form-label">NO. BPJS KESEHATAN<span class="section-subtitle"><code>*</code></span></label>	
-					<input type="number" name="no_bpjs" placeholder="NOMOR BPJS KESEHATAN" value="<?= set_value('no_bpjs'); ?>" class="form-control" required>
+					<input type="number" name="no_bpjs" placeholder="NOMOR BPJS KESEHATAN" value="<?= set_value('no_bpjs'); ?>" class="form-control">
 				</div>
 
 				<div class="input-wrap">
@@ -174,8 +174,8 @@
 					<?php echo form_error('rekening'); ?>
 				</div>
                 <div class="input-wrap">
-					<label class="col-form-label">UPLOAD KARTU BPJS<span class="section-subtitle"><code>*</code></span><h7> (Mak file ukuran 3MB |jpg,png,pdf)</h7></label>
-					<input type="file" name="bpjs" class="form-control <?= (form_error('bpjs') == "" ? '':'is-invalid') ?>" required>
+					<label class="col-form-label">UPLOAD KARTU BPJS KESEHATAN<span class="section-subtitle"><code>*</code></span><h7> (Mak file ukuran 3MB |jpg,png,pdf)</h7></label>
+					<input type="file" name="bpjs" class="form-control <?= (form_error('bpjs') == "" ? '':'is-invalid') ?>">
 					<?php echo form_error('bpjs'); ?>
 				</div>
                 <div class="input-wrap">
