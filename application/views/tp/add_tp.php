@@ -149,52 +149,52 @@
 					<?php echo form_error('foto'); ?>
 				</div>
 				<div class="input-wrap">
-					<label class="col-form-label">UPLOAD KTP<span class="section-subtitle"><code>*</code></span><h7> (Mak file ukuran 3MB |jpg,png)</h7></label>
+					<label class="col-form-label">UPLOAD KTP<span class="section-subtitle"><code>*</code></span><h7> (Maks file ukuran 3MB |jpg,png)</h7></label>
 					<input type="file" name="ktp" class="form-control <?= (form_error('ktp') == "" ? '':'is-invalid') ?>" required>
 					<?php echo form_error('ktp'); ?>
 				</div>
                 <div class="input-wrap">
-					<label class="col-form-label">UPLOAD KK/KARTU KELUARGA<span class="section-subtitle"><code>*</code></span><h7> (Mak file ukuran 3MB |jpg,png,pdf)</h7></label>
+					<label class="col-form-label">UPLOAD KK/KARTU KELUARGA<span class="section-subtitle"><code>*</code></span><h7> (Maks file ukuran 3MB |jpg,png,pdf)</h7></label>
 					<input type="file" name="kk" class="form-control <?= (form_error('kk') == "" ? '':'is-invalid') ?>" required>
 					<?php echo form_error('kk'); ?>
 				</div>
                 <div class="input-wrap">
-					<label class="col-form-label">UPLOAD SKCK TERBARU DAN MASIH BERLAKU<span class="section-subtitle"><code>*</code></span><h7> (Mak file ukuran 3MB |pdf)</h7></label>
+					<label class="col-form-label">UPLOAD SKCK TERBARU DAN MASIH BERLAKU<span class="section-subtitle"><code>*</code></span><h7> (Maks file ukuran 3MB |pdf)</h7></label>
 					<input type="file" name="skck" class="form-control <?= (form_error('skck') == "" ? '':'is-invalid') ?>" required>
 					<?php echo form_error('skck'); ?>
 				</div>
                 <div class="input-wrap">
-					<label class="col-form-label">UPLOAD IJAZAH<span class="section-subtitle"><code>*</code></span><h7> (Mak file ukuran 3MB |pdf)</h7></label>
+					<label class="col-form-label">UPLOAD IJAZAH<span class="section-subtitle"><code>*</code></span><h7> (Maks file ukuran 3MB |pdf)</h7></label>
 					<input type="file" name="ijazah" class="form-control <?= (form_error('ijazah') == "" ? '':'is-invalid') ?>" required>
 					<?php echo form_error('ijazah'); ?>
 				</div>
                 <div class="input-wrap">
-					<label class="col-form-label">UPLOAD BUKU REKENING BANK JATIM<span class="section-subtitle"><code>*</code></span><h7> (Mak file ukuran 3MB |jpg,png,pdf)</h7></label>
+					<label class="col-form-label">UPLOAD BUKU REKENING BANK JATIM<span class="section-subtitle"><code>*</code></span><h7> (Maks file ukuran 3MB |jpg,png,pdf)</h7></label>
 					<input type="file" name="rekening" class="form-control <?= (form_error('rekening') == "" ? '':'is-invalid') ?>" required>
 					<?php echo form_error('rekening'); ?>
 				</div>
                 <div class="input-wrap">
-					<label class="col-form-label">UPLOAD KARTU BPJS KESEHATAN<span class="section-subtitle"><code>*</code></span><h7> (Mak file ukuran 3MB |jpg,png,pdf)</h7></label>
+					<label class="col-form-label">UPLOAD KARTU BPJS KESEHATAN<h7> (Maks file ukuran 3MB |jpg,png,pdf)</h7></label>
 					<input type="file" name="bpjs" class="form-control <?= (form_error('bpjs') == "" ? '':'is-invalid') ?>">
 					<?php echo form_error('bpjs'); ?>
 				</div>
                 <div class="input-wrap">
-					<label class="col-form-label">UPLOAD SURAT KETERANGKAN BISA MENGOPERASIKAN KOMPUTER<span class="section-subtitle"><code>*</code></span><h7> (Mak file ukuran 3MB |pdf)</h7></label>
+					<label class="col-form-label">UPLOAD SURAT KETERANGKAN BISA MENGOPERASIKAN KOMPUTER<span class="section-subtitle"><code>*</code></span><h7> (Maks file ukuran 3MB |pdf)</h7></label>
 					<input type="file" name="suket_kom" class="form-control <?= (form_error('suket_kom') == "" ? '':'is-invalid') ?>" required>
 					<?php echo form_error('suket_kom'); ?>
 				</div>
                 <div class="input-wrap">
-					<label class="col-form-label">UPLOAD SURAT KETERANGKAN KERJA / SURAT PENGALAMAN KERJA<span class="section-subtitle"><code>*</code></span><h7> (Mak file ukuran 3MB |pdf)</h7></label>
+					<label class="col-form-label">UPLOAD SURAT KETERANGKAN KERJA / SURAT PENGALAMAN KERJA<span class="section-subtitle"><code>*</code></span><h7> (Maks file ukuran 3MB |pdf)</h7></label>
 					<input type="file" name="suket_kerja" class="form-control <?= (form_error('suket_kerja') == "" ? '':'is-invalid') ?>" required>
 					<?php echo form_error('suket_kerja'); ?>
 				</div>
                 <div class="input-wrap">
-					<label class="col-form-label">UPLOAD SERTIFIKAT KOMPETENSI (JIKA ADA)<h7> (Mak file ukuran 3MB |pdf)</h7></label>
+					<label class="col-form-label">UPLOAD SERTIFIKAT KOMPETENSI (JIKA ADA)<h7> (Maks file ukuran 3MB |pdf)</h7></label>
 					<input type="file" name="sertifikat" class="form-control <?= (form_error('sertifikat') == "" ? '':'is-invalid') ?>">
 					<?php echo form_error('sertifikat'); ?>
 				</div>
                 <div class="input-wrap">
-					<label class="col-form-label">UPLOAD SURAT PERNYATAAN TIDAK MENGIKUTI KEGIATAN PARTAI<span class="section-subtitle"><code>*</code></span><h7> (Mak file ukuran 3MB |pdf)</h7></label>
+					<label class="col-form-label">UPLOAD SURAT PERNYATAAN TIDAK MENGIKUTI KEGIATAN PARTAI<span class="section-subtitle"><code>*</code></span><h7> (Maks file ukuran 3MB |pdf)</h7></label>
 					<input type="file" name="pernyataan" class="form-control <?= (form_error('pernyataan') == "" ? '':'is-invalid') ?>" required>
 					<?php echo form_error('pernyataan'); ?>
 				</div>				
