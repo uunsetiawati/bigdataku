@@ -107,9 +107,16 @@
 					<img src="<?=base_url('uploads/tp/ktp/'.$tp['ktp'])?>" width="30%">
 				</div>
                 <div class="input-wrap">
-					<label class="col-form-label">UPLOAD KK/KARTU KELUARGA<span class="section-subtitle"><code>*</code></span><h7> (Mak file ukuran 3MB |jpg,png,pdf)</h7></label>
-					<img src="<?=base_url('uploads/tp/kk/'.$tp['kk'])?>" width="30%">
-					<embed type="application/pdf" src="<?=base_url('uploads/tp/kk/'.$tp['kk'])?>" width="600" height="400"></embed>
+					<label class="col-form-label">UPLOAD KK/KARTU KELUARGA<span class="section-subtitle"><code>*</code></span><h7> (Mak file ukuran 3MB |jpg,png,pdf)</h7></label><br>
+					<?php
+					$file_kk = base_url('uploads/tp/bpjs/'.$tp['kk']);
+					$file_extension_kk = pathinfo($file_kk, PATHINFO_EXTENSION);
+					?>
+					<?php if ($file_extension_kk == 'pdf'): ?>
+						<embed type="application/pdf" src="<?=base_url('uploads/tp/kk/'.$tp['kk'])?>" width="600" height="400"></embed>
+					<?php elseif (in_array($file_extension_kk, ['jpg', 'jpeg', 'png', 'gif'])): ?>
+						<img src="<?=base_url('uploads/tp/kk/'.$tp['kk'])?>" alt="Uploaded Image" width="600" height="400">
+					<?php endif; ?>
 
 				</div>
                 <div class="input-wrap">
@@ -123,11 +130,27 @@
 				</div>
                 <div class="input-wrap">
 					<label class="col-form-label">UPLOAD BUKU REKENING BANK JATIM<span class="section-subtitle"><code>*</code></span><h7> (Mak file ukuran 3MB |jpg,png,pdf)</h7></label><br>
-					<embed type="application/pdf" src="<?=base_url('uploads/tp/rekening/'.$tp['rekening'])?>" width="600" height="400"></embed>
+					<?php
+					$file_rekening = base_url('uploads/tp/rekening/'.$tp['rekening']);
+					$file_extension_rekening = pathinfo($file_rekening, PATHINFO_EXTENSION);
+					?>
+					<?php if ($file_extension_rekening == 'pdf'): ?>
+						<embed type="application/pdf" src="<?=$file_rekening?>" width="600" height="400"></embed>
+					<?php elseif (in_array($file_extension_rekening, ['jpg', 'jpeg', 'png', 'gif'])): ?>
+						<img src="<?=$file_rekening?>" alt="Uploaded Image" width="600" height="400">
+					<?php endif; ?>
 				</div>
                 <div class="input-wrap">
 					<label class="col-form-label">UPLOAD KARTU BPJS<span class="section-subtitle"><code>*</code></span><h7> (Mak file ukuran 3MB |jpg,png,pdf)</h7></label><br>
-					<embed type="application/pdf" src="<?=base_url('uploads/tp/bpjs/'.$tp['bpjs'])?>" width="600" height="400"></embed>
+					<?php
+					$file_path = base_url('uploads/tp/bpjs/'.$tp['bpjs']);
+					$file_extension = pathinfo($file_path, PATHINFO_EXTENSION);
+					?>
+					<?php if ($file_extension == 'pdf'): ?>
+						<embed type="application/pdf" src="<?=base_url('uploads/tp/bpjs/'.$tp['bpjs'])?>" width="600" height="400"></embed>
+					<?php elseif (in_array($file_extension, ['jpg', 'jpeg', 'png', 'gif'])): ?>
+						<img src="<?=base_url('uploads/tp/bpjs/'.$tp['bpjs'])?>" alt="Uploaded Image" width="600" height="400">
+					<?php endif; ?>
 				</div>
                 <div class="input-wrap">
 					<label class="col-form-label">UPLOAD SURAT KETERANGKAN BISA MENGOPERASIKAN KOMPUTER<span class="section-subtitle"><code>*</code></span><h7> (Mak file ukuran 3MB |pdf)</h7></label><br>
