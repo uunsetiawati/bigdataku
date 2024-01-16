@@ -154,7 +154,7 @@
 						<?php endif; ?>
 					<?php else: ?>
 					<!-- Jika $tp['bpjs'] bernilai null -->
-					<span class="section-subtitle"><code>Tidak ada data yang diupload</code></span>
+					<span class="section-subtitle"><code>Tidak upload KARTU BPJS</code></span>
 					<?php endif; ?>
 				</div>
                 <div class="input-wrap">
@@ -170,7 +170,7 @@
 					<?php if ($tp['sertifikat'] !== null): ?>
 					<embed type="application/pdf" src="<?=base_url('uploads/tp/sertifikat/'.$tp['sertifikat'])?>" width="600" height="400"></embed>
 					<?php else :?>
-						<span class="section-subtitle"><code>Tidak ada data yang diupload</code></span>
+						<span class="section-subtitle"><code>Tidak diupload SERIFIKAT KOMPETENSI</code></span>
 					<?php endif; ?>
 				</div>
                 <div class="input-wrap">
