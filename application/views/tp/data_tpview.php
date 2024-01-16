@@ -109,7 +109,7 @@
                 <div class="input-wrap">
 					<label class="col-form-label">UPLOAD KK/KARTU KELUARGA<span class="section-subtitle"><code>*</code></span><h7> (Mak file ukuran 3MB |jpg,png,pdf)</h7></label><br>
 					<?php
-					$file_kk = base_url('uploads/tp/bpjs/'.$tp['kk']);
+					$file_kk = base_url('uploads/tp/kk/'.$tp['kk']);
 					$file_extension_kk = pathinfo($file_kk, PATHINFO_EXTENSION);
 					?>
 					<?php if ($file_extension_kk == 'pdf'): ?>
@@ -146,10 +146,15 @@
 					$file_path = base_url('uploads/tp/bpjs/'.$tp['bpjs']);
 					$file_extension = pathinfo($file_path, PATHINFO_EXTENSION);
 					?>
-					<?php if ($file_extension == 'pdf'): ?>
-						<embed type="application/pdf" src="<?=base_url('uploads/tp/bpjs/'.$tp['bpjs'])?>" width="600" height="400"></embed>
-					<?php elseif (in_array($file_extension, ['jpg', 'jpeg', 'png', 'gif'])): ?>
-						<img src="<?=base_url('uploads/tp/bpjs/'.$tp['bpjs'])?>" alt="Uploaded Image" width="600" height="400">
+					<?php if ($tp['bpjs'] !== null): ?>
+						<?php if ($file_extension == 'pdf'): ?>
+							<embed type="application/pdf" src="<?=base_url('uploads/tp/bpjs/'.$tp['bpjs'])?>" width="600" height="400"></embed>
+						<?php elseif (in_array($file_extension, ['jpg', 'jpeg', 'png', 'gif'])): ?>
+							<img src="<?=base_url('uploads/tp/bpjs/'.$tp['bpjs'])?>" alt="Uploaded Image" width="600" height="400">
+						<?php endif; ?>
+					<?php else: ?>
+					<!-- Jika $tp['bpjs'] bernilai null -->
+					<span class="section-subtitle"><code>Tidak ada data yang diupload</code></span>
 					<?php endif; ?>
 				</div>
                 <div class="input-wrap">
@@ -162,7 +167,11 @@
 				</div>
                 <div class="input-wrap">
 					<label class="col-form-label">UPLOAD SERTIFIKAT KOMPETENSI (JIKA ADA)<h7> (Mak file ukuran 3MB |pdf)</h7></label><br>
+					<?php if ($tp['bpjs'] !== null): ?>
 					<embed type="application/pdf" src="<?=base_url('uploads/tp/sertifikat/'.$tp['sertifikat'])?>" width="600" height="400"></embed>
+					<?php else :?>
+						<span class="section-subtitle"><code>Tidak ada data yang diupload</code></span>
+					<?php endif; ?>
 				</div>
                 <div class="input-wrap">
 					<label class="col-form-label">UPLOAD SURAT PERNYATAAN TIDAK MENGIKUTI KEGIATAN PARTAI<span class="section-subtitle"><code>*</code></span><h7> (Mak file ukuran 3MB |pdf)</h7></label><br>
