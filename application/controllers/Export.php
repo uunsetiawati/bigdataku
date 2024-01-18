@@ -541,7 +541,8 @@ class Export extends CI_Controller {
                       ->setCellValue('AA1', 'SUKET KOM')
                       ->setCellValue('AB1', 'SUKET KERJA')
                       ->setCellValue('AC1', 'SERTIFIKAT')
-                      ->setCellValue('AD1', 'PERNYATAAN');
+                      ->setCellValue('AD1', 'PERNYATAAN')
+                      ->setCellValue('AE1', 'WILAYAH KERJA');
           
           $sheet = $spreadsheet->getActiveSheet();
           $sheet->getColumnDimension('A')->setWidth(6); // Set width kolom A
@@ -574,6 +575,7 @@ class Export extends CI_Controller {
           $sheet->getColumnDimension('AB')->setWidth(15); // Set width kolom RW Kop/UKM
           $sheet->getColumnDimension('AC')->setWidth(15); // Set width kolom RW Kop/UKM
           $sheet->getColumnDimension('AD')->setWidth(15); // Set width kolom RW Kop/UKM
+          $sheet->getColumnDimension('AE')->setWidth(20); // Set width kolom RW Kop/UKM
 
           $kolom = 2;
           $nomor = 1;
@@ -609,7 +611,8 @@ class Export extends CI_Controller {
                            ->setCellValue('AA' . $kolom, 'Lihat SUKET_KOM')
                            ->setCellValue('AB' . $kolom, 'Lihat SUKET_KERJA')
                            ->setCellValue('AC' . $kolom, 'Lihat SERTIFIKAT')
-                           ->setCellValue('AD' . $kolom, 'Lihat PERNYATAAN');
+                           ->setCellValue('AD' . $kolom, 'Lihat PERNYATAAN')
+                           ->setCellValue('AE' . $kolom, $pengguna->wilayah_kerja);
 
                          $hyperlink = new \PhpOffice\PhpSpreadsheet\Cell\Hyperlink();
                          $hyperlink->setUrl(site_url('uploads/tp/foto/'.$pengguna->foto));
