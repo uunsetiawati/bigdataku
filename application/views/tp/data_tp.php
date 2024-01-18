@@ -63,6 +63,7 @@
 										<th >No</th>
 										<th >Nama</th>
                                         <th >Kab/Kota</th>
+                                        <th >Wilayah Kerja</th>
                                         <th >Telp</th>
 										<th >Edit</th>
                                         <th >Lihat</th>
@@ -106,9 +107,17 @@
                     },
                     { 
                         "data": "kota",
-                    },       
+                    },      
+                    { 
+                        "data": "wilayah_kerja",
+                    },      
                     { 
                         "data": "no_telp",
+                        "render": function (data, type, row, meta) {
+                            // Assuming 'no_telp' contains the phone number
+                            var whatsappLink = 'https://api.whatsapp.com/send?phone=62' + encodeURIComponent(data);
+                            return '<a href="' + whatsappLink + '" target="_blank">' + data + '</a>';
+                        }
                     },                  
                     { 
                         "data": "aksi",

@@ -77,22 +77,9 @@
 		{
 			$data = array(				
 				//tabel di database => name di form
-				'kodeunik'          => $this->input->post('kodeunik', TRUE),				
-				'nama'   			=> $this->input->post('nama', TRUE),
-				'instansi'   		=> $this->input->post('instansi', TRUE),
-				'materi_judul'   	=> $this->input->post('materi_judul', TRUE),
-				'nik'   			=> $this->input->post('nik', TRUE),				
-				'jk'   				=> $this->input->post('jk', TRUE),
-				'hp'  				=> $this->input->post('hp', TRUE),
-				'jpl'   			=> $this->input->post('jpl', TRUE),
-				'jenis'				=> $this->input->post('jenis', TRUE),
-				'ktp'        	    => $ktp,
-				'npwp'				=> $npwp,
-				'cv'				=> $cv,
-				'materi'			=> $materi,
-				'spt'				=> $spt,
-				'rekening'			=> $rekening,
-				'created'			=> $this->input->post('now', TRUE)				
+				'nama'				=> $this->input->post('nama', TRUE),
+				'wilayah_kerja'		=> $this->input->post('wilayah_kerja', TRUE),				
+				'modified'			=> $this->input->post('now', TRUE)				
 			);
 
 			$id	= $this->input->post('id');

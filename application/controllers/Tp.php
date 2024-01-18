@@ -24,6 +24,7 @@ class Tp extends CI_Controller {
 			array('db' => 'id', 'dt' => 'id'),
 			array('db' => 'nama', 'dt' => 'nama'),
 			array('db' => 'kota', 'dt' 	=> 'kota'),
+            array('db' => 'wilayah_kerja', 'dt' => 'wilayah_kerja'),
             array('db' => 'no_telp', 'dt' => 'no_telp'),
 	        //untuk menampilkan aksi(edit/delete dengan parameter kode mapel)
 	        array(
@@ -143,6 +144,27 @@ class Tp extends CI_Controller {
 			}
 		
 		}
+
+        function edit() 
+        {
+            check_not_login();
+            $id = $this->uri->segment(3);
+            $this->form_validation->set_rules('nama', 'NAMA', 'required'); 
+            if ($this->form_validation->run() == FALSE)
+            {		
+                $get_wilkerja = $this->db->order_by('name','ASC')->select('*')->from('regencies')->where('province_id','35')->get();
+			    $data['wil_kerja'] = $get_wilkerja->result();
+                $data['tp']=$this->db->get_where('tb_tp', array('id' => $id))->row_array();
+                $data['prov']=$this->db->get_where('view_tpall', array('id' => $id))->row_array();
+                $this->templateadmin->load('template/dashboard', 'tp/edit_tp',$data);        
+            }
+            else
+            {                   
+                $this->tp_m->update();
+                redirect('tp/viewdatatp/');
+            }
+
+        }
 
     function nik_check()
         {
@@ -707,7 +729,7 @@ function add_ajax_kab($id_prov)
         	$data .= "<option value='".$value->id."'>".$value->name."</option>";
     	}
     	echo $data;
-	}
+    }
 
         
 }

@@ -94,7 +94,7 @@
 	{
 		$ci   = get_instance();
 		$cmb  = "<select name='$name' class='form-control' $extra required>
-				<option value='' selected disabled>PILIH KAB/KOTA</option>";
+				<option value='' selected disabled>--PILIH KABUPATEN/KOTA--</option>";
 
 		$data = $ci->db->get_where($table, array('province_id' => $id_prov))->result();	
 		foreach ($data as $row) {
