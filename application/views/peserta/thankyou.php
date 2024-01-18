@@ -67,6 +67,7 @@
 					</div>
 				</div>
 			</div>
+			<!-- end footer -->
 
 		</div>
 		<!-- end about us -->

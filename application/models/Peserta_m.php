@@ -265,7 +265,7 @@
 				'alamat'           		=> $this->input->post('alamat', TRUE),
 				'rt'            		=> $this->input->post('rt', TRUE),
 				'rw'            		=> $this->input->post('rw', TRUE),
-				'provinsi'            	=> $this->input->post('provinsi', TRUE),
+				// 'provinsi'            	=> $this->input->post('provinsi', TRUE),
 				// 'kabupaten'            	=> $this->input->post('kabupaten', TRUE),
 				// 'kecamatan'            	=> $this->input->post('kecamatan', TRUE),
 				// 'kelurahan'            	=> $this->input->post('kelurahan', TRUE),
@@ -279,7 +279,7 @@
 				'alamat_kopukm	'		=> $this->input->post('alamat_kopukm', TRUE),
 				'rt_kopukm	'			=> $this->input->post('rt_kopukm', TRUE),
 				'rw_kopukm	'			=> $this->input->post('rw_kopukm', TRUE),
-				'prov_kopukm'			=> $this->input->post('prov_kopukm', TRUE),
+				// 'prov_kopukm'			=> $this->input->post('prov_kopukm', TRUE),
 				// 'kota_kopukm'			=> $this->input->post('kota_kopukm', TRUE),
 				// 'kec_kopukm'			=> $this->input->post('kec_kopukm', TRUE),
 				// 'kel_kopukm'			=> $this->input->post('kel_kopukm', TRUE),
@@ -333,7 +333,91 @@
 			$this->db->where('id', $id);
 			$this->db->update($this->table, $data);
 		}
+
+		function getProv($id)
+		{
+			$this->db->select('b.name AS provinsi');
+			$this->db->from('tb_data_peserta a');
+			$this->db->join('provinces b', 'a.provinsi=b.id');
+			$this->db->where('a.id', $id);
+			$query = $this->db->get();
+			return $query;
+
+		}
+		function getKab($id)
+		{
+			$this->db->select('b.name AS kabupaten');
+			$this->db->from('tb_data_peserta a');
+			$this->db->join('regencies b', 'a.kabupaten=b.id');
+			$this->db->where('a.id', $id);
+			$query = $this->db->get();
+			return $query;
+
+		}
+		function getKec($id)
+		{
+			$this->db->select('b.name AS kecamatan');
+			$this->db->from('tb_data_peserta a');
+			$this->db->join('districts b', 'a.kecamatan=b.id');
+			$this->db->where('a.id', $id);
+			$query = $this->db->get();
+			return $query;
+
+		}
+		function getKel($id)
+		{
+			$this->db->select('b.name AS kelurahan');
+			$this->db->from('tb_data_peserta a');
+			$this->db->join('villages b', 'a.kelurahan=b.id');
+			$this->db->where('a.id', $id);
+			$query = $this->db->get();
+			return $query;
+
+		}
+
+		function getProvkopukm($id)
+		{
+			$this->db->select('b.name AS provinsi');
+			$this->db->from('tb_data_peserta a');
+			$this->db->join('provinces b', 'a.prov_kopukm=b.id');
+			$this->db->where('a.id', $id);
+			$query = $this->db->get();
+			return $query;
+
+		}
+		function getKabkopukm($id)
+		{
+			$this->db->select('b.name AS kabupaten');
+			$this->db->from('tb_data_peserta a');
+			$this->db->join('regencies b', 'a.kota_kopukm=b.id');
+			$this->db->where('a.id', $id);
+			$query = $this->db->get();
+			return $query;
+
+		}
+		function getKeckopukm($id)
+		{
+			$this->db->select('b.name AS kecamatan');
+			$this->db->from('tb_data_peserta a');
+			$this->db->join('districts b', 'a.kec_kopukm=b.id');
+			$this->db->where('a.id', $id);
+			$query = $this->db->get();
+			return $query;
+
+		}
+		function getKelkopukm($id)
+		{
+			$this->db->select('b.name AS kelurahan');
+			$this->db->from('tb_data_peserta a');
+			$this->db->join('villages b', 'a.kel_kopukm=b.id');
+			$this->db->where('a.id', $id);
+			$query = $this->db->get();
+			return $query;
+
+		}
 		
 	}
+
+	
 
 ?>

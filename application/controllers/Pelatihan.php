@@ -41,7 +41,7 @@ class Pelatihan extends CI_Controller {
 				'db' => 'kodeunik',
 				'dt' => 'share',
 				'formatter' => function($d) {
-						 return anchor('peserta/add_pesertadewan/'.$d, '<i class="icon ion-ios-share"></i>','class="btn btn-xs btn-primary" target="_blank" id="text-copy" onclick="copyText()" data-placement="top" title="Share Form"');
+						 return anchor('peserta/add_peserta/'.$d, '<i class="icon ion-ios-share"></i>','class="btn btn-xs btn-primary" target="_blank" id="text-copy" onclick="copyText()" data-placement="top" title="Share Form"');
 			  }
 		  	),
 			  array(

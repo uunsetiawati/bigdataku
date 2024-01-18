@@ -85,7 +85,7 @@
 			<div class="button-default">
 				<button type="submit" name="simpan" class="button">Simpan</button>
 				<?php
-					echo anchor('kelompokkoperasi', 'Kembali', array('class'=>'button2'));
+					echo anchor('pelatihan', 'Kembali', array('class'=>'button2'));
 				?>	
 			</div>
 		</div>

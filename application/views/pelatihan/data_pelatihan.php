@@ -81,17 +81,17 @@
                 // of the DataTable
                 "searching": true,
                 "ajax": '<?php echo site_url('pelatihan/data'); ?>',
-                "order": [[ 0, 'desc' ]],
+                "order": [[ 0, 'asc' ]],
                 "columns": [                    
                     {    
-                        "data": "id",
-                        // "width": "50px",
-                        // "class": "text-center",
-                        // "orderable": true, 
-                        // "sortable": true,  
-                        // render: function (data, type, row, meta) {
-		                //  return meta.row + meta.settings._iDisplayStart + 1;
-		                // }                     
+                        "data": "",
+                        "width": "50px",
+                        "class": "text-center",
+                        "orderable": true, 
+                        "sortable": true,  
+                        render: function (data, type, row, meta) {
+		                 return meta.row + meta.settings._iDisplayStart + 1;
+		                }                     
                     },
                     { 
                         "data": "judul",

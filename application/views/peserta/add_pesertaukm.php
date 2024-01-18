@@ -1,14 +1,21 @@
 <!--section title -->
-<div class="section-title">
-	<h5>Form Peserta Pelatihan </h5>
-	<h4><?=$peserta['judul_pelatihan'];?> DI <?=$peserta['alamat_pelatihan'];?></h4>
-	<?php
-	$tglmulai = new DateTime($peserta['tgl_mulai']);
-	$tglakhir = new DateTime($peserta['tgl_akhir']);
-	?>
-	<h6>Tanggal Pelatihan : <?=$tglmulai->format("d-m-Y");?> s.d <?=$tglakhir->format("d-m-Y")?></h6>
-	<h6>Peserta : <?=$peserta['sasaran'];?></h6>
-		
+<div class="header-about">
+	<div class="container">
+		<div class="social-media-icon socmed-for-about shadow-sm">
+			<div class="coming-soon-word text-center">
+				<img src="<?=base_url('assets/images/logoupt.png')?>" width="100px">
+				<h4>Form Peserta Pelatihan</h4>
+				<?=$peserta['judul_pelatihan']?> DI <?=$peserta['alamat_pelatihan'];?>
+				<?php
+				$tglmulai = new DateTime($peserta['tgl_mulai']);
+				$tglakhir = new DateTime($peserta['tgl_akhir']);
+				?>
+				<h6>Tanggal Pelatihan : <?=$tglmulai->format("d-m-Y");?> s.d <?=$tglakhir->format("d-m-Y")?></h6>
+				<h6>Peserta : <?=$peserta['sasaran'];?></h6>
+				
+			</div>                          
+		</div>
+	</div>
 </div>
 <!-- end section title -->
 
@@ -52,8 +59,8 @@
 				<label class="col-form-label">JENIS KELAMIN<span class="section-subtitle"><code>*</code></span></label>				
 				<select name="jk" class="form-control" required>
 					<option value="" selected disabled>--PILIH JENIS KELAMIN--</option>
-					<option value="L" <?=$this->input->post('jk') == 'L' ? 'selected':''?>>LAKI-LAKI</option>
-					<option value="P" <?=$this->input->post('jk') == 'P' ? 'selected':''?>>PEREMPUAN</option>
+					<option value="LAKI-LAKI" <?=$this->input->post('jk') == 'LAKI-LAKI' ? 'selected':''?>>LAKI-LAKI</option>
+					<option value="PEREMPUAN" <?=$this->input->post('jk') == 'PEREMPUAN' ? 'selected':''?>>PEREMPUAN</option>
 				</select>				
 			</div>
 			<div class="input-wrap">
@@ -106,37 +113,36 @@
 				<input type="number" name="rw" placeholder="RW" value="<?= set_value('rw'); ?>" class="form-control <?= (form_error('rw') == "" ? '':'is-invalid') ?>">
 				<?= form_error('rw'); ?>				
 			</div>
-			<!-- <div class="input-wrap row">
-				<label class="col-3 col-form-label">PROVINSI</label>
-				<div class="col-9">
-				<?php
-                //function cmb_dinamisprov($name, $table, $field, $pk, $id, $selected=null, $extra=null)
-                  echo cmb_dinamisprov('provinsi', 'provinces', 'name', 'id','provinsi','toggleselect()',$this->input->post('provinsi'));
-                ?> 
-				</div>
-			</div> -->
-			<input type="hidden" name="provinsi" value="35">
 			<div class="input-wrap">
-				<label class="col-form-label">KAB/KOTA<span class="section-subtitle"><code>*</code></span></label>				
-				<?php
-                //function cmb_dinamisprov($name, $table, $field, $pk, $id, $selected=null, $extra=null)
-                  echo cmb_dinamiskabupaten('kota', 'regencies', 'name', 'id','kota','toggleselect2()');				
-                ?>				
-			</div>
-			<div class="input-wrap">
-				<label class="col-form-label">KECAMATAN<span class="section-subtitle"><code>*</code></span></label>				
-				<?php
-                //function cmb_dinamisprov($name, $table, $field, $pk, $id, $selected=null, $extra=null)
-                  echo cmb_dinamiskec('kecamatan', 'districts', 'id', 'id','kecamatan','toggleselect3()');
-                ?> 							
-			</div>
-			<div class="input-wrap">
-				<label class="col-form-label">KELURAHAN<span class="section-subtitle"><code>*</code></span></label>
-				<?php
-                //function cmb_dinamisprov($name, $table, $field, $pk, $id, $selected=null, $extra=null)
-                  echo cmb_dinamiskel('kelurahan', 'villages', 'id', 'id','kelurahan');
-                ?> 
-			</div>
+				<label class="col-form-label">PROVINSI<span class="section-subtitle"><code>*</code></span></label>	
+                <select name="provinsi" class="form-control" id="provinsi" required>
+                    <option selected disabled>- PILIH PROVINSI -</option>
+                    <?php 
+                        foreach($provinsi as $prov)
+                        {
+                            echo '<option value="'.$prov->id.'">'.$prov->name.'</option>';
+                        }
+                    ?>
+                </select>
+            </div>
+            <div class="input-wrap">
+				<label class="col-form-label">KABUPATEN / KOTA<span class="section-subtitle"><code>*</code></span></label>	
+                <select name="kota" class="form-control" id="kabupaten" required>
+                    <option value='' selected disabled>- PILIH KABUPATEN -</option>
+                </select>
+            </div>
+            <div class="input-wrap">
+				<label class="col-form-label">KECAMATAN<span class="section-subtitle"><code>*</code></span></label>	
+                <select name="kecamatan" class="form-control" id="kecamatan" required>
+                    <option value='' selected disabled>- PILIH KECAMATAN -</option>
+                </select>
+            </div>
+            <div class="input-wrap">
+				<label class="col-form-label">KELURAHAN<span class="section-subtitle"><code>*</code></span></label>	
+                <select name="kelurahan" class="form-control" id="desa" required>
+                    <option value='' selected disabled>- PILIH KELURAHAN -</option>
+                </select>
+            </div>
 			<div class="input-wrap">
 				<label class="col-form-label">NO.TELP/WA<span class="section-subtitle"><code>*</code></span></label>
 				<input type="text" name="no_telp" placeholder="NOMOR TELEPON (Cth:081331220006)" value="<?= set_value('no_telp'); ?>" class="form-control <?= (form_error('no_telp') == "" ? '':'is-invalid') ?>">
@@ -274,30 +280,23 @@
 			
 			  
 			<span class="section-subtitle"><code>.DATA UMKM</code></span>
-            <div class="input-wrap row">
-                <label class="col-3 col-form-label">NOMOR NIB</label>
-                <div class="col-9">
+            <div class="input-wrap">
+				<label class="col-form-label">NOMOR NIB<span class="section-subtitle"><code>*</code></span></label>
                 <input type="text" name="nib" placeholder="NOMOR NIB" onkeyup="this.value = this.value.toUpperCase()" value="<?= set_value('nib'); ?>" class="form-control" required>
-                </div>
             </div>
-            <div class="input-wrap row">
-                <label class="col-3 col-form-label">NAMA USAHA</label>
-                <div class="col-9">
+            <div class="input-wrap">
+				<label class="col-form-label">NAMA USAHA<span class="section-subtitle"><code>*</code></span></label>
                 <input type="text" name="nama_usaha" placeholder="NAMA USAHA" onkeyup="this.value = this.value.toUpperCase()" value="<?= set_value('nama_usaha'); ?>" class="form-control" required>
-                </div>
             </div>	
-            <div class="input-wrap row">
-                <label class="col-3 col-form-label">STATUS USAHA/LEGALITAS USAHA</label>
-                <div class="col-9">
+            <div class="input-wrap">
+				<label class="col-form-label">STATUS USAHA/LEGALITAS USAHA<span class="section-subtitle"><code>*</code></span></label>
                 <?php
                 //function cmb_dinamisprov($name, $table, $field, $pk, $id, $selected=null, $extra=null)
-                echo cmb_dinamiskop('status_usaha', 'tb_legalitas_usaha', 'nama', 'id','--PILIH STATUS USAHA--',$this->input->post('status_usaha'));
+                echo cmb_dinamiskop('status_usaha', 'tb_legalitas_usaha', 'nama', 'nama','--PILIH STATUS USAHA--',$this->input->post('status_usaha'));
                 ?>
-                </div>
 			</div>   
-            <div class="input-wrap row">
-				<label class="col-3 col-form-label">SERTIFIKASI PRODUK USAHA</label>
-				<div class="col-9">
+            <div class="input-wrap">
+				<label class="col-form-label">SERTIFIKASI PRODUK USAHA<span class="section-subtitle"><code>*</code></span></label>
 					<?php
 					foreach($sertifikasi as $row){?>
 						<label class="form-control2">
@@ -305,149 +304,120 @@
 						</label>
 					<?php }
 					?>
-                </div>
 			</div>  
-            <div class="input-wrap row">
-                <label class="col-3 col-form-label">SEKTOR USAHA</label>
-                <div class="col-9">
+            <div class="input-wrap">
+				<label class="col-form-label">SEKTOR USAHA<span class="section-subtitle"><code>*</code></span></label>
                 <?php
                 //function cmb_dinamisprov($name, $table, $field, $pk, $id, $selected=null, $extra=null)
-                echo cmb_dinamiskop('sektor_usaha', 'tb_sektor_usaha', 'nama', 'id','--PILIH SEKTOR USAHA KOPERASI--', $this->input->post('sektor_usaha'));
+                echo cmb_dinamiskop('sektor_usaha', 'tb_sektor_usaha', 'nama', 'nama','--PILIH SEKTOR USAHA KOPERASI--', $this->input->post('sektor_usaha'));
                 ?>
-                </div>
             </div> 
-            <div class="input-wrap row">
-                <label class="col-3 col-form-label">BIDANG USAHA</label>
-                <div class="col-9">
+            <div class="input-wrap">
+				<label class="col-form-label">BIDANG USAHA<span class="section-subtitle"><code>*</code></span></label>
                 <?php
                 //function cmb_dinamisprov($name, $table, $field, $pk, $id, $selected=null, $extra=null)
-                echo cmb_dinamiskop('bidang_usaha', 'tb_bidang_usaha', 'nama', 'id','--PILIH SEKTOR USAHA KOPERASI--', $this->input->post('bidang_usaha'));
+                echo cmb_dinamiskop('bidang_usaha', 'tb_bidang_usaha', 'nama', 'nama','--PILIH SEKTOR USAHA KOPERASI--', $this->input->post('bidang_usaha'));
                 ?>
-                </div>
             </div>     
-            <div class="input-wrap row">
-                <label class="col-3 col-form-label">ALAMAT USAHA</label>
-                <div class="col-9">
+            <div class="input-wrap">
+				<label class="col-form-label">ALAMAT USAHA<span class="section-subtitle"><code>*</code></span></label>
                 <input type="text" name="alamat_kopukm" placeholder="ALAMAT USAHA" onkeyup="this.value = this.value.toUpperCase()" value="<?= set_value('alamat_kopukm'); ?>" class="form-control" required>
-                </div>
             </div>  
-            <div class="input-wrap row">
-				<label class="col-3 col-form-label">RT</label>
-				<div class="col-9">
+            <div class="input-wrap">
+				<label class="col-form-label">RT<span class="section-subtitle"><code>*</code></span></label>
 				<input type="text" name="rt_kopukm" placeholder="RT" value="<?= set_value('rt_kopukm'); ?>" class="form-control" required> 
-				</div>
 			</div>
-			<div class="input-wrap row">
-				<label class="col-3 col-form-label">RW</label>
-				<div class="col-9">
+			<div class="input-wrap">
+				<label class="col-form-label">RW<span class="section-subtitle"><code>*</code></span></label>
 				<input type="text" name="rw_kopukm" placeholder="RW" value="<?= set_value('rw_kopukm'); ?>" class="form-control">
-				</div>
 			</div>
-            <input type="hidden" name="prov_kopukm" value="35">
-            <div class="input-wrap row">
-                <label class="col-3 col-form-label">KAB/KOTA</label>
-                <div class="col-9">
-                <?php
-                //function cmb_dinamisprov($name, $table, $field, $pk, $id, $selected=null, $extra=null)
-                echo cmb_dinamiskabupaten('kota_kopukm', 'regencies', 'name', 'id','kota_koperasi','tskota()');
-                
-                ?> 
-                </div>
+            <!-- <input type="hidden" name="prov_kopukm" value="35"> -->
+            <div class="input-wrap">
+				<label class="col-form-label">PROVINSI<span class="section-subtitle"><code>*</code></span></label>	
+                <select name="prov_kopukm" class="form-control" id="provinsiukm" required>
+                    <option>- PILIH PROVINSI -</option>
+                    <?php 
+                        foreach($provinsi as $prov)
+                        {
+                            echo '<option value="'.$prov->id.'">'.$prov->name.'</option>';
+                        }
+                    ?>
+                </select>
+            </div>            
+            <div class="input-wrap">
+				<label class="col-form-label">KABUPATEN / KOTA<span class="section-subtitle"><code>*</code></span></label>	
+                <select name="kota_kopukm" class="form-control" id="kabupatenukm" required>
+                    <option value=''>- PILIH KABUPATEN -</option>
+                </select>
             </div>
-            <div class="input-wrap row">
-                <label class="col-3 col-form-label">KECAMATAN</label>
-                <div class="col-9">
-                <?php
-                //function cmb_dinamisprov($name, $table, $field, $pk, $id, $selected=null, $extra=null)
-                echo cmb_dinamiskec('kec_kopukm', 'districts', 'id', 'id','kec_koperasi','tskec()');
-                ?> 				
-                </div>
+            <div class="input-wrap">
+				<label class="col-form-label">KECAMATAN<span class="section-subtitle"><code>*</code></span></label>	
+                <select name="kec_kopukm" class="form-control" id="kecamatanukm" required>
+                    <option value=''>- PILIH KECAMATAN -</option>
+                </select>
             </div>
-            <div class="input-wrap row">
-                <label class="col-3 col-form-label">KELURAHAN</label>
-                <div class="col-9">
-                <?php
-                //function cmb_dinamisprov($name, $table, $field, $pk, $id, $selected=null, $extra=null)
-                echo cmb_dinamiskel('kel_kopukm', 'villages', 'id', 'id','kel_koperasi');
-                ?>
-                </div>
+            <div class="input-wrap">
+				<label class="col-form-label">KELURAHAN<span class="section-subtitle"><code>*</code></span></label>	
+                <select name="kel_kopukm" class="form-control" id="desaukm" required>
+                    <option value=''>- PILIH KELURAHAN -</option>
+                </select>
             </div>
-            <div class="input-wrap row">
-				<label class="col-3 col-form-label">KODE POS</label>
-				<div class="col-9">
+            <div class="input-wrap">
+				<label class="col-form-label">KODE POS<span class="section-subtitle"><code>*</code></span></label>
 				<input type="text" name="kodepos_kopukm" placeholder="KODE POS" value="<?= set_value('kodepos_kopukm'); ?>" class="form-control">
-				</div>
 			</div>
-            <div class="input-wrap row">
-				<label class="col-3 col-form-label">MODAL USAHA UMK PER TAHUN</label>
-				<div class="col-9">
+            <div class="input-wrap">
+				<label class="col-form-label">MODAL USAHA UMK PER TAHUN<span class="section-subtitle"><code>*</code></span></label>
 				<select name="modal_usaha" class="form-control" required>
 					<option value="" selected disabled>--PILIH MODAL USAHA--</option>
 					<option value="< 1M" <?=$this->input->post('modal_usaha') == '< 1M' ? 'selected':''?>>< 1M</option>
 					<option value="1M-5M" <?=$this->input->post('modal_usaha') == '1M-5M' ? 'selected':''?>>1M-5M</option>
 					<option value="5M-10M" <?=$this->input->post('modal_usaha') == '5M-10M' ? 'selected':''?>>5M-10M</option>										
 				</select>
-				</div>
 			</div>
-            <div class="input-wrap row">
-                <label class="col-3 col-form-label">NILAI MODAL USAHA PER TAHUN</label>
-                <div class="col-9">
+            <div class="input-wrap">
+				<label class="col-form-label">NILAI MODAL USAHA PERTAHUN<span class="section-subtitle"><code>*</code></span></label>
                 <input type="text" name="nilai_modalusaha" id="dengan-rupiah" placeholder="NILAI MODAL USAHA" value="<?= set_value('nilai_modalusaha'); ?>" class="form-control" required>
-                </div>
             </div>	
-            <div class="input-wrap row">
-				<label class="col-3 col-form-label">OMZET USAHA PER TAHUN</label>
-				<div class="col-9">
+            <div class="input-wrap">
+			<label class="col-form-label">OMZET USAHA PER TAHUN<span class="section-subtitle"><code>*</code></span></label>
 				<select name="omzet_usaha" class="form-control" required>
 					<option value="" selected disabled>--PILIH OMZET USAHA--</option>
 					<option value="< 2M" <?=$this->input->post('omzet_usaha') == '< 2M' ? 'selected':''?>>< 2M</option>
 					<option value="2M-15M" <?=$this->input->post('omzet_usaha') == '2M-15M' ? 'selected':''?>>2M-15M</option>
 					<option value="15M-50M" <?=$this->input->post('omzet_usaha') == '15M-50M' ? 'selected':''?>>15M-50M</option>										
 				</select>
-				</div>
 			</div>
-            <div class="input-wrap row">
-                <label class="col-3 col-form-label">NILAI OMZET USAHA PER TAHUN</label>
-                <div class="col-9">
+            <div class="input-wrap">
+				<label class="col-form-label">NILAI OMZET USAHA PER TAHUN<span class="section-subtitle"><code>*</code></span></label>
                 <input type="text" name="nilai_omzetusaha" id="dengan-rupiah2" placeholder="NILAI OMZET USAHA" value="<?= set_value('nilai_omzetusaha'); ?>" class="form-control" required>
-                </div>
             </div>	
-            <div class="input-wrap row">
-                <label class="col-3 col-form-label">JUMLAH KARYAWAN LAKI-LAKI</label>
-                <div class="col-9">
+            <div class="input-wrap">
+				<label class="col-form-label">JUMLAH KARYAWAN LAKI-LAKI<span class="section-subtitle"><code>*</code></span></label>
                 <input type="number" name="jml_tenaga_kerjal" placeholder="JUMLAH KARYAWAN LAKI-LAKI" value="<?= set_value('jml_tenaga_kerjal'); ?>" class="form-control" required>
-                </div>
             </div>
-            <div class="input-wrap row">
-                <label class="col-3 col-form-label">JUMLAH KARYAWAN PEREMPUAN</label>
-                <div class="col-9">
+            <div class="input-wrap">
+				<label class="col-form-label">JUMLAH KARYAWAN PEREMPUAN<span class="section-subtitle"><code>*</code></span></label>
                 <input type="number" name="jml_tenaga_kerjap" placeholder="JUMLAH PEREMPUAN" value="<?= set_value('jml_tenaga_kerjap'); ?>" class="form-control" required>
-                </div>
             </div>
-            <div class="input-wrap row">
-                <label class="col-3 col-form-label">JANGKAUAN PEMASARAN PRODUK/LAYANAN USAHA</label>
-                <div class="col-9">
+            <div class="input-wrap">
+				<label class="col-form-label">JANGKAUAN PEMASARAN PRODUK/LAYANAN USAHA<span class="section-subtitle"><code>*</code></span></label>
                 <?php
                 //function cmb_dinamisprov($name, $table, $field, $pk, $id, $selected=null, $extra=null)
-                echo cmb_dinamiskop('wil_pemasaran', 'tb_pemasaran', 'nama', 'id','--PILIH WILAYAH PEMASARAN--',$this->input->post('wil_pemasaran'));
+                echo cmb_dinamiskop('wil_pemasaran', 'tb_pemasaran', 'nama', 'nama','--PILIH WILAYAH PEMASARAN--',$this->input->post('wil_pemasaran'));
                 ?>
-                </div>
             </div>
-            <div class="input-wrap row">
-				<label class="col-3 col-form-label">LOKASI PEMASARAN</label>
-				<div class="col-9">
+            <div class="input-wrap">
+				<label class="col-form-label">LOKASI PEMASARAN<span class="section-subtitle"><code>*</code></span></label>
 				<input type="text" name="lokasi_pemasaran" placeholder="LOKASI PEMASARAN" onkeyup="this.value = this.value.toUpperCase()" value="<?= set_value('lokasi_pemasaran'); ?>" class="form-control">
-				</div>
 			</div>
-            <div class="input-wrap row">
-				<label class="col-3 col-form-label">JABATAN PESERTA DI USAHA</label>
-				<div class="col-9">
+            <div class="input-wrap">
+				<label class="col-form-label">JABATAN PESERTA DI USAHA<span class="section-subtitle"><code>*</code></span></label>
 				<select name="jabatan" class="form-control" required>
 					<option value="" selected disabled>--PILIH JABATAN PESERTA--</option>
 					<option value="PEMILIK" <?=$this->input->post('jabatan') == 'PEMILIK' ? 'selected':''?>>PEMILIK</option>
 					<option value="KARYAWAN" <?=$this->input->post('jabatan') == 'KARYAWAN' ? 'selected':''?>>KARYAWAN</option>									
 				</select>
-				</div>
 			</div>            
            
             <div class="button-default">
@@ -461,6 +431,50 @@
 <!-- end separator -->
 
 <?php $this->load->view('peserta/script_peserta')?>
+
+<script>
+    $(document).ready(function(){
+        $("#provinsi").change(function (){
+            var url = "<?php echo site_url('peserta/add_ajax_kab');?>/"+$(this).val();
+            $('#kabupaten').load(url);
+            return false;
+        })
+
+        $("#kabupaten").change(function (){
+            var url = "<?php echo site_url('peserta/add_ajax_kec');?>/"+$(this).val();
+            $('#kecamatan').load(url);
+            return false;
+        })
+
+        $("#kecamatan").change(function (){
+            var url = "<?php echo site_url('peserta/add_ajax_des');?>/"+$(this).val();
+            $('#desa').load(url);
+            return false;
+        })
+    });
+</script>
+
+<script>
+    $(document).ready(function(){
+        $("#provinsiukm").change(function (){
+            var url = "<?php echo site_url('peserta/add_ajax_kab');?>/"+$(this).val();
+            $('#kabupatenukm').load(url);
+            return false;
+        })
+
+        $("#kabupatenukm").change(function (){
+            var url = "<?php echo site_url('peserta/add_ajax_kec');?>/"+$(this).val();
+            $('#kecamatanukm').load(url);
+            return false;
+        })
+
+        $("#kecamatanukm").change(function (){
+            var url = "<?php echo site_url('peserta/add_ajax_des');?>/"+$(this).val();
+            $('#desaukm').load(url);
+            return false;
+        })
+    });
+</script>
 
 <script>
             /* Dengan Rupiah */

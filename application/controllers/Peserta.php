@@ -17,7 +17,7 @@ class Peserta extends CI_Controller {
 		check_not_login();
 
 		// nama table
-		$table      = 'view_peserta';
+		$table      = 'view_peserta2';
 		// nama PK
 		$primaryKey = 'id';
 		// list field yang mau ditampilkan
@@ -141,6 +141,8 @@ class Peserta extends CI_Controller {
 			$data['masalah'] = $this->db->get('tb_permasalahan')->result();
 			$data['kebutuhan'] = $this->db->get('tb_kebutuhan_diklat')->result();
 			$data['sertifikasi'] = $this->db->get('tb_sertifikasi')->result();
+			$get_prov = $this->db->order_by('name','ASC')->select('*')->from('provinces')->get();
+			$data['provinsi'] = $get_prov->result();
 			$datapelatihan=$this->db->get_where('tb_data_pelatihan', array('kodeunik' => $kodeunik,'status'=>'1'))->row_array();
 			if($datapelatihan > 0){
 				if($datapelatihan['sasaran']=="UKM"){
@@ -211,10 +213,12 @@ class Peserta extends CI_Controller {
 			$data['masalah'] = $this->db->get('tb_permasalahan')->result();
 			$data['kebutuhan'] = $this->db->get('tb_kebutuhan_diklat')->result();
 			$data['sertifikasi'] = $this->db->get('tb_sertifikasi')->result();
+			$get_prov = $this->db->order_by('name','ASC')->select('*')->from('provinces')->get();
+			$data['provinsi'] = $get_prov->result();
 			$datapelatihan=$this->db->get_where('tb_data_pelatihan', array('kodeunik' => $kodeunik,'status'=>'1'))->row_array();
 			if($datapelatihan > 0){
 				if($datapelatihan['sasaran']=="UKM"){
-					$this->templateadmin->load('template/dashboard_p', 'peserta/add_pesertaukmdewan',$data);
+					$this->templateadmin->load('template/dashboard_p', 'peserta/add_pesertacoba',$data);
 				}else if($datapelatihan['sasaran']=="CALON WIRAUSAHA"){
 					$this->templateadmin->load('template/dashboard_p', 'peserta/add_pesertacalonwirausaha',$data);
 				}
@@ -412,8 +416,29 @@ class Peserta extends CI_Controller {
 				$row = $query->row();
 				$data['pelatihan'] = $this->db->get_where('tb_data_pelatihan', array('id' => $row->id_pelatihan))->row_array();
 			}
-			$data['peserta'] = $this->db->get_where('tb_data_peserta', array('id' => $id))->row_array();
-			$this->templateadmin->load('template/dashboard', 'peserta/edit_pesertadewan', $data);			
+
+			$prov=$this->peserta_m->getProv($id)->result();
+			$kab=$this->peserta_m->getKab($id)->result();
+			$kec=$this->peserta_m->getKec($id)->result();
+			$kel=$this->peserta_m->getKel($id)->result();			
+			foreach($prov as $row) {$data['provinsi']= $row->provinsi;}
+			foreach($kab as $row) {$data['kabupaten']= $row->kabupaten;}
+			foreach($kec as $row) {$data['kecamatan']= $row->kecamatan;}
+			foreach($kel as $row) {$data['kelurahan']= $row->kelurahan;}
+
+			$provkopukm=$this->peserta_m->getProvkopukm($id)->result();
+			$kabkopukm=$this->peserta_m->getKabkopukm($id)->result();
+			$keckopukm=$this->peserta_m->getKeckopukm($id)->result();
+			$kelkopukm=$this->peserta_m->getKelkopukm($id)->result();	
+			foreach($provkopukm as $row) {$data['provinsikopukm']= $row->provinsi;}
+			foreach($kabkopukm as $row) {$data['kabupatenkopukm']= $row->kabupaten;}
+			foreach($keckopukm as $row) {$data['kecamatankopukm']= $row->kecamatan;}
+			foreach($kelkopukm as $row) {$data['kelurahankopukm']= $row->kelurahan;}
+
+ 			$data['peserta'] = $this->db->get_where('tb_data_peserta', array('id' => $id))->row_array();
+			$this->templateadmin->load('template/dashboard', 'peserta/edit_peserta_ukm', $data);			
+			// echo $prov;
+
 		}
 		else
 		{   
@@ -496,6 +521,36 @@ class Peserta extends CI_Controller {
 
 		// Create the ZIP file
 		$this->zip->download($zipFileName);
+	}
+
+	function add_ajax_kab($id_prov)
+	{
+    	$query = $this->db->order_by('name','ASC')->get_where('regencies',array('province_id'=>$id_prov));
+    	$data = "<option value=''>- PILIH KABUPATEN -</option>";
+    	foreach ($query->result() as $value) {
+        	$data .= "<option value='".$value->id."'>".$value->name."</option>";
+    	}
+    	echo $data;
+	}
+  
+	function add_ajax_kec($id_kab)
+	{
+    	$query = $this->db->order_by('name','ASC')->get_where('districts',array('regency_id'=>$id_kab));
+    	$data = "<option value=''> - PILIH KECAMATAN - </option>";
+    	foreach ($query->result() as $value) {
+        	$data .= "<option value='".$value->id."'>".$value->name."</option>";
+    	}
+    	echo $data;
+	}
+  
+	function add_ajax_des($id_kec)
+	{
+    	$query = $this->db->order_by('name','ASC')->get_where('villages',array('district_id'=>$id_kec));
+    	$data = "<option value=''> - PILIH KELURAHAN - </option>";
+    	foreach ($query->result() as $value) {
+        	$data .= "<option value='".$value->id."'>".$value->name."</option>";
+    	}
+    	echo $data;
 	}
 
 
