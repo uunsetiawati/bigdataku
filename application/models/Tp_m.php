@@ -31,6 +31,7 @@
 				'jenis_tp'			=> $this->input->post('jenis_tp', TRUE),
 				'no_rekening'		=> $this->input->post('no_rekening', TRUE),
 				'no_bpjs'			=> $this->input->post('no_bpjs', TRUE),
+				'wilayah_kerja'		=> $this->input->post('wilayah_kerja', TRUE),
 				'foto'        	    => $foto,
 				'ktp'        	    => $ktp,
 				'kk'				=> $kk,

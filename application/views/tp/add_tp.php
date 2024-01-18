@@ -142,6 +142,12 @@
 					<label class="col-form-label">NO. BPJS KESEHATAN</label>	
 					<input type="number" name="no_bpjs" placeholder="NOMOR BPJS KESEHATAN" value="<?= set_value('no_bpjs'); ?>" class="form-control">
 				</div>
+				<div class="input-wrap">
+                    <label class="col-form-label">WILAYAH KERJA<span class="section-subtitle"><code>*</code></span></label>	
+					<?php
+					echo cmb_dinamiskota('wilayah_kerja','regencies','name','name',35,$this->input->post('wilayah_kerja'), "class='form-control'");
+					?>
+                </div>
 
 				<div class="input-wrap">
 					<label class="col-form-label">UPLOAD FOTO DIRI (FOTO FORMAL)<span class="section-subtitle"><code>*</code></span><h7> (Maks file ukuran 3MB | jpg,png)</h7></label>
