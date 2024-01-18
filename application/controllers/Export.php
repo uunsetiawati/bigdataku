@@ -478,7 +478,7 @@ class Export extends CI_Controller {
                          $ktp = new Drawing();
                          $ktp->setName('KTP');
                          $ktp->setDescription('KTP');
-                         $ktp->setPath('uploads/peserta/'.$pengguna->ktp);
+                         $ktp->setPath('uploads/ktp/'.$pengguna->ktp);
                          $ktp->setHeight(50);
                          $ktp->setCoordinates('AU' . $kolom);
                          $ktp->setWorksheet($spreadsheet->getActiveSheet());
