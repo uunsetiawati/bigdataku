@@ -96,7 +96,7 @@
 		$cmb  = "<select name='$name' class='form-control' $extra required>
 				<option value='' selected disabled>--PILIH KABUPATEN/KOTA--</option>";
 
-		$data = $ci->db->get_where($table, array('province_id' => $id_prov))->result();	
+		$data = $ci->db->order_by('name','ASC')->get_where($table, array('province_id' => $id_prov))->result();	
 		foreach ($data as $row) {
 			$cmb .= "<option value='".$row->$pk."'";
 			//Apabila $selected bernilai sama dengan nilai $pk maka akan bernilai selected selain itu akan bernilai null
