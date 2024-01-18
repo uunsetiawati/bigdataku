@@ -475,13 +475,13 @@ class Export extends CI_Controller {
                          $drawing->setWorksheet($spreadsheet->getActiveSheet());
 
                          // Jika diinginkan, tambahkan juga gambar
-                         $drawing = new Drawing();
-                         $drawing->setName('KTP');
-                         $drawing->setDescription('KTP');
-                         $drawing->setPath('uploads/peserta/'.$pengguna->ktp);
-                         $drawing->setHeight(50);
-                         $drawing->setCoordinates('AU' . $kolom);
-                         $drawing->setWorksheet($spreadsheet->getActiveSheet());
+                         $ktp = new Drawing();
+                         $ktp->setName('KTP');
+                         $ktp->setDescription('KTP');
+                         $ktp->setPath('uploads/peserta/'.$pengguna->ktp);
+                         $ktp->setHeight(50);
+                         $ktp->setCoordinates('AU' . $kolom);
+                         $ktp->setWorksheet($spreadsheet->getActiveSheet());
 
                $kolom++;
                $nomor++;
