@@ -16,10 +16,11 @@
 	?>
 	<?=form_hidden('now',$now);?>
 	<?=form_hidden('id',$narsum['id']);?>
+	<?=form_hidden('kodeunik',$narsum['kodeunik']);?>
 		<div class="form-wrapper">            
 			<div class="input-wrap">
 				<label class="col-form-label">NIK NARASUMBER<span class="section-subtitle"><code>*</code></span></label>	
-				<input type="number" name="nik" placeholder="NIK / NO. KTP" value="<?= $this->input->post('nik') ?? $narsum['nik'] ?>" class="form-control <?= (form_error('nik') == "" ? '':'is-invalid') ?>">
+				<input type="number" name="nik" placeholder="NIK / NO. KTP" value="<?= $this->input->post('nik') ?? $narsum['nik'] ?>" class="form-control <?= (form_error('nik') == "" ? '':'is-invalid') ?>" readonly>
 					<?= form_error('nik'); ?>					
 			</div>            
 			<div class="input-wrap">

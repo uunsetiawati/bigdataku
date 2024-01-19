@@ -33,18 +33,11 @@ class Narasumber extends CI_Controller {
 	               		return anchor('narasumber/edit/'.$d, '<i class="icon ion-ios-create"></i>','class="btn btn-xs btn-success" data-placement="top" title="Edit"');
 	            }
 	        ),
-			array(
-				'db' => 'kodeunik',
-				'dt' => 'share',
-				'formatter' => function($d) {
-						 return anchor('peserta/add_peserta/'.$d, '<i class="icon ion-ios-share"></i>','class="btn btn-xs btn-primary" id="text-copy" onclick="copyText()" data-placement="top" title="Share Form"');
-			  }
-		  	),
 			  array(
-				'db' => 'kodeunik',
+				'db' => 'id',
 				'dt' => 'lihat',
 				'formatter' => function($d) {
-						 return anchor('peserta/viewdatapeserta/'.$d, '<i class="icon ion-ios-eye"></i>','class="btn btn-xs btn-warning" data-placement="top" title="Lihat Peserta"');
+						 return anchor('narasumber/lihat/'.$d, '<i class="icon ion-ios-eye"></i>','class="btn btn-xs btn-warning" data-placement="top" title="Lihat Narasumber"');
 			  }
 		  	)
 	    );
@@ -179,6 +172,18 @@ class Narasumber extends CI_Controller {
 		}
 	
 	}
+
+	function lihat()
+		{
+			check_not_login();
+			$id=$this->uri->segment(3);
+			$narsum=$this->db->get_where('tb_data_narsum', array('id' => $id))->row_array();
+			$data['narsum']=$narsum;
+			$data['pelatihan']= $this->db->get_where('tb_data_pelatihan', array('kodeunik' => $narsum['kodeunik']))->row_array();
+
+			$this->templateadmin->load('template/dashboard', 'narasumber/data_narasumberview',$data);
+
+		}
 
 	function upload_ktp()
 		{
@@ -540,41 +545,31 @@ class Narasumber extends CI_Controller {
 	function edit() 
 	{
 		check_not_login();
-		$this->form_validation->set_rules('judul', 'Judul', 'required'); // Unique Field
-		$this->form_validation->set_rules('alamat', 'Alamat', 'required'); // Unique Field
-		$this->form_validation->set_rules('kota', 'Kab/Kota', 'required'); // Unique Field
-		$this->form_validation->set_rules('program', 'Program Kode Anggaran', 'required'); // Unique Field
-		$this->form_validation->set_rules('kegiatan', 'Kegiatan Kode Anggaran', 'required'); // Unique Field
-		$this->form_validation->set_rules('subkegiatan', 'Sub Kegaitan Kode Anggaran', 'required'); // Unique Field
+		$this->form_validation->set_rules('nik', 'Nomor NIK/KTP', 'required|callback_nik_check|min_length[16]|max_length[16]', [
+			'is_unique' => '%s sudah terdaftar. Silahkan isikan No. KTP lainnya',
+		]); // Unique Field 
 
 		if ($this->form_validation->run() == FALSE)
 		{			
 			$id = $this->uri->segment(3);			
-			$data['narsum'] = $this->db->get_where('tb_data_narsum', array('id' => $id))->row_array();
+			$narsum = $this->db->get_where('tb_data_narsum', array('id' => $id))->row_array();
+			$data['narsum'] = $narsum;
+			
 			$this->templateadmin->load('template/dashboard', 'narasumber/edit_narasumber', $data);			
 		}
 		else
 		{   
+			$kodeunik=$this->input->post('kodeunik');
 			$this->narasumber_m->update();
-			redirect('pelatihan');
-		}
-
-
-		// if (isset($_POST['submit'])) {
-		// 	$this->pelatihan_m->update();
-		// 	redirect('pelatihan');
-		//   } else {
-		// 	$id_guru     = $this->uri->segment(3);
-		// 	$data['pelatihan']  = $this->db->get_where('view_pelatihan', array('id' => $id_guru))->row_array();
-		// 	$this->templateadmin->load('template/dashboard', 'pelatihan/edit', $data);
-		//   }		
+			redirect('narasumber/viewdatanarsum/'.$kodeunik);
+		}	
 
 	}
 
 	function nik_check(){
         // $id_user= $this->session->userdata('id_user');
         $post = $this->input->post(null, TRUE);
-		$query = $this->db->query("SELECT * FROM tb_data_narsum WHERE nik = '$post[nik]' AND kodeunik='$post[kodeunik]'");
+		$query = $this->db->query("SELECT * FROM tb_data_narsum WHERE nik = '$post[nik]' AND kodeunik='$post[kodeunik]' AND id != '$post[id]'");
 
         if ($query->num_rows() > 0){
             $this->form_validation->set_message('nik_check', '{field} ini sudah terdaftar');

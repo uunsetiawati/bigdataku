@@ -56,10 +56,9 @@
 									<tr>
 										<th >No</th>
 										<th >Nama</th>
-                                        <th >Judul</th>
-										<th >#</th>
-                                        <th >#</th>
-                                        <th >#</th>
+                                        <th >Judul Materi</th>
+										<th >Edit</th>
+                                        <th >Lihat</th>
 									</tr>
 								</thead>								
 							</table>
@@ -108,11 +107,6 @@
                     },                   
                     { 
                         "data": "aksi",
-                        "width": "20px",
-                        "class": "text-center"
-                    },
-                    { 
-                        "data": "share",
                         "width": "20px",
                         "class": "text-center"
                     },
