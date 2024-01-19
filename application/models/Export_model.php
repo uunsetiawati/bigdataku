@@ -19,4 +19,11 @@ class Export_model extends CI_Model {
           return $this->db->get();
      }
 
+     public function getAllNarsum()
+     {
+          $this->db->select('*');
+          $this->db->from('tb_data_narsum');
+          return $this->db->get();
+     }
+
 }

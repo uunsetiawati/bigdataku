@@ -30,7 +30,7 @@
             <div class="content">
 				<div class="container">
 					<div class="row">                        
-                        <div class="col-6">
+                        <div class="col-4">
                             <div class="button-default">
                                 <?php
                                     form_hidden('kodeunik',$this->uri->segment(3));
@@ -40,7 +40,14 @@
                                 ?>
                             </div>
                         </div>  
-                        <div class="col-6">                           
+                        <div class="col-4">                           
+                            <div class="button-default">   
+                                <?php
+                                    echo anchor('export/exportnarsum/', 'Export', array('class'=>'button3'));
+                                ?>
+                            </div>
+                        </div>
+                        <div class="col-4">                           
                             <div class="button-default">   
                                 <?php
                                     echo anchor('pelatihan', 'Kembali', array('class'=>'button2'));
