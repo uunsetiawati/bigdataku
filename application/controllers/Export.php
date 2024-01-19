@@ -716,11 +716,11 @@ class Export extends CI_Controller {
           $sheet->getColumnDimension('F')->setWidth(15); // Set width kolom F
           $sheet->getColumnDimension('G')->setWidth(20); // Set width kolom G
           $sheet->getColumnDimension('H')->setWidth(15); // Set width kolom H
-          $sheet->getColumnDimension('I')->setWidth(30); // Set width kolom I
-          $sheet->getColumnDimension('J')->setWidth(5); // Set width kolom J
-          $sheet->getColumnDimension('K')->setWidth(5); // Set width kolom K
-          $sheet->getColumnDimension('L')->setWidth(25); // Set width kolom L
-          $sheet->getColumnDimension('M')->setWidth(25); // Set width kolom Provinsi
+          $sheet->getColumnDimension('I')->setWidth(15); // Set width kolom I
+          $sheet->getColumnDimension('J')->setWidth(15); // Set width kolom J
+          $sheet->getColumnDimension('K')->setWidth(15); // Set width kolom K
+          $sheet->getColumnDimension('L')->setWidth(15); // Set width kolom L
+          $sheet->getColumnDimension('M')->setWidth(15); // Set width kolom Provinsi
 
           $kolom = 2;
           $nomor = 1;
