@@ -3,9 +3,10 @@
 	<div class="container">
 		<div class="social-media-icon socmed-for-about shadow-sm">
 			<div class="coming-soon-word text-center">
-				<img src="<?=base_url('assets/images/logoupt.png')?>" width="100px">
-				<h4>Form Peserta Pelatihan</h4>
-				<?=$peserta['judul_pelatihan']?> DI <?=$peserta['alamat_pelatihan'];?>
+				<img src="<?=base_url('assets/images/logoupt.png')?>" width="200px">
+				<h5>FORM PESERTA PELATIHAN</h5>
+				<h5><b><?=$peserta['judul_pelatihan']?> </b></h5>
+				<h6><?=$peserta['alamat_pelatihan'];?></h6>
 				<?php
 				$tglmulai = new DateTime($peserta['tgl_mulai']);
 				$tglakhir = new DateTime($peserta['tgl_akhir']);
