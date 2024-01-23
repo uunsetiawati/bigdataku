@@ -65,7 +65,7 @@
 				<?= form_error('no_ktp'); ?>				
 			</div>
 			<div class="input-wrap">
-				<label class="col-form-label">NAMA PESERTA<span class="section-subtitle"><code>*</code></span></label>				
+				<label class="col-form-label">NAMA LENGKAP PESERTA<span class="section-subtitle"><code>*</code></span><h7> (Tanpa Gelar)</h7></label>				
 				<input type="text" name="nama_peserta" placeholder="NAMA PESERTA" onkeyup="this.value = this.value.toUpperCase()" value="<?= set_value('nama_peserta'); ?>" class="form-control <?= (form_error('nama_peserta') == "" ? '':'is-invalid') ?>">
 				<?= form_error('nama_peserta'); ?> 				
 			</div>
@@ -369,14 +369,14 @@
 				<label class="col-form-label">SEKTOR USAHA<span class="section-subtitle"><code>*</code></span></label>
                 <?php
                 //function cmb_dinamisprov($name, $table, $field, $pk, $id, $selected=null, $extra=null)
-                echo cmb_dinamiskop('sektor_usaha', 'tb_sektor_usaha', 'nama', 'nama','--PILIH SEKTOR USAHA KOPERASI--', $this->input->post('sektor_usaha'));
+                echo cmb_dinamiskop('sektor_usaha', 'tb_sektor_usaha', 'nama', 'nama','--PILIH SEKTOR USAHA--', $this->input->post('sektor_usaha'));
                 ?>
             </div> 
             <div class="input-wrap">
 				<label class="col-form-label">BIDANG USAHA<span class="section-subtitle"><code>*</code></span></label>
                 <?php
                 //function cmb_dinamisprov($name, $table, $field, $pk, $id, $selected=null, $extra=null)
-                echo cmb_dinamiskop('bidang_usaha', 'tb_bidang_usaha', 'nama', 'nama','--PILIH SEKTOR USAHA KOPERASI--', $this->input->post('bidang_usaha'));
+                echo cmb_dinamiskop('bidang_usaha', 'tb_bidang_usaha', 'nama', 'nama','--PILIH SEKTOR USAHA--', $this->input->post('bidang_usaha'));
                 ?>
             </div>     
             <div class="input-wrap">
@@ -436,7 +436,7 @@
 				</select>
 			</div>
             <div class="input-wrap">
-				<label class="col-form-label">NILAI MODAL USAHA PERTAHUN<span class="section-subtitle"><code>*</code></span></label>
+				<label class="col-form-label">NILAI MODAL USAHA PERTAHUN <h7> (Dalam Rupiah)</h7><span class="section-subtitle"><code>*</code></span></label>
                 <input type="text" name="nilai_modalusaha" id="dengan-rupiah" placeholder="NILAI MODAL USAHA" value="<?= set_value('nilai_modalusaha'); ?>" class="form-control" required>
             </div>	
             <div class="input-wrap">
@@ -449,7 +449,7 @@
 				</select>
 			</div>
             <div class="input-wrap">
-				<label class="col-form-label">NILAI OMZET USAHA PER TAHUN<span class="section-subtitle"><code>*</code></span></label>
+				<label class="col-form-label">NILAI OMZET USAHA PER TAHUN <h7> (Dalam Rupiah)</h7><span class="section-subtitle"><code>*</code></span></label>
                 <input type="text" name="nilai_omzetusaha" id="dengan-rupiah2" placeholder="NILAI OMZET USAHA" value="<?= set_value('nilai_omzetusaha'); ?>" class="form-control" required>
             </div>	
             <div class="input-wrap">
