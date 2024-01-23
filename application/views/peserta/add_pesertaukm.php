@@ -42,11 +42,23 @@
 	?>
 	<?=form_hidden('now',$now);?>
 	<?=form_hidden('id_pel',$peserta['id']);?>
-		<div class="form-wrapper">    
+		<!-- <div class="form-wrapper">    
 		<div class="content bg-lightblue">  
-		<div class="coming-soon-word text-center">
-		<span class="section-subtitle"><h4><code>Data Pribadi</code></h4></span>
-		</div></div>
+			<div class="coming-soon-word text-center">
+				<span class="section-subtitle"><h4><code>Data Pribadi</code></h4></span>
+			</div>
+		</div> -->
+
+			<!--section title -->
+			<div class="header-about">
+				<div class="social-media-icon socmed-for-about shadow-sm">
+					<div class="coming-soon-word text-center">						
+					<span class="section-subtitle"><h4><code>Data Pribadi</code></h4></span>
+					</div>                          
+				</div>
+			</div>
+			<!-- end section title -->
+
 			<div class="input-wrap">
 				<label class="col-form-label">NO. KTP/NIK<span class="section-subtitle"><code>*</code></span></label>
 				<input type="text" name="no_ktp" placeholder="NO. KTP/NIK" value="<?= set_value('no_ktp'); ?>" class="form-control <?= (form_error('no_ktp') == "" ? '':'is-invalid') ?>">
@@ -184,7 +196,16 @@
 				</div>
 			</div>
 			<hr>
-			<span class="section-subtitle"><code>.Digitalisasi Usaha</code></span>
+			<!-- <span class="section-subtitle"><code>.Digitalisasi Usaha</code></span> -->
+			<!--section title -->
+			<div class="header-about">
+				<div class="social-media-icon socmed-for-about shadow-sm">
+					<div class="coming-soon-word text-center">						
+					<span class="section-subtitle"><h4><code>Digitalisasi Usaha</code></h4></span>
+					</div>                          
+				</div>
+			</div>
+			<!-- end section title -->
 			<div class="input-wrap">
 				<label class="col-form-label">EMAIL USAHA<span class="section-subtitle"><code>*</code></span></label>
 				<input type="text" name="email_usaha" placeholder="MASUKKAN EMAIL USAHA" value="<?= set_value('email_usaha'); ?>" class="form-control" required>
@@ -246,7 +267,16 @@
 			</div>
 			
 			<hr>
-			<span class="section-subtitle"><code>.Transformasi Usaha</code></span>
+			<!-- <span class="section-subtitle"><code>.Transformasi Usaha</code></span> -->
+			<!--section title -->
+			<div class="header-about">
+				<div class="social-media-icon socmed-for-about shadow-sm">
+					<div class="coming-soon-word text-center">						
+					<span class="section-subtitle"><h4><code>Transformasi Usaha</code></h4></span>
+					</div>                          
+				</div>
+			</div>
+			<!-- end section title -->
 			<div class="input-wrap">
 				<label class="col-form-label">PERIZINAN USAHA YANG DIMILIKI<span class="section-subtitle"><code>*</code></span></label>
 					<?php
@@ -258,7 +288,16 @@
 					?>
 			</div>
 			<hr>
-			<span class="section-subtitle"><code>.Informasi Lainnya</code></span>
+			<!-- <span class="section-subtitle"><code>.Informasi Lainnya</code></span> -->
+			<!--section title -->
+			<div class="header-about">
+				<div class="social-media-icon socmed-for-about shadow-sm">
+					<div class="coming-soon-word text-center">						
+					<span class="section-subtitle"><h4><code>Informasi Lainnya</code></h4></span>
+					</div>                          
+				</div>
+			</div>
+			<!-- end section title -->
 			<div class="input-wrap">
 				<label class="col-form-label">PERMASALAHAN YANG DIHADAPI<span class="section-subtitle"><code>*</code></span></label>
 					<?php
@@ -291,7 +330,16 @@
 			<!-- end separator -->
 			
 			  
-			<span class="section-subtitle"><code>.DATA UMKM</code></span>
+			<!-- <span class="section-subtitle"><code>.DATA UMKM</code></span> -->
+			<!--section title -->
+			<div class="header-about">
+				<div class="social-media-icon socmed-for-about shadow-sm">
+					<div class="coming-soon-word text-center">						
+					<span class="section-subtitle"><h4><code>Data UKM</code></h4></span>
+					</div>                          
+				</div>
+			</div>
+			<!-- end section title -->
             <div class="input-wrap">
 				<label class="col-form-label">NOMOR NIB<span class="section-subtitle"><code>*</code></span></label>
                 <input type="text" name="nib" placeholder="NOMOR NIB" onkeyup="this.value = this.value.toUpperCase()" value="<?= set_value('nib'); ?>" class="form-control" required>

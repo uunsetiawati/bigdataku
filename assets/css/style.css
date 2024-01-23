@@ -562,7 +562,7 @@ textarea {
 
 /* social media icon style for about */
 .socmed-for-about {
-    background: #fff;
+    background: #D4F1F4;
     padding: 5px 0;
     border-radius: 30px;
     box-shadow: 0 0 10px -4px rgba(0, 0, 0, 0.9);
@@ -967,7 +967,7 @@ textarea {
 }
 
 .navbar-highlight {
-    background: #007bff;
+    background: #189AB4;
 }
 
 .navbar-highlight .link {
