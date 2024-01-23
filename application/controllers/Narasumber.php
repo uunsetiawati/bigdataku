@@ -545,7 +545,7 @@ class Narasumber extends CI_Controller {
 	function edit() 
 	{
 		check_not_login();
-		$this->form_validation->set_rules('nik', 'Nomor NIK/KTP', 'required|callback_nik_check|min_length[16]|max_length[16]', [
+		$this->form_validation->set_rules('nik', 'Nomor NIK/KTP', 'required|callback_nik_check_edit|min_length[16]|max_length[16]', [
 			'is_unique' => '%s sudah terdaftar. Silahkan isikan No. KTP lainnya',
 		]); // Unique Field 
 
@@ -569,10 +569,23 @@ class Narasumber extends CI_Controller {
 	function nik_check(){
         // $id_user= $this->session->userdata('id_user');
         $post = $this->input->post(null, TRUE);
-		$query = $this->db->query("SELECT * FROM tb_data_narsum WHERE nik = '$post[nik]' AND kodeunik='$post[kodeunik]' AND id!='$post[id]'");
+		$query = $this->db->query("SELECT * FROM tb_data_narsum WHERE nik = '$post[nik]' AND kodeunik='$post[kodeunik]'");
 
         if ($query->num_rows() > 0){
             $this->form_validation->set_message('nik_check', '{field} ini sudah terdaftar');
+            return FALSE;
+        }else {
+            return TRUE;
+        }
+    }
+
+	function nik_check_edit(){
+        // $id_user= $this->session->userdata('id_user');
+        $post = $this->input->post(null, TRUE);
+		$query = $this->db->query("SELECT * FROM tb_data_narsum WHERE nik = '$post[nik]' AND kodeunik='$post[kodeunik]' AND id!='$post[id]'");
+
+        if ($query->num_rows() > 0){
+            $this->form_validation->set_message('nik_check_edit', '{field} ini sudah terdaftar');
             return FALSE;
         }else {
             return TRUE;
