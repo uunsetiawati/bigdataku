@@ -145,7 +145,7 @@ class Narasumber extends CI_Controller {
 			$datapelatihan=$this->db->get_where('tb_data_pelatihan', array('kodeunik' => $kodeunik,'status'=>'1'))->row_array();
 
 			if($datapelatihan > 0){
-
+				$data['pelatihan']=$this->db->get_where('tb_data_pelatihan', array('kodeunik' => $kodeunik))->row_array();
 				$data['narsum'] = $this->db->get('tb_data_narsum')->row_array();
 				$data['nik']=$this->input->post('nik');
 				$this->templateadmin->load('template/dashboard_p', 'narasumber/add_narasumber2',$data);
