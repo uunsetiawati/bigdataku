@@ -150,17 +150,39 @@ class Tp extends CI_Controller {
             check_not_login();
             $id = $this->uri->segment(3);
             $this->form_validation->set_rules('nama', 'NAMA', 'required'); 
+            $this->form_validation->set_rules('foto', 'FOTO', 'callback_validate_foto');
+			$this->form_validation->set_rules('ktp', 'KTP', 'callback_validate_ktp');
+            $this->form_validation->set_rules('kk', 'KK(KARTU KELUARGA)', 'callback_validate_kk');
+            $this->form_validation->set_rules('skck', 'SKCK', 'callback_validate_skck');
+            $this->form_validation->set_rules('ijazah', 'IJAZAH', 'callback_validate_ijazah');
+            $this->form_validation->set_rules('rekening', 'REKENING', 'callback_validate_rekening');
+            $this->form_validation->set_rules('bpjs', 'BPJS KESEHATAN', 'callback_validate_bpjs');
+            $this->form_validation->set_rules('suket_kom', 'SURAT KETERANGAN KOMPUTER', 'callback_validate_suketkom');
+            $this->form_validation->set_rules('suket_kerja', 'SURAT KETERANGAN KERJA', 'callback_validate_suketkerja');
+            $this->form_validation->set_rules('sertifikat', 'SERTIFIKAT KOMPETENSI', 'callback_validate_sertifikat');
+            $this->form_validation->set_rules('pernyataan', 'SURAT PERNYATAAN', 'callback_validate_pernyataan');
             if ($this->form_validation->run() == FALSE)
             {		
                 $get_wilkerja = $this->db->order_by('name','ASC')->select('*')->from('regencies')->where('province_id','35')->get();
 			    $data['wil_kerja'] = $get_wilkerja->result();
                 $data['tp']=$this->db->get_where('tb_tp', array('id' => $id))->row_array();
                 $data['prov']=$this->db->get_where('view_tpall', array('id' => $id))->row_array();
-                $this->templateadmin->load('template/dashboard', 'tp/edit_tp',$data);        
+                $this->templateadmin->load('template/dashboard', 'tp/edit_tp2',$data);        
             }
             else
-            {                   
-                $this->tp_m->update();
+            {         
+                $uploadFoto = $this->upload_foto();
+				$uploadKtp = $this->upload_ktp();
+                $uploadKk = $this->upload_kk();
+                $uploadSkck = $this->upload_skck();
+                $uploadIjazah = $this->upload_ijazah();
+                $uploadRekening = $this->upload_rekening();
+                $uploadBpjs = $this->upload_bpjs();
+                $uploadSuketkom = $this->upload_suketkom();
+                $uploadSuketkerja = $this->upload_suketkerja();
+                $uploadSertifikat = $this->upload_sertifikat();
+                $uploadPernyataan = $this->upload_pernyataan();          
+                $this->tp_m->update2($uploadFoto,$uploadKtp,$uploadKk,$uploadSkck,$uploadIjazah,$uploadRekening,$uploadBpjs,$uploadSuketkom,$uploadSuketkerja,$uploadSertifikat,$uploadPernyataan);
                 redirect('tp/viewdatatp/');
             }
 
@@ -189,7 +211,7 @@ class Tp extends CI_Controller {
 			$foto['upload_path']          = './uploads/tp/foto/';
             $foto['allowed_types']        = 'gif|jpg|png|jpeg';
             $foto['max_size']             = 3000;
-			$foto['file_name'] 			= $nama.'-'.$nik.'foto';
+			$foto['file_name'] 			= $nik.'foto';
             $this->load->library('upload', $foto);
 
             //proses upload

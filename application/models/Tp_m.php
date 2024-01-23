@@ -88,6 +88,31 @@
 			$this->db->update($this->table, $data);
 		}
 
+		function update2($foto,$ktp,$kk,$skck,$ijazah,$rekening,$bpjs,$suket_kom,$suket_kerja,$sertifikat,$pernyataan)
+		{
+			$data = array(				
+				//tabel di database => name di form
+				'nama'				=> $this->input->post('nama', TRUE),
+				'wilayah_kerja'		=> $this->input->post('wilayah_kerja', TRUE),	
+				'foto'        	    => $foto,
+				'ktp'        	    => $ktp,
+				'kk'				=> $kk,
+				'skck'				=> $skck,
+				'ijazah'			=> $ijazah,
+				'rekening'			=> $rekening,
+				'bpjs'				=> $bpjs,
+				'suket_kom'			=> $suket_kom,
+				'suket_kerja'		=> $suket_kerja,
+				'sertifikat'		=> $sertifikat,
+				'pernyataan'		=> $pernyataan,			
+				'modified'			=> $this->input->post('now', TRUE)				
+			);
+
+			$id	= $this->input->post('id');
+			$this->db->where('id', $id);
+			$this->db->update($this->table, $data);
+		}
+
 		function test()
 		{
 		// $data = array(
