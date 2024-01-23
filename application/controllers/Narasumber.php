@@ -195,7 +195,7 @@ class Narasumber extends CI_Controller {
 			$ktp['upload_path']          = './uploads/narasumber/ktp/';
             $ktp['allowed_types']        = 'gif|jpg|png|jpeg';
             $ktp['max_size']             = 3000;
-			$ktp['file_name'] 			= $nama.'-'.$kodeunik.'-'.$nik;
+			$ktp['file_name'] 			= $kodeunik.'-'.$nik;
             $this->load->library('upload', $ktp);
 
 			// if (!$this->upload->do_upload('ktp')) {
@@ -222,7 +222,7 @@ class Narasumber extends CI_Controller {
 			$config2['upload_path']          = './uploads/narasumber/npwp/';
             $config2['allowed_types']        = 'gif|jpg|png|jpeg|pdf';
             $config2['max_size']             = 3000;
-			$config2['file_name'] 			 = $nama.'-'.$kodeunik.'-'.$nik;
+			$config2['file_name'] 			 = $kodeunik.'-'.$nik;
             // $this->load->library('upload', $config2);
 			$this->upload->initialize($config2);
 
@@ -241,7 +241,7 @@ class Narasumber extends CI_Controller {
 			$cv['upload_path']          = './uploads/narasumber/cv/';
             $cv['allowed_types']        = 'pdf';
             $cv['max_size']             = 3000;
-			$cv['file_name'] 			= $nama.'-'.$kodeunik.'-'.$nik;
+			$cv['file_name'] 			= $kodeunik.'-'.$nik;
             // $this->load->library('upload', $config2);
 			$this->upload->initialize($cv);
 
@@ -260,7 +260,7 @@ class Narasumber extends CI_Controller {
 			$materi['upload_path']          = './uploads/narasumber/materi/';
             $materi['allowed_types']        = 'pdf|ppt|pptx';
             $materi['max_size']             = 10000;
-			$materi['file_name'] 			= $nama.'-'.$kodeunik.'-'.$nik;
+			$materi['file_name'] 			= $kodeunik.'-'.$nik;
             // $this->load->library('upload', $config2);
 			$this->upload->initialize($materi);
 
@@ -279,7 +279,7 @@ class Narasumber extends CI_Controller {
 			$materi['upload_path']          = './uploads/narasumber/materi/';
             $materi['allowed_types']        = 'pdf|ppt|pptx';
             $materi['max_size']             = 10000;
-			$materi['file_name'] 			= $nama.'-'.$kodeunik.'-'.$nik;
+			$materi['file_name'] 			= $kodeunik.'-'.$nik;
             $this->load->library('upload', $materi);
 			// $this->upload->initialize($materi);
 
@@ -298,7 +298,7 @@ class Narasumber extends CI_Controller {
 			$spt['upload_path']          = './uploads/narasumber/spt/';
             $spt['allowed_types']        = 'pdf|doc|docx';
             $spt['max_size']             = 3000;
-			$spt['file_name'] 			 = $nama.'-'.$kodeunik.'-'.$nik;
+			$spt['file_name'] 			 = $kodeunik.'-'.$nik;
             // $this->load->library('upload', $config2);
 			$this->upload->initialize($spt);
 
@@ -317,7 +317,7 @@ class Narasumber extends CI_Controller {
 			$rekening['upload_path']          = './uploads/narasumber/rekening/';
             $rekening['allowed_types']        = 'gif|jpg|png|jpeg|pdf';
             $rekening['max_size']             = 3000;
-			$rekening['file_name'] 			  = $nama.'-'.$kodeunik.'-'.$nik;
+			$rekening['file_name'] 			  = $kodeunik.'-'.$nik;
             // $this->load->library('upload', $config2);
 			$this->upload->initialize($rekening);
 
