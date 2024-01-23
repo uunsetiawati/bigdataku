@@ -38,7 +38,7 @@
 		<?=form_hidden('now',$now);?>
 			<div class="form-wrapper">		
                 <div class="input-wrap">
-					<label class="col-form-label">NAMA TENAGA PENDAMPING<span class="section-subtitle"><code>*</code></span></label>
+					<label class="col-form-label">NAMA TENAGA PENDAMPING<span class="section-subtitle"><code>*</code><h7>(Tanpa Gelar)</h7></span></label>
 					<input type="text" name="nama" placeholder="NAMA" onkeyup="this.value = this.value.toUpperCase()" value="<?= set_value('nama') ?>" class="form-control" required> 
 				</div>			
 				<div class="input-wrap">
