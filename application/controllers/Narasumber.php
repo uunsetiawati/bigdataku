@@ -569,7 +569,7 @@ class Narasumber extends CI_Controller {
 	function nik_check(){
         // $id_user= $this->session->userdata('id_user');
         $post = $this->input->post(null, TRUE);
-		$query = $this->db->query("SELECT * FROM tb_data_narsum WHERE nik = '$post[nik]' AND kodeunik='$post[kodeunik]' AND id != '$post[id]'");
+		$query = $this->db->query("SELECT * FROM tb_data_narsum WHERE nik = '$post[nik]' AND kodeunik='$post[kodeunik]'");
 
         if ($query->num_rows() > 0){
             $this->form_validation->set_message('nik_check', '{field} ini sudah terdaftar');
