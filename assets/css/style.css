@@ -63,7 +63,8 @@ Table of Content:
 /* general */
 body {
     /* font-family: 'verdana', sans-serif; */
-    font-family: Raleway;
+    /* font-family: Raleway; */
+    font-family:SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
     color: #555;
     font-size: 14px;
     font-weight: 400;
@@ -79,7 +80,8 @@ h5,
 h6 {
     line-height: 110%;
     /* font-family: 'Roboto', sans-serif; */
-    font-family: Raleway;
+    /* font-family: Raleway; */
+    font-family:SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
     margin: 0;
     font-weight: 500;
     color: #333;

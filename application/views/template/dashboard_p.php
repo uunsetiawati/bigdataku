@@ -33,7 +33,8 @@
     </script>
 	<style>
 		.form-control2 {
-		font-family: system-ui, sans-serif;
+		/* font-family: system-ui, sans-serif; */
+		font-family:SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
 		font-size: 1rem;
 		font-weight: 400;
 		line-height: 1.1;
