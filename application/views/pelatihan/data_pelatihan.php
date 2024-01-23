@@ -109,8 +109,15 @@
                         "data": "tanggalmulai",
                         "render": function (data) {
                             var date = new Date(data);
-                            var month = date.getMonth() + 1;
-                            return date.getDate() + "-" + (month.toString().length > 1 ? month : "0" + month) + "-" +  date.getFullYear();
+                            var month = date.getMonth();
+                            var monthNames = [
+                                "Januari", "Februari", "Maret", "April",
+                                "Mei", "Juni", "July", "Agustus",
+                                "September", "Oktober", "November", "Desember"
+                            ];
+                            // return date.getDate() + "-" + (month.toString().length > 1 ? month : "0" + month) + "-" +  date.getFullYear();
+                            return date.getDate() + " " + monthNames[month] + " " + date.getFullYear();
+
                         }
                     },                    
                     { 

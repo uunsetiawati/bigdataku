@@ -10,8 +10,15 @@
 				<?php
 				$tglmulai = new DateTime($peserta['tgl_mulai']);
 				$tglakhir = new DateTime($peserta['tgl_akhir']);
+				// Array of month names in alphabet format
+				$monthNames = [
+					"Januari", "Februari", "Maret", "April",
+					"Mei", "Juni", "Juli", "Agustus",
+					"September", "Oktober", "November", "Desember"
+				];
 				?>
-				<h6>Tanggal Pelatihan : <?=$tglmulai->format("d-m-Y");?> s.d <?=$tglakhir->format("d-m-Y")?></h6>
+				<!-- <h6>Tanggal Pelatihan : <?=$tglmulai->format("d-m-Y");?> s.d <?=$tglakhir->format("d-m-Y")?></h6> -->
+				<h6><b>Tanggal Pelatihan: <?=$tglmulai->format("d") . " " . $monthNames[$tglmulai->format("n") - 1] . " " . $tglmulai->format("Y");?> s.d <?=$tglakhir->format("d") . " " . $monthNames[$tglakhir->format("n") - 1] . " " . $tglakhir->format("Y");?></b></h6>
 				<h6>Peserta : <?=$peserta['sasaran'];?></h6>
 				
 			</div>                          
@@ -35,7 +42,11 @@
 	?>
 	<?=form_hidden('now',$now);?>
 	<?=form_hidden('id_pel',$peserta['id']);?>
-		<div class="form-wrapper">            
+		<div class="form-wrapper">    
+		<div class="content bg-lightblue">  
+		<div class="coming-soon-word text-center">
+		<span class="section-subtitle"><h4><code>Data Pribadi</code></h4></span>
+		</div></div>
 			<div class="input-wrap">
 				<label class="col-form-label">NO. KTP/NIK<span class="section-subtitle"><code>*</code></span></label>
 				<input type="text" name="no_ktp" placeholder="NO. KTP/NIK" value="<?= set_value('no_ktp'); ?>" class="form-control <?= (form_error('no_ktp') == "" ? '':'is-invalid') ?>">
