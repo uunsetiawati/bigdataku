@@ -207,7 +207,7 @@ class Tp extends CI_Controller {
 			$ktp['upload_path']          = './uploads/tp/ktp/';
             $ktp['allowed_types']        = 'gif|jpg|png|jpeg';
             $ktp['max_size']             = 3000;
-			$ktp['file_name'] 			= $nama.'-'.$nik.'ktp';
+			$ktp['file_name'] 			= $nik.'ktp';
             $this->upload->initialize($ktp);
 
             //proses upload
@@ -224,7 +224,7 @@ class Tp extends CI_Controller {
 			$kk['upload_path']          = './uploads/tp/kk/';
             $kk['allowed_types']        = 'gif|jpg|png|jpeg|pdf';
             $kk['max_size']             = 3000;
-			$kk['file_name'] 			 = $nama.'-'.$nik.'kk';
+			$kk['file_name'] 			 = $nik.'kk';
             // $this->load->library('upload', $config2);
 			$this->upload->initialize($kk);
 
@@ -242,7 +242,7 @@ class Tp extends CI_Controller {
 			$skck['upload_path']          = './uploads/tp/skck/';
             $skck['allowed_types']        = 'pdf';
             $skck['max_size']             = 3000;
-			$skck['file_name'] 			 = $nama.'-'.$nik.'skck';
+			$skck['file_name'] 			 = $nik.'skck';
             // $this->load->library('upload', $config2);
 			$this->upload->initialize($skck);
 
@@ -260,7 +260,7 @@ class Tp extends CI_Controller {
 			$ijazah['upload_path']          = './uploads/tp/ijazah/';
             $ijazah['allowed_types']        = 'pdf';
             $ijazah['max_size']             = 3000;
-			$ijazah['file_name'] 			 = $nama.'-'.$nik.'ijazah';
+			$ijazah['file_name'] 			 = $nik.'ijazah';
             // $this->load->library('upload', $config2);
 			$this->upload->initialize($ijazah);
 
@@ -278,7 +278,7 @@ class Tp extends CI_Controller {
 			$rekening['upload_path']          = './uploads/tp/rekening/';
             $rekening['allowed_types']        = 'gif|jpg|png|jpeg|pdf';
             $rekening['max_size']             = 3000;
-			$rekening['file_name'] 			 = $nama.'-'.$nik.'rekening';
+			$rekening['file_name'] 			 = $nik.'rekening';
             // $this->load->library('upload', $config2);
 			$this->upload->initialize($rekening);
 
@@ -300,7 +300,7 @@ class Tp extends CI_Controller {
 			$bpjs['upload_path']          = './uploads/tp/bpjs/';
             $bpjs['allowed_types']        = 'gif|jpg|png|jpeg|pdf';
             $bpjs['max_size']             = 3000;
-			$bpjs['file_name'] 			 = $nama.'-'.$nik.'bpjs';
+			$bpjs['file_name'] 			 = $nik.'bpjs';
             // $this->load->library('upload', $config2);
 			$this->upload->initialize($bpjs);
 
@@ -320,7 +320,7 @@ class Tp extends CI_Controller {
 			$suketkom['upload_path']          = './uploads/tp/suket_kom/';
             $suketkom['allowed_types']        = 'pdf';
             $suketkom['max_size']             = 3000;
-			$suketkom['file_name'] 			 = $nama.'-'.$nik.'suketkom';
+			$suketkom['file_name'] 			 = $nik.'suketkom';
             // $this->load->library('upload', $config2);
 			$this->upload->initialize($suketkom);
 
@@ -338,7 +338,7 @@ class Tp extends CI_Controller {
 			$suketkerja['upload_path']          = './uploads/tp/suket_kerja/';
             $suketkerja['allowed_types']        = 'pdf';
             $suketkerja['max_size']             = 3000;
-			$suketkerja['file_name'] 			 = $nama.'-'.$nik.'suketkerja';
+			$suketkerja['file_name'] 			 = $nik.'suketkerja';
             // $this->load->library('upload', $config2);
 			$this->upload->initialize($suketkerja);
 
@@ -360,7 +360,7 @@ class Tp extends CI_Controller {
 			$sertifikat['upload_path']          = './uploads/tp/sertifikat/';
             $sertifikat['allowed_types']        = 'pdf';
             $sertifikat['max_size']             = 3000;
-			$sertifikat['file_name'] 			 = $nama.'-'.$nik.'sertifikat';
+			$sertifikat['file_name'] 			 = $nik.'sertifikat';
             // $this->load->library('upload', $config2);
 			$this->upload->initialize($sertifikat);
 
@@ -380,7 +380,7 @@ class Tp extends CI_Controller {
 			$pernyataan['upload_path']          = './uploads/tp/pernyataan/';
             $pernyataan['allowed_types']        = 'pdf';
             $pernyataan['max_size']             = 3000;
-			$pernyataan['file_name'] 			 = $nama.'-'.$nik.'pernyataan';
+			$pernyataan['file_name'] 			 = $nik.'pernyataan';
             // $this->load->library('upload', $config2);
 			$this->upload->initialize($pernyataan);
 
