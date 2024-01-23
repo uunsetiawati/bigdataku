@@ -376,7 +376,7 @@
 				<label class="col-form-label">BIDANG USAHA<span class="section-subtitle"><code>*</code></span></label>
                 <?php
                 //function cmb_dinamisprov($name, $table, $field, $pk, $id, $selected=null, $extra=null)
-                echo cmb_dinamiskop('bidang_usaha', 'tb_bidang_usaha', 'nama', 'nama','--PILIH SEKTOR USAHA--', $this->input->post('bidang_usaha'));
+                echo cmb_dinamiskop('bidang_usaha', 'tb_bidang_usaha', 'nama', 'nama','--PILIH BIDANG USAHA--', $this->input->post('bidang_usaha'));
                 ?>
             </div>     
             <div class="input-wrap">
