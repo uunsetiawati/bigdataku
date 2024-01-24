@@ -148,7 +148,9 @@ class Tp extends CI_Controller {
         function edit() 
         {
             check_not_login();
-            $id = $this->uri->segment(3);
+            $this->form_validation->set_rules('nik', 'NIK', 'required|callback_nik_check_edit|min_length[16]|max_length[16]', [
+				'is_unique' => '%s sudah terdaftar',
+			]); // Unique Field 
             $this->form_validation->set_rules('nama', 'NAMA', 'required'); 
             $this->form_validation->set_rules('foto', 'FOTO', 'callback_validate_foto');
 			$this->form_validation->set_rules('ktp', 'KTP', 'callback_validate_ktp');
@@ -162,7 +164,8 @@ class Tp extends CI_Controller {
             $this->form_validation->set_rules('sertifikat', 'SERTIFIKAT KOMPETENSI', 'callback_validate_sertifikat');
             $this->form_validation->set_rules('pernyataan', 'SURAT PERNYATAAN', 'callback_validate_pernyataan');
             if ($this->form_validation->run() == FALSE)
-            {		
+            {		                
+                $id = $this->uri->segment(3);
                 $get_wilkerja = $this->db->order_by('name','ASC')->select('*')->from('regencies')->where('province_id','35')->get();
 			    $data['wil_kerja'] = $get_wilkerja->result();
                 $data['tp']=$this->db->get_where('tb_tp', array('id' => $id))->row_array();
@@ -196,6 +199,20 @@ class Tp extends CI_Controller {
     
             if ($query->num_rows() > 0){
                 $this->form_validation->set_message('nik_check', '{field} ini sudah mengisi form');
+                return FALSE;
+            }else {
+                return TRUE;
+            }
+        }
+
+    function nik_check_edit()
+        {
+            // $id_user= $this->session->userdata('id_user');
+            $post = $this->input->post(null, TRUE);
+            $query = $this->db->query("SELECT * FROM tb_tp WHERE nik = '$post[nik]' AND id != '$post[id]'");
+    
+            if ($query->num_rows() > 0){
+                $this->form_validation->set_message('nik_check_edit', '{field} ini sudah ada');
                 return FALSE;
             }else {
                 return TRUE;

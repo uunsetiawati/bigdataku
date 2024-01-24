@@ -15,8 +15,8 @@
 	$now=date('Y-m-d H:i:s');
 	?>
 	<?=form_hidden('now',$now);?>
-	<?=form_hidden('id',$narsum['id']);?>
-	<?=form_hidden('kodeunik',$narsum['kodeunik']);?>
+	<?=form_hidden('id',$this->input->post('id') ?? $narsum['id']);?>
+	<?=form_hidden('kodeunik',$this->input->post('kodeunik') ?? $narsum['kodeunik']);?>
 		<div class="form-wrapper">            
 			<div class="input-wrap">
 				<label class="col-form-label">NIK NARASUMBER<span class="section-subtitle"><code>*</code></span></label>	
@@ -40,7 +40,7 @@
 			<div class="input-wrap">
 				<label class="col-form-label">JENIS KELAMIN<span class="section-subtitle"><code>*</code></span></label>	
 				<?php
-				echo form_dropdown('jk', array('LAKI-LAKI'=>'LAKI-LAKI', 'PEREMPUAN'=>'PEREMPUAN'), $narsum['jk'], "class='form-control'");
+				echo form_dropdown('jk', array('LAKI-LAKI'=>'LAKI-LAKI', 'PEREMPUAN'=>'PEREMPUAN'), $this->input->post('jk') ?? $narsum['jk'], "class='form-control'");
 				?>
 			</div>
 			<div class="input-wrap">

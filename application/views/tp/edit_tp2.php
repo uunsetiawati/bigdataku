@@ -22,17 +22,21 @@
 		$now = date('Y-m-d H:i:s');
 		?>
 		<?=form_hidden('now',$now);?>
-		<?=form_hidden('id',$tp['id']);?>
-        <?=form_hidden('nik',$tp['nik']);?>
-			<div class="form-wrapper">		
+		<?=form_hidden('id',$this->input->post('id') ?? $tp['id']);?>
+			<div class="form-wrapper">	
+				<div class="input-wrap">
+					<label class="col-form-label">NIK TENAGA PENDAMPING<span class="section-subtitle"><code>*</code></span></label>	
+					<input type="number" name="nik" placeholder="NIK / NO. KTP" value="<?= $this->input->post('nik') ?? $tp['nik'] ?>" class="form-control <?= (form_error('nik') == "" ? '':'is-invalid') ?>" readonly>
+					<?= form_error('nik'); ?>					
+				</div>	
                 <div class="input-wrap">
 					<label class="col-form-label">NAMA TENAGA PENDAMPING<span class="section-subtitle"><code>*</code></span></label>
-					<input type="text" name="nama" placeholder="NAMA" onkeyup="this.value = this.value.toUpperCase()" value="<?= $tp['nama'] ?>" class="form-control <?= (form_error('nama') == "" ? '':'is-invalid') ?>" readonly> 
+					<input type="text" name="nama" placeholder="NAMA" onkeyup="this.value = this.value.toUpperCase()" value="<?= $this->input->post('nama') ?? $tp['nama'] ?>" class="form-control <?= (form_error('nama') == "" ? '':'is-invalid') ?>" readonly> 
 					<?= form_error('nama'); ?>
 				</div>		
 				<div class="input-wrap">
                     <label class="col-form-label">ASAL KABUPATEN / KOTA<span class="section-subtitle"><code>*</code></span></label>	
-                    <input type="text" name="kabkota" placeholder="kabkota" value="<?= $prov['kabkota'] ?>" class="form-control" readonly>	
+                    <input type="text" name="kabkota" placeholder="kabkota" value="<?= $this->input->post('kabkota') ?? $prov['kabkota'] ?>" class="form-control" readonly>	
                 </div>	
 				<!-- <div class="input-wrap">
 					<label class="col-form-label">NIK TENAGA PENDAMPING<span class="section-subtitle"><code>*</code></span></label>	
@@ -107,7 +111,7 @@
 					<?php
 					echo cmb_dinamiskota('wilayah_kerja','regencies','name','name',35,$this->input->post('wilayah_kerja') ?? $tp['wilayah_kerja'], "class='form-control'")
 					?>
-                </div>	
+                </div>
                 <div class="input-wrap">
 					<label class="col-form-label">UPLOAD FOTO DIRI (FOTO FORMAL)<span class="section-subtitle"><code>*</code></span><h7> (Maks file ukuran 3MB | jpg,png)</h7></label>
 					<input type="file" name="foto" class="form-control <?= (form_error('foto') == "" ? '':'is-invalid') ?>" required>
