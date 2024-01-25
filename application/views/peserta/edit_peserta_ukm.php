@@ -33,7 +33,7 @@
 		<div class="form-wrapper">  
 			<div class="input-wrap">
 				<label class="col-form-label">NO. URUT<span class="section-subtitle"><code>*</code></span></label>
-				<input type="number" name="no_urut" placeholder="NOMOR URUT" value="<?= $this->input->post('no_urut') ?? $peserta['no_urut'];?>" class="form-control <?= (form_error('no_urut') == "" ? '':'is-invalid') ?>">
+				<input type="number" name="no_urut" placeholder="NOMOR URUT" value="<?= $this->input->post('no_urut') ?? $peserta['no_urut'];?>" class="form-control <?= (form_error('no_urut') == "" ? '':'is-invalid') ?>" required>
 				<?= form_error('no_urut'); ?>				
 			</div>          
 			<div class="input-wrap">
