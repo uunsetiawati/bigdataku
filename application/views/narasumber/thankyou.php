@@ -15,7 +15,7 @@
 					<div class="separator-medium"></div>
 					<!-- end separator -->
                     
-                    <a href="https://wa.me/6281331220006">
+                    <a href="https://wa.me/6285235142348">
                         <div class="row">
                             <div class="col-12">
                                 <button class="button button-fill button-rounded">Chat Admin</button>

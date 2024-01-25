@@ -34,7 +34,7 @@
                             <div class="button-default">
                                 <?php
                                     // echo anchor('peserta/add_pesertadewan/'.$this->uri->segment(3), '<class="button" target="_blank">Tambah Data');
-                                    echo anchor('peserta/add_pesertadewan/'.$this->uri->segment(3), 'Tambah Peserta', array('class'=>'button', 'target'=>'_blank'));
+                                    echo anchor('#', 'Tambah Peserta', array('class'=>'button', 'target'=>'_blank'));
                                 ?>
                             </div>
                         </div>  

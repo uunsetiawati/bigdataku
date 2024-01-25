@@ -66,7 +66,7 @@
 			</div>
 			<div class="input-wrap">
 				<?php
-					echo form_dropdown('sasaran', array('KOPERASI'=>'KOPERASI', 'UKM'=>'UKM', 'CALON WIRAUSAHA'=>'CALON WIRAUSAHA'), $pelatihan['sasaran'], "class='form-control'");
+					echo form_dropdown('sasaran', array('KOPERASI'=>'KOPERASI', 'UKM'=>'UKM', 'CALON WIRAUSAHA'=>'CALON WIRAUSAHA','SAFARI PODCAST'=>'SAFARI PODCAST'), $pelatihan['sasaran'], "class='form-control'");
 				?>
 			</div>
 			<div class="input-wrap">

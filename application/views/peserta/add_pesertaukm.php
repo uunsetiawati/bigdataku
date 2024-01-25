@@ -186,13 +186,15 @@
 			<div class="form-wrapper" id="foto" style="display:block;">
 				<div class="input-wrap">
 					<label class="col-form-label">UPLOAD FOTO DIRI<span class="section-subtitle"><code>*</code></span><h7> (Maksimal file ukuran 3MB)</h7></label>
-					<input type="file" name="foto" class="form-control" required>
+					<input type="file" name="foto" class="form-control <?= (form_error('foto') == "" ? '':'is-invalid') ?>" required>
+					<?php echo form_error('foto'); ?>
 				</div>
 			</div>
 			<div class="form-wrapper" id="foto_ktp" style="display:block;">
 				<div class="input-wrap">
 					<label class="col-form-label">UPLOAD FOTO KTP<span class="section-subtitle"><code>*</code></span><h7> (Maksimal file ukuran 3MB)</h7></label>
-					<input type="file" name="foto_ktp" class="form-control" required>
+					<input type="file" name="foto_ktp" class="form-control <?= (form_error('foto_ktp') == "" ? '':'is-invalid') ?>" required>
+					<?php echo form_error('foto_ktp'); ?>
 				</div>
 			</div>
 			<hr>

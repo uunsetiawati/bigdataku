@@ -137,6 +137,29 @@
 					<img src="<?=base_url('uploads/ktp/'.$peserta['ktp'])?>" style="width:323.52px;height:204.01px;">
 				</div>
 			</div>
+
+			<hr>
+			<span class="section-subtitle"><code>.Digitalisasi Usaha</code></span>
+			<div class="input-wrap">
+                <label class="col-form-label">WEBSITE USAHA<span class="section-subtitle"><code>*</code></span></label>
+                <input type="text" name="web_usaha" placeholder="WEBSITE USAHA" value="<?= $this->input->post('web_usaha') ?? $peserta['web_usaha']; ?>" class="form-control" required>
+            </div>     
+			<div class="input-wrap">
+                <label class="col-form-label">EMAIL USAHA<span class="section-subtitle"><code>*</code></span></label>
+                <input type="text" name="email_usaha" placeholder="EMAIL USAHA"  value="<?= $this->input->post('email_usaha') ?? $peserta['email_usaha']; ?>" class="form-control" required>
+            </div> 
+			<div class="input-wrap">
+                <label class="col-form-label">SOSIAL MEDIA USAHA<span class="section-subtitle"><code>*</code></span></label>
+                <input type="text" name="sosmed_usaha" placeholder="SOSIAL MEDIA USAHA" onkeyup="this.value = this.value.toUpperCase()" value="<?= $this->input->post('sosmed_usaha') ?? $peserta['sosmed_usaha']; ?>" class="form-control" required>
+            </div>   
+			<div class="input-wrap">
+                <label class="col-form-label">MARKETPLACE USAHA<span class="section-subtitle"><code>*</code></span></label>
+                <input type="text" name="market_usaha" placeholder="MARKETPLACE USAHA" onkeyup="this.value = this.value.toUpperCase()" value="<?= $this->input->post('market_usaha') ?? $peserta['market_usaha']; ?>" class="form-control" required>
+            </div>    
+			<div class="input-wrap">
+                <label class="col-form-label">APAKAH TERDAFTAR DI PLATFORM PENGADAAN BARANG JASA<span class="section-subtitle"><code>*</code></span></label>
+                <input type="text" name="pengadaan" placeholder="PENGADAAN USAHA" onkeyup="this.value = this.value.toUpperCase()" value="<?= $this->input->post('pengadaan') ?? $peserta['pengadaan']; ?>" class="form-control" required>
+            </div>    
 				
 			<hr>
 			<span class="section-subtitle"><code>.Transformasi Usaha</code></span>

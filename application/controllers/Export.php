@@ -31,6 +31,8 @@ class Export extends CI_Controller {
                $this->export($kodeunik);
           }else if($pelatihan['sasaran']=='UKM'){
                $this->exportukm($kodeunik);
+          }else if($pelatihan['sasaran']=='SAFARI PODCAST'){
+               $this->exportpodcast($kodeunik);
           }
      }
 
@@ -492,6 +494,129 @@ class Export extends CI_Controller {
 
           header('Content-Type: application/vnd.ms-excel');
           header('Content-Disposition: attachment;filename="Pesertaukm.xlsx"');
+          header('Cache-Control: max-age=0');
+
+	  $writer->save('php://output');
+     }
+
+     public function exportpodcast($kodeunik)
+     {
+          check_not_login();
+          // $kodeunik = $this->uri->segment(3);	
+          $semua_pengguna = $this->export_model->getAllPodcast($kodeunik)->result();
+
+          $spreadsheet = new Spreadsheet;
+          // $spreadsheet->getDefaultStyle('B')->getNumberFormat()->setFormatCode(NumberFormat::FORMAT_TEXT);
+          $height = 50;
+
+          $spreadsheet->getActiveSheet()
+                      ->setCellValue('A1', 'NO. URUT')
+                      ->setCellValue('B1', 'NAMA PESERTA')
+                      ->setCellValue('C1', 'JENIS KELAMIN')
+                      ->setCellValue('D1', 'TEMPAT LAHIR')
+                      ->setCellValue('E1', 'TANGGAL LAHIR')
+                      ->setCellValue('F1', 'AGAMA')
+                      ->setCellValue('G1', 'PENDIDIKAN TERAKHIR')
+                      ->setCellValue('H1', 'ALAMAT')
+                      ->setCellValue('I1', 'RT')
+                      ->setCellValue('J1', 'RW')
+                      ->setCellValue('K1', 'KELURAHAN')
+                      ->setCellValue('L1', 'KECAMATAN')
+                      ->setCellValue('M1', 'KABUPATEN')
+                      ->setCellValue('N1', 'PROVINSI')
+                      ->setCellValue('O1', 'NO. TELP')
+                      ->setCellValue('P1', 'STATUS PERKAWINAN')
+                      ->setCellValue('Q1', 'APAKAH ANDA PENYANDANG DISABILITAS')
+                      ->setCellValue('RQ1', 'JABATAN PESERTA DI USAHA')
+                      ->setCellValue('S1', 'NAMA USAHA')
+                      ->setCellValue('T1', 'EMAIL USAHA')
+                      ->setCellValue('U1', 'MEDIA SOSIAL USAHA')
+                      ->setCellValue('V1', 'MARKETPLACE USAHA')
+                      ->setCellValue('W1', 'Lihat FOTO')
+                      ->setCellValue('X1', 'FOTO');
+                      
+          $sheet = $spreadsheet->getActiveSheet();
+          $sheet->getColumnDimension('A')->setWidth(8); // Set width kolom A
+          $sheet->getColumnDimension('B')->setWidth(25); // Set width kolom B
+          $sheet->getColumnDimension('C')->setWidth(25); // Set width kolom C
+          $sheet->getColumnDimension('D')->setWidth(15); // Set width kolom D
+          $sheet->getColumnDimension('E')->setWidth(15); // Set width kolom E
+          $sheet->getColumnDimension('F')->setWidth(15); // Set width kolom F
+          $sheet->getColumnDimension('G')->setWidth(15); // Set width kolom G
+          $sheet->getColumnDimension('H')->setWidth(10); // Set width kolom H
+          $sheet->getColumnDimension('I')->setWidth(10); // Set width kolom I
+          $sheet->getColumnDimension('J')->setWidth(30); // Set width kolom J
+          $sheet->getColumnDimension('K')->setWidth(5); // Set width kolom K
+          $sheet->getColumnDimension('L')->setWidth(5); // Set width kolom L
+          $sheet->getColumnDimension('M')->setWidth(15); // Set width kolom Provinsi
+          $sheet->getColumnDimension('N')->setWidth(25); // Set width kolom Kabupaten
+          $sheet->getColumnDimension('O')->setWidth(25); // Set width kolom Kecamatan
+          $sheet->getColumnDimension('P')->setWidth(25); // Set width kolom Kelurahan
+          $sheet->getColumnDimension('Q')->setWidth(15); // Set width kolom NO. telp
+          $sheet->getColumnDimension('R')->setWidth(15); // Set width kolom Disabilitas
+          $sheet->getColumnDimension('S')->setWidth(20); // Set width kolom Jabatan
+          $sheet->getColumnDimension('T')->setWidth(20); // Set width kolom Alamat Kop/UKM
+          $sheet->getColumnDimension('U')->setWidth(20); // Set width kolom RT Kop/UKM
+          $sheet->getColumnDimension('V')->setWidth(15); // Set width kolom NIB
+          $sheet->getColumnDimension('W')->setWidth(15); // Set width kolom Nama usaha
+          $sheet->getColumnDimension('X')->setWidth(20); // Set width kolom status usaha
+
+          $kolom = 2;
+          $nomor = 1;
+          $height = 50;
+          foreach($semua_pengguna as $pengguna) {
+
+               $spreadsheet->getActiveSheet()
+                           ->setCellValue('A' . $kolom, $pengguna->no_urut)
+                         //   ->setCellValue('B' . $kolom, $pengguna->no_ktp)
+                           ->setCellValue('B' . $kolom, $pengguna->nama_peserta)
+                           ->setCellValue('C' . $kolom, $pengguna->jk)
+                           ->setCellValue('D' . $kolom, $pengguna->tempat_lahir)
+                           ->setCellValue('E' . $kolom, date('d-m-Y',strtotime($pengguna->tgl_lahir)))
+                           ->setCellValue('F' . $kolom, $pengguna->agama)
+                           ->setCellValue('G' . $kolom, $pengguna->pendidikan)
+                           ->setCellValue('H' . $kolom, $pengguna->alamat)
+                           ->setCellValue('I' . $kolom, $pengguna->rt)
+                           ->setCellValue('J' . $kolom, $pengguna->rw)
+                           ->setCellValue('K' . $kolom, $pengguna->kelurahan)
+                           ->setCellValue('L' . $kolom, $pengguna->kecamatan)
+                           ->setCellValue('M' . $kolom, $pengguna->kabupaten)
+                           ->setCellValue('N' . $kolom, $pengguna->provinsi)
+                           ->setCellValueExplicit('O' . $kolom, $pengguna->no_telp, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValue('P' . $kolom, $pengguna->disabilitas)
+                           ->setCellValue('Q' . $kolom, $pengguna->jabatan)
+                           ->setCellValue('R' . $kolom, $pengguna->nama_usaha)
+                           ->setCellValue('S' . $kolom, $pengguna->alamat_kopukm)
+                           ->setCellValue('T' . $kolom, $pengguna->web_usaha)
+                           ->setCellValue('U' . $kolom, $pengguna->email_usaha)
+                           ->setCellValue('V' . $kolom, $pengguna->market_usaha)
+                           ->setCellValue('W' . $kolom, 'Lihat FOTO')
+                           ->getRowDimension($kolom)->setRowHeight($height);
+
+                         $hyperlink = new \PhpOffice\PhpSpreadsheet\Cell\Hyperlink();
+                         $hyperlink->setUrl(site_url('uploads/peserta/'.$pengguna->foto));
+                         $hyperlink->setTooltip('Klik untuk membuka');
+                         $spreadsheet->getActiveSheet()->getCell('w' . $kolom)->setHyperlink($hyperlink);
+
+                         // Jika diinginkan, tambahkan juga gambar
+                         $drawing = new Drawing();
+                         $drawing->setName('Foto');
+                         $drawing->setDescription('Foto');
+                         $drawing->setPath('uploads/peserta/'.$pengguna->foto);
+                         $drawing->setHeight(50);
+                         $drawing->setCoordinates('x' . $kolom);
+                         $drawing->setWorksheet($spreadsheet->getActiveSheet());
+
+
+               $kolom++;
+               $nomor++;
+
+          }          
+
+          $writer = new Xlsx($spreadsheet);
+
+          header('Content-Type: application/vnd.ms-excel');
+          header('Content-Disposition: attachment;filename="Pesertasafaripodcast.xlsx"');
           header('Cache-Control: max-age=0');
 
 	  $writer->save('php://output');

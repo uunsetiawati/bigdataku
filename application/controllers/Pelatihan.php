@@ -41,7 +41,23 @@ class Pelatihan extends CI_Controller {
 				'db' => 'kodeunik',
 				'dt' => 'share',
 				'formatter' => function($d) {
-						 return anchor('peserta/add_peserta/'.$d, '<i class="icon ion-ios-share"></i>','class="btn btn-xs btn-primary" target="_blank" id="text-copy" onclick="copyText()" data-placement="top" title="Share Form"');
+
+					$data['pelatihan'] = $this->db->get_where('view_pelatihan', array('kodeunik' => $d))->row_array();
+					// Check if the result is not empty
+					if (!empty($data['pelatihan'])) {
+						$sasaran = $data['pelatihan']['sasaran'];
+			
+						if ($sasaran == 'UKM') {
+							return anchor('peserta/add_peserta/'.$d, '<i class="icon ion-ios-share"></i>', 'class="btn btn-xs btn-primary" target="_blank" id="text-copy" onclick="copyText()" data-placement="top" title="Share Form"');
+						} elseif ($sasaran == 'SAFARI PODCAST') {
+							return anchor('peserta/add_peserta_podcast/'.$d, '<i class="icon ion-ios-share"></i>', 'class="btn btn-xs btn-primary" target="_blank" id="text-copy" onclick="copyText()" data-placement="top" title="Share Form"');
+						}
+					}
+			
+					// Default case (return an empty string or another default value)
+					return '';
+
+						 
 			  }
 		  	),
 			  array(

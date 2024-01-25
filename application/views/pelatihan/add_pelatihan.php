@@ -73,6 +73,7 @@
 					<option value="KOPERASI" <?=$this->input->post('sasaran') == 'KOPERASI' ? 'selected':''?>>KOPERASI</option>
 					<option value="UKM" <?=$this->input->post('sasaran') == 'UKM' ? 'selected':''?>>UKM</option>
 					<option value="CALON WIRAUSAHA" <?=$this->input->post('sasaran') == 'CALON WIRAUSAHA' ? 'selected':''?>>CALON WIRAUSAHA</option>
+					<option value="SAFARI PODCAST" <?=$this->input->post('sasaran') == 'SAFARI PODCAST' ? 'selected':''?>>SAFARI PODCAST</option>
 				</select>
 			</div>
 			<div class="input-wrap">

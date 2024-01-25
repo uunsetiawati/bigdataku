@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<link rel="icon" href="<?=base_url('assets/images/favicon.png')?>">
+	<link rel="icon" href="<?=base_url('assets/images/logoupt.png')?>">
 	<title>Maxui</title>
 
 	<link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700,900&display=swap" rel="stylesheet">
