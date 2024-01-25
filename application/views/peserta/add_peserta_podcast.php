@@ -4,7 +4,7 @@
 		<div class="social-media-icon socmed-for-about shadow-sm">
 			<div class="coming-soon-word text-center">
 				<img src="<?=base_url('assets/images/logoupt.png')?>" width="200px">
-				<h5>FORM PESERTA SAFARI PODCAST</h5>
+				<h5>FORM PESERTA</h5>
 				<h5><b><?=$peserta['judul_pelatihan']?> </b></h5>
 				<h6><?=$peserta['alamat_pelatihan'];?></h6>
 				<?php
@@ -18,7 +18,7 @@
 				];
 				?>
 				<!-- <h6>Tanggal Pelatihan : <?=$tglmulai->format("d-m-Y");?> s.d <?=$tglakhir->format("d-m-Y")?></h6> -->
-				<h6><b>Tanggal Pelatihan: <?=$tglmulai->format("d") . " " . $monthNames[$tglmulai->format("n") - 1] . " " . $tglmulai->format("Y");?> s.d <?=$tglakhir->format("d") . " " . $monthNames[$tglakhir->format("n") - 1] . " " . $tglakhir->format("Y");?></b></h6>
+				<h6><b>Tanggal Kegiatan : <?=$tglmulai->format("d") . " " . $monthNames[$tglmulai->format("n") - 1] . " " . $tglmulai->format("Y");?></b></h6>
 				
 			</div>                          
 		</div>
