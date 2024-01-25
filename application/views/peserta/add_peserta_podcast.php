@@ -58,7 +58,7 @@
 			</div>
 			<!-- end section title -->
 			<div class="input-wrap">
-				<label class="col-form-label">NAMA LENGKAP PESERTA<span class="section-subtitle"><code>*</code></span><h7> (Tanpa Gelar)</h7></label>				
+				<label class="col-form-label">NAMA LENGKAP PESERTA<span class="section-subtitle"><code>*</code></span></label>				
 				<input type="text" name="nama_peserta" placeholder="NAMA PESERTA" onkeyup="this.value = this.value.toUpperCase()" value="<?= set_value('nama_peserta'); ?>" class="form-control">
 			</div>
 			<div class="input-wrap">
@@ -103,7 +103,7 @@
 				</select>				
 			</div>
 			<div class="input-wrap">
-				<label class="col-form-label">ALAMAT DOMISILI<span class="section-subtitle"><code>*</code></span></label>				
+				<label class="col-form-label">ALAMAT DOMISILI SESUAI KTP<span class="section-subtitle"><code>*</code></span></label>				
 				<input type="text" name="alamat" placeholder="ALAMAT" onkeyup="this.value = this.value.toUpperCase()" value="<?= set_value('alamat'); ?>" class="form-control">			
 			</div>
 			<div class="input-wrap">
