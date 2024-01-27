@@ -326,7 +326,7 @@ class Peserta extends CI_Controller {
 			$config['upload_path']          = './uploads/peserta/';
             $config['allowed_types']        = 'gif|jpg|png|jpeg';
             $config['max_size']             = 3000;
-			$config['file_name'] 			= $nama.'-'.$kodeunik.'-'.$ktp;
+			$config['file_name'] 			= $kodeunik.'-'.$ktp;
             $this->load->library('upload', $config);
 
             //proses upload
@@ -362,7 +362,7 @@ class Peserta extends CI_Controller {
 			$config2['upload_path']          = './uploads/ktp/';
             $config2['allowed_types']        = 'gif|jpg|png|jpeg';
             $config2['max_size']             = 3000;
-			$config2['file_name'] 			 = $nama.'-'.$kodeunik.'-'.$ktp;
+			$config2['file_name'] 			 = $kodeunik.'-'.$ktp;
             // $this->load->library('upload', $config2);
 			$this->upload->initialize($config2);
 
