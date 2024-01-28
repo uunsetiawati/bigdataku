@@ -468,6 +468,7 @@ class Export extends CI_Controller {
                          $spreadsheet->getActiveSheet()->getCell('AT' . $kolom)->setHyperlink($hyperlink);
 
                          // Jika diinginkan, tambahkan juga gambar
+                         if (file_exists('uploads/peserta/'.$pengguna->foto)) {
                          $drawing = new Drawing();
                          $drawing->setName('Foto');
                          $drawing->setDescription('Foto');
@@ -475,8 +476,10 @@ class Export extends CI_Controller {
                          $drawing->setHeight(50);
                          $drawing->setCoordinates('AS' . $kolom);
                          $drawing->setWorksheet($spreadsheet->getActiveSheet());
+                         }
 
                          // Jika diinginkan, tambahkan juga gambar
+                         if (file_exists('uploads/ktp/'.$pengguna->ktp)) {
                          $ktp = new Drawing();
                          $ktp->setName('KTP');
                          $ktp->setDescription('KTP');
@@ -484,6 +487,7 @@ class Export extends CI_Controller {
                          $ktp->setHeight(50);
                          $ktp->setCoordinates('AU' . $kolom);
                          $ktp->setWorksheet($spreadsheet->getActiveSheet());
+                         }
 
                $kolom++;
                $nomor++;
