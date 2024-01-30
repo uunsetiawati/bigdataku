@@ -5,7 +5,7 @@
 
 		public $table ="tb_data_peserta";
 
-		function save($foto,$ktp)
+		function save($foto,$ktp,$no_urut)
 		{
 			$nama_peserta = $this->input->post('nama_peserta', TRUE);
 			$sosmed = $this->input->post('sosmed', TRUE);
@@ -61,6 +61,7 @@
 				//tabel di database => name di form				
 				'id_pelatihan'          => $this->input->post('id_pel', TRUE),
 				'kodeunik'          	=> $this->uri->segment(3),
+				'no_urut'				=> $no_urut,
 				'no_ktp'          		=> $this->input->post('no_ktp', TRUE),
 				'nama_peserta'        	=> $nama_peserta,
 				'tempat_lahir'          => $this->input->post('tempat_lahir', TRUE),
