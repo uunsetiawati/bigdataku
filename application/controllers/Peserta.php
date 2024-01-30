@@ -182,6 +182,8 @@ class Peserta extends CI_Controller {
 			
 			// $checkbox = $this->input->post('sosmed_usaha');
 			// $sosmed=implode(',',$checkbox);
+			// $peserta=$this->db->where('kodeunik',$kodeunik);
+			// $total_peserta=$this->db->count_all_results($peserta)+1;
 
 			$uploadFoto = $this->upload_foto();
 			$uploadKtp = $this->upload_ktp();
@@ -338,7 +340,7 @@ class Peserta extends CI_Controller {
 	function upload_foto_podcast()
 		{
 			$kodeunik = $this->uri->segment(3);
-			$telp=$this->input->post('no_Telp');
+			$telp=$this->input->post('no_telp');
 
 			//validasi foto yang di upload
 			$config['upload_path']          = './uploads/peserta/';
@@ -606,8 +608,13 @@ class Peserta extends CI_Controller {
 
 	function cek($kodeunik)
 	{
-		$data['pelatihan'] = $this->db->get_where('tb_data_pelatihan', array('kodeunik' => $kodeunik,'status'=>'1'))->row_array();
-		$this->templateadmin->load('template/dashboard_p', 'peserta/noevent');
+		// $data['pelatihan'] = $this->db->get_where('tb_data_pelatihan', array('kodeunik' => $kodeunik,'status'=>'1'))->row_array();
+		// $this->templateadmin->load('template/dashboard_p', 'peserta/noevent');
+
+		$peserta=$this->db->get_where('tb_data_peserta', array('kodeunik'=>$kodeunik))->row_array();
+			// $total_peserta=$this->db->count_all_results($peserta)+1;
+			$total_peserta = $this->db->where('kodeunik', $kodeunik)->count_all_results('tb_data_peserta') + 1;
+			echo $total_peserta;
 	}
 
 	public function downloadFoto($kodeunik)

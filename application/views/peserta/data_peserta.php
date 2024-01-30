@@ -34,7 +34,12 @@
                             <div class="button-default">
                                 <?php
                                     // echo anchor('peserta/add_pesertadewan/'.$this->uri->segment(3), '<class="button" target="_blank">Tambah Data');
-                                    echo anchor('#', 'Tambah Peserta', array('class'=>'button', 'target'=>'_blank'));
+                                    if($peserta['sasaran'] == "UKM"){
+                                        echo anchor('peserta/add_peserta/'.$this->uri->segment(3), 'Tambah Peserta', array('class'=>'button', 'target'=>'_blank'));
+                                    }else if($peserta['sasaran'] == "SAFARI PODCAST"){
+                                        echo anchor('peserta/add_peserta_podcast/'.$this->uri->segment(3), 'Tambah Peserta', array('class'=>'button', 'target'=>'_blank'));
+                                    }
+                                    
                                 ?>
                             </div>
                         </div>  
@@ -55,14 +60,26 @@
                     </div>
 
                     <div class="row">                        
-                        <div class="col-6">
+                        <div class="col-4">
                             <div class="button-default">
                                 <?php
                                     echo anchor('peserta/downloadFoto/'.$this->uri->segment(3), 'Download Foto', array('class'=>'button4'));
                                 ?>
                             </div>
                         </div>  
-                        <div class="col-6">                           
+                        <div class="col-4">                           
+                            <div class="button-default">   
+                                <?php
+                                if($peserta['sasaran'] == 'UKM'){
+                                    echo anchor('laporanfpdf/cetak/'.$this->uri->segment(3), 'Cetak', array('class'=>'button6', 'target'=>'_blank'));
+                                }else if($peserta['sasaran'] == 'SAFARI PODCAST'){
+                                    echo anchor('laporanfpdf/cetak_podcast/'.$this->uri->segment(3), 'Cetak', array('class'=>'button6', 'target'=>'_blank'));
+                                }
+                                    
+                                ?>
+                            </div>
+                        </div>
+                        <div class="col-4">                           
                             <div class="button-default">   
                                 <?php
                                     echo anchor('peserta/downloadKtp/'.$this->uri->segment(3), 'Download KTP', array('class'=>'button5'));

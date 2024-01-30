@@ -1442,6 +1442,23 @@ textarea {
     display: inline-block;
 }
 
+.button6 {
+    background: #d769e1 ;
+    border-radius: 4px;
+    padding: 0 12px;
+    line-height: 38px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+    text-transform: none;
+    margin-top: 20px;
+    border: 0;
+    width: 100%;
+    text-align: center;
+    display: inline-block;
+}
+
+
 .button i.icon-left {
     margin-right: 3px;
 }
