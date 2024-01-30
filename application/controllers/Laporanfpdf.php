@@ -289,9 +289,46 @@ class Laporanfpdf extends CI_Controller {
             // $pdf->Cell(85,50,'<img src="uploads/peserta/' . $row->foto . '" style="width: 144px;height: 211px;">',1,0,'C', false);
             // $pdf->Image('uploads/peserta/' . $row->foto ,0,0,0,0);
             $image1 = "uploads/peserta/".$row->foto;
+            // if (file_exists($image1)) {
+            // $pdf->SetX(40);
+            // $pdf->Cell(65, 50, $pdf->Image($image1, $pdf->GetX() + 2, $pdf->GetY() + 2, 30, 40, '', '', '', false, 300, '', false, false, 0), 0, 0, 'C');
+            // }
+
             if (file_exists($image1)) {
-            $pdf->SetX(40);
-            $pdf->Cell(65, 50, $pdf->Image($image1, $pdf->GetX() + 2, $pdf->GetY() + 2, 30, 40, '', '', '', false, 300, '', false, false, 0), 0, 0, 'C');
+                // Membaca metadata gambar
+                $exif = exif_read_data($image1);
+            
+                // Cek apakah ada informasi orientasi gambar
+                if (!empty($exif['Orientation'])) {
+                    // Memutar gambar sesuai dengan orientasi
+                    $source_image = imagecreatefromjpeg($image1);
+                    switch ($exif['Orientation']) {
+                        case 3:
+                            $rotated_image = imagerotate($source_image, 180, 0);
+                            break;
+                        case 6:
+                            $rotated_image = imagerotate($source_image, -90, 0);
+                            break;
+                        case 8:
+                            $rotated_image = imagerotate($source_image, 90, 0);
+                            break;
+                        default:
+                            $rotated_image = $source_image;
+                    }
+                    // Simpan gambar yang sudah diputar
+                    imagejpeg($rotated_image, 'rotated_image.jpg');
+                    // Memasukkan gambar ke dalam PDF
+                    $pdf->SetX(40);
+                    $pdf->Cell(65, 50, $pdf->Image('rotated_image.jpg', $pdf->GetX() + 2, $pdf->GetY() + 2, 30, 40, '', '', '', false, 300, '', false, false, 0), 0, 0, 'C'); // Membuat cell kosong sebagai wadah untuk gambar
+                    // $pdf->Image('rotated_image.jpg', $pdf->GetX() + 2, $pdf->GetY() + 2, 30, 40, '', '', '', false, 300, '', false, false, 0); // Memasukkan gambar ke TCPDF
+                    // Hapus gambar yang sudah diputar
+                    unlink('rotated_image.jpg');
+                } else {
+                    // Jika tidak ada informasi orientasi, masukkan gambar ke dalam PDF seperti biasa
+                    $pdf->SetX(40);
+                    $pdf->Cell(65, 50, $pdf->Image($image1, $pdf->GetX() + 2, $pdf->GetY() + 2, 30, 40, '', '', '', false, 300, '', false, false, 0), 0, 0, 'C'); // Membuat cell kosong sebagai wadah untuk gambar
+                    // $pdf->Image($image1, $pdf->GetX() + 2, $pdf->GetY() + 2, 30, 40, '', '', '', false, 300, '', false, false, 0); // Memasukkan gambar ke TCPDF
+                }
             }
 
             // if (file_exists($image1)) {
