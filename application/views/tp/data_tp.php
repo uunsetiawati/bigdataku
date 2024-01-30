@@ -54,6 +54,23 @@
                             </div>
                         </div> 
                     </div>
+                    <div class="row">                        
+                        <div class="col-6">
+                            <div class="button-default">
+                                <?php
+                                    echo anchor('tp/downloadFoto/', 'Download Foto', array('class'=>'button4'));
+                                ?>
+                            </div>
+                        </div> 
+                        
+                        <div class="col-6">                           
+                            <div class="button-default">   
+                                <?php
+                                    echo anchor('tp/downloadKtp/', 'Download KTP', array('class'=>'button5'));
+                                ?>
+                            </div>
+                        </div>
+                    </div>
                     <div class="card">
 					<div class="card-body">
 						<div class="table-responsive">

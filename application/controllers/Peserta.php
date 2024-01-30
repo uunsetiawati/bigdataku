@@ -243,8 +243,9 @@ class Peserta extends CI_Controller {
 		}
 		else
 		{   
+			$total_peserta = $this->db->where('kodeunik', $kodeunik)->count_all_results('tb_data_peserta') + 1;
 			$uploadFoto = $this->upload_foto_podcast();			
-			$this->peserta_m->save_podcast($uploadFoto);
+			$this->peserta_m->save_podcast($uploadFoto,$total_peserta);
 			$this->thankyou($kodeunik);
 		}
 	}	
@@ -345,12 +346,13 @@ class Peserta extends CI_Controller {
 		{
 			$kodeunik = $this->uri->segment(3);
 			$telp=$this->input->post('no_telp');
+			$total_peserta = $this->db->where('kodeunik', $kodeunik)->count_all_results('tb_data_peserta') + 1;
 
 			//validasi foto yang di upload
 			$config['upload_path']          = './uploads/peserta/';
             $config['allowed_types']        = 'gif|jpg|png|jpeg';
             $config['max_size']             = 3000;
-			$config['file_name'] 			= $kodeunik.'-'.$telp;
+			$config['file_name'] 			= $total_peserta.'-'.$kodeunik.'-'.$telp;
             $this->load->library('upload', $config);
 
             //proses upload

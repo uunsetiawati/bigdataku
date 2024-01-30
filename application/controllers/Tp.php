@@ -740,6 +740,62 @@ class Tp extends CI_Controller {
             return $check;
         }
 
+    public function downloadFoto()
+	{
+		// Load the ZIP library
+		$this->load->library('zip');
+
+		// Array of image file paths (change these to your image file paths)
+		$queryfoto = $this->db->get_where('tb_tp', array('status' => 1))->result();
+		
+		
+
+		// Populate $imagePaths with image paths
+		foreach ($queryfoto as $query) {
+		$imagePaths[] = './uploads/tp/foto/' . $query->foto; // Add image paths to the array
+		}	
+		
+
+		// Add each image file to the ZIP archive
+		foreach ($imagePaths as $image) {
+			$this->zip->read_file($image);
+		}
+
+		// Name of the ZIP file to be downloaded
+		$zipFileName = 'Foto-TP.zip';
+
+		// Create the ZIP file
+		$this->zip->download($zipFileName);
+	}
+
+	public function downloadKtp()
+	{
+		// Load the ZIP library
+		$this->load->library('zip');
+
+		// Array of image file paths (change these to your image file paths)
+		$queryfoto = $this->db->get_where('tb_tp', array('status' => 1))->result();
+		
+		
+
+		// Populate $imagePaths with image paths
+		foreach ($queryfoto as $query) {
+		$imagePaths[] = './uploads/tp/ktp/' . $query->ktp; // Add image paths to the array
+		}	
+		
+
+		// Add each image file to the ZIP archive
+		foreach ($imagePaths as $image) {
+			$this->zip->read_file($image);
+		}
+
+		// Name of the ZIP file to be downloaded
+		$zipFileName = 'KTP-TP.zip';
+
+		// Create the ZIP file
+		$this->zip->download($zipFileName);
+	}
+
 function add_ajax_kab($id_prov)
 	{
     	$query = $this->db->order_by('name','ASC')->get_where('regencies',array('province_id'=>$id_prov));
