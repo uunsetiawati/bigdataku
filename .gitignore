@@ -18,5 +18,5 @@ application/logs/*
 /vendor/
 /uploads/
 
-application/third_party/fpdf/
+# application/third_party/fpdf/
 application/config/
