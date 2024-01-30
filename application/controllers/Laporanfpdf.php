@@ -315,14 +315,16 @@ class Laporanfpdf extends CI_Controller {
                         default:
                             $rotated_image = $source_image;
                     }
+                    // Simpan gambar yang sudah diputar dengan nama unik
+                    $rotated_image_filename = 'rotated_image_' . uniqid() . '.jpg';
                     // Simpan gambar yang sudah diputar
-                    imagejpeg($rotated_image, 'rotated_image.jpg');
+                    imagejpeg($rotated_image, $rotated_image_filename);
                     // Memasukkan gambar ke dalam PDF
                     $pdf->SetX(40);
-                    $pdf->Cell(65, 50, $pdf->Image('rotated_image.jpg', $pdf->GetX() + 2, $pdf->GetY() + 2, 30, 40, '', '', '', false, 300, '', false, false, 0), 0, 0, 'C'); // Membuat cell kosong sebagai wadah untuk gambar
+                    $pdf->Cell(65, 50, $pdf->Image($rotated_image_filename, $pdf->GetX() + 2, $pdf->GetY() + 2, 30, 40, '', '', '', false, 300, '', false, false, 0), 0, 0, 'C'); // Membuat cell kosong sebagai wadah untuk gambar
                     // $pdf->Image('rotated_image.jpg', $pdf->GetX() + 2, $pdf->GetY() + 2, 30, 40, '', '', '', false, 300, '', false, false, 0); // Memasukkan gambar ke TCPDF
                     // Hapus gambar yang sudah diputar
-                    unlink('rotated_image.jpg');
+                    unlink($rotated_image_filename);
                 } else {
                     // Jika tidak ada informasi orientasi, masukkan gambar ke dalam PDF seperti biasa
                     $pdf->SetX(40);
