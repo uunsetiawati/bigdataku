@@ -291,8 +291,15 @@ class Laporanfpdf extends CI_Controller {
             $image1 = "uploads/peserta/".$row->foto;
             if (file_exists($image1)) {
             $pdf->SetX(40);
-            $pdf->Cell(65, 50, $pdf->Image($image1, $pdf->GetX(), $pdf->GetY(), 30, 40), 0, 0, 'C');
+            $pdf->Cell(65, 50, $pdf->Image($image1, $pdf->GetX() + 2, $pdf->GetY() + 2, 30, 40, '', '', '', false, 300, '', false, false, 0), 0, 0, 'C');
             }
+
+            // if (file_exists($image1)) {
+            //     $pdf->SetX(40);
+            //     $pdf->Cell(65, 50, '', 1, 0, 'C'); // Membuat cell kosong sebagai wadah untuk gambar
+            //     $pdf->Image($image1, $pdf->GetX() + 2, $pdf->GetY() + 2, 30, 40, '', '', '', false, 300, '', false, false, 0); // Gunakan parameter opsional 'isHTML' sebagai false untuk menghindari gambar terbalik
+            // }
+
             $pdf->Cell(90,15,'TTD PESERTA',0,1,'C');
             $pdf->cell(85);
             $pdf->SetFont('Times','B',10);
