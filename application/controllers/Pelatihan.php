@@ -51,6 +51,8 @@ class Pelatihan extends CI_Controller {
 							return anchor('peserta/add_peserta/'.$d, '<i class="icon ion-ios-share"></i>', 'class="btn btn-xs btn-primary" target="_blank" id="text-copy" onclick="copyText()" data-placement="top" title="Share Form"');
 						} elseif ($sasaran == 'SAFARI PODCAST') {
 							return anchor('peserta/add_peserta_podcast/'.$d, '<i class="icon ion-ios-share"></i>', 'class="btn btn-xs btn-primary" target="_blank" id="text-copy" onclick="copyText()" data-placement="top" title="Share Form"');
+						} elseif ($sasaran == 'KOPERASI') {
+							return anchor('peserta/add_peserta/'.$d, '<i class="icon ion-ios-share"></i>', 'class="btn btn-xs btn-primary" target="_blank" id="text-copy" onclick="copyText()" data-placement="top" title="Share Form"');
 						}
 					}
 			

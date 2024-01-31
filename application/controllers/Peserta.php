@@ -167,6 +167,8 @@ class Peserta extends CI_Controller {
 					$this->templateadmin->load('template/dashboard_p', 'peserta/add_pesertacalonwirausaha',$data);
 				}else if($datapelatihan['sasaran']=="SAFARI PODCAST"){
 				$this->templateadmin->load('template/dashboard_p', 'peserta/add_peserta_podcast',$data);
+				}else if($datapelatihan['sasaran']=="KOPERASI"){
+					$this->templateadmin->load('template/dashboard_p', 'peserta/add_peserta_koperasi',$data);
 				}
 					
 			}else{
