@@ -38,6 +38,8 @@
                                         echo anchor('peserta/add_peserta/'.$this->uri->segment(3), 'Tambah Peserta', array('class'=>'button', 'target'=>'_blank'));
                                     }else if($peserta['sasaran'] == "SAFARI PODCAST"){
                                         echo anchor('peserta/add_peserta_podcast/'.$this->uri->segment(3), 'Tambah Peserta', array('class'=>'button', 'target'=>'_blank'));
+                                    }else if($peserta['sasaran'] == "KOPERASI"){
+                                        echo anchor('peserta/add_peserta/'.$this->uri->segment(3), 'Tambah Peserta', array('class'=>'button', 'target'=>'_blank'));
                                     }
                                     
                                 ?>

@@ -357,7 +357,7 @@
 			</div>
 			<div class="input-wrap">
 				<label class="col-form-label">TANGGAL BADAN HUKUM</label>				
-				<input type="date" name="tgl_badan_hukum" placeholder="TANGGAL BADAN HUKUM" value="<?= set_value('tgl_badan_hukum'); ?>" class="form-control">			
+				<input type="date" name="tgl_badan_hukum" placeholder="TANGGAL BADAN HUKUM" value="<?= set_value('tgl_badan_hukum'); ?>" class="form-control" required>			
 			</div>
 			<div class="input-wrap">
 				<label class="col-form-label">ALAMAT KOPERASI<span class="section-subtitle"><code>*</code></span></label>

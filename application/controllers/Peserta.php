@@ -39,7 +39,7 @@ class Peserta extends CI_Controller {
 					if (!empty($data['pelatihan'])) {
 						$sasaran = $data['pelatihan']['sasaran'];
 			
-						if ($sasaran == 'UKM') {
+						if ($sasaran == 'UKM' || 'KOPERASI') {
 							return anchor('peserta/edit/'.$d, '<i class="fa fa-edit"></i>', 'class="btn btn-xs btn-primary" data-placement="top" title="Edit"');
 						} elseif ($sasaran == 'SAFARI PODCAST') {
 							return anchor('peserta/edit_podcast/'.$d, '<i class="fa fa-edit"></i>', 'class="btn btn-xs btn-primary" data-placement="top" title="Edit"');
@@ -524,12 +524,7 @@ class Peserta extends CI_Controller {
 		$this->form_validation->set_rules('no_telp', 'No Telp/WA', 'required|min_length[10]|max_length[13]'); // required
 		if ($this->form_validation->run() == FALSE)
 		{		
-			$id = $this->uri->segment(3);	
-			$query = $this->db->query("SELECT * FROM tb_data_peserta WHERE id = $id");
-			if ($query->num_rows() > 0){
-				$row = $query->row();
-				$data['pelatihan'] = $this->db->get_where('tb_data_pelatihan', array('id' => $row->id_pelatihan))->row_array();
-			}
+			$id = $this->uri->segment(3);				
 
 			$prov=$this->peserta_m->getProv($id)->result();
 			$kab=$this->peserta_m->getKab($id)->result();
@@ -549,8 +544,22 @@ class Peserta extends CI_Controller {
 			foreach($keckopukm as $row) {$data['kecamatankopukm']= $row->kecamatan;}
 			foreach($kelkopukm as $row) {$data['kelurahankopukm']= $row->kelurahan;}
 
- 			$data['peserta'] = $this->db->get_where('tb_data_peserta', array('id' => $id))->row_array();
-			$this->templateadmin->load('template/dashboard', 'peserta/edit_peserta_ukm', $data);			
+			$query = $this->db->query("SELECT * FROM tb_data_peserta WHERE id = $id");
+			if ($query->num_rows() > 0){
+				$row = $query->row();
+				$pelatihan = $this->db->get_where('tb_data_pelatihan', array('id' => $row->id_pelatihan))->row_array();
+				$data['pelatihan'] = $pelatihan; 
+				$data['peserta'] = $this->db->get_where('tb_data_peserta', array('id' => $id))->row_array();
+				// $pelatihan=$this->db->get_where('tb_data_pelatihan', array('id' => $id))->row_array();
+				if($pelatihan['sasaran']=="UKM"){
+					$this->templateadmin->load('template/dashboard', 'peserta/edit_peserta_ukm', $data);	
+				}else if($pelatihan['sasaran']=="KOPERASI"){
+					$this->templateadmin->load('template/dashboard', 'peserta/edit_peserta_koperasi', $data);	
+				}
+			}
+
+ 			
+					
 			// echo $prov;
 
 		}

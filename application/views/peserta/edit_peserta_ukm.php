@@ -26,9 +26,9 @@
 	$now = date('Y-m-d H:i:s');
 	?>
 	<?=form_hidden('now',$now);?>
-	<?=form_hidden('id',$peserta['id']);?>
-	<?=form_hidden('id_pel',$peserta['id_pelatihan']);?>
-	<?=form_hidden('kodeunik',$peserta['kodeunik']);?>
+	<?=form_hidden('id',$this->input->post('id') ?? $peserta['id']);?>
+	<?=form_hidden('id_pel',$this->input->post('id_pelatihan') ?? $peserta['id_pelatihan']);?>
+	<?=form_hidden('kodeunik',$this->input->post('kodeunik') ?? $peserta['kodeunik']);?>
 	
 		<div class="form-wrapper">  
 			<div class="input-wrap">

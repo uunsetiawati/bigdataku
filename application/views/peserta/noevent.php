@@ -27,36 +27,7 @@
 
 			<!-- separator -->
 			<div class="separator-large"></div>
-			<!-- end separator -->
-
-			<!-- footer -->
-			<div class="footer">
-				<div class="container">
-					<div class="content-box shadow-sm">
-						<h4 class="mb-1">Follow Us</h4>
-						<!-- <span>Mobile Template</span> -->
-
-						<!-- separator -->
-						<div class="separator-small"></div>
-						<!-- end separator -->
-
-						<div class="social-media-icon">
-							<ul>
-								<li><a href="https://facebook.com/uptpkukmjatim/"><i class="icon ion-logo-facebook bg-facebook"></i></a></li>
-								<li><a href="https://www.instagram.com/uptkukmjatim/"><i class="icon ion-logo-instagram bg-instagram"></i></a></li>
-								<li><a href="https://www.youtube.com/@UPTPKUKMJATIM"><i class="icon ion-logo-youtube bg-youtube"></i></a></li>
-								<li><a href="https://wa.me/6281331220006"><i class="icon ion-logo-whatsapp bg-whatsapp"></i></a></li>
-							</ul>
-						</div>
-
-						<!-- separator -->
-						<div class="separator-small"></div>
-						<!-- end separator -->
-
-						<p class="made-by text-small">Made With <i class="icon ion-ios-heart"></i> UPTKUKM JATIM</p>
-					</div>
-				</div>
-			</div>
+			<!-- end separator -->			
 
 		</div>
 		<!-- end about us -->
