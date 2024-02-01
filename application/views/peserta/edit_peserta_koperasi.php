@@ -95,7 +95,7 @@
 			<div class="input-wrap">
 				<label class="col-form-label">PENDIDIKAN<span class="section-subtitle"><code>*</code></span></label>
 				<?php
-				echo form_dropdown('pendidikan', array( 'SD'=>'SD', 'SMP'=>'SMP', 'SMA/SMK'=>'SMA/SMK', 'S-1'=>'S-1', 'S-2'=>'S-2', 'S-3'=>'S-3', 'TIDAK SEKOLAH'=>'TIDAK SEKOLAH'), $peserta['pendidikan'], "class='form-control'");		
+				echo form_dropdown('pendidikan', array( 'SD'=>'SD', 'SMP'=>'SMP', 'SMA/SMK'=>'SMA/SMK', 'D-III'=>'D-III', 'S-1'=>'S-1', 'S-2'=>'S-2', 'S-3'=>'S-3', 'TIDAK SEKOLAH'=>'TIDAK SEKOLAH'), $peserta['pendidikan'], "class='form-control'");		
 				?>				
 			</div>
 			<div class="input-wrap">
