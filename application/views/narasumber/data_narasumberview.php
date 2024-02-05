@@ -88,7 +88,7 @@
 					?>
 					<?php if ($file_extension_rekening == 'pdf'): ?>
 						<embed type="application/pdf" src="<?=$file_rekening?>" width="600" height="400"></embed>
-					<?php elseif (in_array($file_extension_rekening, ['jpg', 'jpeg', 'png', 'gif'])): ?>
+					<?php elseif (in_array($file_extension_rekening, ['jpg', 'JPG', 'jpeg','JPEG', 'png', 'PNG','gif'])): ?>
 						<img src="<?=$file_rekening?>" alt="Uploaded Image" width="600" height="400">
 					<?php endif; ?>
 				</div>
