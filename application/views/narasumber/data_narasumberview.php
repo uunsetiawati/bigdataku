@@ -74,7 +74,19 @@
 			</div>
 			<div class="input-wrap">
 				<label class="col-form-label">UPLOAD MATERI<span class="section-subtitle"><code>*</code></span><h7> (Maks file ukuran 10MB | pdf,ppt)</h7></label><br>
-				<embed type="application/pdf" src="<?=base_url('uploads/narasumber/materi/'.$narsum['materi'])?>" width="600" height="400"></embed>
+				<?php
+					$file_materi = base_url('uploads/narasumber/materi/'.$narsum['materi']);
+					$file_extension_materi = pathinfo($file_materi, PATHINFO_EXTENSION);
+					?>
+				<?php if ($file_extension_materi == 'pdf'): ?>
+					<embed type="application/pdf" src="<?=$file_materi?>" width="600" height="400"></embed>
+				<?php elseif (in_array($file_extension_materi, ['ppt', 'PPT', 'pptx', 'PPTX'])): ?>
+					<div class="col-4">	
+					<?php
+					echo anchor('uploads/narasumber/materi/' . $narsum['materi'], 'Download PPT', array('class'=>'button2'));
+					?>
+					</div>
+				<?php endif; ?>
 			</div>
 			<div class="input-wrap">
 				<label class="col-form-label">UPLOAD SPT (SURAT PERINTAH TUGAS)<span class="section-subtitle"><code>*</code></span><h7> (Mak file ukuran 3MB |pdf|doc|docx)</h7></label><br>
