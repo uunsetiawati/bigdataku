@@ -12,6 +12,16 @@ class Export_model extends CI_Model {
           return $this->db->get();
      }
 
+     public function getSemua()
+     {
+          $this->db->select('*');
+          $this->db->from('view_peserta');
+          $this->db->order_by('id_pel','ASC');
+          $this->db->order_by('no_urut','ASC');
+
+          return $this->db->get();
+     }
+
      public function getAllPodcast($kodeunik)
      {
           $this->db->select('*');
