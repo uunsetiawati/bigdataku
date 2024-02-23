@@ -30,12 +30,17 @@
 	<?=form_hidden('id_pel', $this->input->post('id_pel') ?? $peserta['id_pelatihan']);?>
 	<?=form_hidden('kodeunik', $this->input->post('kodeunik') ?? $peserta['kodeunik']);?>
 	
-		<div class="form-wrapper">  
+		<div class="form-wrapper">  			
 			<div class="input-wrap">
 				<label class="col-form-label">NO. URUT<span class="section-subtitle"><code>*</code></span></label>
 				<input type="number" name="no_urut" placeholder="NOMOR URUT" value="<?= $this->input->post('no_urut') ?? $peserta['no_urut'];?>" class="form-control <?= (form_error('no_urut') == "" ? '':'is-invalid') ?>">
 				<?= form_error('no_urut'); ?>				
 			</div> 
+			<div class="input-wrap">
+				<label class="col-form-label">NO. KTP/NIK<span class="section-subtitle"><code>*</code></span></label>
+				<input type="text" name="no_ktp" placeholder="NO. KTP/NIK" value="<?= $this->input->post('no_ktp') ?? $peserta['no_ktp']; ?>" class="form-control <?= (form_error('no_ktp') == "" ? '':'is-invalid') ?>">
+				<?= form_error('no_ktp'); ?>				
+			</div>
 			<div class="input-wrap">
 				<label class="col-form-label">NAMA PESERTA<span class="section-subtitle"><code>*</code></span></label>				
 				<input type="text" name="nama_peserta" placeholder="NAMA PESERTA" onkeyup="this.value = this.value.toUpperCase()" value="<?= $this->input->post('nama_peserta') ?? $peserta['nama_peserta']; ?>" class="form-control" required>			
@@ -114,7 +119,7 @@
 			<div class="form-wrapper" id="foto" style="display:block;">
 				<div class="input-wrap">
 					<label class="col-form-label">UPLOAD FOTO DIRI<span class="section-subtitle"><code>*</code></span><h7> (Maksimal file ukuran 3MB)</h7></label>
-					<input type="hidden" name="foto" value="<?=$this->input->post('foto') ?? $peserta['foto']?>" class="form-control" required>
+					<input type="file" name="foto" value="<?=$this->input->post('foto') ?? $peserta['foto']?>" class="form-control" placeholder="UBAH FOTO" required>
 					<img src="<?=base_url('uploads/peserta/'.$peserta['foto'])?>" style="width: 144px;height: 211px;">
 				</div>
 			</div>

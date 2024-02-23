@@ -212,7 +212,9 @@ class Peserta extends CI_Controller {
 
 	function add_peserta_podcast($kodeunik)
 	{
-
+		$this->form_validation->set_rules('no_ktp', 'Nomor KTP', 'required|callback_noktp_check|min_length[16]|max_length[16]', [
+			'is_unique' => '%s sudah terdaftar. Silahkan isikan %S lainnya',
+		]); // Unique Field 
 		$this->form_validation->set_rules('no_telp', 'Nomor TELP', 'required|callback_notelp_check|min_length[10]|max_length[13]', [
 			'is_unique' => '%s sudah terdaftar. Silahkan isikan %S lainnya',
 		]); 
@@ -555,6 +557,8 @@ class Peserta extends CI_Controller {
 					$this->templateadmin->load('template/dashboard', 'peserta/edit_peserta_ukm', $data);	
 				}else if($pelatihan['sasaran']=="KOPERASI"){
 					$this->templateadmin->load('template/dashboard', 'peserta/edit_peserta_koperasi', $data);	
+				}else if($pelatihan['sasaran']=="SAFARI PODCAST"){
+					$this->templateadmin->load('template/dashboard', 'peserta/edit_peserta_podcast', $data);	
 				}
 			}
 
@@ -579,6 +583,9 @@ class Peserta extends CI_Controller {
 		$this->form_validation->set_rules('no_urut', 'Nomor Urut', 'required|callback_nourut_check_edit', [
 			'is_unique' => '%s sudah ada. Silahkan isikan No. Urut lainnya',
 		]); // Unique Field
+		$this->form_validation->set_rules('no_ktp', 'Nomor KTP', 'required|callback_noktp_check_edit|min_length[16]|max_length[16]', [
+			'is_unique' => '%s sudah terdaftar. Silahkan isikan No. KTP lainnya',
+		]); // Unique Field 
 		$this->form_validation->set_rules('no_telp', 'No Telp/WA', 'required|callback_notelp_check_edit|min_length[10]|max_length[13]'); // required
 		if ($this->form_validation->run() == FALSE)
 		{		

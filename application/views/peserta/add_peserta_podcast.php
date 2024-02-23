@@ -58,6 +58,11 @@
 			</div>
 			<!-- end section title -->
 			<div class="input-wrap">
+				<label class="col-form-label">NO. KTP/NIK<span class="section-subtitle"><code>*</code></span></label>
+				<input type="text" name="no_ktp" placeholder="NO. KTP/NIK" value="<?= set_value('no_ktp'); ?>" class="form-control <?= (form_error('no_ktp') == "" ? '':'is-invalid') ?>">
+				<?= form_error('no_ktp'); ?>				
+			</div>
+			<div class="input-wrap">
 				<label class="col-form-label">NAMA LENGKAP PESERTA<span class="section-subtitle"><code>*</code></span></label>				
 				<input type="text" name="nama_peserta" placeholder="NAMA PESERTA" onkeyup="this.value = this.value.toUpperCase()" value="<?= set_value('nama_peserta'); ?>" class="form-control">
 			</div>
