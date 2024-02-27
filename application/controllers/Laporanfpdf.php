@@ -214,7 +214,7 @@ class Laporanfpdf extends CI_Controller {
             $pdf->Cell(150);
             $pdf->Cell(20,8,'',1,1,'C');
             $pdf->SetFont('Times','B',12);
-            $pdf->Rect(15, 45, 180, 100, 'D');
+            // $pdf->Rect(15, 45, 180, 110, 'D');
             $pdf->Cell(0,15,'DATA PESERTA',0,1,'C');
             $pdf->SetFont('Times','',10);
             $pdf->Cell(80,7,'NO. KTP',0,0);
@@ -253,7 +253,7 @@ class Laporanfpdf extends CI_Controller {
             $pdf->Cell(0,7,$row->disabilitas,0,1);         
             $pdf->SetFont('Times','B',12);
             $pdf->Ln(10); // line break
-            $pdf->Rect(15, 150, 180, 40, 'D');
+            // $pdf->Rect(15, 165, 180, 40, 'D');
             $pdf->Cell(0,15,'DATA USAHA',0,1,'C');
             $pdf->SetFont('Times','',10);
             $pdf->Cell(80,7,'JABATAN DI USAHA',0,0);
@@ -264,9 +264,9 @@ class Laporanfpdf extends CI_Controller {
             $pdf->Cell(0,7,$row->nama_usaha,0,1);
             $pdf->Cell(80,7,'ALAMAT USAHA',0,0);
             $pdf->Cell(10,7,':',0,0,'C');
-            $pdf->Cell(0,7,$row->alamat_kopukm,0,1);            
+            $pdf->MultiCell(0,7,$row->alamat_kopukm,0,1);            
             $pdf->Ln(10); // line break
-            $pdf->Rect(15, 195, 180, 50, 'D');
+            // $pdf->Rect(15, 195, 180, 50, 'D');
             $pdf->SetFont('Times','B',12);
             $pdf->Cell(0,15,'DIGITALISASI USAHA',0,1,'C');
             $pdf->SetFont('Times','',10);
