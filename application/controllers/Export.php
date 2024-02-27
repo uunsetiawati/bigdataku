@@ -843,13 +843,13 @@ class Export extends CI_Controller {
                          $spreadsheet->getActiveSheet()->getCell('w' . $kolom)->setHyperlink($hyperlink);
 
                          // Jika diinginkan, tambahkan juga gambar
-                         $drawing = new Drawing();
-                         $drawing->setName('Foto');
-                         $drawing->setDescription('Foto');
-                         $drawing->setPath('uploads/peserta/'.$pengguna->foto);
-                         $drawing->setHeight(50);
-                         $drawing->setCoordinates('x' . $kolom);
-                         $drawing->setWorksheet($spreadsheet->getActiveSheet());
+                         // $drawing = new Drawing();
+                         // $drawing->setName('Foto');
+                         // $drawing->setDescription('Foto');
+                         // $drawing->setPath('uploads/peserta/'.$pengguna->foto);
+                         // $drawing->setHeight(50);
+                         // $drawing->setCoordinates('x' . $kolom);
+                         // $drawing->setWorksheet($spreadsheet->getActiveSheet());
 
 
                $kolom++;
