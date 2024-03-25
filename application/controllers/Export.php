@@ -726,7 +726,107 @@ class Export extends CI_Controller {
      {
           check_not_login();
           // $kodeunik = $this->uri->segment(3);	
-          // $semua_pengguna = $this->export_model->getAll($kodeunik)->result();          
+          // $semua_pengguna = $this->export_model->getAll($kodeunik)->result();      
+          
+          $query = $this->db->query("SELECT 
+          a.id                     AS id,
+          a.id_pelatihan           AS id_pelatihan,
+          a.kodeunik               AS kodeunik,
+          a.no_urut                AS no_urut,
+          a.no_ktp                 AS no_ktp,
+          a.nama_peserta           AS nama_peserta,
+          a.tempat_lahir           AS tempat_lahir,
+          a.tgl_lahir              AS tgl_lahir,
+          a.jk                     AS jk,
+          a.status                 AS status,
+          a.pendidikan             AS pendidikan,
+          a.agama                  AS agama,
+          a.alamat                 AS alamat,
+          a.rt                     AS rt,
+          a.rw                     AS rw,
+          d.name                   AS provinsi,
+          b.name                   AS kabupaten,
+          e.name                   AS kecamatan,
+          f.name                   AS kelurahan,
+          a.no_telp                AS no_telp,
+          a.disabilitas            AS disabilitas,
+          a.jabatan                AS jabatan,
+          a.nama_kop               AS nama_kop,
+          a.nik_koperasi           AS nik_koperasi,
+          a.no_badan_hukum         AS no_badan_hukum,
+          a.tgl_badan_hukum        AS tgl_badan_hukum,
+          a.alamat_kopukm          AS alamat_kopukm,
+          a.rt_kopukm              AS rt_kopukm,
+          a.rw_kopukm              AS rw_kopukm,
+          d.name                   AS prov_kopukm,
+          b.name                   AS kota_kopukm,
+          e.name                   AS kec_kopukm,
+          f.name                   AS kel_kopukm,
+          a.kodepos_kopukm         AS kodepos_kopukm,
+          a.jml_anggota            AS jml_anggota,
+          a.anggota_l              AS anggota_l,
+          a.anggota_p              AS anggota_p,
+          a.calon_anggota          AS calon_anggota,
+          a.bentuk_koperasi        AS bentuk_koperasi,
+          a.jenis_koperasi         AS jenis_koperasi,
+          a.tipe_koperasi          AS tipe_koperasi,
+          a.kelompok_koperasi      AS kelompok_koperasi,
+          a.cabang                 AS cabang,
+          a.kantor_cabang_pembantu AS kantor_cabang_pembantu,
+          a.kantor_kas             AS kantor_kas,
+          a.sektor_usaha           AS sektor_usaha,
+          a.bidang_usaha           AS bidang_usaha,
+          a.jenis_produk           AS jenis_produk,
+          a.volume_usaha           AS volume_usaha,
+          a.status_usaha           AS status_usaha,
+          a.sertifikasi            AS sertifikasi,
+          a.wil_pemasaran          AS wil_pemasaran,
+          a.nama_usaha             AS nama_usaha,
+          a.nib                    AS nib,
+          a.jml_tenaga_kerja       AS jml_tenaga_kerja,
+          a.jml_tenaga_kerjal      AS jml_tenaga_kerjal,
+          a.jml_tenaga_kerjap      AS jml_tenaga_kerjap,
+          a.modal_usaha            AS modal_usaha,
+          a.nilai_modalusaha       AS nilai_modalusaha,
+          a.nilai_modalhutang      AS nilai_modalhutang,
+          a.omzet_usaha            AS omzet_usaha,
+          a.nilai_omzetusaha       AS nilai_omzetusaha,
+          a.nilai_shukoperasi      AS nilai_shukoperasi,
+          a.skala_koperasi         AS skala_koperasi,
+          a.web_usaha              AS web_usaha,
+          a.email_usaha            AS email_usaha,
+          a.sosmed_usaha           AS sosmed_usaha,
+          a.market_usaha           AS market_usaha,
+          a.pengadaan              AS pengadaan,
+          a.izin_usaha             AS izin_usaha,
+          a.pemasaran              AS pemasaran,
+          a.lokasi_pemasaran       AS lokasi_pemasaran,
+          a.idebisnis              AS idebisnis,
+          a.permasalahan           AS permasalahan,
+          a.kebutuhan              AS kebutuhan,
+          a.foto                   AS foto,
+          a.ktp                    AS ktp,
+          c.jenis_pelatihan        AS jenis_pelatihan,
+          c.divisi                 AS divisi,
+          c.program                AS program,
+          c.id                     AS id_pel,
+          c.judul_pelatihan        AS judul_pelatihan,
+          c.alamat_pelatihan       AS alamat_pelatihan,
+          c.kota                   AS kota_pelatihan,
+          c.tgl_mulai              AS tgl_mulai,
+          c.tgl_akhir              AS tgl_akhir
+
+          FROM tb_data_peserta a 
+          JOIN regencies b ON a.kabupaten = b.id 
+          JOIN tb_data_pelatihan c ON a.id_pelatihan = c.id
+          JOIN provinces d ON a.provinsi = d.id
+          JOIN districts e ON a.kecamatan = e.id
+          JOIN villages f ON a.kelurahan = f.id
+          
+          WHERE a.kodeunik=$kodeunik
+          ORDER BY no_urut ASC");
+
+          $semua_pengguna = $query->result();
 
           $spreadsheet = new Spreadsheet;
           // $spreadsheet->getDefaultStyle('B')->getNumberFormat()->setFormatCode(NumberFormat::FORMAT_TEXT);
