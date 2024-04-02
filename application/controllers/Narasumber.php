@@ -381,9 +381,9 @@ class Narasumber extends CI_Controller {
             $this->form_validation->set_message('validate_ktp', '{field} wajib diisi');
             $check = FALSE;
         } else if (isset($_FILES['ktp']) && $_FILES['ktp']['size'] != 0) {
-            $allowedExts = array("gif", "jpeg", "jpg", "png", "JPG", "JPEG", "GIF", "PNG");
+            $allowedExts = array("gif", "jpeg", "jpg", "png", "pdf", "JPG", "JPEG", "GIF", "PNG", "PDF");
             $extension = pathinfo($_FILES["ktp"]["name"], PATHINFO_EXTENSION);
-			$allowedTypes = array('image/gif','image/jpeg','image/pjpeg','image/png','image/x-png');
+			$allowedTypes = array('application/pdf','image/gif','image/jpeg','image/pjpeg','image/png','image/x-png');
 			$detectedType = get_mime_by_extension($_FILES['ktp']['name']);
             $type = $_FILES['ktp']['type'];
             if (!in_array($detectedType, $allowedTypes)) {
@@ -437,9 +437,9 @@ class Narasumber extends CI_Controller {
             $this->form_validation->set_message('validate_cv', '{field} wajib diisi');
             $check = FALSE;
         } else if (isset($_FILES['cv']) && $_FILES['cv']['size'] != 0) {
-            $allowedExts = array("pdf", "PDF");
+            $allowedExts = array("pdf", "PDF", "doc", "docx", "DOC", "DOCX");
             $extension = pathinfo($_FILES["cv"]["name"], PATHINFO_EXTENSION);
-			$allowedTypes = array('application/pdf');
+			$allowedTypes = array('application/pdf','application/msword','application/vnd.openxmlformats-officedocument.wordprocessingml.document');
 			$detectedType = get_mime_by_extension($_FILES['cv']['name']);
             $type = $_FILES['cv']['type'];
             if (!in_array($detectedType, $allowedTypes)) {

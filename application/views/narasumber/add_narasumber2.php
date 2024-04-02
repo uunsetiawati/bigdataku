@@ -60,17 +60,17 @@
 					<?= form_error('hp'); ?>
 				</div>
 				<div class="input-wrap">
-					<label class="col-form-label">UPLOAD FOTO KTP<span class="section-subtitle"><code>*</code></span><h7> (Maks Foto 3MB | JPEG,JPG,PNG)</h7></label>
+					<label class="col-form-label">UPLOAD FOTO KTP<span class="section-subtitle"><code>*</code></span><h7> (Maks Foto 3MB | JPEG,JPG,PNG,PDF)</h7></label>
 					<input type="file" name="ktp" class="form-control <?= (form_error('ktp') == "" ? '':'is-invalid') ?>" required>
 					<?php echo form_error('ktp'); ?>
 				</div>
 				<div class="input-wrap">
-					<label class="col-form-label">UPLOAD FOTO NPWP<span class="section-subtitle"><code>*</code></span><h7> (Maks Foto 3MB | JPEG,JPG,PNG)</h7></label>
+					<label class="col-form-label">UPLOAD FOTO NPWP<span class="section-subtitle"><code>*</code></span><h7> (Maks Foto 3MB | JPEG,JPG,PNG,PDF)</h7></label>
 					<input type="file" name="npwp" class="form-control <?= (form_error('npwp') == "" ? '':'is-invalid') ?>" required>
 					<?php echo form_error('npwp'); ?>
 				</div>
 				<div class="input-wrap">
-					<label class="col-form-label">UPLOAD CV<span class="section-subtitle"><code>*</code></span><h7> (Maks file ukuran 3MB | pdf)</h7></label>
+					<label class="col-form-label">UPLOAD CV<span class="section-subtitle"><code>*</code></span><h7> (Maks file ukuran 3MB | pdf,word)</h7></label>
 					<input type="file" name="cv" class="form-control <?= (form_error('cv') == "" ? '':'is-invalid') ?>" required>
 					<?php echo form_error('cv'); ?>
 				</div>				
