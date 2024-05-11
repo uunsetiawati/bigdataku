@@ -48,8 +48,25 @@ class Peserta extends CI_Controller {
 			
 					// Default case (return an empty string or another default value)
 					return '';	               		
-	            }
-	        )
+	            	}
+				),
+				array(
+					'db' => 'id',
+					'dt' => 'validasi',
+  
+						'formatter' => function($d){
+							$valid = $this->db->get_where('tb_data_peserta', array('id' => $d))->row_array();
+							if(!empty($valid)){
+								$validasi=$valid['validasi'];
+								if($validasi=='VALID'){
+									return anchor('peserta/validasi/'.$d, '<i class="icon ion-ios-checkmark"></i>','class="btn btn-xs btn-success" data-placement="top" title="validasi Peserta" onclick="return confirm(\'Apakah Anda yakin ingin menghapus validasi peserta ini?\')"');
+								}elseif($validasi=='TIDAK' || $validasi==' ' || true){
+									return anchor('peserta/validasii/'.$d, '<i class="icon ion-ios-close"></i>','class="btn btn-xs btn-danger" data-placement="top" title="validasi Peserta" onclick="return confirm(\'Apakah Anda yakin ingin validasi peserta ini?\')"');
+								}
+							}
+								               		
+					  }
+			  )
 	    );
 		// $kodeunik ="202310040949";
 		// $where = "kodeunik='".$this->session->userdata('id_user')."'";
@@ -467,7 +484,7 @@ class Peserta extends CI_Controller {
                 $this->form_validation->set_message('validate_foto_ktp', 'Invalid Image Content!');
                 $check = FALSE;
             }
-            if (filesize($_FILES['foto_ktp']['tmp_name']) > 3097152) {
+            if (filesize($_FILES['foto_ktp']['tmp_name']) > 10485760) {
                 $this->form_validation->set_message('validate_foto_ktp', 'Ukuran gambar tidak boleh lebih dari 3MB!');
                 $check = FALSE;
             }
@@ -495,7 +512,7 @@ class Peserta extends CI_Controller {
                 $this->form_validation->set_message('validate_foto', 'Invalid Image Content!');
                 $check = FALSE;
             }
-            if (filesize($_FILES['foto']['tmp_name']) > 3097152) {
+            if (filesize($_FILES['foto']['tmp_name']) > 10485760) {
                 $this->form_validation->set_message('validate_foto', 'Ukuran gambar tidak boleh lebih dari 3MB!');
                 $check = FALSE;
             }
@@ -620,9 +637,81 @@ class Peserta extends CI_Controller {
 
 	}
 
-	function delete() 
+	function validasi() 
 	{
+		check_not_login();
 
+		$id = $this->uri->segment(3);
+
+		$query = $this->db->query("SELECT * FROM tb_data_peserta WHERE id = $id");
+		$row = $query->row();
+		$update = $this->db->query("UPDATE tb_data_peserta SET validasi='TIDAK' WHERE id = $id");	
+		
+		// if (!empty($id)) {		
+		// 	$query = $this->db->query("SELECT * FROM tb_data_peserta WHERE id = $id");
+		// 	$row = $query->row();	
+		// 	if ($row && ($row->validasi == "TIDAK" || $row->validasi == " ")){
+		// 		$update = $this->db->query("UPDATE tb_data_peserta SET validasi='VALID' WHERE id = $id");			
+		// 	}elseif($row && ($row->validasi == "VALID")){
+		// 		$query = $this->db->query("UPDATE tb_data_peserta SET validasi='TIDAK' WHERE id = $id");				
+		// 	}
+		// 	redirect('peserta/viewdatapeserta/'.$row->kodeunik);
+		// }else {
+		// 	echo "ID kosong";
+		// }
+		redirect('peserta/viewdatapeserta/'.$row->kodeunik);
+	}
+
+	function validasii() 
+	{
+		check_not_login();
+
+		$id = $this->uri->segment(3);
+		$query = $this->db->query("SELECT * FROM tb_data_peserta WHERE id = $id");
+		$row = $query->row();
+		$update = $this->db->query("UPDATE tb_data_peserta SET validasi='VALID' WHERE id = $id");
+		
+		// if (!empty($id)) {		
+		// 	$query = $this->db->query("SELECT * FROM tb_data_peserta WHERE id = $id");
+		// 	$row = $query->row();	
+		// 	if ($row && ($row->validasi == "TIDAK" || $row->validasi == " ")){
+		// 		$update = $this->db->query("UPDATE tb_data_peserta SET validasi='VALID' WHERE id = $id");			
+		// 	}elseif($row && ($row->validasi == "VALID")){
+		// 		$query = $this->db->query("UPDATE tb_data_peserta SET validasi='TIDAK' WHERE id = $id");				
+		// 	}
+		// 	redirect('peserta/viewdatapeserta/'.$row->kodeunik);
+		// }else {
+		// 	echo "ID kosong";
+		// }
+		redirect('peserta/viewdatapeserta/'.$row->kodeunik);
+	}
+
+	function validasiall() 
+	{
+		check_not_login();
+
+		$id = $this->uri->segment(3);
+
+		$query = $this->db->query("SELECT * FROM tb_data_peserta WHERE id = $id");
+		$row = $query->row();
+		$kodeunik = $row->kodeunik;
+		$update = $this->db->query("UPDATE tb_data_peserta SET validasi='VALID' WHERE kodeunik = $id");	
+
+		redirect('peserta/viewdatapeserta/'.$id);
+	}
+
+	function batalvalidasi() 
+	{
+		check_not_login();
+
+		$id = $this->uri->segment(3);
+
+		$query = $this->db->query("SELECT * FROM tb_data_peserta WHERE id = $id");
+		$row = $query->row();
+		$kodeunik = $row->kodeunik;
+		$update = $this->db->query("UPDATE tb_data_peserta SET validasi='TIDAK' WHERE kodeunik = $id");	
+
+		redirect('peserta/viewdatapeserta/'.$id);
 	}
 
 	function thankyou($kodeunik)

@@ -30,7 +30,7 @@
             <div class="content">
 				<div class="container">
 					<div class="row">                        
-                        <div class="col-4">
+                        <div class="col-3">
                             <div class="button-default">
                                 <?php
                                     // echo anchor('peserta/add_pesertadewan/'.$this->uri->segment(3), '<class="button" target="_blank">Tambah Data');
@@ -45,14 +45,21 @@
                                 ?>
                             </div>
                         </div>  
-                        <div class="col-4">                           
+                        <div class="col-3">                           
                             <div class="button-default">   
                                 <?php
                                     echo anchor('export/export1/'.$this->uri->segment(3), 'Export', array('class'=>'button3'));
                                 ?>
                             </div>
                         </div>
-                        <div class="col-4">                           
+                        <div class="col-3">                           
+                            <div class="button-default">   
+                                <?php
+                                    echo anchor('peserta/validasiall/'.$this->uri->segment(3), 'Approve', array('class'=>'button3', 'onclick'=>"return confirm('Apakah Anda yakin ingin memvalidasi semua peserta pelatihan ini?')"));
+                                ?>
+                            </div>
+                        </div>
+                        <div class="col-3">                           
                             <div class="button-default">   
                                 <?php                                    
                                     echo anchor('pelatihan', 'Kembali', array('class'=>'button2'));
@@ -62,26 +69,36 @@
                     </div>
 
                     <div class="row">                        
-                        <div class="col-4">
+                        <div class="col-3">
                             <div class="button-default">
                                 <?php
                                     echo anchor('peserta/downloadFoto/'.$this->uri->segment(3), 'Download Foto', array('class'=>'button4'));
                                 ?>
                             </div>
                         </div>  
-                        <div class="col-4">                           
+                        <div class="col-3">                           
                             <div class="button-default">   
                                 <?php
                                 if($peserta['sasaran'] == 'UKM'){
                                     echo anchor('laporanfpdf/cetak/'.$this->uri->segment(3), 'Cetak', array('class'=>'button6', 'target'=>'_blank'));
                                 }else if($peserta['sasaran'] == 'SAFARI PODCAST'){
                                     echo anchor('laporanfpdf/cetak_podcast/'.$this->uri->segment(3), 'Cetak', array('class'=>'button6', 'target'=>'_blank'));
+                                }else if($peserta['sasaran'] == 'KOPERASI'){
+                                    echo anchor('peserta/viewdatapeserta/'.$this->uri->segment(3), 'Cetak', array('class'=>'button6'));
                                 }
                                     
                                 ?>
                             </div>
                         </div>
-                        <div class="col-4">                           
+                        <div class="col-3">                           
+                            <div class="button-default">   
+                                <?php
+                                    echo anchor('peserta/batalvalidasi/'.$this->uri->segment(3), 'UnaApprove', 
+                                    array('class'=>'button5', 'onclick'=>"return confirm('Apakah Anda yakin ingin menghapus semua validasi peserta pelatihan ini?')"));
+                                ?>
+                            </div>
+                        </div>
+                        <div class="col-3">                           
                             <div class="button-default">   
                                 <?php
                                     echo anchor('peserta/downloadKtp/'.$this->uri->segment(3), 'Download KTP', array('class'=>'button5'));
@@ -102,6 +119,7 @@
                                         <th style="text-align: center;">ASAL</th>
                                         <th style="text-align: center;">No. Telp</th>
 										<th >#</th>
+                                        <th >#</th>
 									</tr>
 								</thead>								
 							</table>
@@ -153,6 +171,11 @@
                     },                                     
                     { 
                         "data": "aksi",
+                        "width": "20px",
+                        "class": "text-center"
+                    },
+                    { 
+                        "data": "validasi",
                         "width": "20px",
                         "class": "text-center"
                     },
