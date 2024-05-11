@@ -185,7 +185,7 @@
 			</div>
 			<div class="form-wrapper" id="foto" style="display:block;">
 				<div class="input-wrap">
-					<label class="col-form-label">UPLOAD FOTO DIRI<span class="section-subtitle"><code>*</code></span><h7> (Maksimal file ukuran 3MB)</h7></label>
+					<label class="col-form-label">UPLOAD FOTO DIRI FORMAL<span class="section-subtitle"><code>*</code></span><h7> (Maksimal file ukuran 3MB)</h7></label>
 					<input type="file" name="foto" class="form-control <?= (form_error('foto') == "" ? '':'is-invalid') ?>" required>
 					<?php echo form_error('foto'); ?>
 				</div>
@@ -346,6 +346,15 @@
 				<label class="col-form-label">NOMOR NIB<span class="section-subtitle"><code>*</code></span></label>
                 <input type="text" name="nib" placeholder="NOMOR NIB" onkeyup="this.value = this.value.toUpperCase()" value="<?= set_value('nib'); ?>" class="form-control" required>
             </div>
+			<div class="input-wrap">
+				<label class="col-form-label">SUDAH BERAPA LAMA MEMILIKI NIB<span class="section-subtitle"><code>*</code></span></label>				
+				<select name="lama_nib" class="form-control" required>
+					<option value="" selected disabled>--PILIH LAMA MEMILIKI NIB--</option>
+					<option value="< 6 BULAN" <?=$this->input->post('lama_nib') == '< 6 BULAN' ? 'selected':''?>>< 6 BULAN</option>
+					<option value="6 BULAN - 2 TAHUN" <?=$this->input->post('lama_nib') == '6 BULAN - 2 TAHUN' ? 'selected':''?>>6 BULAN - 2 TAHUN</option>
+					<option value="> 2 TAHUN" <?=$this->input->post('lama_nib') == '> 2 TAHUN' ? 'selected':''?>>> 2 TAHUN</option>
+				</select>				
+			</div>
             <div class="input-wrap">
 				<label class="col-form-label">NAMA USAHA<span class="section-subtitle"><code>*</code></span></label>
                 <input type="text" name="nama_usaha" placeholder="NAMA USAHA" onkeyup="this.value = this.value.toUpperCase()" value="<?= set_value('nama_usaha'); ?>" class="form-control" required>
@@ -380,7 +389,15 @@
                 //function cmb_dinamisprov($name, $table, $field, $pk, $id, $selected=null, $extra=null)
                 echo cmb_dinamiskop('bidang_usaha', 'tb_bidang_usaha', 'nama', 'nama','--PILIH BIDANG USAHA--', $this->input->post('bidang_usaha'));
                 ?>
-            </div>     
+            </div>    
+			<div class="input-wrap">
+				<label class="col-form-label">TANGGAL PENDIRIAN USAHA<span class="section-subtitle"><code>*</code></span></label>				
+				<input type="date" name="tgl_pendirian" placeholder="TANGGAL PENDIRIAN USAHA" value="<?= set_value('tgl_pendirian'); ?>" class="form-control">				
+			</div> 
+			<div class="input-wrap">
+				<label class="col-form-label">NPWP USAHA<span class="section-subtitle"><code>*</code></span></label>				
+				<input type="text" name="npwp" placeholder="NPWP USAHA" onkeyup="this.value = this.value.toUpperCase()" value="<?= set_value('npwp'); ?>" class="form-control">			
+			</div>
             <div class="input-wrap">
 				<label class="col-form-label">ALAMAT USAHA<span class="section-subtitle"><code>*</code></span></label>
                 <input type="text" name="alamat_kopukm" placeholder="ALAMAT USAHA" onkeyup="this.value = this.value.toUpperCase()" value="<?= set_value('alamat_kopukm'); ?>" class="form-control" required>
@@ -462,6 +479,10 @@
 				<label class="col-form-label">JUMLAH KARYAWAN PEREMPUAN<span class="section-subtitle"><code>*</code></span></label>
                 <input type="number" name="jml_tenaga_kerjap" placeholder="JUMLAH PEREMPUAN" value="<?= set_value('jml_tenaga_kerjap'); ?>" class="form-control" required>
             </div>
+			<div class="input-wrap">
+				<label class="col-form-label">KAPASITAS PRODUKSI PERTAHUN<span class="section-subtitle"><code>*</code></span></label>				
+				<input type="text" name="kapasitas_produksi" onkeyup="this.value = this.value.toUpperCase()" value="<?= set_value('kapasitas_produksi'); ?>" class="form-control">			
+			</div>
             <div class="input-wrap">
 				<label class="col-form-label">JANGKAUAN PEMASARAN PRODUK/LAYANAN USAHA<span class="section-subtitle"><code>*</code></span></label>
                 <?php
@@ -480,7 +501,19 @@
 					<option value="PEMILIK" <?=$this->input->post('jabatan') == 'PEMILIK' ? 'selected':''?>>PEMILIK</option>
 					<option value="KARYAWAN" <?=$this->input->post('jabatan') == 'KARYAWAN' ? 'selected':''?>>KARYAWAN</option>									
 				</select>
-			</div>            
+			</div>
+			<div class="input-wrap">
+				<label class="col-form-label">APAKAH PERNAH MENGIKUTI PELATIHAN SEBELUMNYA?<span class="section-subtitle"><code>*</code></span></label>
+				<select name="pelatihan_sebelumnya" class="form-control" required>
+					<option value="" selected disabled>--PILIH SALAH SATU--</option>
+					<option value="YA" <?=$this->input->post('pelatihan_sebelumnya') == 'YA' ? 'selected':''?>>YA</option>
+					<option value="TIDAK" <?=$this->input->post('pelatihan_sebelumnya') == 'TIDAK' ? 'selected':''?>>TIDAK</option>									
+				</select>
+			</div>    
+			<div class="input-wrap">
+				<label class="col-form-label">MASUKAN / SARAN<span class="section-subtitle"><code>*</code></span></label>				
+				<input type="text" name="saran" placeholder="MASUKAN / SARAN" onkeyup="this.value = this.value.toUpperCase()" value="<?= set_value('saran'); ?>" class="form-control">			
+			</div>          
            
             <div class="button-default">
 				<button type="submit" name="simpan" class="button" id="btnsubmit" style="display:block">Simpan</button>

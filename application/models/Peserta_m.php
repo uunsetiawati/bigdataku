@@ -141,6 +141,12 @@
 				'permasalahan'			=> $masalah,
 				'kebutuhan'				=> $kebutuhan,
 				'jabatan'				=> $this->input->post('jabatan', TRUE),
+				'tgl_pendirian'			=> $this->input->post('tgl_pendirian', TRUE),
+				'npwp'					=> $this->input->post('npwp', TRUE),
+				'lama_nib'				=> $this->input->post('lama_nib', TRUE),
+				'kapasitas_produksi'	=> $this->input->post('kapasitas_produksi', TRUE),
+				'pelatihan_sebelumnya'	=> $this->input->post('pelatihan_sebelumnya', TRUE),
+				'saran'					=> $this->input->post('saran', TRUE),
 				'foto'					=> $foto,
 				'ktp'					=> $ktp,
 				'created'				=> $this->input->post('now', TRUE)

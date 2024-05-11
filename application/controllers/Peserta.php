@@ -478,13 +478,13 @@ class Peserta extends CI_Controller {
             $allowedExts = array("gif", "jpeg", "jpg", "png", "JPG", "JPEG", "GIF", "PNG");
             $extension = pathinfo($_FILES["foto_ktp"]["name"], PATHINFO_EXTENSION);
 			$allowedTypes = array('image/gif','image/jpeg','image/pjpeg','image/png','image/x-png');
-			$detectedType = get_mime_by_extension($_FILES['foto_ktp']['name']);
+			$detectedType = $_FILES['foto_ktp']['type'];
             $type = $_FILES['foto_ktp']['type'];
             if (!in_array($detectedType, $allowedTypes)) {
                 $this->form_validation->set_message('validate_foto_ktp', 'Invalid Image Content!');
                 $check = FALSE;
             }
-            if (filesize($_FILES['foto_ktp']['tmp_name']) > 10485760) {
+            if ($_FILES['foto_ktp']['size'] > 10485760) {
                 $this->form_validation->set_message('validate_foto_ktp', 'Ukuran gambar tidak boleh lebih dari 3MB!');
                 $check = FALSE;
             }
@@ -506,13 +506,13 @@ class Peserta extends CI_Controller {
             $allowedExts = array("gif", "jpeg", "jpg", "png", "JPG", "JPEG", "GIF", "PNG");
             $extension = pathinfo($_FILES["foto"]["name"], PATHINFO_EXTENSION);
 			$allowedTypes = array('image/gif','image/jpeg','image/pjpeg','image/png','image/x-png');
-			$detectedType = get_mime_by_extension($_FILES['foto']['name']);
+			$detectedType = $_FILES['foto']['type'];
             $type = $_FILES['foto']['type'];
             if (!in_array($detectedType, $allowedTypes)) {
                 $this->form_validation->set_message('validate_foto', 'Invalid Image Content!');
                 $check = FALSE;
             }
-            if (filesize($_FILES['foto']['tmp_name']) > 10485760) {
+            if ($_FILES['foto']['size'] > 10485760) {
                 $this->form_validation->set_message('validate_foto', 'Ukuran gambar tidak boleh lebih dari 3MB!');
                 $check = FALSE;
             }
