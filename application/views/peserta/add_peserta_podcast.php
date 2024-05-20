@@ -155,8 +155,8 @@
 				<?= form_error('no_telp'); ?>
 			</div>
 			<div class="input-wrap">
-				<label class="col-form-label">ASAL SEKOLAH<span class="section-subtitle"><code>*</code></span></label>
-                <input type="text" name="nama_kop" placeholder="NAMA ASAL SEKOLAH" onkeyup="this.value = this.value.toUpperCase()" value="<?= set_value('nama_kop'); ?>" class="form-control" required>
+				<label class="col-form-label">ASAL SEKOLAH / ASAL DESA<span class="section-subtitle"><code>*</code></span></label>
+                <input type="text" name="nama_kop" placeholder="NAMA ASAL SEKOLAH / ASAL DESA" onkeyup="this.value = this.value.toUpperCase()" value="<?= set_value('nama_kop'); ?>" class="form-control" required>
             </div>
 			<div class="input-wrap">
 				<label class="col-form-label">APAKAH ANDA PENYANDANG DISABILITAS<span class="section-subtitle"><code>*</code></span></label>
