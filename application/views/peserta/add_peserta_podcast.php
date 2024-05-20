@@ -58,7 +58,7 @@
 			</div>
 			<!-- end section title -->
 			<div class="input-wrap">
-				<label class="col-form-label">NO. KTP/NIK<span class="section-subtitle"><code>*</code></span></label>
+				<label class="col-form-label">NO. KTP/NIK/KARTU PELAJAR<span class="section-subtitle"><code>*</code></span></label>
 				<input type="text" name="no_ktp" placeholder="NO. KTP/NIK" value="<?= set_value('no_ktp'); ?>" class="form-control <?= (form_error('no_ktp') == "" ? '':'is-invalid') ?>">
 				<?= form_error('no_ktp'); ?>				
 			</div>
@@ -155,6 +155,10 @@
 				<?= form_error('no_telp'); ?>
 			</div>
 			<div class="input-wrap">
+				<label class="col-form-label">ASAL SEKOLAH<span class="section-subtitle"><code>*</code></span></label>
+                <input type="text" name="nama_kop" placeholder="NAMA ASAL SEKOLAH" onkeyup="this.value = this.value.toUpperCase()" value="<?= set_value('nama_kop'); ?>" class="form-control" required>
+            </div>
+			<div class="input-wrap">
 				<label class="col-form-label">APAKAH ANDA PENYANDANG DISABILITAS<span class="section-subtitle"><code>*</code></span></label>
 				<select name="disabilitas" class="form-control" required>
 					<option value="" selected disabled>--PILIH SALAH SATU--</option>
@@ -177,9 +181,16 @@
 			</div>
 			<div class="form-wrapper" id="foto" style="display:block;">
 				<div class="input-wrap">
-					<label class="col-form-label">UPLOAD FOTO DIRI<span class="section-subtitle"><code>*</code></span><h7> (Maksimal file ukuran 3MB)</h7></label>
+					<label class="col-form-label">UPLOAD FOTO DIRI (FORMAL)<span class="section-subtitle"><code>*</code></span><h7> (Maksimal file ukuran 3MB)</h7></label>
 					<input type="file" name="foto" class="form-control <?= (form_error('foto') == "" ? '':'is-invalid') ?>" required>
 					<?php echo form_error('foto'); ?>
+				</div>
+			</div>
+
+			<div class="form-wrapper" id="foto_ktp" style="display:block;">
+				<div class="input-wrap">
+					<label class="col-form-label">UPLOAD FOTO KTP / KK / KARTU PELAJAR<span class="section-subtitle"><code>*</code></span><h7> (Maksimal file ukuran 3MB)</h7></label>
+					<input type="file" name="foto_ktp" class="form-control" required>
 				</div>
 			</div>
 			

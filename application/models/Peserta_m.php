@@ -154,7 +154,7 @@
 			$this->db->insert($this->table, $data);
 		}
 
-		function save_podcast($foto,$no_urut)
+		function save_podcast($foto,$ktp,$no_urut)
 		{
 			$nama_peserta = $this->input->post('nama_peserta', TRUE);
 			$sosmed = $this->input->post('sosmed', TRUE);
@@ -282,7 +282,7 @@
 				'kebutuhan'				=> $kebutuhan,
 				'jabatan'				=> $this->input->post('jabatan', TRUE),
 				'foto'					=> $foto,
-				// 'ktp'					=> $ktp,
+				'ktp'					=> $ktp,
 				'created'				=> $this->input->post('now', TRUE)
 			);
 			$this->db->insert($this->table, $data);

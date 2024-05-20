@@ -236,6 +236,7 @@ class Peserta extends CI_Controller {
 			'is_unique' => '%s sudah terdaftar. Silahkan isikan %S lainnya',
 		]); 
 		$this->form_validation->set_rules('foto', 'FOTO', 'callback_validate_foto'); // penamaan callback, calback_nama fungsi
+		$this->form_validation->set_rules('foto_ktp', 'KTP', 'callback_validate_foto_ktp'); // penamaan callback, calback_nama fungsi
 		if ($this->form_validation->run() == FALSE)
 		{			
 			// $kodeunik = $this->uri->segment(3);
@@ -265,8 +266,9 @@ class Peserta extends CI_Controller {
 		else
 		{   
 			$total_peserta = $this->db->where('kodeunik', $kodeunik)->count_all_results('tb_data_peserta') + 1;
-			$uploadFoto = $this->upload_foto_podcast();			
-			$this->peserta_m->save_podcast($uploadFoto,$total_peserta);
+			$uploadFoto = $this->upload_foto_podcast();	
+			$uploadKtp = $this->upload_ktp();	
+			$this->peserta_m->save_podcast($uploadFoto,$uploadKtp,$total_peserta);
 			$this->thankyou($kodeunik);
 		}
 	}	
@@ -353,7 +355,7 @@ class Peserta extends CI_Controller {
 			//validasi foto yang di upload
 			$config['upload_path']          = './uploads/peserta/';
             $config['allowed_types']        = 'gif|jpg|png|jpeg';
-            $config['max_size']             = 3000;
+            $config['max_size']             = 10000;
 			$config['file_name'] 			= $total_peserta.'-'.$kodeunik.'-'.$ktp;
             $this->load->library('upload', $config);
 
@@ -372,7 +374,7 @@ class Peserta extends CI_Controller {
 			//validasi foto yang di upload
 			$config['upload_path']          = './uploads/peserta/';
             $config['allowed_types']        = 'gif|jpg|png|jpeg';
-            $config['max_size']             = 3000;
+            $config['max_size']             = 10000;
 			$config['file_name'] 			= $total_peserta.'-'.$kodeunik.'-'.$telp;
             $this->load->library('upload', $config);
 
@@ -391,7 +393,7 @@ class Peserta extends CI_Controller {
 			//validasi foto yang di upload
 			$config2['upload_path']          = './uploads/ktp/';
             $config2['allowed_types']        = 'gif|jpg|png|jpeg';
-            $config2['max_size']             = 3000;
+            $config2['max_size']             = 10000;
 			$config2['file_name'] 			 = $total_peserta.'-'.$kodeunik.'-'.$ktp;
             // $this->load->library('upload', $config2);
 			$this->upload->initialize($config2);
