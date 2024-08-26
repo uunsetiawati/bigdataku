@@ -22,7 +22,11 @@
 					];
 					?>
                     <p>Pada Tanggal Pelatihan: <?=$tglmulai->format("d") . " " . $monthNames[$tglmulai->format("n") - 1] . " " . $tglmulai->format("Y");?> s.d <?=$tglakhir->format("d") . " " . $monthNames[$tglakhir->format("n") - 1] . " " . $tglakhir->format("Y");?></p>
-                    <h6>Apabila mengundurkan diri harap menghubungi panitia di nomor berikut H-2 sebelum tanggal kegiatan</h6>
+                    
+					<h6>Informasi selanjutnya mengenai kelulusan sebagai peserta pelatihan akan disampaikan oleh panitia melalui WhatsApp paling lambat H-4 sebelum acara pelatihan.</h6><br>
+					
+					<h6>Apabila mengundurkan diri harap menghubungi panitia di nomor berikut H-2 sebelum tanggal kegiatan</h6>
+					
 					<!-- separator -->
 					<div class="separator-medium"></div>
 					<!-- end separator -->
