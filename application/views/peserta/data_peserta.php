@@ -33,14 +33,14 @@
                         <div class="col-3">
                             <div class="button-default">
                                 <?php
-                                    // echo anchor('peserta/add_pesertadewan/'.$this->uri->segment(3), '<class="button" target="_blank">Tambah Data');
-                                    if($peserta['sasaran'] == "UKM"){
-                                        echo anchor('peserta/add_peserta/'.$this->uri->segment(3), 'Tambah Peserta', array('class'=>'button', 'target'=>'_blank'));
-                                    }else if($peserta['sasaran'] == "SAFARI PODCAST"){
-                                        echo anchor('peserta/add_peserta_podcast/'.$this->uri->segment(3), 'Tambah Peserta', array('class'=>'button', 'target'=>'_blank'));
-                                    }else if($peserta['sasaran'] == "KOPERASI"){
-                                        echo anchor('peserta/add_peserta/'.$this->uri->segment(3), 'Tambah Peserta', array('class'=>'button', 'target'=>'_blank'));
-                                    }
+                                    echo anchor('pelatihan/laporan/'.$this->uri->segment(3), 'Laporan', array('class'=>'button'));
+                                    // if($peserta['sasaran'] == "UKM"){
+                                    //     echo anchor('peserta/add_peserta/'.$this->uri->segment(3), 'Tambah Peserta', array('class'=>'button', 'target'=>'_blank'));
+                                    // }else if($peserta['sasaran'] == "SAFARI PODCAST"){
+                                    //     echo anchor('peserta/add_peserta_podcast/'.$this->uri->segment(3), 'Tambah Peserta', array('class'=>'button', 'target'=>'_blank'));
+                                    // }else if($peserta['sasaran'] == "KOPERASI"){
+                                    //     echo anchor('peserta/add_peserta/'.$this->uri->segment(3), 'Tambah Peserta', array('class'=>'button', 'target'=>'_blank'));
+                                    // }
                                     
                                 ?>
                             </div>

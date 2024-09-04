@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+use setasign\Fpdi\Fpdi;
+
 class Pelatihan extends CI_Controller {
 
 	public function __construct()
@@ -224,6 +226,509 @@ class Pelatihan extends CI_Controller {
 			
 
 		}
+
+	function laporan()
+		{
+			// $this->load->view('view_peserta');
+			$kodeunik=$this->uri->segment(3);
+			$data['pelatihan']=$this->db->get_where('tb_data_pelatihan', array('kodeunik' => $kodeunik))->row_array();
+			$data['laporan']=$this->db->get_where('view_laporan', array('kodeunik' => $kodeunik))->row_array();
+			$this->templateadmin->load('template/dashboard', 'laporan/data_laporan',$data);
+		}
+
+		function upload_sk($kodeunik)
+		{		
+			// Get data from URI and form inputs
+			// $kodeunik = $this->uri->segment(3);
+			$laporan = $this->pelatihan_m->get_laporan_by_kodeunik($kodeunik); // Pastikan fungsi ini ada
+			if(!empty($laporan)){
+				$this->edit_sk($kodeunik);
+			}else{
+				// File upload configuration
+				$config['upload_path']   = './uploads/laporan/sk/'; // Define the path where the file will be stored
+				$config['allowed_types'] = 'pdf'; // Only allow PDF files
+				$config['max_size']      = 10000; // Set the maximum file size limit (in KB)
+				$config['file_name']     = 'SK-' . $kodeunik; // Rename the file to include the unique code
+			
+				// Initialize upload library with the above configuration
+				$this->load->library('upload', $config);
+				$this->upload->initialize($config);
+			
+				// Check if the upload was successful
+				if ($this->upload->do_upload('sk')) {
+					// Get uploaded data if the upload is successful
+					$upload = $this->upload->data();
+
+					// Extract the file name to store in the database
+					$file_name = $upload['file_name'];
+			
+					// Call the model method to save upload details to the database
+					$this->pelatihan_m->upload_sk($file_name);
+			
+					// Redirect to the specified route after a successful upload
+					redirect('pelatihan/laporan/' . $kodeunik);
+				} else {
+					// Display upload errors if the upload fails
+					$error = $this->upload->display_errors('<p class="error">', '</p>');
+					
+					// Load the error view or handle it as per your needs
+					echo $error;
+				}
+			}
+		}
+
+		function edit_sk($kodeunik)
+		{
+			// $kodeunik = $this->input->post('kodeunik');
+			// $id_laporan=$this->input->post('id');
+			
+			// Path upload dan pengaturan file
+			$upload_path = './uploads/laporan/sk/';
+			$sk = [
+				'upload_path'   => $upload_path,
+				'allowed_types' => 'pdf',
+				'max_size'      => 10000,
+				'file_name'     => 'SK-' . $kodeunik,
+			];
+
+			// Inisialisasi upload
+			$this->load->library('upload', $sk);
+			$this->upload->initialize($sk);
+
+			// Ambil data file lama dari database (sesuaikan sesuai field database)
+			$laporan = $this->pelatihan_m->get_laporan_by_id($kodeunik); // Pastikan fungsi ini ada
+			$file_lama = !empty($laporan['sk']) ? $upload_path . $laporan['sk'] : null;
+
+			// Cek dan hapus file lama jika ada
+			if ($file_lama && file_exists($file_lama)) {
+				unlink($file_lama);
+			}
+
+			// Proses upload file baru
+			if ($this->upload->do_upload('sk')) {
+				$upload = $this->upload->data();
+				$file_name = $upload['file_name']; // Nama file yang diupload
+
+				// Update database dengan file baru
+				$this->pelatihan_m->update_sk($kodeunik, $file_name); // Pastikan fungsi update sesuai dengan struktur database Anda
+
+				redirect('pelatihan/laporan/' . $kodeunik);
+			} else {
+				// Tampilkan pesan kesalahan jika upload gagal
+				$error = $this->upload->display_errors();
+				echo "Error: " . $error;
+			}
+		}
+
+		function upload_tor($kodeunik)
+		{		
+
+			// Get data from URI and form inputs
+			// $kodeunik = $this->uri->segment(3);
+			$laporan = $this->pelatihan_m->get_laporan_by_kodeunik($kodeunik); // Pastikan fungsi ini ada
+			
+		
+			if(!empty($laporan)){
+				$this->edit_tor($kodeunik);
+			}else{
+				// File upload configuration
+				$config['upload_path']   = './uploads/laporan/tor/'; // Define the path where the file will be stored
+				$config['allowed_types'] = 'pdf'; // Only allow PDF files
+				$config['max_size']      = 10000; // Set the maximum file size limit (in KB)
+				$config['file_name']     = 'TOR-' . $kodeunik; // Rename the file to include the unique code
+			
+				// Initialize upload library with the above configuration
+				$this->load->library('upload', $config);
+				$this->upload->initialize($config);
+				// Check if the upload was successful
+				if ($this->upload->do_upload('tor')) {
+					// Get uploaded data if the upload is successful
+					$upload = $this->upload->data();
+
+					// Extract the file name to store in the database
+					$file_name = $upload['file_name'];
+			
+					// Call the model method to save upload details to the database
+					$this->pelatihan_m->upload_tor($file_name);
+			
+					// Redirect to the specified route after a successful upload
+					redirect('pelatihan/laporan/' . $kodeunik);
+				} else {
+					// Display upload errors if the upload fails
+					$error = $this->upload->display_errors('<p class="error">', '</p>');
+					
+					// Load the error view or handle it as per your needs
+					echo $error;
+				}
+			}
+		}
+
+		function edit_tor($kodeunik)
+		{
+			// $kodeunik = $this->input->post('kodeunik');
+			$id_laporan=$this->input->post('id');
+			
+			// Path upload dan pengaturan file
+			$upload_path = './uploads/laporan/tor/';
+			$tor = [
+				'upload_path'   => $upload_path,
+				'allowed_types' => 'pdf',
+				'max_size'      => 10000,
+				'file_name'     => 'TOR-' . $kodeunik,
+			];
+
+			// Inisialisasi upload
+			$this->load->library('upload', $tor);
+			$this->upload->initialize($tor);
+
+			// Ambil data file lama dari database (sesuaikan sesuai field database)
+			$laporan = $this->pelatihan_m->get_laporan_by_kodeunik($kodeunik); // Pastikan fungsi ini ada
+			$file_lama = !empty($laporan['tor']) ? $upload_path . $laporan['tor'] : null;
+
+			// Cek dan hapus file lama jika ada
+			if ($file_lama && file_exists($file_lama)) {
+				unlink($file_lama);
+			}
+
+			// Proses upload file baru
+			if ($this->upload->do_upload('tor')) {
+				$upload = $this->upload->data();
+				$file_name = $upload['file_name']; // Nama file yang diupload
+
+				// Update database dengan file baru
+				$this->pelatihan_m->update_tor($kodeunik, $file_name); // Pastikan fungsi update sesuai dengan struktur database Anda
+
+				redirect('pelatihan/laporan/' . $kodeunik);
+			} else {
+				// Tampilkan pesan kesalahan jika upload gagal
+				$error = $this->upload->display_errors();
+				echo "Error: " . $error;
+			}
+		}
+
+		function upload_laporan($kodeunik)
+		{		
+
+			// Get data from URI and form inputs
+			// $kodeunik = $this->uri->segment(3);
+			$laporan = $this->pelatihan_m->get_laporan_by_kodeunik($kodeunik); // Pastikan fungsi ini ada
+			
+		
+			if(!empty($laporan)){
+				$this->edit_laporan($kodeunik);
+			}else{
+				// File upload configuration
+				$config['upload_path']   = './uploads/laporan/laporan/'; // Define the path where the file will be stored
+				$config['allowed_types'] = 'pdf'; // Only allow PDF files
+				$config['max_size']      = 10000; // Set the maximum file size limit (in KB)
+				$config['file_name']     = 'LAPORAN-' . $kodeunik; // Rename the file to include the unique code
+			
+				// Initialize upload library with the above configuration
+				$this->load->library('upload', $config);
+				$this->upload->initialize($config);
+				// Check if the upload was successful
+				if ($this->upload->do_upload('laporan')) {
+					// Get uploaded data if the upload is successful
+					$upload = $this->upload->data();
+
+					// Extract the file name to store in the database
+					$file_name = $upload['file_name'];
+			
+					// Call the model method to save upload details to the database
+					$this->pelatihan_m->upload_laporan($file_name);
+			
+					// Redirect to the specified route after a successful upload
+					redirect('pelatihan/laporan/' . $kodeunik);
+				} else {
+					// Display upload errors if the upload fails
+					$error = $this->upload->display_errors('<p class="error">', '</p>');
+					
+					// Load the error view or handle it as per your needs
+					echo $error;
+				}
+			}
+		}
+
+		function edit_laporan($kodeunik)
+		{
+			// $kodeunik = $this->input->post('kodeunik');
+			$id_laporan=$this->input->post('id');
+			
+			// Path upload dan pengaturan file
+			$upload_path = './uploads/laporan/laporan/';
+			$laporan = [
+				'upload_path'   => $upload_path,
+				'allowed_types' => 'pdf',
+				'max_size'      => 10000,
+				'file_name'     => 'LAPORAN-' . $kodeunik,
+			];
+
+			// Inisialisasi upload
+			$this->load->library('upload', $laporan);
+			$this->upload->initialize($laporan);
+
+			// Ambil data file lama dari database (sesuaikan sesuai field database)
+			$laporan = $this->pelatihan_m->get_laporan_by_kodeunik($kodeunik); // Pastikan fungsi ini ada
+			$file_lama = !empty($laporan['laporan']) ? $upload_path . $laporan['laporan'] : null;
+
+			// Cek dan hapus file lama jika ada
+			if ($file_lama && file_exists($file_lama)) {
+				unlink($file_lama);
+			}
+
+			// Proses upload file baru
+			if ($this->upload->do_upload('laporan')) {
+				$upload = $this->upload->data();
+				$file_name = $upload['file_name']; // Nama file yang diupload
+
+				// Update database dengan file baru
+				$this->pelatihan_m->update_laporan($kodeunik, $file_name); // Pastikan fungsi update sesuai dengan struktur database Anda
+
+				redirect('pelatihan/laporan/' . $kodeunik);
+			} else {
+				// Tampilkan pesan kesalahan jika upload gagal
+				$error = $this->upload->display_errors();
+				echo "Error: " . $error;
+			}
+		}
+
+		function upload_undangan($kodeunik)
+		{		
+
+			// Get data from URI and form inputs
+			// $kodeunik = $this->uri->segment(3);
+			$laporan = $this->pelatihan_m->get_laporan_by_kodeunik($kodeunik); // Pastikan fungsi ini ada
+					
+			if(!empty($laporan)){
+				$this->edit_undangan($kodeunik);
+			}else{
+				// File upload configuration
+				$config['upload_path']   = './uploads/laporan/undangan/'; // Define the path where the file will be stored
+				$config['allowed_types'] = 'pdf'; // Only allow PDF files
+				$config['max_size']      = 10000; // Set the maximum file size limit (in KB)
+				$config['file_name']     = 'UNDANGAN-' . $kodeunik; // Rename the file to include the unique code
+			
+				// Initialize upload library with the above configuration
+				$this->load->library('upload', $config);
+				$this->upload->initialize($config);
+				// Check if the upload was successful
+				if ($this->upload->do_upload('undangan')) {
+					// Get uploaded data if the upload is successful
+					$upload = $this->upload->data();
+
+					// Extract the file name to store in the database
+					$file_name = $upload['file_name'];
+			
+					// Call the model method to save upload details to the database
+					$this->pelatihan_m->upload_undangan($file_name);
+			
+					// Redirect to the specified route after a successful upload
+					redirect('pelatihan/laporan/' . $kodeunik);
+				} else {
+					// Display upload errors if the upload fails
+					$error = $this->upload->display_errors('<p class="error">', '</p>');
+					
+					// Load the error view or handle it as per your needs
+					echo $error;
+				}
+			}
+		}
+
+		function edit_undangan($kodeunik)
+		{
+			// $kodeunik = $this->input->post('kodeunik');
+			$id_laporan=$this->input->post('id');
+			
+			// Path upload dan pengaturan file
+			$upload_path = './uploads/laporan/undangan/';
+			$undangan = [
+				'upload_path'   => $upload_path,
+				'allowed_types' => 'pdf',
+				'max_size'      => 10000,
+				'file_name'     => 'UNDANGAN-' . $kodeunik,
+			];
+
+			// Inisialisasi upload
+			$this->load->library('upload', $undangan);
+			$this->upload->initialize($undangan);
+
+			// Ambil data file lama dari database (sesuaikan sesuai field database)
+			$laporan = $this->pelatihan_m->get_laporan_by_kodeunik($kodeunik); // Pastikan fungsi ini ada
+			$file_lama = !empty($laporan['undangan']) ? $upload_path . $laporan['undangan'] : null;
+
+			// Cek dan hapus file lama jika ada
+			if ($file_lama && file_exists($file_lama)) {
+				unlink($file_lama);
+			}
+
+			// Proses upload file baru
+			if ($this->upload->do_upload('undangan')) {
+				$upload = $this->upload->data();
+				$file_name = $upload['file_name']; // Nama file yang diupload
+
+				// Update database dengan file baru
+				$this->pelatihan_m->update_undangan($kodeunik, $file_name); // Pastikan fungsi update sesuai dengan struktur database Anda
+
+				redirect('pelatihan/laporan/' . $kodeunik);
+			} else {
+				// Tampilkan pesan kesalahan jika upload gagal
+				$error = $this->upload->display_errors();
+				echo "Error: " . $error;
+			}
+		}
+
+		function upload_jadwal($kodeunik)
+		{		
+
+			// Get data from URI and form inputs
+			// $kodeunik = $this->uri->segment(3);
+			$laporan = $this->pelatihan_m->get_laporan_by_kodeunik($kodeunik); // Pastikan fungsi ini ada
+					
+			if(!empty($laporan)){
+				$this->edit_jadwal($kodeunik);
+			}else{
+				// File upload configuration
+				$config['upload_path']   = './uploads/laporan/jadwal/'; // Define the path where the file will be stored
+				$config['allowed_types'] = 'pdf'; // Only allow PDF files
+				$config['max_size']      = 10000; // Set the maximum file size limit (in KB)
+				$config['file_name']     = 'JADWAL-' . $kodeunik; // Rename the file to include the unique code
+			
+				// Initialize upload library with the above configuration
+				$this->load->library('upload', $config);
+				$this->upload->initialize($config);
+				// Check if the upload was successful
+				if ($this->upload->do_upload('jadwal')) {
+					// Get uploaded data if the upload is successful
+					$upload = $this->upload->data();
+
+					// Extract the file name to store in the database
+					$file_name = $upload['file_name'];
+			
+					// Call the model method to save upload details to the database
+					$this->pelatihan_m->upload_jadwal($file_name);
+			
+					// Redirect to the specified route after a successful upload
+					redirect('pelatihan/laporan/' . $kodeunik);
+				} else {
+					// Display upload errors if the upload fails
+					$error = $this->upload->display_errors('<p class="error">', '</p>');
+					
+					// Load the error view or handle it as per your needs
+					echo $error;
+				}
+			}
+		}
+
+		function edit_jadwal($kodeunik)
+		{
+			// $kodeunik = $this->input->post('kodeunik');
+			$id_laporan=$this->input->post('id');
+			
+			// Path upload dan pengaturan file
+			$upload_path = './uploads/laporan/jadwal/';
+			$jadwal = [
+				'upload_path'   => $upload_path,
+				'allowed_types' => 'pdf',
+				'max_size'      => 10000,
+				'file_name'     => 'JADWAL-' . $kodeunik,
+			];
+
+			// Inisialisasi upload
+			$this->load->library('upload', $jadwal);
+			$this->upload->initialize($jadwal);
+
+			// Ambil data file lama dari database (sesuaikan sesuai field database)
+			$laporan = $this->pelatihan_m->get_laporan_by_kodeunik($kodeunik); // Pastikan fungsi ini ada
+			$file_lama = !empty($laporan['jadwal']) ? $upload_path . $laporan['jadwal'] : null;
+
+			// Cek dan hapus file lama jika ada
+			if ($file_lama && file_exists($file_lama)) {
+				unlink($file_lama);
+			}
+
+			// Proses upload file baru
+			if ($this->upload->do_upload('jadwal')) {
+				$upload = $this->upload->data();
+				$file_name = $upload['file_name']; // Nama file yang diupload
+
+				// Update database dengan file baru
+				$this->pelatihan_m->update_jadwal($kodeunik, $file_name); // Pastikan fungsi update sesuai dengan struktur database Anda
+
+				redirect('pelatihan/laporan/' . $kodeunik);
+			} else {
+				// Tampilkan pesan kesalahan jika upload gagal
+				$error = $this->upload->display_errors();
+				echo "Error: " . $error;
+			}
+		}
+
+		function downloadfull($kodeunik)
+		{
+			// Daftar file PDF yang ingin digabungkan
+			$laporan = $this->pelatihan_m->get_laporan_by_kodeunik($kodeunik);
+			// $upload_path = './uploads/laporan/';
+
+			$file_sk = './uploads/laporan/sk/' . $laporan['sk'];
+			$file_tor = './uploads/laporan/tor/' . $laporan['tor'];
+			$file_laporan = './uploads/laporan/laporan/' . $laporan['laporan'];
+			$file_undangan = './uploads/laporan/undangan/' . $laporan['undangan'];
+			$file_jadwal = './uploads/laporan/jadwal/' . $laporan['jadwal'];
+			$pdfFiles = [
+				$file_sk,      // Path ke file SK
+				$file_tor,     // Path ke file TOR
+				$file_laporan,  // Path ke file LAPORAN
+				$file_undangan,  // Path ke file UNDANGAN
+				$file_jadwal  // Path ke file JADWAL
+			];
+
+			// Inisialisasi FPDI
+			$pdf = new FPDI();
+
+			// Loop melalui setiap file dan tambahkan halaman ke dokumen baru
+			foreach ($pdfFiles as $file) {
+				// Cek apakah file ada
+				if (file_exists($file)) {
+					$pageCount = $pdf->setSourceFile($file);
+					for ($i = 1; $i <= $pageCount; $i++) {
+						$templateId = $pdf->importPage($i);
+						$size = $pdf->getTemplateSize($templateId);
+						$pdf->AddPage($size['orientation'], [$size['width'], $size['height']]);
+						$pdf->useTemplate($templateId);
+					}
+				} else {
+					echo "File {$file} tidak ditemukan.";
+					return;
+				}
+			}
+
+			// $file_lama = !empty($laporan['fullversion']) ? $upload_path . $laporan['fullversion'] : null;
+
+			// // Cek dan hapus file lama jika ada
+			// if ($file_lama && file_exists($file_lama)) {
+			// 	unlink($file_lama);
+			// }
+
+			// Set nama file yang akan disimpan
+			$outputFileName = 'LAPORAN-' . $kodeunik . '.pdf';
+			$outputFilePath = './uploads/laporan/' . $outputFileName;
+
+			// Output PDF yang sudah digabungkan dan simpan ke file
+			$pdf->Output('F', $outputFilePath);
+
+			// Simpan nama file ke database
+			$this->pelatihan_m->update_laporan_filename($kodeunik, $outputFileName);
+
+			// Set headers untuk menampilkan PDF langsung di tab baru
+			header('Content-Type: application/pdf');
+			header('Content-Disposition: inline; filename="' . $outputFileName . '"');
+
+			// Output PDF yang sudah digabungkan langsung ke browser
+			readfile($outputFilePath);
+		}
+
+
+
+		
 
 	function delete() 
 	{
