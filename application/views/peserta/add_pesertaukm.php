@@ -185,15 +185,15 @@
 			</div>
 			<div class="form-wrapper" id="foto" style="display:block;">
 				<div class="input-wrap">
-					<label class="col-form-label">UPLOAD FOTO DIRI FORMAL<span class="section-subtitle"><code>*</code></span><h7> (Maksimal file ukuran 3MB)</h7></label>
-					<input type="file" name="foto" class="form-control <?= (form_error('foto') == "" ? '':'is-invalid') ?>" required>
+					<label class="col-form-label"><h4>UPLOAD FOTO DIRI FORMAL (UNTUK SERTIFIKAT)</h4><span class="section-subtitle"><code>*</code></span><h7> (Maksimal file ukuran 3MB)</h7></label>
+					<input type="file" name="foto" class="form-control <?= (form_error('foto') == "" ? '':'is-invalid') ?>" accept="image/*" required>
 					<?php echo form_error('foto'); ?>
 				</div>
 			</div>
 			<div class="form-wrapper" id="foto_ktp" style="display:block;">
 				<div class="input-wrap">
-					<label class="col-form-label">UPLOAD FOTO KTP<span class="section-subtitle"><code>*</code></span><h7> (Maksimal file ukuran 3MB)</h7></label>
-					<input type="file" name="foto_ktp" class="form-control <?= (form_error('foto_ktp') == "" ? '':'is-invalid') ?>" required>
+					<label class="col-form-label"><h4>UPLOAD FOTO KTP</h4><span class="section-subtitle"><code>*</code></span><h7> (Maksimal file ukuran 3MB)</h7></label>
+					<input type="file" name="foto_ktp" class="form-control <?= (form_error('foto_ktp') == "" ? '':'is-invalid') ?>" accept="image/*" required>
 					<?php echo form_error('foto_ktp'); ?>
 				</div>
 			</div>
