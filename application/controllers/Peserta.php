@@ -176,17 +176,38 @@ class Peserta extends CI_Controller {
 			$data['sertifikasi'] = $this->db->get('tb_sertifikasi')->result();
 			$get_prov = $this->db->order_by('name','ASC')->select('*')->from('provinces')->get();
 			$data['provinsi'] = $get_prov->result();
+			$datapeserta = $this->db->where('kodeunik', $kodeunik)->count_all_results('tb_data_peserta');
 			$datapelatihan=$this->db->get_where('tb_data_pelatihan', array('kodeunik' => $kodeunik,'status'=>'1'))->row_array();
+
+			
+
 			if($datapelatihan > 0){
-				if($datapelatihan['sasaran']=="UKM"){
-					$this->templateadmin->load('template/dashboard_p', 'peserta/add_pesertaukm',$data);
-				}else if($datapelatihan['sasaran']=="CALON WIRAUSAHA"){
-					$this->templateadmin->load('template/dashboard_p', 'peserta/add_pesertacalonwirausaha',$data);
-				}else if($datapelatihan['sasaran']=="SAFARI PODCAST"){
-				$this->templateadmin->load('template/dashboard_p', 'peserta/add_peserta_podcast',$data);
-				}else if($datapelatihan['sasaran']=="KOPERASI"){
-					$this->templateadmin->load('template/dashboard_p', 'peserta/add_peserta_koperasi',$data);
+				if(!empty($datapelatihan['kuota'])){
+					if($datapeserta<$datapelatihan['kuota']){
+						if($datapelatihan['sasaran']=="UKM"){
+							$this->templateadmin->load('template/dashboard_p', 'peserta/add_pesertaukm',$data);
+						}else if($datapelatihan['sasaran']=="CALON WIRAUSAHA"){
+							$this->templateadmin->load('template/dashboard_p', 'peserta/add_pesertacalonwirausaha',$data);
+						}else if($datapelatihan['sasaran']=="SAFARI PODCAST"){
+						$this->templateadmin->load('template/dashboard_p', 'peserta/add_peserta_podcast',$data);
+						}else if($datapelatihan['sasaran']=="KOPERASI"){
+							$this->templateadmin->load('template/dashboard_p', 'peserta/add_peserta_koperasi',$data);
+						}
+					}else{
+						$this->templateadmin->load('template/dashboard_p', 'peserta/noevent');
+					}
+				}else{
+					if($datapelatihan['sasaran']=="UKM"){
+						$this->templateadmin->load('template/dashboard_p', 'peserta/add_pesertaukm',$data);
+					}else if($datapelatihan['sasaran']=="CALON WIRAUSAHA"){
+						$this->templateadmin->load('template/dashboard_p', 'peserta/add_pesertacalonwirausaha',$data);
+					}else if($datapelatihan['sasaran']=="SAFARI PODCAST"){
+					$this->templateadmin->load('template/dashboard_p', 'peserta/add_peserta_podcast',$data);
+					}else if($datapelatihan['sasaran']=="KOPERASI"){
+						$this->templateadmin->load('template/dashboard_p', 'peserta/add_peserta_koperasi',$data);
+					}
 				}
+				
 					
 			}else{
 				// echo 'Tidak ada pelatihan/pendaftaran pelatihan sudah memenuhi kuota';
@@ -198,32 +219,53 @@ class Peserta extends CI_Controller {
 		}
 		else
 		{   
+			$datapeserta = $this->db->where('kodeunik', $kodeunik)->count_all_results('tb_data_peserta');
+			$datapelatihan=$this->db->get_where('tb_data_pelatihan', array('kodeunik' => $kodeunik,'status'=>'1'))->row_array();
+			if(!empty($datapelatihan['kuota'])){
+				if($datapeserta<$datapelatihan['kuota']){
+					// $checkbox = $this->input->post('sosmed_usaha');
+					// $sosmed=implode(',',$checkbox);
+					// $peserta=$this->db->where('kodeunik',$kodeunik);
+					// $total_peserta=$this->db->count_all_results($peserta)+1;
+					// $pesertaukm=$this->db->get_where('tb_data_peserta', array('kodeunik'=>$kodeunik))->row_array();
+					// $total_peserta=$this->db->count_all_results($peserta)+1;
+					$total_peserta = $this->db->where('kodeunik', $kodeunik)->count_all_results('tb_data_peserta') + 1;
+		
+					$uploadFoto = $this->upload_foto();
+					$uploadKtp = $this->upload_ktp();
+		
+					// if($uploadFoto && $uploadKtp){
+					// 	$data = [
+					// 		'foto' => $uploadFoto,
+					// 		'ktp'  => $uploadKtp
+					// 	];
+					// 	$this->peserta_m->save($data);
+					// }
+									
+					
+					$this->peserta_m->save($uploadFoto,$uploadKtp,$total_peserta);
+					
+					// redirect('peserta');
+					// echo "sukses";
+					$this->thankyou($kodeunik);
+				}else{
+					$this->templateadmin->load('template/dashboard_p', 'peserta/noevent');
+				}
+			}else{
+				$total_peserta = $this->db->where('kodeunik', $kodeunik)->count_all_results('tb_data_peserta') + 1;
+		
+				$uploadFoto = $this->upload_foto();
+				$uploadKtp = $this->upload_ktp();			
+				
+				$this->peserta_m->save($uploadFoto,$uploadKtp,$total_peserta);
+				
+				$this->thankyou($kodeunik);
+				
+			}
 			
-			// $checkbox = $this->input->post('sosmed_usaha');
-			// $sosmed=implode(',',$checkbox);
-			// $peserta=$this->db->where('kodeunik',$kodeunik);
-			// $total_peserta=$this->db->count_all_results($peserta)+1;
-			// $pesertaukm=$this->db->get_where('tb_data_peserta', array('kodeunik'=>$kodeunik))->row_array();
-			// $total_peserta=$this->db->count_all_results($peserta)+1;
-			$total_peserta = $this->db->where('kodeunik', $kodeunik)->count_all_results('tb_data_peserta') + 1;
-
-			$uploadFoto = $this->upload_foto();
-			$uploadKtp = $this->upload_ktp();
-
-			// if($uploadFoto && $uploadKtp){
-			// 	$data = [
-			// 		'foto' => $uploadFoto,
-        	// 		'ktp'  => $uploadKtp
-			// 	];
-			// 	$this->peserta_m->save($data);
-			// }
-							
 			
-			$this->peserta_m->save($uploadFoto,$uploadKtp,$total_peserta);
 			
-			// redirect('peserta');
-			// echo "sukses";
-			$this->thankyou($kodeunik);
+			
 		}
 	}	
 
