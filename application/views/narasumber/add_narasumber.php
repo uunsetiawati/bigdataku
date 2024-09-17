@@ -56,12 +56,12 @@
 				</div>
 				<div class="input-wrap">
 					<label class="col-form-label">UPLOAD MATERI<span class="section-subtitle"><code>*</code></span><h7> (Maks file ukuran 10MB | pdf,ppt)</h7></label>
-					<input type="file" name="materi" class="form-control <?= (form_error('materi') == "" ? '':'is-invalid') ?>" required>
+					<input type="file" name="materi" class="form-control <?= (form_error('materi') == "" ? '':'is-invalid') ?>" accept=".pdf,.ppt,.pptx" required>
 					<?php echo form_error('materi'); ?>
 				</div>
 				<div class="input-wrap">
 					<label class="col-form-label">UPLOAD SPT (SURAT PERINTAH TUGAS)<span class="section-subtitle"><code>*</code></span><h7> (Mak file ukuran 3MB |pdf|doc|docx)</h7></label>
-					<input type="file" name="spt" class="form-control <?= (form_error('spt') == "" ? '':'is-invalid') ?>" required>
+					<input type="file" name="spt" class="form-control <?= (form_error('spt') == "" ? '':'is-invalid') ?>" accept=".pdf,.doc,.docx" required>
 					<?php echo form_error('spt'); ?>
 				</div>
 

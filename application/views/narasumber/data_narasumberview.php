@@ -61,16 +61,46 @@
 			</div>
 
 			<div class="input-wrap">
-				<label class="col-form-label">UPLOAD FOTO KTP<span class="section-subtitle"><code>*</code></span><h7> (Maks Foto 3MB | JPEG,JPG,PNG)</h7></label>
-				<img src="<?=base_url('uploads/narasumber/ktp/'.$narsum['ktp'])?>" width="30%">
+				<label class="col-form-label">UPLOAD FOTO KTP<span class="section-subtitle"><code>*</code></span><h7> (Maks Foto 3MB | JPEG,JPG,PNG,PDF)</h7></label><br>
+				<?php
+					$file_ktp = base_url('uploads/narasumber/ktp/'.$narsum['ktp']);
+					$file_extension_ktp = pathinfo($file_ktp, PATHINFO_EXTENSION);
+					?>
+				<?php if (in_array($file_extension_ktp, ['jpg', 'png', 'jpeg', 'gif'])): ?>
+					<img src="<?=base_url('uploads/narasumber/ktp/'.$narsum['ktp'])?>" width="30%">	
+				<?php elseif ($file_extension_ktp == 'pdf'): ?>
+					<embed type="application/pdf" src="<?=$file_ktp?>" width="600" height="400"></embed>
+				<?php endif; ?>
+				
 			</div>
 			<div class="input-wrap">
-				<label class="col-form-label">UPLOAD FOTO NPWP<span class="section-subtitle"><code>*</code></span><h7> (Maks Foto 3MB | JPEG,JPG,PNG)</h7></label>
-				<img src="<?=base_url('uploads/narasumber/npwp/'.$narsum['npwp'])?>" width="30%">
+				<label class="col-form-label">UPLOAD FOTO NPWP<span class="section-subtitle"><code>*</code></span><h7> (Maks Foto 3MB | JPEG,JPG,PNG,PDF)</h7></label><br>
+				<?php
+					$file_npwp = base_url('uploads/narasumber/npwp/'.$narsum['npwp']);
+					$file_extension_npwp = pathinfo($file_npwp, PATHINFO_EXTENSION);
+					?>
+				<?php if (in_array($file_extension_npwp, ['jpg', 'png', 'jpeg', 'gif'])): ?>
+					<img src="<?=base_url('uploads/narasumber/npwp/'.$narsum['npwp'])?>" width="30%">	
+				<?php elseif ($file_extension_npwp == 'pdf'): ?>
+					<embed type="application/pdf" src="<?=$file_npwp?>" width="600" height="400"></embed>
+				<?php endif; ?>
 			</div>
 			<div class="input-wrap">
 				<label class="col-form-label">UPLOAD CV<span class="section-subtitle"><code>*</code></span><h7> (Maks file ukuran 3MB | pdf)</h7></label><br>
-				<embed type="application/pdf" src="<?=base_url('uploads/narasumber/cv/'.$narsum['cv'])?>" width="600" height="400"></embed>
+				<?php
+					$file_cv = base_url('uploads/narasumber/cv/'.$narsum['cv']);
+					$file_extension_cv = strtolower(pathinfo($file_cv, PATHINFO_EXTENSION)); // Menggunakan strtolower untuk case-insensitive
+					?>
+				<?php if ($file_extension_cv == 'pdf'): ?>
+					<embed type="application/pdf" src="<?=base_url('uploads/narasumber/cv/'.$narsum['cv'])?>" width="600" height="400"></embed>
+				<?php elseif (in_array($file_extension_cv, ['doc', 'docx'])): ?>
+					<div class="col-4">	
+					<?php
+					echo anchor('uploads/narasumber/cv/' . $narsum['cv'], 'Download CV', array('class'=>'button2'));
+					?>
+					</div>
+				<?php endif; ?>
+				
 			</div>
 			<div class="input-wrap">
 				<label class="col-form-label">UPLOAD MATERI<span class="section-subtitle"><code>*</code></span><h7> (Maks file ukuran 10MB | pdf,ppt)</h7></label><br>
@@ -89,8 +119,20 @@
 				<?php endif; ?>
 			</div>
 			<div class="input-wrap">
-				<label class="col-form-label">UPLOAD SPT (SURAT PERINTAH TUGAS)<span class="section-subtitle"><code>*</code></span><h7> (Mak file ukuran 3MB |pdf|doc|docx)</h7></label><br>
-				<embed type="application/pdf" src="<?=base_url('uploads/narasumber/spt/'.$narsum['spt'])?>" width="600" height="400"></embed>
+					<label class="col-form-label">UPLOAD SPT (SURAT PERINTAH TUGAS)<span class="section-subtitle"><code>*</code></span><h7> (Mak file ukuran 3MB |pdf|doc|docx)</h7></label><br>
+					<?php
+					$file_spt = base_url('uploads/narasumber/spt/'.$narsum['spt']);
+					$file_extension_spt = strtolower(pathinfo($file_spt, PATHINFO_EXTENSION)); // Menggunakan strtolower untuk case-insensitive
+					?>
+					<?php if ($file_extension_spt == 'pdf'): ?>
+						<embed type="application/pdf" src="<?=base_url('uploads/narasumber/spt/'.$narsum['spt'])?>" width="600" height="400"></embed>
+					<?php elseif (in_array($file_extension_spt, ['doc', 'docx'])): ?>
+						<div class="col-4">	
+						<?php
+						echo anchor('uploads/narasumber/spt/' . $narsum['spt'], 'Download SPT', array('class'=>'button2'));
+						?>
+						</div>
+					<?php endif; ?>
 			</div>
 			<div class="input-wrap">
 					<label class="col-form-label">UPLOAD REKENING<span class="section-subtitle"><code>*</code></span><h7> (Maks file ukuran 3MB | jpg,jpeg,png,pdf)</h7></label><br>
@@ -103,7 +145,7 @@
 					<?php elseif (in_array($file_extension_rekening, ['jpg', 'JPG', 'jpeg','JPEG', 'png', 'PNG','gif'])): ?>
 						<img src="<?=$file_rekening?>" alt="Uploaded Image" width="600" height="400">
 					<?php endif; ?>
-				</div>
+			</div>
 			<div class="button-default">
 				<!-- <button type="submit" name="simpan" class="button">Simpan</button> -->
 				<?php

@@ -193,9 +193,9 @@ class Narasumber extends CI_Controller {
 
 			//validasi foto yang di upload
 			$ktp['upload_path']          = './uploads/narasumber/ktp/';
-            $ktp['allowed_types']        = 'gif|jpg|png|jpeg';
-            $ktp['max_size']             = 3000;
-			$ktp['file_name'] 			= $kodeunik.'-'.$nik;
+            $ktp['allowed_types']        = 'gif|jpg|png|jpeg|pdf';
+            $ktp['max_size']             = 30000;
+			$ktp['file_name'] 			= 'KTP-'.$kodeunik.'-'.$nik;
             $this->load->library('upload', $ktp);
 
 			// if (!$this->upload->do_upload('ktp')) {
@@ -221,8 +221,8 @@ class Narasumber extends CI_Controller {
 			//validasi foto yang di upload
 			$config2['upload_path']          = './uploads/narasumber/npwp/';
             $config2['allowed_types']        = 'gif|jpg|png|jpeg|pdf';
-            $config2['max_size']             = 3000;
-			$config2['file_name'] 			 = $kodeunik.'-'.$nik;
+            $config2['max_size']             = 30000;
+			$config2['file_name'] 			 = 'NPWP-'.$kodeunik.'-'.$nik;
             // $this->load->library('upload', $config2);
 			$this->upload->initialize($config2);
 
@@ -239,9 +239,9 @@ class Narasumber extends CI_Controller {
 			$nama = $this->input->post('nama');
 			//validasi foto yang di upload
 			$cv['upload_path']          = './uploads/narasumber/cv/';
-            $cv['allowed_types']        = 'pdf';
-            $cv['max_size']             = 3000;
-			$cv['file_name'] 			= $kodeunik.'-'.$nik;
+            $cv['allowed_types']        = 'pdf|doc|docx';
+            $cv['max_size']             = 30000;
+			$cv['file_name'] 			= 'CV-'.$kodeunik.'-'.$nik;
             // $this->load->library('upload', $config2);
 			$this->upload->initialize($cv);
 
@@ -259,8 +259,8 @@ class Narasumber extends CI_Controller {
 			//validasi foto yang di upload
 			$materi['upload_path']          = './uploads/narasumber/materi/';
             $materi['allowed_types']        = 'pdf|ppt|pptx';
-            $materi['max_size']             = 10000;
-			$materi['file_name'] 			= $kodeunik.'-'.$nik;
+            $materi['max_size']             = 30000;
+			$materi['file_name'] 			= 'MATERI-'.$kodeunik.'-'.$nik;
             // $this->load->library('upload', $config2);
 			$this->upload->initialize($materi);
 
@@ -278,8 +278,8 @@ class Narasumber extends CI_Controller {
 			//validasi foto yang di upload
 			$materi['upload_path']          = './uploads/narasumber/materi/';
             $materi['allowed_types']        = 'pdf|ppt|pptx';
-            $materi['max_size']             = 10000;
-			$materi['file_name'] 			= $kodeunik.'-'.$nik;
+            $materi['max_size']             = 30000;
+			$materi['file_name'] 			= 'MATERI-'.$kodeunik.'-'.$nik;
             $this->load->library('upload', $materi);
 			// $this->upload->initialize($materi);
 
@@ -297,8 +297,8 @@ class Narasumber extends CI_Controller {
 			//validasi foto yang di upload
 			$spt['upload_path']          = './uploads/narasumber/spt/';
             $spt['allowed_types']        = 'pdf|doc|docx';
-            $spt['max_size']             = 3000;
-			$spt['file_name'] 			 = $kodeunik.'-'.$nik;
+            $spt['max_size']             = 30000;
+			$spt['file_name'] 			 = 'SPT-'.$kodeunik.'-'.$nik;
             // $this->load->library('upload', $config2);
 			$this->upload->initialize($spt);
 
@@ -316,8 +316,8 @@ class Narasumber extends CI_Controller {
 			//validasi foto yang di upload
 			$rekening['upload_path']          = './uploads/narasumber/rekening/';
             $rekening['allowed_types']        = 'gif|jpg|png|jpeg|pdf';
-            $rekening['max_size']             = 3000;
-			$rekening['file_name'] 			  = $kodeunik.'-'.$nik;
+            $rekening['max_size']             = 30000;
+			$rekening['file_name'] 			  = 'REKENING-'.$kodeunik.'-'.$nik;
             // $this->load->library('upload', $config2);
 			$this->upload->initialize($rekening);
 
@@ -384,13 +384,13 @@ class Narasumber extends CI_Controller {
             $allowedExts = array("gif", "jpeg", "jpg", "png", "pdf", "JPG", "JPEG", "GIF", "PNG", "PDF");
             $extension = pathinfo($_FILES["ktp"]["name"], PATHINFO_EXTENSION);
 			$allowedTypes = array('application/pdf','image/gif','image/jpeg','image/pjpeg','image/png','image/x-png');
-			$detectedType = get_mime_by_extension($_FILES['ktp']['name']);
+			$detectedType = $_FILES['ktp']['type'];
             $type = $_FILES['ktp']['type'];
             if (!in_array($detectedType, $allowedTypes)) {
                 $this->form_validation->set_message('validate_ktp', 'Invalid Image Content!');
                 $check = FALSE;
             }
-            if (filesize($_FILES['ktp']['tmp_name']) > 3097152) {
+            if (filesize($_FILES['ktp']['tmp_name']) > 31457280) {
                 $this->form_validation->set_message('validate_ktp', 'Ukuran gambar tidak boleh lebih dari 3MB!');
                 $check = FALSE;
             }
@@ -412,13 +412,13 @@ class Narasumber extends CI_Controller {
             $allowedExts = array("gif", "jpeg", "jpg", "png", "pdf","JPG", "JPEG", "GIF", "PNG", "PDF");
             $extension = pathinfo($_FILES["npwp"]["name"], PATHINFO_EXTENSION);
 			$allowedTypes = array('application/pdf','image/gif','image/jpeg','image/pjpeg','image/png','image/x-png');
-			$detectedType = get_mime_by_extension($_FILES['npwp']['name']);
+			$detectedType = $_FILES['npwp']['type'];
             $type = $_FILES['npwp']['type'];
             if (!in_array($detectedType, $allowedTypes)) {
                 $this->form_validation->set_message('validate_npwp', 'Invalid Image Content!');
                 $check = FALSE;
             }
-            if (filesize($_FILES['npwp']['tmp_name']) > 3097152) {
+            if (filesize($_FILES['npwp']['tmp_name']) > 31457280) {
                 $this->form_validation->set_message('validate_npwp', 'Ukuran gambar tidak boleh lebih dari 3MB!');
                 $check = FALSE;
             }
@@ -440,13 +440,13 @@ class Narasumber extends CI_Controller {
             $allowedExts = array("pdf", "PDF", "doc", "docx", "DOC", "DOCX");
             $extension = pathinfo($_FILES["cv"]["name"], PATHINFO_EXTENSION);
 			$allowedTypes = array('application/pdf','application/msword','application/vnd.openxmlformats-officedocument.wordprocessingml.document');
-			$detectedType = get_mime_by_extension($_FILES['cv']['name']);
+			$detectedType = $_FILES['cv']['type'];
             $type = $_FILES['cv']['type'];
             if (!in_array($detectedType, $allowedTypes)) {
                 $this->form_validation->set_message('validate_cv', 'Invalid Image Content!');
                 $check = FALSE;
             }
-            if (filesize($_FILES['cv']['tmp_name']) > 3097152) {
+            if (filesize($_FILES['cv']['tmp_name']) > 31457280) {
                 $this->form_validation->set_message('validate_cv', 'Ukuran gambar tidak boleh lebih dari 3MB!');
                 $check = FALSE;
             }
@@ -468,13 +468,13 @@ class Narasumber extends CI_Controller {
             $allowedExts = array("pdf", "ppt", "pptx", "PPT", "PDF", "PPT", "PPTX");
             $extension = pathinfo($_FILES["materi"]["name"], PATHINFO_EXTENSION);
 			$allowedTypes = array('application/pdf','application/vnd.ms-powerpoint','application/vnd.openxmlformats-officedocument.presentationml.presentation');
-			$detectedType = get_mime_by_extension($_FILES['materi']['name']);
+			$detectedType = $_FILES['materi']['type'];
             $type = $_FILES['materi']['type'];
             if (!in_array($detectedType, $allowedTypes)) {
                 $this->form_validation->set_message('validate_materi', 'Invalid Image Content!');
                 $check = FALSE;
             }
-            if (filesize($_FILES['materi']['tmp_name']) > 10097152) {
+            if (filesize($_FILES['materi']['tmp_name']) > 31457280) {
                 $this->form_validation->set_message('validate_materi', 'Ukuran file tidak boleh lebih dari 10MB!');
                 $check = FALSE;
             }
@@ -496,13 +496,13 @@ class Narasumber extends CI_Controller {
             $allowedExts = array("pdf", "doc", "docx", "PDF", "DOC", "DOCX");
             $extension = pathinfo($_FILES["spt"]["name"], PATHINFO_EXTENSION);
 			$allowedTypes = array('application/pdf','application/msword','application/vnd.openxmlformats-officedocument.wordprocessingml.document');
-			$detectedType = get_mime_by_extension($_FILES['spt']['name']);
+			$detectedType = $_FILES['spt']['type'];
             $type = $_FILES['spt']['type'];
             if (!in_array($detectedType, $allowedTypes)) {
                 $this->form_validation->set_message('validate_spt', 'Invalid Image Content!');
                 $check = FALSE;
             }
-            if (filesize($_FILES['spt']['tmp_name']) > 3097152) {
+            if (filesize($_FILES['spt']['tmp_name']) > 31457280) {
                 $this->form_validation->set_message('validate_spt', 'Ukuran file tidak boleh lebih dari 3MB!');
                 $check = FALSE;
             }
@@ -524,13 +524,13 @@ class Narasumber extends CI_Controller {
             $allowedExts = array("gif", "jpeg", "jpg", "png", "pdf","JPG", "JPEG", "GIF", "PNG", "PDF");
             $extension = pathinfo($_FILES["rekening"]["name"], PATHINFO_EXTENSION);
 			$allowedTypes = array('application/pdf','image/gif','image/jpeg','image/pjpeg','image/png','image/x-png');
-			$detectedType = get_mime_by_extension($_FILES['rekening']['name']);
+			$detectedType = $_FILES['rekening']['type'];
             $type = $_FILES['rekening']['type'];
             if (!in_array($detectedType, $allowedTypes)) {
                 $this->form_validation->set_message('validate_rekening', 'Invalid File Content!');
                 $check = FALSE;
             }
-            if (filesize($_FILES['rekening']['tmp_name']) > 3097152) {
+            if (filesize($_FILES['rekening']['tmp_name']) > 31457280) {
                 $this->form_validation->set_message('validate_rekening', 'Ukuran file tidak boleh lebih dari 3MB!');
                 $check = FALSE;
             }

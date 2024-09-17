@@ -61,32 +61,32 @@
 				</div>
 				<div class="input-wrap">
 					<label class="col-form-label">UPLOAD FOTO KTP<span class="section-subtitle"><code>*</code></span><h7> (Maks Foto 3MB | JPEG,JPG,PNG,PDF)</h7></label>
-					<input type="file" name="ktp" class="form-control <?= (form_error('ktp') == "" ? '':'is-invalid') ?>" required>
+					<input type="file" name="ktp" class="form-control <?= (form_error('ktp') == "" ? '':'is-invalid') ?>" accept="image/*,application/pdf" required>
 					<?php echo form_error('ktp'); ?>
 				</div>
 				<div class="input-wrap">
 					<label class="col-form-label">UPLOAD FOTO NPWP<span class="section-subtitle"><code>*</code></span><h7> (Maks Foto 3MB | JPEG,JPG,PNG,PDF)</h7></label>
-					<input type="file" name="npwp" class="form-control <?= (form_error('npwp') == "" ? '':'is-invalid') ?>" required>
+					<input type="file" name="npwp" class="form-control <?= (form_error('npwp') == "" ? '':'is-invalid') ?>" accept="image/*,application/pdf" required>
 					<?php echo form_error('npwp'); ?>
 				</div>
 				<div class="input-wrap">
 					<label class="col-form-label">UPLOAD CV<span class="section-subtitle"><code>*</code></span><h7> (Maks file ukuran 3MB | pdf,word)</h7></label>
-					<input type="file" name="cv" class="form-control <?= (form_error('cv') == "" ? '':'is-invalid') ?>" required>
+					<input type="file" name="cv" class="form-control <?= (form_error('cv') == "" ? '':'is-invalid') ?>" accept=".pdf,.doc,.docx" required>
 					<?php echo form_error('cv'); ?>
 				</div>				
 				<div class="input-wrap">
 					<label class="col-form-label">UPLOAD MATERI<span class="section-subtitle"><code>*</code></span><h7> (Maks file ukuran 10MB | pdf,ppt)</h7></label>
-					<input type="file" name="materi" class="form-control <?= (form_error('materi') == "" ? '':'is-invalid') ?>" required>
+					<input type="file" name="materi" class="form-control <?= (form_error('materi') == "" ? '':'is-invalid') ?>" accept=".pdf,.ppt,.pptx" required>
 					<?php echo form_error('materi'); ?>
 				</div>
 				<div class="input-wrap">
 					<label class="col-form-label">UPLOAD SPT (SURAT PERINTAH TUGAS)<span class="section-subtitle"><code>*</code></span><h7> (Mak file ukuran 3MB |pdf|doc|docx)</h7></label>
-					<input type="file" name="spt" class="form-control <?= (form_error('spt') == "" ? '':'is-invalid') ?>" required>
+					<input type="file" name="spt" class="form-control <?= (form_error('spt') == "" ? '':'is-invalid') ?>" accept=".pdf,.doc,.docx" required>
 					<?php echo form_error('spt'); ?>
 				</div>
 				<div class="input-wrap">
 					<label class="col-form-label">UPLOAD REKENING<span class="section-subtitle"><code>*</code></span><h7> (Maks file ukuran 3MB | jpg,jpeg,png,pdf)</h7></label>
-					<input type="file" name="rekening" class="form-control <?= (form_error('rekening') == "" ? '':'is-invalid') ?>" required>
+					<input type="file" name="rekening" class="form-control <?= (form_error('rekening') == "" ? '':'is-invalid') ?>" accept="image/*,application/pdf" required>
 					<?php echo form_error('rekening'); ?>
 				</div>
 
