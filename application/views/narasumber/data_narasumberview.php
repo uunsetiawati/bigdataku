@@ -66,7 +66,7 @@
 					$file_ktp = base_url('uploads/narasumber/ktp/'.$narsum['ktp']);
 					$file_extension_ktp = pathinfo($file_ktp, PATHINFO_EXTENSION);
 					?>
-				<?php if (in_array($file_extension_ktp, ['jpg', 'png', 'jpeg', 'gif'])): ?>
+				<?php if (in_array($file_extension_ktp, ['jpg', 'png', 'jpeg', 'gif', 'JPG', 'JPEG', 'PNG'])): ?>
 					<img src="<?=base_url('uploads/narasumber/ktp/'.$narsum['ktp'])?>" width="30%">	
 				<?php elseif ($file_extension_ktp == 'pdf'): ?>
 					<embed type="application/pdf" src="<?=$file_ktp?>" width="600" height="400"></embed>
@@ -79,7 +79,7 @@
 					$file_npwp = base_url('uploads/narasumber/npwp/'.$narsum['npwp']);
 					$file_extension_npwp = pathinfo($file_npwp, PATHINFO_EXTENSION);
 					?>
-				<?php if (in_array($file_extension_npwp, ['jpg', 'png', 'jpeg', 'gif'])): ?>
+				<?php if (in_array($file_extension_npwp, ['jpg', 'png', 'jpeg', 'gif', 'JPG', 'JPEG', 'PNG'])): ?>
 					<img src="<?=base_url('uploads/narasumber/npwp/'.$narsum['npwp'])?>" width="30%">	
 				<?php elseif ($file_extension_npwp == 'pdf'): ?>
 					<embed type="application/pdf" src="<?=$file_npwp?>" width="600" height="400"></embed>
