@@ -25,19 +25,19 @@
                     
 					<h6>Informasi selanjutnya mengenai kelulusan sebagai peserta pelatihan akan disampaikan oleh panitia melalui WhatsApp paling lambat H-4 sebelum acara pelatihan.</h6><br>
 					
-					<h6>Apabila mengundurkan diri harap menghubungi panitia di nomor berikut H-2 sebelum tanggal kegiatan</h6>
+					<!-- <h6>Apabila mengundurkan diri harap menghubungi panitia di nomor berikut H-2 sebelum tanggal kegiatan</h6> -->
 					
 					<!-- separator -->
 					<div class="separator-medium"></div>
 					<!-- end separator -->
                     
-                    <a href="https://wa.me/6285235142348">
+                    <!-- <a href="https://wa.me/6285235142348">
                         <div class="row">
                             <div class="col-12">
                                 <button class="button button-fill button-rounded">Chat Admin</button>
                             </div>                            
                         </div>
-                    </a>
+                    </a> -->
 					
 				</div>
 			</div>
