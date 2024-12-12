@@ -828,6 +828,28 @@ class Export extends CI_Controller {
 
           $semua_pengguna = $query->result();
 
+          #### query khusus geologi koperasi ####
+          $querygeo = $this->db->query("SELECT 
+          a.id                     AS id,
+          a.id_pelatihan           AS id_pelatihan,
+          a.kodeunik               AS kodeunik,          
+          d.name                   AS prov_kopukm,
+          b.name                   AS kota_kopukm,
+          e.name                   AS kec_kopukm,
+          f.name                   AS kel_kopukm
+
+          FROM tb_data_peserta a 
+          JOIN regencies b ON a.kota_kopukm = b.id 
+          JOIN tb_data_pelatihan c ON a.id_pelatihan = c.id
+          JOIN provinces d ON a.prov_kopukm = d.id
+          JOIN districts e ON a.kec_kopukm = e.id
+          JOIN villages f ON a.kel_kopukm = f.id
+          
+          WHERE a.kodeunik=$kodeunik
+          ORDER BY no_urut ASC");
+
+          $penggunageo = $querygeo->result();
+
           $spreadsheet = new Spreadsheet;
           // $spreadsheet->getDefaultStyle('B')->getNumberFormat()->setFormatCode(NumberFormat::FORMAT_TEXT);
           $height = 50;
@@ -921,7 +943,7 @@ class Export extends CI_Controller {
           $sheet->getColumnDimension('AA')->setWidth(20); // Set width kolom bidang usaha
           $sheet->getColumnDimension('AB')->setWidth(5); // Set width kolom alamat usaha
           $sheet->getColumnDimension('AC')->setWidth(5); // Set width kolom RT usaha
-          $sheet->getColumnDimension('AD')->setWidth(5); // Set width kolom RW usaha
+          $sheet->getColumnDimension('AD')->setWidth(25); // Set width kolom RW usaha
           $sheet->getColumnDimension('AE')->setWidth(25); // Set width kolom Kota usaha
           $sheet->getColumnDimension('AF')->setWidth(25); // Set width kolom Kec usaha
           $sheet->getColumnDimension('AG')->setWidth(25); // Set width kolom kel usaha
@@ -953,7 +975,15 @@ class Export extends CI_Controller {
           $kolom = 2;
           $nomor = 1;
           $height = 50;
+
+          $geo_map = [];
+          foreach ($penggunageo as $geo) {
+               $geo_map[$geo->id] = $geo;
+          }
+
           foreach($semua_pengguna as $pengguna) {
+               
+               $geo = isset($geo_map[$pengguna->id]) ? $geo_map[$pengguna->id] : null;
 
                $spreadsheet->getActiveSheet()
                            ->setCellValue('A' . $kolom, $pengguna->no_urut)
@@ -986,10 +1016,10 @@ class Export extends CI_Controller {
                            ->setCellValue('AA' . $kolom, $pengguna->alamat_kopukm)
                            ->setCellValueExplicit('AB' . $kolom, $pengguna->rt_kopukm,\PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
                            ->setCellValueExplicit('AC' . $kolom, $pengguna->rw_kopukm, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
-                           ->setCellValue('AD' . $kolom, $pengguna->kel_kopukm)
-                           ->setCellValue('AE' . $kolom, $pengguna->kec_kopukm)
-                           ->setCellValue('AF' . $kolom, $pengguna->kota_kopukm)
-                           ->setCellValue('AG' . $kolom, $pengguna->prov_kopukm)
+                           ->setCellValue('AD' . $kolom, $geo->kel_kopukm)
+                           ->setCellValue('AE' . $kolom, $geo->kec_kopukm)
+                           ->setCellValue('AF' . $kolom, $geo->kota_kopukm)
+                           ->setCellValue('AG' . $kolom, $geo->prov_kopukm)
                            ->setCellValueExplicit('AH' . $kolom, $pengguna->kodepos_kopukm, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
                            ->setCellValue('AI' . $kolom, $pengguna->bentuk_koperasi)
                            ->setCellValue('AJ' . $kolom, $pengguna->tipe_koperasi)
@@ -1048,7 +1078,7 @@ class Export extends CI_Controller {
 
                $kolom++;
                $nomor++;
-
+               
           }          
 
           $writer = new Xlsx($spreadsheet);
