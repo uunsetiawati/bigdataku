@@ -984,7 +984,8 @@ class Export extends CI_Controller {
           foreach($semua_pengguna as $pengguna) {
                
                $geo = isset($geo_map[$pengguna->id]) ? $geo_map[$pengguna->id] : null;
-
+               $cleanedPermasalahan = str_replace(["\r", "\n"], '', $pengguna->permasalahan);
+               $cleanedKebutuhan = str_replace(["\r", "\n"], '', $pengguna->kebutuhan);
                $spreadsheet->getActiveSheet()
                            ->setCellValue('A' . $kolom, $pengguna->no_urut)
                          //   ->setCellValue('B' . $kolom, $pengguna->no_ktp)
@@ -1006,8 +1007,8 @@ class Export extends CI_Controller {
                            ->setCellValueExplicit('Q' . $kolom, $pengguna->no_telp, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
                            ->setCellValue('R' . $kolom, $pengguna->disabilitas)
                            ->setCellValue('S' . $kolom, $pengguna->izin_usaha)
-                           ->setCellValue('T' . $kolom, $pengguna->permasalahan)
-                           ->setCellValue('U' . $kolom, $pengguna->kebutuhan)
+                           ->setCellValue('T' . $kolom, $cleanedPermasalahan)                           
+                           ->setCellValue('U' . $kolom, $cleanedKebutuhan)
                            ->setCellValueExplicit('V' . $kolom, $pengguna->nik_koperasi, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
                            ->setCellValueExplicit('W' . $kolom, $pengguna->nib, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
                            ->setCellValue('X' . $kolom, $pengguna->nama_kop)
