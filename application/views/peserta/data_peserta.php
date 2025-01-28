@@ -33,14 +33,14 @@
                         <div class="col-3">
                             <div class="button-default">
                                 <?php
-                                    echo anchor('pelatihan/laporan/'.$this->uri->segment(3), 'Laporan', array('class'=>'button'));
-                                    // if($peserta['sasaran'] == "UKM"){
-                                    //     echo anchor('peserta/add_peserta/'.$this->uri->segment(3), 'Tambah Peserta', array('class'=>'button', 'target'=>'_blank'));
-                                    // }else if($peserta['sasaran'] == "SAFARI PODCAST"){
-                                    //     echo anchor('peserta/add_peserta_podcast/'.$this->uri->segment(3), 'Tambah Peserta', array('class'=>'button', 'target'=>'_blank'));
-                                    // }else if($peserta['sasaran'] == "KOPERASI"){
-                                    //     echo anchor('peserta/add_peserta/'.$this->uri->segment(3), 'Tambah Peserta', array('class'=>'button', 'target'=>'_blank'));
-                                    // }
+                                    // echo anchor('pelatihan/laporan/'.$this->uri->segment(3), 'Laporan', array('class'=>'button'));
+                                    if($peserta['sasaran'] == "UKM"){
+                                        echo anchor('peserta/add_peserta/'.$this->uri->segment(3), 'Tambah Peserta', array('class'=>'button', 'target'=>'_blank'));
+                                    }else if($peserta['sasaran'] == "SAFARI PODCAST"){
+                                        echo anchor('peserta/add_peserta_podcast/'.$this->uri->segment(3), 'Tambah Peserta', array('class'=>'button', 'target'=>'_blank'));
+                                    }else if($peserta['sasaran'] == "KOPERASI"){
+                                        echo anchor('peserta/add_peserta/'.$this->uri->segment(3), 'Tambah Peserta', array('class'=>'button', 'target'=>'_blank'));
+                                    }
                                     
                                 ?>
                             </div>
@@ -55,7 +55,8 @@
                         <div class="col-3">                           
                             <div class="button-default">   
                                 <?php
-                                    echo anchor('peserta/validasiall/'.$this->uri->segment(3), 'Approve', array('class'=>'button3', 'onclick'=>"return confirm('Apakah Anda yakin ingin memvalidasi semua peserta pelatihan ini?')"));
+                                    // echo anchor('peserta/validasiall/'.$this->uri->segment(3), 'Approve', array('class'=>'button3', 'onclick'=>"return confirm('Apakah Anda yakin ingin memvalidasi semua peserta pelatihan ini?')"));
+                                    echo anchor('pelatihan/laporan/'.$this->uri->segment(3), 'Laporan', array('class'=>'button8'));
                                 ?>
                             </div>
                         </div>
@@ -93,8 +94,10 @@
                         <div class="col-3">                           
                             <div class="button-default">   
                                 <?php
-                                    echo anchor('peserta/batalvalidasi/'.$this->uri->segment(3), 'UnaApprove', 
-                                    array('class'=>'button5', 'onclick'=>"return confirm('Apakah Anda yakin ingin menghapus semua validasi peserta pelatihan ini?')"));
+                                    // echo anchor('peserta/batalvalidasi/'.$this->uri->segment(3), 'UnaApprove', 
+                                    // array('class'=>'button5', 'onclick'=>"return confirm('Apakah Anda yakin ingin menghapus semua validasi peserta pelatihan ini?')"));
+                                    echo anchor('uploadcontroller/formupload/'.$this->uri->segment(3), 'Upload FIX Peserta', 
+                                    array('class'=>'button7'));
                                 ?>
                             </div>
                         </div>
@@ -119,7 +122,7 @@
                                         <th style="text-align: center;">ASAL</th>
                                         <th style="text-align: center;">No. Telp</th>
 										<th >#</th>
-                                        <th >#</th>
+                                        <!-- <th >#</th> -->
 									</tr>
 								</thead>								
 							</table>
@@ -174,11 +177,11 @@
                         "width": "20px",
                         "class": "text-center"
                     },
-                    { 
-                        "data": "validasi",
-                        "width": "20px",
-                        "class": "text-center"
-                    },
+                    // { 
+                    //     "data": "validasi",
+                    //     "width": "20px",
+                    //     "class": "text-center"
+                    // },
                 ]
 
             });
