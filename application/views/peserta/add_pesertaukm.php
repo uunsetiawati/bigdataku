@@ -42,13 +42,10 @@
 	?>
 	<?=form_hidden('now',$now);?>
 	<?=form_hidden('id_pel',$peserta['id']);?>
-		<!-- <div class="form-wrapper">    
-		<div class="content bg-lightblue">  
-			<div class="coming-soon-word text-center">
-				<span class="section-subtitle"><h4><code>Data Pribadi</code></h4></span>
-			</div>
-		</div> -->
+		
+		
 
+		<div class="tab">
 			<!--section title -->
 			<div class="header-about">
 				<div class="social-media-icon socmed-for-about shadow-sm">
@@ -122,21 +119,7 @@
 					<option value="KONGHUCHU" <?=$this->input->post('agama') == 'KONGHUCHU' ? 'selected':''?>>KONGHUCHU</option>					
 				</select>				
 			</div>
-			<div class="input-wrap">
-				<label class="col-form-label">ALAMAT<span class="section-subtitle"><code>*</code></span></label>				
-				<input type="text" name="alamat" placeholder="ALAMAT" onkeyup="this.value = this.value.toUpperCase()" value="<?= set_value('alamat'); ?>" class="form-control <?= (form_error('alamat') == "" ? '':'is-invalid') ?>">
-				<?= form_error('alamat'); ?>				
-			</div>
-			<div class="input-wrap">
-				<label class="col-form-label">RT<span class="section-subtitle"><code>*</code></span></label>				
-				<input type="number" name="rt" placeholder="RT" value="<?= set_value('rt'); ?>" class="form-control <?= (form_error('rt') == "" ? '':'is-invalid') ?>">
-				<?= form_error('rt'); ?>				
-			</div>
-			<div class="input-wrap">
-				<label class="col-form-label">RW<span class="section-subtitle"><code>*</code></span></label>				
-				<input type="number" name="rw" placeholder="RW" value="<?= set_value('rw'); ?>" class="form-control <?= (form_error('rw') == "" ? '':'is-invalid') ?>">
-				<?= form_error('rw'); ?>				
-			</div>
+			
 			<div class="input-wrap">
 				<label class="col-form-label">PROVINSI<span class="section-subtitle"><code>*</code></span></label>	
                 <select name="provinsi" class="form-control" id="provinsi" required>
@@ -168,6 +151,21 @@
                 </select>
             </div>
 			<div class="input-wrap">
+				<label class="col-form-label">ALAMAT<span class="section-subtitle"><code>*</code></span></label>				
+				<input type="text" name="alamat" placeholder="ALAMAT" onkeyup="this.value = this.value.toUpperCase()" value="<?= set_value('alamat'); ?>" class="form-control <?= (form_error('alamat') == "" ? '':'is-invalid') ?>">
+				<?= form_error('alamat'); ?>				
+			</div>
+			<div class="input-wrap">
+				<label class="col-form-label">RT<span class="section-subtitle"><code>*</code></span></label>				
+				<input type="number" name="rt" placeholder="RT" value="<?= set_value('rt'); ?>" class="form-control <?= (form_error('rt') == "" ? '':'is-invalid') ?>">
+				<?= form_error('rt'); ?>				
+			</div>
+			<div class="input-wrap">
+				<label class="col-form-label">RW<span class="section-subtitle"><code>*</code></span></label>				
+				<input type="number" name="rw" placeholder="RW" value="<?= set_value('rw'); ?>" class="form-control <?= (form_error('rw') == "" ? '':'is-invalid') ?>">
+				<?= form_error('rw'); ?>				
+			</div>
+			<div class="input-wrap">
 				<label class="col-form-label">NO.TELP/WA<span class="section-subtitle"><code>*</code></span></label>
 				<input type="text" name="no_telp" placeholder="NOMOR TELEPON (Cth:081331220006)" value="<?= set_value('no_telp'); ?>" class="form-control <?= (form_error('no_telp') == "" ? '':'is-invalid') ?>">
 				<?= form_error('no_telp'); ?>
@@ -185,7 +183,7 @@
 			</div>
 			<div class="form-wrapper" id="foto" style="display:block;">
 				<div class="input-wrap">
-					<label class="col-form-label"><h4>UPLOAD FOTO DIRI FORMAL (UNTUK SERTIFIKAT)</h4><span class="section-subtitle"><code>*</code></span><h7> (Maksimal file ukuran 3MB)</h7></label>
+					<label class="col-form-label"><h4>UPLOAD PAS FOTO FORMAL (UNTUK SERTIFIKAT)</h4><span class="section-subtitle"><code>*</code></span><h7> (Maksimal file ukuran 3MB)</h7></label>
 					<input type="file" name="foto" class="form-control <?= (form_error('foto') == "" ? '':'is-invalid') ?>" accept="image/*" required>
 					<?php echo form_error('foto'); ?>
 				</div>
@@ -197,9 +195,10 @@
 					<?php echo form_error('foto_ktp'); ?>
 				</div>
 			</div>
-			<hr>
+		</div>
 			<!-- <span class="section-subtitle"><code>.Digitalisasi Usaha</code></span> -->
 			<!--section title -->
+		<div class="tab">
 			<div class="header-about">
 				<div class="social-media-icon socmed-for-about shadow-sm">
 					<div class="coming-soon-word text-center">						
@@ -209,15 +208,15 @@
 			</div>
 			<!-- end section title -->
 			<div class="input-wrap">
-				<label class="col-form-label">EMAIL USAHA<span class="section-subtitle"><code>*</code></span></label>
-				<input type="text" name="email_usaha" placeholder="MASUKKAN EMAIL USAHA" value="<?= set_value('email_usaha'); ?>" class="form-control" required>
+				<label class="col-form-label">EMAIL</label>
+				<input type="text" name="email_usaha" placeholder="MASUKKAN EMAIL" value="<?= set_value('email_usaha'); ?>" class="form-control">
 			</div>
 			<div class="input-wrap">
-				<label class="col-form-label">WEBSITE USAHA<span class="section-subtitle"><code>*</code></span></label>
-				<input type="text" name="web_usaha" placeholder="MASUKKAN WEBSITE USAHA" value="<?= set_value('web_usaha'); ?>" class="form-control" required>
+				<label class="col-form-label">WEBSITE USAHA</label>
+				<input type="text" name="web_usaha" placeholder="MASUKKAN WEBSITE USAHA" value="<?= set_value('web_usaha'); ?>" class="form-control">
 			</div>
 			<div class="input-wrap">
-				<label class="col-form-label">MEDIA SOSIAL USAHA<span class="section-subtitle"><code>*</code></span></label>
+				<label class="col-form-label">MEDIA SOSIAL USAHA</label>
                 <label class="form-control2">
                 <input type="checkbox" name="sosmed[]" value="INSTAGRAM" <?= (!empty($this->input->post('sosmed')) && in_array('INSTAGRAM',$this->input->post('sosmed'))) ? 'checked' : ''?> />INSTAGRAM
                 </label>
@@ -235,7 +234,7 @@
                 </label>
 			</div>
 			<div class="input-wrap">
-				<label class="col-form-label">MARKETPLACE USAHA<span class="section-subtitle"><code>*</code></span></label>
+				<label class="col-form-label">MARKETPLACE USAHA</label>
                 <label class="form-control2">
                 <input type="checkbox" name="market[]" value="SHOPEE" <?= (!empty($this->input->post('market')) && in_array('SHOPEE',$this->input->post('market'))) ? 'checked' : ''?>/>SHOPEE
                 </label>
@@ -256,7 +255,7 @@
                 </label>
 			</div>
 			<div class="input-wrap">
-				<label class="col-form-label">APAKAH TERDAFTAR DI PLATFORM PENGADAAN BARANG JASA<span class="section-subtitle"><code>*</code></span></label>
+				<label class="col-form-label">APAKAH TERDAFTAR DI PLATFORM PENGADAAN BARANG JASA</label>
                 <label class="form-control2">
                 <input type="checkbox" name="pengadaan[]" value="BELA PENGADAAN" <?= (!empty($this->input->post('pengadaan')) && in_array('BELA PENGADAAN',$this->input->post('pengadaan'))) ? 'checked' : '';?>/>BELA PENGADAAN
                 </label>
@@ -266,11 +265,11 @@
 				<label class="form-control2">
                 <input type="checkbox" name="pengadaan[]" value="LAINNYA" <?= (!empty($this->input->post('pengadaan')) && in_array('LAINNYA',$this->input->post('pengadaan'))) ? 'checked' : '';?>/>LAINNYA
                 </label>	
-			</div>
-			
-			<hr>
+			</div>			
+		</div>
 			<!-- <span class="section-subtitle"><code>.Transformasi Usaha</code></span> -->
 			<!--section title -->
+		<div class="tab">
 			<div class="header-about">
 				<div class="social-media-icon socmed-for-about shadow-sm">
 					<div class="coming-soon-word text-center">						
@@ -280,7 +279,7 @@
 			</div>
 			<!-- end section title -->
 			<div class="input-wrap">
-				<label class="col-form-label">PERIZINAN USAHA YANG DIMILIKI<span class="section-subtitle"><code>*</code></span></label>
+				<label class="col-form-label">PERIZINAN USAHA YANG DIMILIKI</label>
 					<?php
 					foreach($izin as $row){?>
 						<label class="form-control2">
@@ -289,7 +288,8 @@
 					<?php }
 					?>
 			</div>
-			<hr>
+		</div>
+		<div class="tab">
 			<!-- <span class="section-subtitle"><code>.Informasi Lainnya</code></span> -->
 			<!--section title -->
 			<div class="header-about">
@@ -301,7 +301,7 @@
 			</div>
 			<!-- end section title -->
 			<div class="input-wrap">
-				<label class="col-form-label">PERMASALAHAN YANG DIHADAPI<span class="section-subtitle"><code>*</code></span></label>
+				<label class="col-form-label">PERMASALAHAN YANG DIHADAPI</label>
 					<?php
 					foreach($masalah as $row){?>
 						<label class="form-control2">
@@ -311,7 +311,7 @@
 					?>
 			</div>
 			<div class="input-wrap">
-				<label class="col-form-label">KEBUTUHAN DIKLAT / PELATIHAN<span class="section-subtitle"><code>*</code></span></label>
+				<label class="col-form-label">KEBUTUHAN DIKLAT / PELATIHAN</label>
 					<?php
 					foreach($kebutuhan as $row){?>
 						<label class="form-control2">
@@ -320,7 +320,7 @@
 					<?php }
 					?>
 			</div>
-			
+		</div>
 			
 
 			<!-- separator -->
@@ -334,6 +334,7 @@
 			  
 			<!-- <span class="section-subtitle"><code>.DATA UMKM</code></span> -->
 			<!--section title -->
+		<div class="tab">
 			<div class="header-about">
 				<div class="social-media-icon socmed-for-about shadow-sm">
 					<div class="coming-soon-word text-center">						
@@ -356,18 +357,18 @@
 				</select>				
 			</div>
             <div class="input-wrap">
-				<label class="col-form-label">NAMA USAHA<span class="section-subtitle"><code>*</code></span></label>
+				<label class="col-form-label">NAMA USAHA / NAMA MERK USAHA<span class="section-subtitle"><code>*</code></span></label>
                 <input type="text" name="nama_usaha" placeholder="NAMA USAHA" onkeyup="this.value = this.value.toUpperCase()" value="<?= set_value('nama_usaha'); ?>" class="form-control" required>
             </div>	
             <div class="input-wrap">
-				<label class="col-form-label">STATUS USAHA/LEGALITAS USAHA<span class="section-subtitle"><code>*</code></span></label>
+				<label class="col-form-label">STATUS USAHA/LEGALITAS USAHA</label>
                 <?php
                 //function cmb_dinamisprov($name, $table, $field, $pk, $id, $selected=null, $extra=null)
                 echo cmb_dinamiskop('status_usaha', 'tb_legalitas_usaha', 'nama', 'nama','--PILIH STATUS USAHA--',$this->input->post('status_usaha'));
                 ?>
 			</div>   
             <div class="input-wrap">
-				<label class="col-form-label">SERTIFIKASI PRODUK USAHA<span class="section-subtitle"><code>*</code></span></label>
+				<label class="col-form-label">SERTIFIKASI PRODUK USAHA</label>
 					<?php
 					foreach($sertifikasi as $row){?>
 						<label class="form-control2">
@@ -395,21 +396,18 @@
 				<input type="date" name="tgl_pendirian" placeholder="TANGGAL PENDIRIAN USAHA" value="<?= set_value('tgl_pendirian'); ?>" class="form-control">				
 			</div> 
 			<div class="input-wrap">
-				<label class="col-form-label">NPWP USAHA<span class="section-subtitle"><code>*</code></span></label>				
+				<label class="col-form-label">NPWP USAHA<span class="section-subtitle"></label>				
 				<input type="text" name="npwp" placeholder="NPWP USAHA" onkeyup="this.value = this.value.toUpperCase()" value="<?= set_value('npwp'); ?>" class="form-control">			
 			</div>
-            <div class="input-wrap">
-				<label class="col-form-label">ALAMAT USAHA<span class="section-subtitle"><code>*</code></span></label>
-                <input type="text" name="alamat_kopukm" placeholder="ALAMAT USAHA" onkeyup="this.value = this.value.toUpperCase()" value="<?= set_value('alamat_kopukm'); ?>" class="form-control" required>
-            </div>  
-            <div class="input-wrap">
+              
+            <!-- <div class="input-wrap">
 				<label class="col-form-label">RT<span class="section-subtitle"><code>*</code></span></label>
 				<input type="text" name="rt_kopukm" placeholder="RT" value="<?= set_value('rt_kopukm'); ?>" class="form-control" required> 
 			</div>
 			<div class="input-wrap">
 				<label class="col-form-label">RW<span class="section-subtitle"><code>*</code></span></label>
 				<input type="text" name="rw_kopukm" placeholder="RW" value="<?= set_value('rw_kopukm'); ?>" class="form-control">
-			</div>
+			</div> -->
             <!-- <input type="hidden" name="prov_kopukm" value="35"> -->
             <div class="input-wrap">
 				<label class="col-form-label">PROVINSI<span class="section-subtitle"><code>*</code></span></label>	
@@ -441,8 +439,12 @@
                     <option value=''>- PILIH KELURAHAN -</option>
                 </select>
             </div>
+			<div class="input-wrap">
+				<label class="col-form-label">ALAMAT USAHA<span class="section-subtitle"><code>*</code></span></label>
+                <input type="text" name="alamat_kopukm" placeholder="ALAMAT USAHA" onkeyup="this.value = this.value.toUpperCase()" value="<?= set_value('alamat_kopukm'); ?>" class="form-control" required>
+            </div>
             <div class="input-wrap">
-				<label class="col-form-label">KODE POS<span class="section-subtitle"><code>*</code></span></label>
+				<label class="col-form-label">KODE POS<span class="section-subtitle"></label>
 				<input type="text" name="kodepos_kopukm" placeholder="KODE POS" value="<?= set_value('kodepos_kopukm'); ?>" class="form-control">
 			</div>
             <div class="input-wrap">
@@ -472,15 +474,15 @@
                 <input type="text" name="nilai_omzetusaha" id="dengan-rupiah2" placeholder="NILAI OMZET USAHA" value="<?= set_value('nilai_omzetusaha'); ?>" class="form-control" required>
             </div>	
             <div class="input-wrap">
-				<label class="col-form-label">JUMLAH KARYAWAN LAKI-LAKI<span class="section-subtitle"><code>*</code></span></label>
+				<label class="col-form-label">JUMLAH KARYAWAN LAKI-LAKI</label>
                 <input type="number" name="jml_tenaga_kerjal" placeholder="JUMLAH KARYAWAN LAKI-LAKI" value="<?= set_value('jml_tenaga_kerjal'); ?>" class="form-control" required>
             </div>
             <div class="input-wrap">
-				<label class="col-form-label">JUMLAH KARYAWAN PEREMPUAN<span class="section-subtitle"><code>*</code></span></label>
+				<label class="col-form-label">JUMLAH KARYAWAN PEREMPUAN</label>
                 <input type="number" name="jml_tenaga_kerjap" placeholder="JUMLAH PEREMPUAN" value="<?= set_value('jml_tenaga_kerjap'); ?>" class="form-control" required>
             </div>
 			<div class="input-wrap">
-				<label class="col-form-label">KAPASITAS PRODUKSI PERTAHUN<span class="section-subtitle"><code>*</code></span></label>				
+				<label class="col-form-label">KAPASITAS PRODUKSI PERTAHUN</label>				
 				<input type="text" name="kapasitas_produksi" onkeyup="this.value = this.value.toUpperCase()" value="<?= set_value('kapasitas_produksi'); ?>" class="form-control">			
 			</div>
             <div class="input-wrap">
@@ -491,7 +493,7 @@
                 ?>
             </div>
             <div class="input-wrap">
-				<label class="col-form-label">LOKASI PEMASARAN<span class="section-subtitle"><code>*</code></span></label>
+				<label class="col-form-label">LOKASI PEMASARAN<span class="section-subtitle"></label>
 				<input type="text" name="lokasi_pemasaran" placeholder="LOKASI PEMASARAN" onkeyup="this.value = this.value.toUpperCase()" value="<?= set_value('lokasi_pemasaran'); ?>" class="form-control">
 			</div>
             <div class="input-wrap">
@@ -514,10 +516,27 @@
 				<label class="col-form-label">MASUKAN / SARAN<span class="section-subtitle"><code>*</code></span></label>				
 				<input type="text" name="saran" placeholder="MASUKAN / SARAN" onkeyup="this.value = this.value.toUpperCase()" value="<?= set_value('saran'); ?>" class="form-control">			
 			</div>          
-           
-            <div class="button-default">
+		</div>
+            <!-- <div class="button-default">
 				<button type="submit" name="simpan" class="button" id="btnsubmit" style="display:block">Simpan</button>
-			</div>			
+			</div>			 -->
+			<div class="row">
+				<div class="col-6">
+					<button class="button2" id="prevBtn" onclick="nextPrev(-1)">Sebelumnya</button>
+				</div>
+				<div class="col-6">
+					<button class="button" id="nextBtn" onclick="nextPrev(1)">Selanjutnya</button>
+				</div>
+			</div>
+
+			<!-- Circles which indicates the steps of the form: -->
+			<div style="text-align:center;margin-top:40px;">
+				<span class="step"></span>
+				<span class="step"></span>
+				<span class="step"></span>
+				<span class="step"></span>
+				<span class="step"></span>
+			</div>
 	</form>			
 </div>
 
@@ -603,3 +622,93 @@
         return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
     }
   </script>
+
+<script>
+var currentTab = 0; // Current tab is set to be the first tab (0)
+showTab(currentTab); // Display the current tab
+
+function showTab(n) {
+  // This function will display the specified tab of the form...
+  var x = document.getElementsByClassName("tab");
+  x[n].style.display = "block";
+  //... and fix the Previous/Next buttons:
+  if (n == 0) {
+    document.getElementById("prevBtn").style.display = "none";
+  } else {
+    document.getElementById("prevBtn").style.display = "inline";
+  }
+  if (n == (x.length - 1)) {
+    document.getElementById("nextBtn").innerHTML = "Simpan";
+  } else {
+    document.getElementById("nextBtn").innerHTML = "Next";
+  }
+  //... and run a function that will display the correct step indicator:
+  fixStepIndicator(n)
+}
+
+function nextPrev(n) {
+  // This function will figure out which tab to display
+  var x = document.getElementsByClassName("tab");
+  // Exit the function if any field in the current tab is invalid:
+  if (n == 1 && !validateForm()) return false;
+  // Hide the current tab:
+  x[currentTab].style.display = "none";
+  // Increase or decrease the current tab by 1:
+  currentTab = currentTab + n;
+  
+	// // Isi resume dengan data input
+	// $('#resume-no-ktp').text($('#no_ktp').val());
+    // $('#resume-nama').text($('#nama').val());
+	// $('#resume-jk').text($('#jk').val());
+	// $('#resume-tempatlahir').text($('#tempat_lahir').val());
+	// $('#resume-tgllahir').text(formatTanggal($('#tgl_lahir').val()));
+	// $('#resume-alamat').text($('#alamat').val());
+	// // $('#resume-provinsi').text($('#provinsi').val());
+	// $('#provinsi').on('change', function() {
+    //     var selectedText = $(this).find('option:selected').text(); // Ambil teks dari opsi yang dipilih
+    //     $('#resume-provinsi').text(selectedText); // Tampilkan teks pada elemen dengan ID 'resume-provinsi'
+    // });
+
+
+  // if you have reached the end of the form...
+  if (currentTab >= x.length) {
+    // ... the form gets submitted:
+    document.getElementById("regForm").submit();
+    return false;
+  }
+  // Otherwise, display the correct tab:
+  showTab(currentTab);
+}
+
+function validateForm() {
+  // This function deals with validation of the form fields
+  var x, y, i, valid = true;
+  x = document.getElementsByClassName("tab");
+  y = x[currentTab].getElementsByTagName("input");
+  // A loop that checks every input field in the current tab:
+  for (i = 0; i < y.length; i++) {
+    // If a field is empty...
+    if (y[i].value == "") {
+      // add an "invalid" class to the field:
+      y[i].className += " invalid";
+      // and set the current valid status to false
+      valid = false;
+    }
+  }
+  // If the valid status is true, mark the step as finished and valid:
+  if (valid) {
+    document.getElementsByClassName("step")[currentTab].className += " finish";
+  }
+  return valid; // return the valid status
+}
+
+function fixStepIndicator(n) {
+  // This function removes the "active" class of all steps...
+  var i, x = document.getElementsByClassName("step");
+  for (i = 0; i < x.length; i++) {
+    x[i].className = x[i].className.replace(" active", "");
+  }
+  //... and adds the "active" class on the current step:
+  x[n].className += " active";
+}
+</script>

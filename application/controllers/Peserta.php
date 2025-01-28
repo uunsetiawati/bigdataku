@@ -50,23 +50,23 @@ class Peserta extends CI_Controller {
 					return '';	               		
 	            	}
 				),
-				array(
-					'db' => 'id',
-					'dt' => 'validasi',
+			// 	array(
+			// 		'db' => 'id',
+			// 		'dt' => 'validasi',
   
-						'formatter' => function($d){
-							$valid = $this->db->get_where('tb_data_peserta', array('id' => $d))->row_array();
-							if(!empty($valid)){
-								$validasi=$valid['validasi'];
-								if($validasi=='VALID'){
-									return anchor('peserta/validasi/'.$d, '<i class="icon ion-ios-checkmark"></i>','class="btn btn-xs btn-success" data-placement="top" title="validasi Peserta" onclick="return confirm(\'Apakah Anda yakin ingin menghapus validasi peserta ini?\')"');
-								}elseif($validasi=='TIDAK' || $validasi==' ' || true){
-									return anchor('peserta/validasii/'.$d, '<i class="icon ion-ios-close"></i>','class="btn btn-xs btn-danger" data-placement="top" title="validasi Peserta" onclick="return confirm(\'Apakah Anda yakin ingin validasi peserta ini?\')"');
-								}
-							}
+			// 			'formatter' => function($d){
+			// 				$valid = $this->db->get_where('tb_data_peserta', array('id' => $d))->row_array();
+			// 				if(!empty($valid)){
+			// 					$validasi=$valid['validasi'];
+			// 					if($validasi=='VALID'){
+			// 						return anchor('peserta/validasi/'.$d, '<i class="icon ion-ios-checkmark"></i>','class="btn btn-xs btn-success" data-placement="top" title="validasi Peserta" onclick="return confirm(\'Apakah Anda yakin ingin menghapus validasi peserta ini?\')"');
+			// 					}elseif($validasi=='TIDAK' || $validasi==' ' || true){
+			// 						return anchor('peserta/validasii/'.$d, '<i class="icon ion-ios-close"></i>','class="btn btn-xs btn-danger" data-placement="top" title="validasi Peserta" onclick="return confirm(\'Apakah Anda yakin ingin validasi peserta ini?\')"');
+			// 					}
+			// 				}
 								               		
-					  }
-			  )
+			// 		  }
+			//   )
 	    );
 		// $kodeunik ="202310040949";
 		// $where = "kodeunik='".$this->session->userdata('id_user')."'";
@@ -315,6 +315,101 @@ class Peserta extends CI_Controller {
 		}
 	}	
 
+	function add_rapat($kodeunik)
+	{
+
+		$this->form_validation->set_rules('no_ktp', 'Nomor KTP', 'required|callback_noktp_check|min_length[16]|max_length[16]', [
+			'is_unique' => '%s sudah terdaftar. Silahkan isikan %S lainnya',
+		]); // Unique Field 
+		// $this->form_validation->set_rules('nama_peserta', 'Nama Peserta', 'required'); // required
+		// $this->form_validation->set_rules('tempat_lahir', 'Tempat Lahir', 'required'); // required 
+		// $this->form_validation->set_rules('tgl_lahir', 'Tanggal Lahir', 'required'); // required
+		// $this->form_validation->set_rules('alamat', 'Alamat', 'required'); // required
+		// $this->form_validation->set_rules('rt', 'RT', 'required'); // required
+		// $this->form_validation->set_rules('rw', 'RW', 'required'); // required
+		$this->form_validation->set_rules('no_telp', 'No Telp/WA', 'required|min_length[10]|max_length[13]'); // required
+		$this->form_validation->set_rules('foto_ktp', 'KTP', 'callback_validate_foto_ktp'); // penamaan callback, calback_nama fungsi
+
+		if ($this->form_validation->run() == FALSE)
+		{						
+			// $kodeunik = $this->uri->segment(3);
+			$data['peserta'] = $this->db->get_where('tb_data_pelatihan', array('kodeunik' => $kodeunik,'status'=>'1'))->row_array();
+			$get_prov = $this->db->order_by('name','ASC')->select('*')->from('provinces')->get();
+			$data['provinsi'] = $get_prov->result();
+			$kabkotajatim = $this->db->order_by('name', 'ASC')->select('*')->from('regencies')->where('province_id', 35)->get();
+			$data['kabkota'] = $kabkotajatim->result();
+			$datapeserta = $this->db->where('kodeunik', $kodeunik)->count_all_results('tb_data_peserta');
+			$datapelatihan=$this->db->get_where('tb_data_pelatihan', array('kodeunik' => $kodeunik,'status'=>'1'))->row_array();			
+
+			if($datapelatihan > 0){
+				if(!empty($datapelatihan['kuota'])){
+					if($datapeserta<$datapelatihan['kuota']){
+						if($datapelatihan['sasaran']=="UKM"){
+							$this->templateadmin->load('template/dashboard_p', 'peserta/add_pesertaukm',$data);
+						}else if($datapelatihan['sasaran']=="CALON WIRAUSAHA"){
+							$this->templateadmin->load('template/dashboard_p', 'peserta/add_pesertacalonwirausaha',$data);
+						}else if($datapelatihan['sasaran']=="SAFARI PODCAST"){
+						$this->templateadmin->load('template/dashboard_p', 'peserta/add_peserta_podcast',$data);
+						}else if($datapelatihan['sasaran']=="KOPERASI"){
+							$this->templateadmin->load('template/dashboard_p', 'peserta/add_peserta_koperasi',$data);
+						}else if($datapelatihan['sasaran']=="RAPAT"){
+							$this->templateadmin->load('template/dashboard_p', 'peserta/add_peserta_rapat',$data);
+						}
+					}else{
+						$this->templateadmin->load('template/dashboard_p', 'peserta/noevent');
+					}
+				}else{
+					if($datapelatihan['sasaran']=="UKM"){
+						$this->templateadmin->load('template/dashboard_p', 'peserta/add_pesertaukm',$data);
+					}else if($datapelatihan['sasaran']=="CALON WIRAUSAHA"){
+						$this->templateadmin->load('template/dashboard_p', 'peserta/add_pesertacalonwirausaha',$data);
+					}else if($datapelatihan['sasaran']=="SAFARI PODCAST"){
+					$this->templateadmin->load('template/dashboard_p', 'peserta/add_peserta_podcast',$data);
+					}else if($datapelatihan['sasaran']=="KOPERASI"){
+						$this->templateadmin->load('template/dashboard_p', 'peserta/add_peserta_koperasi',$data);
+					}else if($datapelatihan['sasaran']=="RAPAT"){
+						$this->templateadmin->load('template/dashboard_p', 'peserta/add_peserta_rapat',$data);
+					}
+				}				
+					
+			}else{
+				// echo 'Tidak ada pelatihan/pendaftaran pelatihan sudah memenuhi kuota';
+				$this->templateadmin->load('template/dashboard_p', 'peserta/noevent');
+				
+			}			
+						
+		}
+		else
+		{   
+			$datapeserta = $this->db->where('kodeunik', $kodeunik)->count_all_results('tb_data_peserta');
+			$datapelatihan=$this->db->get_where('tb_data_pelatihan', array('kodeunik' => $kodeunik,'status'=>'1'))->row_array();
+			if(!empty($datapelatihan['kuota'])){
+				if($datapeserta<$datapelatihan['kuota']){
+					
+					$total_peserta = $this->db->where('kodeunik', $kodeunik)->count_all_results('tb_data_peserta') + 1;
+		
+					$uploadKtp = $this->upload_ktp_rapat();									
+					
+					$this->peserta_m->save_rapat($uploadKtp,$total_peserta);
+					
+					$this->thankyou($kodeunik);
+				}else{
+					$this->templateadmin->load('template/dashboard_p', 'peserta/noevent');
+				}
+			}else{
+				$total_peserta = $this->db->where('kodeunik', $kodeunik)->count_all_results('tb_data_peserta') + 1;
+		
+				$uploadKtp = $this->upload_ktp_rapat();			
+				
+				$this->peserta_m->save_rapat($uploadKtp,$total_peserta);
+				
+				$this->thankyou($kodeunik);
+				
+			}
+			
+		}
+	}	
+
 	function add_pesertadewan($kodeunik)
 	{
 
@@ -439,6 +534,26 @@ class Peserta extends CI_Controller {
 			$config2['file_name'] 			 = $total_peserta.'-'.$kodeunik.'-'.$ktp;
             // $this->load->library('upload', $config2);
 			$this->upload->initialize($config2);
+
+            //proses upload
+            $this->upload->do_upload('foto_ktp');
+            $upload = $this->upload->data();
+            return $upload['file_name'];
+		}
+
+		function upload_ktp_rapat()
+		{
+			$kodeunik = $this->uri->segment(3);
+			$ktp=$this->input->post('no_ktp');
+			$nama = $this->input->post('nama_peserta');
+			$total_peserta = $this->db->where('kodeunik', $kodeunik)->count_all_results('tb_data_peserta') + 1;
+			//validasi foto yang di upload
+			$config2['upload_path']          = './uploads/ktp/';
+            $config2['allowed_types']        = 'gif|jpg|png|jpeg';
+            $config2['max_size']             = 10000;
+			$config2['file_name'] 			 = $total_peserta.'-'.$kodeunik.'-'.$ktp;
+            $this->load->library('upload', $config2);
+			// $this->upload->initialize($config2);
 
             //proses upload
             $this->upload->do_upload('foto_ktp');
@@ -835,6 +950,16 @@ class Peserta extends CI_Controller {
 	{
     	$query = $this->db->order_by('name','ASC')->get_where('regencies',array('province_id'=>$id_prov));
     	$data = "<option value=''> --PILIH KABUPATEN-- </option>";
+    	foreach ($query->result() as $value) {
+        	$data .= "<option value='".$value->id."'>".$value->name."</option>";
+    	}
+    	echo $data;
+	}
+
+	function add_ajax_kabjatim()
+	{
+    	$query = $this->db->order_by('name','ASC')->get_where('regencies',array('province_id'=>35));
+    	$data = "<option value=''> --PILIH KABUPATEN / KOTA-- </option>";
     	foreach ($query->result() as $value) {
         	$data .= "<option value='".$value->id."'>".$value->name."</option>";
     	}

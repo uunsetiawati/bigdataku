@@ -49,6 +49,7 @@
 			</div>
 		</div> -->
 
+		<div class="tab">
 			<!--section title -->
 			<div class="header-about">
 				<div class="social-media-icon socmed-for-about shadow-sm">
@@ -123,21 +124,7 @@
 					<option value="KONGHUCHU" <?=$this->input->post('agama') == 'KONGHUCHU' ? 'selected':''?>>KONGHUCHU</option>					
 				</select>				
 			</div>
-			<div class="input-wrap">
-				<label class="col-form-label">ALAMAT<span class="section-subtitle"><code>*</code></span></label>				
-				<input type="text" name="alamat" placeholder="ALAMAT" onkeyup="this.value = this.value.toUpperCase()" value="<?= set_value('alamat'); ?>" class="form-control <?= (form_error('alamat') == "" ? '':'is-invalid') ?>">
-				<?= form_error('alamat'); ?>				
-			</div>
-			<div class="input-wrap">
-				<label class="col-form-label">RT<span class="section-subtitle"><code>*</code></span></label>				
-				<input type="number" name="rt" placeholder="RT" value="<?= set_value('rt'); ?>" class="form-control <?= (form_error('rt') == "" ? '':'is-invalid') ?>">
-				<?= form_error('rt'); ?>				
-			</div>
-			<div class="input-wrap">
-				<label class="col-form-label">RW<span class="section-subtitle"><code>*</code></span></label>				
-				<input type="number" name="rw" placeholder="RW" value="<?= set_value('rw'); ?>" class="form-control <?= (form_error('rw') == "" ? '':'is-invalid') ?>">
-				<?= form_error('rw'); ?>				
-			</div>
+			
 			<div class="input-wrap">
 				<label class="col-form-label">PROVINSI<span class="section-subtitle"><code>*</code></span></label>	
                 <select name="provinsi" class="form-control" id="provinsi" required>
@@ -169,6 +156,21 @@
                 </select>
             </div>
 			<div class="input-wrap">
+				<label class="col-form-label">ALAMAT<span class="section-subtitle"><code>*</code></span></label>				
+				<input type="text" name="alamat" placeholder="ALAMAT" onkeyup="this.value = this.value.toUpperCase()" value="<?= set_value('alamat'); ?>" class="form-control <?= (form_error('alamat') == "" ? '':'is-invalid') ?>">
+				<?= form_error('alamat'); ?>				
+			</div>
+			<div class="input-wrap">
+				<label class="col-form-label">RT<span class="section-subtitle"><code>*</code></span></label>				
+				<input type="number" name="rt" placeholder="RT" value="<?= set_value('rt'); ?>" class="form-control <?= (form_error('rt') == "" ? '':'is-invalid') ?>">
+				<?= form_error('rt'); ?>				
+			</div>
+			<div class="input-wrap">
+				<label class="col-form-label">RW<span class="section-subtitle"><code>*</code></span></label>				
+				<input type="number" name="rw" placeholder="RW" value="<?= set_value('rw'); ?>" class="form-control <?= (form_error('rw') == "" ? '':'is-invalid') ?>">
+				<?= form_error('rw'); ?>				
+			</div>
+			<div class="input-wrap">
 				<label class="col-form-label">NO.TELP/WA<span class="section-subtitle"><code>*</code></span></label>
 				<input type="text" name="no_telp" placeholder="NOMOR TELEPON (Cth:081331220006)" value="<?= set_value('no_telp'); ?>" class="form-control <?= (form_error('no_telp') == "" ? '':'is-invalid') ?>">
 				<?= form_error('no_telp'); ?>
@@ -186,19 +188,22 @@
 			</div>
 			<div class="form-wrapper" id="foto" style="display:block;">
 				<div class="input-wrap">
-					<label class="col-form-label">UPLOAD FOTO DIRI<span class="section-subtitle"><code>*</code></span><h7> (Maksimal file ukuran 3MB)</h7></label>
-					<input type="file" name="foto" class="form-control <?= (form_error('foto') == "" ? '':'is-invalid') ?>" required>
+					<label class="col-form-label"><h4>UPLOAD PAS FOTO FORMAL (UNTUK SERTIFIKAT)</h4><span class="section-subtitle"><code>*</code></span><h7> (Maksimal file ukuran 3MB)</h7></label>
+					<input type="file" name="foto" accept="image/*" class="form-control <?= (form_error('foto') == "" ? '':'is-invalid') ?>" required>
 					<?php echo form_error('foto'); ?>
 				</div>
 			</div>
 			<div class="form-wrapper" id="foto_ktp" style="display:block;">
 				<div class="input-wrap">
-					<label class="col-form-label">UPLOAD FOTO KTP<span class="section-subtitle"><code>*</code></span><h7> (Maksimal file ukuran 3MB)</h7></label>
-					<input type="file" name="foto_ktp" class="form-control <?= (form_error('foto_ktp') == "" ? '':'is-invalid') ?>" required>
+					<label class="col-form-label"><h4>UPLOAD FOTO KTP</h4><span class="section-subtitle"><code>*</code></span><h7> (Maksimal file ukuran 3MB)</h7></label>
+					<input type="file" name="foto_ktp" accept="image/*" class="form-control <?= (form_error('foto_ktp') == "" ? '':'is-invalid') ?>" required>
 					<?php echo form_error('foto_ktp'); ?>
 				</div>
 			</div>
-			<hr>
+		</div>
+
+		
+		<div class="tab">
 			<!-- <span class="section-subtitle"><code>.Digitalisasi Usaha</code></span> -->
 			<!--section title -->
 			<div class="header-about">
@@ -210,14 +215,14 @@
 			</div>
 			<!-- end section title -->
 			<div class="input-wrap">
-				<label class="col-form-label">EMAIL USAHA</label>
+				<label class="col-form-label">EMAIL USAHA<h7> (Bila tidak ada isi 0)</h7></label>
 				<input type="text" name="email_usaha" placeholder="MASUKKAN EMAIL USAHA" value="<?= set_value('email_usaha'); ?>" class="form-control" required>
 			</div>
 			<div class="input-wrap">
-				<label class="col-form-label">WEBSITE USAHA</label>
+				<label class="col-form-label">WEBSITE USAHA<h7> (Bila tidak ada isi 0)</h7></label>
 				<input type="text" name="web_usaha" placeholder="MASUKKAN WEBSITE USAHA" value="<?= set_value('web_usaha'); ?>" class="form-control" required>
 			</div>
-			<div class="input-wrap">
+			<!-- <div class="input-wrap">
 				<label class="col-form-label">MEDIA SOSIAL USAHA</label>
                 <label class="form-control2">
                 <input type="checkbox" name="sosmed[]" value="INSTAGRAM" <?= (!empty($this->input->post('sosmed')) && in_array('INSTAGRAM',$this->input->post('sosmed'))) ? 'checked' : ''?> />INSTAGRAM
@@ -267,9 +272,10 @@
 				<label class="form-control2">
                 <input type="checkbox" name="pengadaan[]" value="LAINNYA" <?= (!empty($this->input->post('pengadaan')) && in_array('LAINNYA',$this->input->post('pengadaan'))) ? 'checked' : '';?>/>LAINNYA
                 </label>	
-			</div>
-			
-			<hr>
+			</div> -->
+		</div>
+		
+		<div class="tab">
 			<!-- <span class="section-subtitle"><code>.Transformasi Usaha</code></span> -->
 			<!--section title -->
 			<div class="header-about">
@@ -290,7 +296,9 @@
 					<?php }
 					?>
 			</div>
-			<hr>
+		</div>
+			
+		<div class="tab">
 			<!-- <span class="section-subtitle"><code>.Informasi Lainnya</code></span> -->
 			<!--section title -->
 			<div class="header-about">
@@ -321,7 +329,7 @@
 					<?php }
 					?>
 			</div>	
-			
+		</div>
 
 			<!-- separator -->
 			<div class="separator-small"></div>
@@ -330,7 +338,7 @@
 			<!-- separator -->
 			<div class="separator-small"></div>
 			<!-- end separator -->
-
+		<div class="tab">
 			<!--section title -->
 			<div class="header-about">
 				<div class="social-media-icon socmed-for-about shadow-sm">
@@ -341,11 +349,11 @@
 			</div>
 			<!-- end section title -->
             <div class="input-wrap">
-				<label class="col-form-label">NIK KOPERASI</label>
+				<label class="col-form-label">NOMOR INDUK KOPERASI<h7> (Bila tidak ada isi 0)</h7></label>
                 <input type="number" name="nik_koperasi" placeholder="NIK KOPERASI" value="<?= set_value('nik_koperasi'); ?>" class="form-control">
             </div>
             <div class="input-wrap">
-				<label class="col-form-label">NIB KOPERASI</label>
+				<label class="col-form-label">NIB KOPERASI<h7> (Bila tidak ada isi 0)</h7></label>
                 <input type="number" name="nib" placeholder="NIB KOPERASI" value="<?= set_value('nib'); ?>" class="form-control">
             </div>	
 			<div class="input-wrap">
@@ -353,25 +361,14 @@
 				<input type="text" name="nama_kop" placeholder="NAMA KOPERASI" onkeyup="this.value = this.value.toUpperCase()" value="<?= set_value('nama_kop'); ?>" class="form-control" required>
 			</div>
 			<div class="input-wrap">
-				<label class="col-form-label">NOMOR BADAN HUKUM</label>				
+				<label class="col-form-label">NOMOR BADAN HUKUM<h7> (Bila tidak ada isi 0)</h7></label>				
 				<input type="text" name="no_badan_hukum" placeholder="NOMOR BADAN HUKUM" onkeyup="this.value = this.value.toUpperCase()" value="<?= set_value('no_badan_hukum'); ?>" class="form-control">				
 			</div>
 			<div class="input-wrap">
 				<label class="col-form-label">TANGGAL BADAN HUKUM</label>				
 				<input type="date" name="tgl_badan_hukum" placeholder="TANGGAL BADAN HUKUM" value="<?= set_value('tgl_badan_hukum'); ?>" class="form-control">			
 			</div>
-			<div class="input-wrap">
-				<label class="col-form-label">ALAMAT KOPERASI<span class="section-subtitle"><code>*</code></span></label>
-                <input type="text" name="alamat_kopukm" placeholder="ALAMAT USAHA" onkeyup="this.value = this.value.toUpperCase()" value="<?= set_value('alamat_kopukm'); ?>" class="form-control" required>
-            </div>  
-            <div class="input-wrap">
-				<label class="col-form-label">RT<span class="section-subtitle"><code>*</code></span></label>
-				<input type="text" name="rt_kopukm" placeholder="RT" value="<?= set_value('rt_kopukm'); ?>" class="form-control" required> 
-			</div>
-			<div class="input-wrap">
-				<label class="col-form-label">RW<span class="section-subtitle"><code>*</code></span></label>
-				<input type="text" name="rw_kopukm" placeholder="RW" value="<?= set_value('rw_kopukm'); ?>" class="form-control">
-			</div>
+			
             <!-- <input type="hidden" name="prov_kopukm" value="35"> -->
             <div class="input-wrap">
 				<label class="col-form-label">PROVINSI<span class="section-subtitle"><code>*</code></span></label>	
@@ -403,10 +400,22 @@
                     <option value=''>-- PILIH KELURAHAN --</option>
                 </select>
             </div>
-            <div class="input-wrap">
+			<div class="input-wrap">
+				<label class="col-form-label">ALAMAT KOPERASI<span class="section-subtitle"><code>*</code></span></label>
+                <input type="text" name="alamat_kopukm" placeholder="ALAMAT USAHA" onkeyup="this.value = this.value.toUpperCase()" value="<?= set_value('alamat_kopukm'); ?>" class="form-control" required>
+            </div>  
+            <!-- <div class="input-wrap">
+				<label class="col-form-label">RT<span class="section-subtitle"><code>*</code></span></label>
+				<input type="text" name="rt_kopukm" placeholder="RT" value="<?= set_value('rt_kopukm'); ?>" class="form-control" required> 
+			</div>
+			<div class="input-wrap">
+				<label class="col-form-label">RW<span class="section-subtitle"><code>*</code></span></label>
+				<input type="text" name="rw_kopukm" placeholder="RW" value="<?= set_value('rw_kopukm'); ?>" class="form-control">
+			</div> -->
+            <!-- <div class="input-wrap">
 				<label class="col-form-label">KODE POS<span class="section-subtitle"><code>*</code></span></label>
 				<input type="text" name="kodepos_kopukm" placeholder="KODE POS" value="<?= set_value('kodepos_kopukm'); ?>" class="form-control">
-			</div>
+			</div> -->
             <div class="input-wrap">
 				<label class="col-form-label">BENTUK KOPERASI<span class="section-subtitle"><code>*</code></span></label>
                 <?php
@@ -414,14 +423,14 @@
                 echo cmb_dinamiskop('bentuk_koperasi', 'tb_bentuk_koperasi', 'nama', 'nama','--PILIH BENTUK KOPERASI--',$this->input->post('bentuk_koperasi'));
                 ?>
 			</div>   
-			<div class="input-wrap">
+			<!-- <div class="input-wrap">
 				<label class="col-form-label">TIPE KOPERASI<span class="section-subtitle"><code>*</code></span></label>
 				<select name="tipe_koperasi" class="form-control" required>
 					<option value="" selected disabled>--PILIH TIPE KOPERASI--</option>
 					<option value="KONVENSIONAL" <?=$this->input->post('tipe_koperasi') == 'KONVENSIONAL' ? 'selected':''?>>KONVENSIONAL</option>
 					<option value="SYARIAH" <?=$this->input->post('tipe_koperasi') == 'SYARIAH' ? 'selected':''?>>SYARIAH</option>
 				</select>
-			</div>
+			</div> -->
 			<div class="input-wrap">
 				<label class="col-form-label">JENIS KOPERASI<span class="section-subtitle"><code>*</code></span></label>
                 <?php
@@ -429,13 +438,13 @@
                 echo cmb_dinamiskop('jenis_koperasi', 'tb_jenis_koperasi', 'nama', 'nama','--PILIH JENIS KOPERASI--',$this->input->post('jenis_koperasi'));
                 ?>
 			</div>  
-			<div class="input-wrap">
+			<!-- <div class="input-wrap">
 				<label class="col-form-label">KELOMPOK KOPERASI<span class="section-subtitle"><code>*</code></span></label>
                 <?php
                 //function cmb_dinamisprov($name, $table, $field, $pk, $id, $selected=null, $extra=null)
                 echo cmb_dinamiskop('kelompok_koperasi', 'tb_kelompok_koperasi', 'nama', 'nama','--PILIH KELOMPOK KOPERASI--',$this->input->post('kelompok_koperasi'));
                 ?>
-			</div>  
+			</div>   -->
 			<div class="input-wrap">
 				<label class="col-form-label">SEKTOR USAHA KOPERASI<span class="section-subtitle"><code>*</code></span></label>
                 <?php
@@ -456,7 +465,7 @@
                 <input type="text" name="nilai_omzetusaha" id="dengan-rupiah3" placeholder="NILAI OMZET USAHA" value="<?= set_value('nilai_omzetusaha'); ?>" class="form-control">
             </div>
 			<div class="input-wrap">
-				<label class="col-form-label">SHU KOPERASI TAHUN BERJALAN/31 DESEMBER <h7> (Dalam Rupiah)</h7></label>
+				<label class="col-form-label">SHU KOPERASI TAHUN SEBELUMNYA <h7> (Dalam Rupiah)</h7></label>
                 <input type="text" name="nilai_shukoperasi" id="dengan-rupiah4" placeholder="NILAI SHU KOPERASI" value="<?= set_value('nilai_shukoperasi'); ?>" class="form-control">
             </div>
 			<div class="input-wrap">
@@ -467,10 +476,10 @@
 				<label class="col-form-label">JUMLAH ANGGOTA PEREMPUAN<span class="section-subtitle"><code>*</code></span></label>
                 <input type="number" name="anggota_p" placeholder="JUMLAH ANGGOTA PEREMPUAN" value="<?= set_value('anggota_p'); ?>" class="form-control" required>
             </div>
-			<div class="input-wrap">
+			<!-- <div class="input-wrap">
 				<label class="col-form-label">JUMLAH CALON ANGGOTA<span class="section-subtitle"><code>*</code></span></label>
                 <input type="number" name="calon_anggota" placeholder="JUMLAH CALON ANGGOTA" value="<?= set_value('calon_anggota'); ?>" class="form-control" required>
-            </div>
+            </div> -->
 			<div class="input-wrap">
 				<label class="col-form-label">JUMLAH KARYAWAN / PENGELOLA <span class="section-subtitle"><code>*</code></span></label>
 				<input type="number" name="jml_tenaga_kerja" placeholder="JUMLAH KARYAWAN / PENGELOLA" value="<?= set_value('jml_tenaga_kerja'); ?>" class="form-control" required>
@@ -491,10 +500,10 @@
 					<option value="KAB/KOTA" <?=$this->input->post('skala_koperasi') == 'KAB/KOTA' ? 'selected':''?>>KAB/KOTA</option>
 				</select>
 			</div>
-			<div class="input-wrap">
+			<!-- <div class="input-wrap">
 				<label class="col-form-label">LOKASI PEMASARAN<span class="section-subtitle"><code>*</code></span></label>
 				<input type="text" name="lokasi_pemasaran" placeholder="LOKASI PEMASARAN" onkeyup="this.value = this.value.toUpperCase()" value="<?= set_value('lokasi_pemasaran'); ?>" class="form-control">
-			</div>
+			</div> -->
 			<div class="input-wrap">
 				<label class="col-form-label">JABATAN PESERTA DI KOPERASI<span class="section-subtitle"><code>*</code></span></label>
 				<select name="jabatan" class="form-control" required>
@@ -506,7 +515,7 @@
 					<option value="ANGGOTA" <?=$this->input->post('jabatan') == 'ANGGOTA' ? 'selected':''?>>ANGGOTA</option>
 				</select>
 			</div>
-			<div class="input-wrap">
+			<!-- <div class="input-wrap">
 				<label class="col-form-label">CABANG KOPERASI</label>
 				<input type="text" name="cabang" placeholder="CABANG KOPERASI" onkeyup="this.value = this.value.toUpperCase()" value="<?= set_value('cabang'); ?>" class="form-control">
 			</div>
@@ -517,11 +526,29 @@
 			<div class="input-wrap">
 				<label class="col-form-label">KANTOR KAS</label>
 				<input type="text" name="kantor_kas" placeholder="KANTOR KAS" onkeyup="this.value = this.value.toUpperCase()" value="<?= set_value('kantor_kas'); ?>" class="form-control">
-			</div>                    
+			</div>                     -->
            
-            <div class="button-default">
+            <!-- <div class="button-default">
 				<button type="submit" name="simpan" class="button" id="btnsubmit" style="display:block">Simpan</button>
-			</div>			
+			</div>	 -->
+		</div>
+			<div class="row">
+				<div class="col-6">
+					<button class="button2" id="prevBtn" onclick="nextPrev(-1)">Sebelumnya</button>
+				</div>
+				<div class="col-6">
+					<button class="button" id="nextBtn" onclick="nextPrev(1)">Selanjutnya</button>
+				</div>
+			</div>
+
+			<!-- Circles which indicates the steps of the form: -->
+			<div style="text-align:center;margin-top:40px;">
+				<span class="step"></span>
+				<span class="step"></span>
+				<span class="step"></span>
+				<span class="step"></span>
+				<span class="step"></span>
+			</div>
 	</form>			
 </div>
 
@@ -619,3 +646,93 @@
         return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
     }
   </script>
+
+<script>
+var currentTab = 0; // Current tab is set to be the first tab (0)
+showTab(currentTab); // Display the current tab
+
+function showTab(n) {
+  // This function will display the specified tab of the form...
+  var x = document.getElementsByClassName("tab");
+  x[n].style.display = "block";
+  //... and fix the Previous/Next buttons:
+  if (n == 0) {
+    document.getElementById("prevBtn").style.display = "none";
+  } else {
+    document.getElementById("prevBtn").style.display = "inline";
+  }
+  if (n == (x.length - 1)) {
+    document.getElementById("nextBtn").innerHTML = "Simpan";
+  } else {
+    document.getElementById("nextBtn").innerHTML = "Next";
+  }
+  //... and run a function that will display the correct step indicator:
+  fixStepIndicator(n)
+}
+
+function nextPrev(n) {
+  // This function will figure out which tab to display
+  var x = document.getElementsByClassName("tab");
+  // Exit the function if any field in the current tab is invalid:
+  if (n == 1 && !validateForm()) return false;
+  // Hide the current tab:
+  x[currentTab].style.display = "none";
+  // Increase or decrease the current tab by 1:
+  currentTab = currentTab + n;
+  
+	// // Isi resume dengan data input
+	// $('#resume-no-ktp').text($('#no_ktp').val());
+    // $('#resume-nama').text($('#nama').val());
+	// $('#resume-jk').text($('#jk').val());
+	// $('#resume-tempatlahir').text($('#tempat_lahir').val());
+	// $('#resume-tgllahir').text(formatTanggal($('#tgl_lahir').val()));
+	// $('#resume-alamat').text($('#alamat').val());
+	// // $('#resume-provinsi').text($('#provinsi').val());
+	// $('#provinsi').on('change', function() {
+    //     var selectedText = $(this).find('option:selected').text(); // Ambil teks dari opsi yang dipilih
+    //     $('#resume-provinsi').text(selectedText); // Tampilkan teks pada elemen dengan ID 'resume-provinsi'
+    // });
+
+
+  // if you have reached the end of the form...
+  if (currentTab >= x.length) {
+    // ... the form gets submitted:
+    document.getElementById("regForm").submit();
+    return false;
+  }
+  // Otherwise, display the correct tab:
+  showTab(currentTab);
+}
+
+function validateForm() {
+  // This function deals with validation of the form fields
+  var x, y, i, valid = true;
+  x = document.getElementsByClassName("tab");
+  y = x[currentTab].getElementsByTagName("input");
+  // A loop that checks every input field in the current tab:
+  for (i = 0; i < y.length; i++) {
+    // If a field is empty...
+    if (y[i].value == "") {
+      // add an "invalid" class to the field:
+      y[i].className += " invalid";
+      // and set the current valid status to false
+      valid = false;
+    }
+  }
+  // If the valid status is true, mark the step as finished and valid:
+  if (valid) {
+    document.getElementsByClassName("step")[currentTab].className += " finish";
+  }
+  return valid; // return the valid status
+}
+
+function fixStepIndicator(n) {
+  // This function removes the "active" class of all steps...
+  var i, x = document.getElementsByClassName("step");
+  for (i = 0; i < x.length; i++) {
+    x[i].className = x[i].className.replace(" active", "");
+  }
+  //... and adds the "active" class on the current step:
+  x[n].className += " active";
+}
+</script>
