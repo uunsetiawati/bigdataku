@@ -198,143 +198,7 @@
 		</div>
 			<!-- <span class="section-subtitle"><code>.Digitalisasi Usaha</code></span> -->
 			<!--section title -->
-		<div class="tab">
-			<div class="header-about">
-				<div class="social-media-icon socmed-for-about shadow-sm">
-					<div class="coming-soon-word text-center">						
-					<span class="section-subtitle"><h4><code>Digitalisasi Usaha</code></h4></span>
-					</div>                          
-				</div>
-			</div>
-			<!-- end section title -->
-			<div class="input-wrap">
-				<label class="col-form-label">EMAIL</label>
-				<input type="text" name="email_usaha" placeholder="MASUKKAN EMAIL" value="<?= set_value('email_usaha'); ?>" class="form-control">
-			</div>
-			<div class="input-wrap">
-				<label class="col-form-label">WEBSITE USAHA</label>
-				<input type="text" name="web_usaha" placeholder="MASUKKAN WEBSITE USAHA" value="<?= set_value('web_usaha'); ?>" class="form-control">
-			</div>
-			<div class="input-wrap">
-				<label class="col-form-label">MEDIA SOSIAL USAHA</label>
-                <label class="form-control2">
-                <input type="checkbox" name="sosmed[]" value="INSTAGRAM" <?= (!empty($this->input->post('sosmed')) && in_array('INSTAGRAM',$this->input->post('sosmed'))) ? 'checked' : ''?> />INSTAGRAM
-                </label>
-                <label class="form-control2">
-                <input type="checkbox" name="sosmed[]" value="FACEBOOK" <?= (!empty($this->input->post('sosmed')) && in_array('FACEBOOK',$this->input->post('sosmed'))) ? 'checked' : ''?> />FACEBOOK
-                </label>
-				<label class="form-control2">
-                <input type="checkbox" name="sosmed[]" value="TIKTOK" <?= (!empty($this->input->post('sosmed')) && in_array('TIKTOK',$this->input->post('sosmed'))) ? 'checked' : ''?> />TIKTOK
-                </label>
-				<label class="form-control2">
-                <input type="checkbox" name="sosmed[]" value="YOUTUBE" <?= (!empty($this->input->post('sosmed')) && in_array('YOUTUBE',$this->input->post('sosmed'))) ? 'checked' : ''?> />YOUTUBE
-                </label>
-				<label class="form-control2">
-                <input type="checkbox" name="sosmed[]" value="LAINNYA" <?= (!empty($this->input->post('sosmed')) && in_array('LAINNYA',$this->input->post('sosmed'))) ? 'checked' : ''?> />LAINNYA
-                </label>
-			</div>
-			<div class="input-wrap">
-				<label class="col-form-label">MARKETPLACE USAHA</label>
-                <label class="form-control2">
-                <input type="checkbox" name="market[]" value="SHOPEE" <?= (!empty($this->input->post('market')) && in_array('SHOPEE',$this->input->post('market'))) ? 'checked' : ''?>/>SHOPEE
-                </label>
-                <label class="form-control2">
-                <input type="checkbox" name="market[]" value="LAZADA" <?= (!empty($this->input->post('market')) && in_array('LAZADA',$this->input->post('market'))) ? 'checked' : ''?>/>LAZADA
-                </label>
-				<label class="form-control2">
-                <input type="checkbox" name="market[]" value="TOKOPEDIA" <?= (!empty($this->input->post('market')) && in_array('TOKOPEDIA',$this->input->post('market'))) ? 'checked' : ''?>/>TOKOPEDIA
-                </label>
-				<label class="form-control2">
-                <input type="checkbox" name="market[]" value="BUKALAPAK" <?= (!empty($this->input->post('market')) && in_array('BUKALAPAK',$this->input->post('market'))) ? 'checked' : ''?>/>BUKALAPAK
-                </label>
-				<label class="form-control2">
-                <input type="checkbox" name="market[]" value="BLIBLI" <?= (!empty($this->input->post('market')) && in_array('BLIBLI',$this->input->post('market'))) ? 'checked' : ''?>/>BLIBLI
-                </label>
-				<label class="form-control2">
-                <input type="checkbox" name="market[]" value="LAINNYA" <?= (!empty($this->input->post('market')) && in_array('LAINNYA',$this->input->post('market'))) ? 'checked' : ''?>/>LAINNYA
-                </label>
-			</div>
-			<div class="input-wrap">
-				<label class="col-form-label">APAKAH TERDAFTAR DI PLATFORM PENGADAAN BARANG JASA</label>
-                <label class="form-control2">
-                <input type="checkbox" name="pengadaan[]" value="BELA PENGADAAN" <?= (!empty($this->input->post('pengadaan')) && in_array('BELA PENGADAAN',$this->input->post('pengadaan'))) ? 'checked' : '';?>/>BELA PENGADAAN
-                </label>
-                <label class="form-control2">
-                <input type="checkbox" name="pengadaan[]" value="E-KATALOG" <?= (!empty($this->input->post('pengadaan')) && in_array('E-KATALOG',$this->input->post('pengadaan'))) ? 'checked' : '';?>/>E-KATALOG
-                </label>
-				<label class="form-control2">
-                <input type="checkbox" name="pengadaan[]" value="LAINNYA" <?= (!empty($this->input->post('pengadaan')) && in_array('LAINNYA',$this->input->post('pengadaan'))) ? 'checked' : '';?>/>LAINNYA
-                </label>	
-			</div>			
-		</div>
-			<!-- <span class="section-subtitle"><code>.Transformasi Usaha</code></span> -->
-			<!--section title -->
-		<div class="tab">
-			<div class="header-about">
-				<div class="social-media-icon socmed-for-about shadow-sm">
-					<div class="coming-soon-word text-center">						
-					<span class="section-subtitle"><h4><code>Transformasi Usaha</code></h4></span>
-					</div>                          
-				</div>
-			</div>
-			<!-- end section title -->
-			<div class="input-wrap">
-				<label class="col-form-label">PERIZINAN USAHA YANG DIMILIKI</label>
-					<?php
-					foreach($izin as $row){?>
-						<label class="form-control2">
-						<input type="checkbox" name="izin[]" value="<?=$row->nama;?>" <?= (!empty($this->input->post('izin')) && in_array($row->nama,$this->input->post('izin', true))) ? 'checked' : ''; ?> /><?=$row->nama;?>
-						</label>
-					<?php }
-					?>
-			</div>
-		</div>
-		<div class="tab">
-			<!-- <span class="section-subtitle"><code>.Informasi Lainnya</code></span> -->
-			<!--section title -->
-			<div class="header-about">
-				<div class="social-media-icon socmed-for-about shadow-sm">
-					<div class="coming-soon-word text-center">						
-					<span class="section-subtitle"><h4><code>Informasi Lainnya</code></h4></span>
-					</div>                          
-				</div>
-			</div>
-			<!-- end section title -->
-			<div class="input-wrap">
-				<label class="col-form-label">PERMASALAHAN YANG DIHADAPI</label>
-					<?php
-					foreach($masalah as $row){?>
-						<label class="form-control2">
-						<input type="checkbox" name="masalah[]" value="<?=$row->nama;?>" <?= (!empty($this->input->post('masalah')) && in_array($row->nama,$this->input->post('masalah', true))) ? 'checked' : ''; ?> /><?=$row->nama;?>
-						</label>
-					<?php }
-					?>
-			</div>
-			<div class="input-wrap">
-				<label class="col-form-label">KEBUTUHAN DIKLAT / PELATIHAN</label>
-					<?php
-					foreach($kebutuhan as $row){?>
-						<label class="form-control2">
-						<input type="checkbox" name="kebutuhan[]" value="<?=$row->nama;?>" <?= (!empty($this->input->post('kebutuhan')) && in_array($row->nama,$this->input->post('kebutuhan', true))) ? 'checked' : ''; ?> /><?=$row->nama;?>
-						</label>
-					<?php }
-					?>
-			</div>
-		</div>
-			
-
-			<!-- separator -->
-			<div class="separator-small"></div>
-			<!-- end separator -->
-			<hr>
-			<!-- separator -->
-			<div class="separator-small"></div>
-			<!-- end separator -->
-			
-			  
-			<!-- <span class="section-subtitle"><code>.DATA UMKM</code></span> -->
-			<!--section title -->
-		<div class="tab">
+			<div class="tab">
 			<div class="header-about">
 				<div class="social-media-icon socmed-for-about shadow-sm">
 					<div class="coming-soon-word text-center">						
@@ -504,6 +368,132 @@
 					<option value="KARYAWAN" <?=$this->input->post('jabatan') == 'KARYAWAN' ? 'selected':''?>>KARYAWAN</option>									
 				</select>
 			</div>
+			        
+		</div>
+
+		<div class="tab">
+			<div class="header-about">
+				<div class="social-media-icon socmed-for-about shadow-sm">
+					<div class="coming-soon-word text-center">						
+					<span class="section-subtitle"><h4><code>Digitalisasi Usaha</code></h4></span>
+					</div>                          
+				</div>
+			</div>
+			<!-- end section title -->
+			<div class="input-wrap">
+				<label class="col-form-label">EMAIL <h7> (Bila tidak ada isi 0)</h7></label>
+				<input type="text" name="email_usaha" placeholder="MASUKKAN EMAIL" value="<?= set_value('email_usaha'); ?>" class="form-control" required>
+			</div>
+			<div class="input-wrap">
+				<label class="col-form-label">WEBSITE USAHA <h7> (Bila tidak ada isi 0)</h7></label>
+				<input type="text" name="web_usaha" placeholder="MASUKKAN WEBSITE USAHA" value="<?= set_value('web_usaha'); ?>" class="form-control" required>
+			</div>
+			<div class="input-wrap">
+				<label class="col-form-label">MEDIA SOSIAL USAHA</label>
+                <label class="form-control2">
+                <input type="checkbox" name="sosmed[]" value="INSTAGRAM" <?= (!empty($this->input->post('sosmed')) && in_array('INSTAGRAM',$this->input->post('sosmed'))) ? 'checked' : ''?> />INSTAGRAM
+                </label>
+                <label class="form-control2">
+                <input type="checkbox" name="sosmed[]" value="FACEBOOK" <?= (!empty($this->input->post('sosmed')) && in_array('FACEBOOK',$this->input->post('sosmed'))) ? 'checked' : ''?> />FACEBOOK
+                </label>
+				<label class="form-control2">
+                <input type="checkbox" name="sosmed[]" value="TIKTOK" <?= (!empty($this->input->post('sosmed')) && in_array('TIKTOK',$this->input->post('sosmed'))) ? 'checked' : ''?> />TIKTOK
+                </label>
+				<label class="form-control2">
+                <input type="checkbox" name="sosmed[]" value="YOUTUBE" <?= (!empty($this->input->post('sosmed')) && in_array('YOUTUBE',$this->input->post('sosmed'))) ? 'checked' : ''?> />YOUTUBE
+                </label>
+				<label class="form-control2">
+                <input type="checkbox" name="sosmed[]" value="LAINNYA" <?= (!empty($this->input->post('sosmed')) && in_array('LAINNYA',$this->input->post('sosmed'))) ? 'checked' : ''?> />LAINNYA
+                </label>
+			</div>
+			<div class="input-wrap">
+				<label class="col-form-label">MARKETPLACE USAHA</label>
+                <label class="form-control2">
+                <input type="checkbox" name="market[]" value="SHOPEE" <?= (!empty($this->input->post('market')) && in_array('SHOPEE',$this->input->post('market'))) ? 'checked' : ''?>/>SHOPEE
+                </label>
+                <label class="form-control2">
+                <input type="checkbox" name="market[]" value="LAZADA" <?= (!empty($this->input->post('market')) && in_array('LAZADA',$this->input->post('market'))) ? 'checked' : ''?>/>LAZADA
+                </label>
+				<label class="form-control2">
+                <input type="checkbox" name="market[]" value="TOKOPEDIA" <?= (!empty($this->input->post('market')) && in_array('TOKOPEDIA',$this->input->post('market'))) ? 'checked' : ''?>/>TOKOPEDIA
+                </label>
+				<label class="form-control2">
+                <input type="checkbox" name="market[]" value="BUKALAPAK" <?= (!empty($this->input->post('market')) && in_array('BUKALAPAK',$this->input->post('market'))) ? 'checked' : ''?>/>BUKALAPAK
+                </label>
+				<label class="form-control2">
+                <input type="checkbox" name="market[]" value="BLIBLI" <?= (!empty($this->input->post('market')) && in_array('BLIBLI',$this->input->post('market'))) ? 'checked' : ''?>/>BLIBLI
+                </label>
+				<label class="form-control2">
+                <input type="checkbox" name="market[]" value="LAINNYA" <?= (!empty($this->input->post('market')) && in_array('LAINNYA',$this->input->post('market'))) ? 'checked' : ''?>/>LAINNYA
+                </label>
+			</div>
+			<div class="input-wrap">
+				<label class="col-form-label">APAKAH TERDAFTAR DI PLATFORM PENGADAAN BARANG JASA</label>
+                <label class="form-control2">
+                <input type="checkbox" name="pengadaan[]" value="BELA PENGADAAN" <?= (!empty($this->input->post('pengadaan')) && in_array('BELA PENGADAAN',$this->input->post('pengadaan'))) ? 'checked' : '';?>/>BELA PENGADAAN
+                </label>
+                <label class="form-control2">
+                <input type="checkbox" name="pengadaan[]" value="E-KATALOG" <?= (!empty($this->input->post('pengadaan')) && in_array('E-KATALOG',$this->input->post('pengadaan'))) ? 'checked' : '';?>/>E-KATALOG
+                </label>
+				<label class="form-control2">
+                <input type="checkbox" name="pengadaan[]" value="LAINNYA" <?= (!empty($this->input->post('pengadaan')) && in_array('LAINNYA',$this->input->post('pengadaan'))) ? 'checked' : '';?>/>LAINNYA
+                </label>	
+			</div>			
+		</div>
+			<!-- <span class="section-subtitle"><code>.Transformasi Usaha</code></span> -->
+			<!--section title -->
+		<div class="tab">
+			<div class="header-about">
+				<div class="social-media-icon socmed-for-about shadow-sm">
+					<div class="coming-soon-word text-center">						
+					<span class="section-subtitle"><h4><code>Transformasi Usaha</code></h4></span>
+					</div>                          
+				</div>
+			</div>
+			<!-- end section title -->
+			<div class="input-wrap">
+				<label class="col-form-label">PERIZINAN USAHA YANG DIMILIKI</label>
+					<?php
+					foreach($izin as $row){?>
+						<label class="form-control2">
+						<input type="checkbox" name="izin[]" value="<?=$row->nama;?>" <?= (!empty($this->input->post('izin')) && in_array($row->nama,$this->input->post('izin', true))) ? 'checked' : ''; ?> /><?=$row->nama;?>
+						</label>
+					<?php }
+					?>
+			</div>
+		</div>
+		<div class="tab">
+			<!-- <span class="section-subtitle"><code>.Informasi Lainnya</code></span> -->
+			<!--section title -->
+			<div class="header-about">
+				<div class="social-media-icon socmed-for-about shadow-sm">
+					<div class="coming-soon-word text-center">						
+					<span class="section-subtitle"><h4><code>Informasi Lainnya</code></h4></span>
+					</div>                          
+				</div>
+			</div>
+			<!-- end section title -->
+			<div class="input-wrap">
+				<label class="col-form-label">PERMASALAHAN YANG DIHADAPI</label>
+					<?php
+					foreach($masalah as $row){?>
+						<label class="form-control2">
+						<input type="checkbox" name="masalah[]" value="<?=$row->nama;?>" <?= (!empty($this->input->post('masalah')) && in_array($row->nama,$this->input->post('masalah', true))) ? 'checked' : ''; ?> /><?=$row->nama;?>
+						</label>
+					<?php }
+					?>
+			</div>
+			<div class="input-wrap">
+				<label class="col-form-label">KEBUTUHAN DIKLAT / PELATIHAN</label>
+					<?php
+					foreach($kebutuhan as $row){?>
+						<label class="form-control2">
+						<input type="checkbox" name="kebutuhan[]" value="<?=$row->nama;?>" <?= (!empty($this->input->post('kebutuhan')) && in_array($row->nama,$this->input->post('kebutuhan', true))) ? 'checked' : ''; ?> /><?=$row->nama;?>
+						</label>
+					<?php }
+					?>
+			</div>
+
 			<div class="input-wrap">
 				<label class="col-form-label">APAKAH PERNAH MENGIKUTI PELATIHAN SEBELUMNYA?<span class="section-subtitle"><code>*</code></span></label>
 				<select name="pelatihan_sebelumnya" class="form-control" required>
@@ -515,8 +505,28 @@
 			<div class="input-wrap">
 				<label class="col-form-label">MASUKAN / SARAN<span class="section-subtitle"><code>*</code></span></label>				
 				<input type="text" name="saran" placeholder="MASUKAN / SARAN" onkeyup="this.value = this.value.toUpperCase()" value="<?= set_value('saran'); ?>" class="form-control">			
-			</div>          
+			</div>  
+
+			<label class="col-form-label">Klik Ya untuk melanjutkan <span class="section-subtitle"><code>*</code></span></label>
+			<label class="form-control2">
+				Ya <input type="checkbox" name="resume" required>
+			</label>	
+
 		</div>
+			
+
+			<!-- separator -->
+			<div class="separator-small"></div>
+			<!-- end separator -->
+			<hr>
+			<!-- separator -->
+			<div class="separator-small"></div>
+			<!-- end separator -->
+			
+			  
+			<!-- <span class="section-subtitle"><code>.DATA UMKM</code></span> -->
+			<!--section title -->
+		
             <!-- <div class="button-default">
 				<button type="submit" name="simpan" class="button" id="btnsubmit" style="display:block">Simpan</button>
 			</div>			 -->
