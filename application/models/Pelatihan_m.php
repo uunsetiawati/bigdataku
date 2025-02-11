@@ -231,6 +231,11 @@
 		$this->db->update($this->table, $data);
 
 
+		}		
+
+		public function uploadtData($data)
+		{
+			$this->db->insert('tb_data_peserta_fix', $data); // Sesuaikan 'nama_tabel' dengan nama tabel database Anda
 		}
 	}
 
