@@ -96,7 +96,7 @@
                                 <?php
                                     // echo anchor('peserta/batalvalidasi/'.$this->uri->segment(3), 'UnaApprove', 
                                     // array('class'=>'button5', 'onclick'=>"return confirm('Apakah Anda yakin ingin menghapus semua validasi peserta pelatihan ini?')"));
-                                    echo anchor('uploadcontroller/formupload/'.$this->uri->segment(3), 'Upload FIX Peserta', 
+                                    echo anchor('UploadController/formupload/'.$this->uri->segment(3), 'Upload FIX Peserta', 
                                     array('class'=>'button7'));
                                 ?>
                             </div>
