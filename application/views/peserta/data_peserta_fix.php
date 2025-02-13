@@ -79,6 +79,19 @@
         </div>
     </div>
 </div>
+<div class="container">
+    <div class="button-default">
+        <div class="row"> 
+            <div class="col-12">
+                <div class="button-default">   
+                    <?php
+                        echo anchor('export/export2/'.$this->uri->segment(3), 'Export Peserta Fix', array('class'=>'button3'));
+                    ?>
+                </div>   
+            </div> 
+        </div>
+    </div> 
+</div>
 
 <!-- separator -->
 <div class="separator-large"></div>

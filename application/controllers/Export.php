@@ -38,6 +38,20 @@ class Export extends CI_Controller {
           }
      }
 
+     public function export2(){
+          $kodeunik=$this->uri->segment(3);
+          $pelatihan=$this->db->get_where('tb_data_pelatihan', array('kodeunik' => $kodeunik))->row_array();          
+          if($pelatihan['sasaran']=='CALON WIRAUSAHA'){
+               $this->exportfix($kodeunik);
+          }else if($pelatihan['sasaran']=='UKM'){
+               $this->exportukmfix($kodeunik);
+          }else if($pelatihan['sasaran']=='SAFARI PODCAST'){
+               $this->exportpodcastfix($kodeunik);
+          }else if($pelatihan['sasaran']=='KOPERASI'){
+               $this->exportkoperasifix($kodeunik);
+          }
+     }
+
      public function export($kodeunik)
      {
           check_not_login();
@@ -407,6 +421,28 @@ class Export extends CI_Controller {
 
           $semua_pengguna = $query->result();
 
+          #### query khusus geologi koperasi ####
+          $querygeo = $this->db->query("SELECT 
+          a.id                     AS id,
+          a.id_pelatihan           AS id_pelatihan,
+          a.kodeunik               AS kodeunik,          
+          d.name                   AS prov_kopukm,
+          b.name                   AS kota_kopukm,
+          e.name                   AS kec_kopukm,
+          f.name                   AS kel_kopukm
+
+          FROM tb_data_peserta a 
+          JOIN regencies b ON a.kota_kopukm = b.id 
+          JOIN tb_data_pelatihan c ON a.id_pelatihan = c.id
+          JOIN provinces d ON a.prov_kopukm = d.id
+          JOIN districts e ON a.kec_kopukm = e.id
+          JOIN villages f ON a.kel_kopukm = f.id
+          
+          WHERE a.kodeunik=$kodeunik
+          ORDER BY no_urut ASC");
+
+          $penggunageo = $querygeo->result();
+
           $spreadsheet = new Spreadsheet;
           // $spreadsheet->getDefaultStyle('B')->getNumberFormat()->setFormatCode(NumberFormat::FORMAT_TEXT);
           $height = 50;
@@ -509,8 +545,16 @@ class Export extends CI_Controller {
           $kolom = 2;
           $nomor = 1;
           $height = 50;
-          foreach($semua_pengguna as $pengguna) {
 
+          $geo_map = [];
+          foreach ($penggunageo as $geo) {
+               $geo_map[$geo->id] = $geo;
+          }
+
+          foreach($semua_pengguna as $pengguna) {
+               $geo = isset($geo_map[$pengguna->id]) ? $geo_map[$pengguna->id] : null;
+               $cleanedPermasalahan = str_replace(["\r", "\n"], '', $pengguna->permasalahan);
+               $cleanedKebutuhan = str_replace(["\r", "\n"], '', $pengguna->kebutuhan);
                $spreadsheet->getActiveSheet()
                            ->setCellValue('A' . $kolom, $pengguna->no_urut)
                          //   ->setCellValue('B' . $kolom, $pengguna->no_ktp)
@@ -532,8 +576,8 @@ class Export extends CI_Controller {
                            ->setCellValueExplicit('Q' . $kolom, $pengguna->no_telp, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
                            ->setCellValue('R' . $kolom, $pengguna->disabilitas)
                            ->setCellValue('S' . $kolom, $pengguna->izin_usaha)
-                           ->setCellValue('T' . $kolom, $pengguna->permasalahan)
-                           ->setCellValue('U' . $kolom, $pengguna->kebutuhan)
+                           ->setCellValue('T' . $kolom, $cleanedPermasalahan)
+                           ->setCellValue('U' . $kolom, $cleanedKebutuhan)
                            ->setCellValueExplicit('V' . $kolom, $pengguna->nib, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
                            ->setCellValue('W' . $kolom, $pengguna->nama_usaha)
                            ->setCellValue('X' . $kolom, $pengguna->status_usaha)
@@ -543,9 +587,346 @@ class Export extends CI_Controller {
                            ->setCellValue('AB' . $kolom, $pengguna->alamat_kopukm)
                            ->setCellValueExplicit('AC' . $kolom, $pengguna->rt_kopukm, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
                            ->setCellValueExplicit('AD' . $kolom, $pengguna->rw_kopukm, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
-                           ->setCellValue('AE' . $kolom, $pengguna->kel_kopukm)
-                           ->setCellValue('AF' . $kolom, $pengguna->kec_kopukm)
-                           ->setCellValue('AG' . $kolom, $pengguna->kota_kopukm)
+                           ->setCellValue('AE' . $kolom, $geo->kel_kopukm)
+                           ->setCellValue('AF' . $kolom, $geo->kec_kopukm)
+                           ->setCellValue('AG' . $kolom, $geo->kota_kopukm)
+                           ->setCellValueExplicit('AH' . $kolom, $pengguna->kodepos_kopukm, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValue('AI' . $kolom, str_replace('&lt;', '<',$pengguna->modal_usaha))
+                           ->setCellValueExplicit('AJ' . $kolom, $pengguna->nilai_modalusaha, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValue('AK' . $kolom, str_replace('&lt;', '<',$pengguna->omzet_usaha))
+                           ->setCellValueExplicit('AL' . $kolom, $pengguna->nilai_omzetusaha, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValueExplicit('AM' . $kolom, $pengguna->jml_tenaga_kerjal, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValueExplicit('AN' . $kolom, $pengguna->jml_tenaga_kerjap, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValue('AO' . $kolom, $pengguna->wil_pemasaran)
+                           ->setCellValue('AP' . $kolom, $pengguna->lokasi_pemasaran)
+                           ->setCellValue('AQ' . $kolom, $pengguna->jabatan)
+                           ->setCellValue('AR' . $kolom, 'Lihat FOTO')
+                           ->setCellValue('AT' . $kolom, 'Lihat KTP')
+                           ->getRowDimension($kolom)->setRowHeight($height);
+
+                         $hyperlink = new \PhpOffice\PhpSpreadsheet\Cell\Hyperlink();
+                         $hyperlink->setUrl(site_url('uploads/peserta/'.$pengguna->foto));
+                         $hyperlink->setTooltip('Klik untuk membuka');
+                         $spreadsheet->getActiveSheet()->getCell('AR' . $kolom)->setHyperlink($hyperlink);
+
+                         $hyperlink = new \PhpOffice\PhpSpreadsheet\Cell\Hyperlink();
+                         $hyperlink->setUrl(site_url('uploads/ktp/'.$pengguna->ktp));
+                         $hyperlink->setTooltip('Klik untuk membuka');
+                         $spreadsheet->getActiveSheet()->getCell('AT' . $kolom)->setHyperlink($hyperlink);
+
+                         // Jika diinginkan, tambahkan juga gambar
+                         // if (file_exists('uploads/peserta/'.$pengguna->foto)) {
+                         // $drawing = new Drawing();
+                         // $drawing->setName('Foto');
+                         // $drawing->setDescription('Foto');
+                         // $drawing->setPath('uploads/peserta/'.$pengguna->foto);
+                         // $drawing->setHeight(50);
+                         // $drawing->setCoordinates('AS' . $kolom);
+                         // $drawing->setWorksheet($spreadsheet->getActiveSheet());
+                         // }
+
+                         // Jika diinginkan, tambahkan juga gambar
+                         // if (file_exists('uploads/ktp/'.$pengguna->ktp)) {
+                         // $ktp = new Drawing();
+                         // $ktp->setName('KTP');
+                         // $ktp->setDescription('KTP');
+                         // $ktp->setPath('uploads/ktp/'.$pengguna->ktp);
+                         // $ktp->setHeight(50);
+                         // $ktp->setCoordinates('AU' . $kolom);
+                         // $ktp->setWorksheet($spreadsheet->getActiveSheet());
+                         // }
+
+               $kolom++;
+               $nomor++;
+
+          }          
+
+          $writer = new Xlsx($spreadsheet);
+
+          header('Content-Type: application/vnd.ms-excel');
+          header('Content-Disposition: attachment;filename="Pesertaukm.xlsx"');
+          header('Cache-Control: max-age=0');
+
+	  $writer->save('php://output');
+     }
+
+     public function exportukmfix($kodeunik)
+     {
+          check_not_login();
+          // $kodeunik = $this->uri->segment(3);	
+
+          // $semua_pengguna = $this->export_model->getAll($kodeunik)->result();
+
+          $query = $this->db->query("SELECT 
+          a.id                     AS id,
+          a.id_pelatihan           AS id_pelatihan,
+          a.kodeunik               AS kodeunik,
+          g.nourut                 AS no_urut,
+          g.nik                 AS no_ktp,
+          a.nama_peserta           AS nama_peserta,
+          a.tempat_lahir           AS tempat_lahir,
+          a.tgl_lahir              AS tgl_lahir,
+          a.jk                     AS jk,
+          a.status                 AS status,
+          a.pendidikan             AS pendidikan,
+          a.agama                  AS agama,
+          a.alamat                 AS alamat,
+          a.rt                     AS rt,
+          a.rw                     AS rw,
+          d.name                   AS provinsi,
+          b.name                   AS kabupaten,
+          e.name                   AS kecamatan,
+          f.name                   AS kelurahan,
+          a.no_telp                AS no_telp,
+          a.disabilitas            AS disabilitas,
+          a.jabatan                AS jabatan,
+          a.nama_kop               AS nama_kop,
+          a.nik_koperasi           AS nik_koperasi,
+          a.no_badan_hukum         AS no_badan_hukum,
+          a.tgl_badan_hukum        AS tgl_badan_hukum,
+          a.alamat_kopukm          AS alamat_kopukm,
+          a.rt_kopukm              AS rt_kopukm,
+          a.rw_kopukm              AS rw_kopukm,
+          d.name                   AS prov_kopukm,
+          b.name                   AS kota_kopukm,
+          e.name                   AS kec_kopukm,
+          f.name                   AS kel_kopukm,
+          a.kodepos_kopukm         AS kodepos_kopukm,
+          a.jml_anggota            AS jml_anggota,
+          a.anggota_l              AS anggota_l,
+          a.anggota_p              AS anggota_p,
+          a.calon_anggota          AS calon_anggota,
+          a.bentuk_koperasi        AS bentuk_koperasi,
+          a.jenis_koperasi         AS jenis_koperasi,
+          a.tipe_koperasi          AS tipe_koperasi,
+          a.kelompok_koperasi      AS kelompok_koperasi,
+          a.cabang                 AS cabang,
+          a.kantor_cabang_pembantu AS kantor_cabang_pembantu,
+          a.kantor_kas             AS kantor_kas,
+          a.sektor_usaha           AS sektor_usaha,
+          a.bidang_usaha           AS bidang_usaha,
+          a.jenis_produk           AS jenis_produk,
+          a.volume_usaha           AS volume_usaha,
+          a.status_usaha           AS status_usaha,
+          a.sertifikasi            AS sertifikasi,
+          a.wil_pemasaran          AS wil_pemasaran,
+          a.nama_usaha             AS nama_usaha,
+          a.nib                    AS nib,
+          a.jml_tenaga_kerja       AS jml_tenaga_kerja,
+          a.jml_tenaga_kerjal      AS jml_tenaga_kerjal,
+          a.jml_tenaga_kerjap      AS jml_tenaga_kerjap,
+          a.modal_usaha            AS modal_usaha,
+          a.nilai_modalusaha       AS nilai_modalusaha,
+          a.nilai_modalhutang      AS nilai_modalhutang,
+          a.omzet_usaha            AS omzet_usaha,
+          a.nilai_omzetusaha       AS nilai_omzetusaha,
+          a.nilai_shukoperasi      AS nilai_shukoperasi,
+          a.skala_koperasi         AS skala_koperasi,
+          a.web_usaha              AS web_usaha,
+          a.email_usaha            AS email_usaha,
+          a.sosmed_usaha           AS sosmed_usaha,
+          a.market_usaha           AS market_usaha,
+          a.pengadaan              AS pengadaan,
+          a.izin_usaha             AS izin_usaha,
+          a.pemasaran              AS pemasaran,
+          a.lokasi_pemasaran       AS lokasi_pemasaran,
+          a.idebisnis              AS idebisnis,
+          a.permasalahan           AS permasalahan,
+          a.kebutuhan              AS kebutuhan,
+          a.foto                   AS foto,
+          a.ktp                    AS ktp,
+          c.jenis_pelatihan        AS jenis_pelatihan,
+          c.divisi                 AS divisi,
+          c.program                AS program,
+          c.id                     AS id_pel,
+          c.judul_pelatihan        AS judul_pelatihan,
+          c.alamat_pelatihan       AS alamat_pelatihan,
+          c.kota                   AS kota_pelatihan,
+          c.tgl_mulai              AS tgl_mulai,
+          c.tgl_akhir              AS tgl_akhir
+
+          FROM tb_data_peserta_fix g
+          JOIN tb_data_peserta a ON g.nik = a.no_ktp
+          JOIN regencies b ON a.kabupaten = b.id 
+          JOIN tb_data_pelatihan c ON a.id_pelatihan = c.id
+          JOIN provinces d ON a.provinsi = d.id
+          JOIN districts e ON a.kecamatan = e.id
+          JOIN villages f ON a.kelurahan = f.id
+          
+          WHERE g.kodeunik=$kodeunik
+          ORDER BY no_urut ASC");
+
+          $semua_pengguna = $query->result();
+
+          #### query khusus geologi koperasi ####
+          $querygeo = $this->db->query("SELECT 
+          a.id                     AS id,
+          a.id_pelatihan           AS id_pelatihan,
+          a.kodeunik               AS kodeunik,          
+          d.name                   AS prov_kopukm,
+          b.name                   AS kota_kopukm,
+          e.name                   AS kec_kopukm,
+          f.name                   AS kel_kopukm
+
+          FROM tb_data_peserta a 
+          JOIN regencies b ON a.kota_kopukm = b.id 
+          JOIN tb_data_pelatihan c ON a.id_pelatihan = c.id
+          JOIN provinces d ON a.prov_kopukm = d.id
+          JOIN districts e ON a.kec_kopukm = e.id
+          JOIN villages f ON a.kel_kopukm = f.id
+          
+          WHERE a.kodeunik=$kodeunik
+          ORDER BY no_urut ASC");
+
+          $penggunageo = $querygeo->result();
+
+          $spreadsheet = new Spreadsheet;
+          // $spreadsheet->getDefaultStyle('B')->getNumberFormat()->setFormatCode(NumberFormat::FORMAT_TEXT);
+          $height = 50;
+
+          $spreadsheet->getActiveSheet()
+                      ->setCellValue('A1', 'NO. URUT')
+                      ->setCellValue('B1', 'NO. KTP')
+                      ->setCellValue('C1', 'NAMA PESERTA')
+                      ->setCellValue('D1', 'TEMPAT LAHIR')
+                      ->setCellValue('E1', 'TANGGAL LAHIR')
+                      ->setCellValue('F1', 'JENIS KELAMIN')
+                      ->setCellValue('G1', 'STATUS PERKAWINAN')
+                      ->setCellValue('H1', 'PENDIDIKAN TERAKHIR')
+                      ->setCellValue('I1', 'AGAMA')
+                      ->setCellValue('J1', 'ALAMAT')
+                      ->setCellValue('K1', 'RT')
+                      ->setCellValue('L1', 'RW')
+                      ->setCellValue('M1', 'KELURAHAN')
+                      ->setCellValue('N1', 'KECAMATAN')
+                      ->setCellValue('O1', 'KABUPATEN')
+                      ->setCellValue('P1', 'PROVINSI')
+                      ->setCellValue('Q1', 'NO. TELP')
+                      ->setCellValue('R1', 'APAKAH ANDA PENYANDANG DISABILITAS')
+                      ->setCellValue('S1', 'PERIZINAN USAHA YANG DIMIKI')
+                      ->setCellValue('T1', 'PERMSALAHAN YANG DIHADAPI')
+                      ->setCellValue('U1', 'KEBUTUHAN DIKLAT/PELATIHAN')
+                      ->setCellValue('V1', 'NO. NIB')
+                      ->setCellValue('W1', 'NAMA USAHA')
+                      ->setCellValue('X1', 'STATUS USAHA')
+                      ->setCellValue('Y1', 'SERTIFIKASI USAHA')
+                      ->setCellValue('Z1', 'SEKTOR USAHA')
+                      ->setCellValue('AA1', 'BIDANG USAHA')
+                      ->setCellValue('AB1', 'ALAMAT USAHA')
+                      ->setCellValue('AC1', 'RT USAHA')
+                      ->setCellValue('AD1', 'RW USAHA')
+                      ->setCellValue('AE1', 'KELURAHAN USAHA')
+                      ->setCellValue('AF1', 'KECAMATAN USAHA')
+                      ->setCellValue('AG1', 'KABUPATEN USAHA')
+                      ->setCellValue('AH1', 'KODEPOS USAHA')
+                      ->setCellValue('AI1', 'MODAL USAHA PER TAHUN')
+                      ->setCellValue('AJ1', 'NILAI MODAL USAHA PER TAHUN')
+                      ->setCellValue('AK1', 'OMZET USAHA PER TAHUN')
+                      ->setCellValue('AL1', 'NILAI OMZET USAHA PER TAHUN')
+                      ->setCellValue('AM1', 'JUMLAH KARYAWAN LAKI-LAKI')
+                      ->setCellValue('AN1', 'JUMLAH KARYAWAN PEREMPUAN')
+                      ->setCellValue('AO1', 'WILAYAH PEMASARAN')
+                      ->setCellValue('AP1', 'LOKASI PEMASARAN')
+                      ->setCellValue('AQ1', 'JABATAN PESERTA DI USAHA')
+                      ->setCellValue('AR1', 'Lihat FOTO')
+                      ->setCellValue('AS1', 'FOTO')
+                      ->setCellValue('AT1', 'Lihat KTP')
+                      ->setCellValue('AU1', 'KTP');
+                      
+          $sheet = $spreadsheet->getActiveSheet();
+          $sheet->getColumnDimension('A')->setWidth(8); // Set width kolom A
+          $sheet->getColumnDimension('B')->setWidth(25); // Set width kolom B
+          $sheet->getColumnDimension('C')->setWidth(25); // Set width kolom C
+          $sheet->getColumnDimension('D')->setWidth(15); // Set width kolom D
+          $sheet->getColumnDimension('E')->setWidth(15); // Set width kolom E
+          $sheet->getColumnDimension('F')->setWidth(15); // Set width kolom F
+          $sheet->getColumnDimension('G')->setWidth(15); // Set width kolom G
+          $sheet->getColumnDimension('H')->setWidth(10); // Set width kolom H
+          $sheet->getColumnDimension('I')->setWidth(10); // Set width kolom I
+          $sheet->getColumnDimension('J')->setWidth(30); // Set width kolom J
+          $sheet->getColumnDimension('K')->setWidth(5); // Set width kolom K
+          $sheet->getColumnDimension('L')->setWidth(5); // Set width kolom L
+          $sheet->getColumnDimension('M')->setWidth(15); // Set width kolom Provinsi
+          $sheet->getColumnDimension('N')->setWidth(25); // Set width kolom Kabupaten
+          $sheet->getColumnDimension('O')->setWidth(25); // Set width kolom Kecamatan
+          $sheet->getColumnDimension('P')->setWidth(25); // Set width kolom Kelurahan
+          $sheet->getColumnDimension('Q')->setWidth(15); // Set width kolom NO. telp
+          $sheet->getColumnDimension('R')->setWidth(15); // Set width kolom Disabilitas
+          $sheet->getColumnDimension('S')->setWidth(20); // Set width kolom Jabatan
+          $sheet->getColumnDimension('T')->setWidth(20); // Set width kolom Alamat Kop/UKM
+          $sheet->getColumnDimension('U')->setWidth(20); // Set width kolom RT Kop/UKM
+          $sheet->getColumnDimension('V')->setWidth(15); // Set width kolom NIB
+          $sheet->getColumnDimension('W')->setWidth(15); // Set width kolom Nama usaha
+          $sheet->getColumnDimension('X')->setWidth(20); // Set width kolom status usaha
+          $sheet->getColumnDimension('Y')->setWidth(20); // Set width kolom sertifikasi
+          $sheet->getColumnDimension('Z')->setWidth(20); // Set width kolom sektor usaha
+          $sheet->getColumnDimension('AA')->setWidth(20); // Set width kolom bidang usaha
+          $sheet->getColumnDimension('AB')->setWidth(30); // Set width kolom alamat usaha
+          $sheet->getColumnDimension('AC')->setWidth(5); // Set width kolom RT usaha
+          $sheet->getColumnDimension('AD')->setWidth(5); // Set width kolom RW usaha
+          $sheet->getColumnDimension('AE')->setWidth(25); // Set width kolom Kota usaha
+          $sheet->getColumnDimension('AF')->setWidth(25); // Set width kolom Kec usaha
+          $sheet->getColumnDimension('AG')->setWidth(25); // Set width kolom kel usaha
+          $sheet->getColumnDimension('AH')->setWidth(10); // Set width kolom kodepos usaha
+          $sheet->getColumnDimension('AI')->setWidth(10); // Set width kolom modal usaha
+          $sheet->getColumnDimension('AJ')->setWidth(20); // Set width kolom nilai modal usaha
+          $sheet->getColumnDimension('AK')->setWidth(10); // Set width kolom omzet usaha
+          $sheet->getColumnDimension('AL')->setWidth(20); // Set width kolom nilai omzet usaha
+          $sheet->getColumnDimension('AM')->setWidth(5); // Set width kolom tenaga kerja laki
+          $sheet->getColumnDimension('AN')->setWidth(5); // Set width kolom tenaga kerja cewe
+          $sheet->getColumnDimension('AO')->setWidth(25); // Set width kolom wilayah pemasaran
+          $sheet->getColumnDimension('AP')->setWidth(30); // Set width kolom lokasi pemasaran
+          $sheet->getColumnDimension('AQ')->setWidth(15); // Set width kolom jabatan
+          $sheet->getColumnDimension('AR')->setWidth(15); // Set width kolom jabatan
+
+          $kolom = 2;
+          $nomor = 1;
+          $height = 50;
+
+          $geo_map = [];
+          foreach ($penggunageo as $geo) {
+               $geo_map[$geo->id] = $geo;
+          }
+
+          foreach($semua_pengguna as $pengguna) {
+               $geo = isset($geo_map[$pengguna->id]) ? $geo_map[$pengguna->id] : null;
+               $cleanedPermasalahan = str_replace(["\r", "\n"], '', $pengguna->permasalahan);
+               $cleanedKebutuhan = str_replace(["\r", "\n"], '', $pengguna->kebutuhan);
+               $spreadsheet->getActiveSheet()
+                           ->setCellValue('A' . $kolom, $pengguna->no_urut)
+                         //   ->setCellValue('B' . $kolom, $pengguna->no_ktp)
+                           ->setCellValueExplicit('B' . $kolom, $pengguna->no_ktp, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValue('C' . $kolom, $pengguna->nama_peserta)
+                           ->setCellValue('D' . $kolom, $pengguna->tempat_lahir)
+                           ->setCellValue('E' . $kolom, date('d-m-Y',strtotime($pengguna->tgl_lahir)))
+                           ->setCellValue('F' . $kolom, $pengguna->jk)
+                           ->setCellValue('G' . $kolom, $pengguna->status)
+                           ->setCellValue('H' . $kolom, $pengguna->pendidikan)
+                           ->setCellValue('I' . $kolom, $pengguna->agama)
+                           ->setCellValue('J' . $kolom, $pengguna->alamat)
+                           ->setCellValueExplicit('K' . $kolom, $pengguna->rt, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValueExplicit('L' . $kolom, $pengguna->rw, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValue('M' . $kolom, $pengguna->kelurahan)
+                           ->setCellValue('N' . $kolom, $pengguna->kecamatan)
+                           ->setCellValue('O' . $kolom, $pengguna->kabupaten)
+                           ->setCellValue('P' . $kolom, $pengguna->provinsi)
+                           ->setCellValueExplicit('Q' . $kolom, $pengguna->no_telp, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValue('R' . $kolom, $pengguna->disabilitas)
+                           ->setCellValue('S' . $kolom, $pengguna->izin_usaha)
+                           ->setCellValue('T' . $kolom, $cleanedPermasalahan)
+                           ->setCellValue('U' . $kolom, $cleanedKebutuhan)
+                           ->setCellValueExplicit('V' . $kolom, $pengguna->nib, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValue('W' . $kolom, $pengguna->nama_usaha)
+                           ->setCellValue('X' . $kolom, $pengguna->status_usaha)
+                           ->setCellValue('Y' . $kolom, $pengguna->sertifikasi)
+                           ->setCellValue('Z' . $kolom, $pengguna->sektor_usaha)
+                           ->setCellValue('AA' . $kolom, $pengguna->bidang_usaha)
+                           ->setCellValue('AB' . $kolom, $pengguna->alamat_kopukm)
+                           ->setCellValueExplicit('AC' . $kolom, $pengguna->rt_kopukm, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValueExplicit('AD' . $kolom, $pengguna->rw_kopukm, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValue('AE' . $kolom, $geo->kel_kopukm)
+                           ->setCellValue('AF' . $kolom, $geo->kec_kopukm)
+                           ->setCellValue('AG' . $kolom, $geo->kota_kopukm)
                            ->setCellValueExplicit('AH' . $kolom, $pengguna->kodepos_kopukm, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
                            ->setCellValue('AI' . $kolom, str_replace('&lt;', '<',$pengguna->modal_usaha))
                            ->setCellValueExplicit('AJ' . $kolom, $pengguna->nilai_modalusaha, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
@@ -824,6 +1205,376 @@ class Export extends CI_Controller {
           JOIN villages f ON a.kelurahan = f.id
           
           WHERE a.kodeunik=$kodeunik
+          ORDER BY no_urut ASC");
+
+          $semua_pengguna = $query->result();
+
+          #### query khusus geologi koperasi ####
+          $querygeo = $this->db->query("SELECT 
+          a.id                     AS id,
+          a.id_pelatihan           AS id_pelatihan,
+          a.kodeunik               AS kodeunik,          
+          d.name                   AS prov_kopukm,
+          b.name                   AS kota_kopukm,
+          e.name                   AS kec_kopukm,
+          f.name                   AS kel_kopukm
+
+          FROM tb_data_peserta a 
+          JOIN regencies b ON a.kota_kopukm = b.id 
+          JOIN tb_data_pelatihan c ON a.id_pelatihan = c.id
+          JOIN provinces d ON a.prov_kopukm = d.id
+          JOIN districts e ON a.kec_kopukm = e.id
+          JOIN villages f ON a.kel_kopukm = f.id
+          
+          WHERE a.kodeunik=$kodeunik
+          ORDER BY no_urut ASC");
+
+          $penggunageo = $querygeo->result();
+
+          $spreadsheet = new Spreadsheet;
+          // $spreadsheet->getDefaultStyle('B')->getNumberFormat()->setFormatCode(NumberFormat::FORMAT_TEXT);
+          $height = 50;
+
+          $spreadsheet->getActiveSheet()
+                      ->setCellValue('A1', 'NO. URUT')
+                      ->setCellValue('B1', 'NO. KTP')
+                      ->setCellValue('C1', 'NAMA PESERTA')
+                      ->setCellValue('D1', 'TEMPAT LAHIR')
+                      ->setCellValue('E1', 'TANGGAL LAHIR')
+                      ->setCellValue('F1', 'JENIS KELAMIN')
+                      ->setCellValue('G1', 'STATUS PERKAWINAN')
+                      ->setCellValue('H1', 'PENDIDIKAN TERAKHIR')
+                      ->setCellValue('I1', 'AGAMA')
+                      ->setCellValue('J1', 'ALAMAT')
+                      ->setCellValue('K1', 'RT')
+                      ->setCellValue('L1', 'RW')
+                      ->setCellValue('M1', 'KELURAHAN')
+                      ->setCellValue('N1', 'KECAMATAN')
+                      ->setCellValue('O1', 'KABUPATEN')
+                      ->setCellValue('P1', 'PROVINSI')
+                      ->setCellValue('Q1', 'NO. TELP')
+                      ->setCellValue('R1', 'APAKAH ANDA PENYANDANG DISABILITAS')
+                      ->setCellValue('S1', 'PRIZINAN USAHA YANG DIMIKI')
+                      ->setCellValue('T1', 'PERMSALAHAN YANG DIHADAPI')
+                      ->setCellValue('U1', 'KEBUTUHAN DIKLAT/PELATIHAN')
+                      ->setCellValue('V1', 'NIK KOPERASI')
+                      ->setCellValue('W1', 'NIB KOPERASI')
+                      ->setCellValue('X1', 'NAMA KOPERASI')
+                      ->setCellValue('Y1', 'NOMOR BADAN HUKUM')
+                      ->setCellValue('Z1', 'TANGGAL BADAN HUKUM')
+                      ->setCellValue('AA1', 'ALAMAT KOPERASI')
+                      ->setCellValue('AB1', 'RT KOPERASI')
+                      ->setCellValue('AC1', 'RW KOPERASI')
+                      ->setCellValue('AD1', 'KELURAHAN KOPERASI')
+                      ->setCellValue('AE1', 'KECAMATAN KOPERASI')
+                      ->setCellValue('AF1', 'KABUPATEN KOPERASI')
+                      ->setCellValue('AG1', 'PROVINSI KOPERASI')
+                      ->setCellValue('AH1', 'KODEPOS KOPERASI')
+                      ->setCellValue('AI1', 'BENTUK KOPERASI')
+                      ->setCellValue('AJ1', 'TIPE KOPERASI')
+                      ->setCellValue('AK1', 'JENIS KOPERASI')
+                      ->setCellValue('AL1', 'KELOMPOK KOPERASI')
+                      ->setCellValue('AM1', 'SEKTOR USAHA KOPERASI')
+                      ->setCellValue('AN1', 'MODAL USAHA KOPERASI (MODAL SENDIRI)')
+                      ->setCellValue('AO1', 'MODAL HUTANG KOPERASI')
+                      ->setCellValue('AP1', 'OMZET KOPERASI')
+                      ->setCellValue('AQ1', 'SHU KOPERASI TAHUN BERJALAN/31 DESEMBER')
+                      ->setCellValue('AR1', 'JUMLAH ANGGOTA LAKI-LAKI')
+                      ->setCellValue('AS1', 'JUMLAH ANGGOTA PEREMPUAN')
+                      ->setCellValue('AT1', 'JUMLAH CALON ANGGOTA')
+                      ->setCellValue('AU1', 'JUMLAH KARYAWAN / PENGELOLA')
+                      ->setCellValue('AV1', 'SKALA USAHA KOPERASI')
+                      ->setCellValue('AW1', 'LOKASI PEMASARAN')
+                      ->setCellValue('AX1', 'CABANG KOPERASI')
+                      ->setCellValue('AY1', 'KANTOR CABANG PEMBANTU')
+                      ->setCellValue('AZ1', 'KANTOR KAS')
+                      ->setCellValue('BA1', 'JABATAN PESERTA DI KOPERASI')
+                      ->setCellValue('BB1', 'Lihat FOTO')
+                      ->setCellValue('BC1', 'FOTO')
+                      ->setCellValue('BD1', 'Lihat KTP')
+                      ->setCellValue('BE1', 'KTP');
+                      
+          $sheet = $spreadsheet->getActiveSheet();
+          $sheet->getColumnDimension('A')->setWidth(8); // Set width kolom A
+          $sheet->getColumnDimension('B')->setWidth(25); // Set width kolom B
+          $sheet->getColumnDimension('C')->setWidth(25); // Set width kolom C
+          $sheet->getColumnDimension('D')->setWidth(15); // Set width kolom D
+          $sheet->getColumnDimension('E')->setWidth(15); // Set width kolom E
+          $sheet->getColumnDimension('F')->setWidth(15); // Set width kolom F
+          $sheet->getColumnDimension('G')->setWidth(15); // Set width kolom G
+          $sheet->getColumnDimension('H')->setWidth(10); // Set width kolom H
+          $sheet->getColumnDimension('I')->setWidth(10); // Set width kolom I
+          $sheet->getColumnDimension('J')->setWidth(30); // Set width kolom J
+          $sheet->getColumnDimension('K')->setWidth(5); // Set width kolom K
+          $sheet->getColumnDimension('L')->setWidth(5); // Set width kolom L
+          $sheet->getColumnDimension('M')->setWidth(15); // Set width kolom Provinsi
+          $sheet->getColumnDimension('N')->setWidth(25); // Set width kolom Kabupaten
+          $sheet->getColumnDimension('O')->setWidth(25); // Set width kolom Kecamatan
+          $sheet->getColumnDimension('P')->setWidth(25); // Set width kolom Kelurahan
+          $sheet->getColumnDimension('Q')->setWidth(15); // Set width kolom NO. telp
+          $sheet->getColumnDimension('R')->setWidth(15); // Set width kolom Disabilitas
+          $sheet->getColumnDimension('S')->setWidth(20); // Set width kolom Jabatan
+          $sheet->getColumnDimension('T')->setWidth(20); // Set width kolom Alamat Kop/UKM
+          $sheet->getColumnDimension('U')->setWidth(20); // Set width kolom RT Kop/UKM
+          $sheet->getColumnDimension('V')->setWidth(15); // Set width kolom NIB
+          $sheet->getColumnDimension('W')->setWidth(15); // Set width kolom Nama usaha
+          $sheet->getColumnDimension('X')->setWidth(20); // Set width kolom status usaha
+          $sheet->getColumnDimension('Y')->setWidth(20); // Set width kolom sertifikasi
+          $sheet->getColumnDimension('Z')->setWidth(20); // Set width kolom sektor usaha
+          $sheet->getColumnDimension('AA')->setWidth(20); // Set width kolom bidang usaha
+          $sheet->getColumnDimension('AB')->setWidth(5); // Set width kolom alamat usaha
+          $sheet->getColumnDimension('AC')->setWidth(5); // Set width kolom RT usaha
+          $sheet->getColumnDimension('AD')->setWidth(25); // Set width kolom RW usaha
+          $sheet->getColumnDimension('AE')->setWidth(25); // Set width kolom Kota usaha
+          $sheet->getColumnDimension('AF')->setWidth(25); // Set width kolom Kec usaha
+          $sheet->getColumnDimension('AG')->setWidth(25); // Set width kolom kel usaha
+          $sheet->getColumnDimension('AH')->setWidth(10); // Set width kolom kodepos usaha
+          $sheet->getColumnDimension('AI')->setWidth(10); // Set width kolom modal usaha
+          $sheet->getColumnDimension('AJ')->setWidth(20); // Set width kolom nilai modal usaha
+          $sheet->getColumnDimension('AK')->setWidth(10); // Set width kolom omzet usaha
+          $sheet->getColumnDimension('AL')->setWidth(20); // Set width kolom nilai omzet usaha
+          $sheet->getColumnDimension('AM')->setWidth(15); // Set width kolom tenaga kerja laki
+          $sheet->getColumnDimension('AN')->setWidth(15); // Set width kolom tenaga kerja cewe
+          $sheet->getColumnDimension('AO')->setWidth(15); // Set width kolom wilayah pemasaran
+          $sheet->getColumnDimension('AP')->setWidth(15); // Set width kolom lokasi pemasaran
+          $sheet->getColumnDimension('AQ')->setWidth(15); // Set width kolom jabatan
+          $sheet->getColumnDimension('AR')->setWidth(15); // Set width kolom jabatan
+          $sheet->getColumnDimension('AS')->setWidth(15); // Set width kolom jabatan
+          $sheet->getColumnDimension('AT')->setWidth(15); // Set width kolom jabatan
+          $sheet->getColumnDimension('AU')->setWidth(15); // Set width kolom jabatan
+          $sheet->getColumnDimension('AV')->setWidth(15); // Set width kolom jabatan
+          $sheet->getColumnDimension('AW')->setWidth(15); // Set width kolom jabatan
+          $sheet->getColumnDimension('AX')->setWidth(15); // Set width kolom jabatan
+          $sheet->getColumnDimension('AY')->setWidth(15); // Set width kolom jabatan
+          $sheet->getColumnDimension('AZ')->setWidth(15); // Set width kolom jabatan
+          $sheet->getColumnDimension('BA')->setWidth(15); // Set width kolom jabatan
+          $sheet->getColumnDimension('BB')->setWidth(15); // Set width kolom jabatan
+          $sheet->getColumnDimension('BC')->setWidth(15); // Set width kolom jabatan
+          $sheet->getColumnDimension('BD')->setWidth(15); // Set width kolom jabatan
+          $sheet->getColumnDimension('BE')->setWidth(15); // Set width kolom jabatan
+
+          $kolom = 2;
+          $nomor = 1;
+          $height = 50;
+
+          $geo_map = [];
+          foreach ($penggunageo as $geo) {
+               $geo_map[$geo->id] = $geo;
+          }
+
+          foreach($semua_pengguna as $pengguna) {
+               
+               $geo = isset($geo_map[$pengguna->id]) ? $geo_map[$pengguna->id] : null;
+               $cleanedPermasalahan = str_replace(["\r", "\n"], '', $pengguna->permasalahan);
+               $cleanedKebutuhan = str_replace(["\r", "\n"], '', $pengguna->kebutuhan);
+               $spreadsheet->getActiveSheet()
+                           ->setCellValue('A' . $kolom, $pengguna->no_urut)
+                         //   ->setCellValue('B' . $kolom, $pengguna->no_ktp)
+                           ->setCellValueExplicit('B' . $kolom, $pengguna->no_ktp, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValue('C' . $kolom, $pengguna->nama_peserta)
+                           ->setCellValue('D' . $kolom, $pengguna->tempat_lahir)
+                           ->setCellValue('E' . $kolom, date('d-m-Y',strtotime($pengguna->tgl_lahir)))
+                           ->setCellValue('F' . $kolom, $pengguna->jk)
+                           ->setCellValue('G' . $kolom, $pengguna->status)
+                           ->setCellValue('H' . $kolom, $pengguna->pendidikan)
+                           ->setCellValue('I' . $kolom, $pengguna->agama)
+                           ->setCellValue('J' . $kolom, $pengguna->alamat)
+                           ->setCellValueExplicit('K' . $kolom, $pengguna->rt, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValueExplicit('L' . $kolom, $pengguna->rw, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValue('M' . $kolom, $pengguna->kelurahan)
+                           ->setCellValue('N' . $kolom, $pengguna->kecamatan)
+                           ->setCellValue('O' . $kolom, $pengguna->kabupaten)
+                           ->setCellValue('P' . $kolom, $pengguna->provinsi)
+                           ->setCellValueExplicit('Q' . $kolom, $pengguna->no_telp, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValue('R' . $kolom, $pengguna->disabilitas)
+                           ->setCellValue('S' . $kolom, $pengguna->izin_usaha)
+                           ->setCellValue('T' . $kolom, $cleanedPermasalahan)                           
+                           ->setCellValue('U' . $kolom, $cleanedKebutuhan)
+                           ->setCellValueExplicit('V' . $kolom, $pengguna->nik_koperasi, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValueExplicit('W' . $kolom, $pengguna->nib, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValue('X' . $kolom, $pengguna->nama_kop)
+                           ->setCellValue('Y' . $kolom, $pengguna->no_badan_hukum)
+                           ->setCellValue('Z' . $kolom, date('d-m-Y',strtotime($pengguna->tgl_badan_hukum)))
+                           ->setCellValue('AA' . $kolom, $pengguna->alamat_kopukm)
+                           ->setCellValueExplicit('AB' . $kolom, $pengguna->rt_kopukm,\PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValueExplicit('AC' . $kolom, $pengguna->rw_kopukm, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValue('AD' . $kolom, $geo->kel_kopukm)
+                           ->setCellValue('AE' . $kolom, $geo->kec_kopukm)
+                           ->setCellValue('AF' . $kolom, $geo->kota_kopukm)
+                           ->setCellValue('AG' . $kolom, $geo->prov_kopukm)
+                           ->setCellValueExplicit('AH' . $kolom, $pengguna->kodepos_kopukm, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValue('AI' . $kolom, $pengguna->bentuk_koperasi)
+                           ->setCellValue('AJ' . $kolom, $pengguna->tipe_koperasi)
+                           ->setCellValue('AK' . $kolom, $pengguna->jenis_koperasi)
+                           ->setCellValue('AL' . $kolom, $pengguna->kelompok_koperasi)
+                           ->setCellValue('AM' . $kolom, $pengguna->sektor_usaha)
+                           ->setCellValue('AN' . $kolom, $pengguna->nilai_modalusaha)
+                           ->setCellValue('AO' . $kolom, $pengguna->nilai_modalhutang)
+                           ->setCellValue('AP' . $kolom, $pengguna->nilai_omzetusaha)
+                           ->setCellValue('AQ' . $kolom, $pengguna->nilai_shukoperasi)
+                           ->setCellValueExplicit('AR' . $kolom, $pengguna->anggota_l, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValueExplicit('AS' . $kolom, $pengguna->anggota_p, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValueExplicit('AT' . $kolom, $pengguna->calon_anggota, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValueExplicit('AU' . $kolom, $pengguna->jml_tenaga_kerja, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValue('AV' . $kolom, $pengguna->skala_koperasi)
+                           ->setCellValue('AW' . $kolom, $pengguna->lokasi_pemasaran)
+                           ->setCellValue('AX' . $kolom, $pengguna->cabang)
+                           ->setCellValue('AY' . $kolom, $pengguna->kantor_cabang_pembantu)
+                           ->setCellValue('AZ' . $kolom, $pengguna->kantor_kas)
+                           ->setCellValue('BA' . $kolom, $pengguna->jabatan)
+                           ->setCellValue('BB' . $kolom, 'Lihat FOTO')
+                           ->setCellValue('BD' . $kolom, 'Lihat KTP')
+                           ->getRowDimension($kolom)->setRowHeight($height);
+
+                         $hyperlink = new \PhpOffice\PhpSpreadsheet\Cell\Hyperlink();
+                         $hyperlink->setUrl(site_url('uploads/peserta/'.$pengguna->foto));
+                         $hyperlink->setTooltip('Klik untuk membuka');
+                         $spreadsheet->getActiveSheet()->getCell('BB' . $kolom)->setHyperlink($hyperlink);
+
+                         $hyperlink = new \PhpOffice\PhpSpreadsheet\Cell\Hyperlink();
+                         $hyperlink->setUrl(site_url('uploads/ktp/'.$pengguna->ktp));
+                         $hyperlink->setTooltip('Klik untuk membuka');
+                         $spreadsheet->getActiveSheet()->getCell('BD' . $kolom)->setHyperlink($hyperlink);
+
+                         // Jika diinginkan, tambahkan juga gambar
+                         // if (file_exists('uploads/peserta/'.$pengguna->foto)) {
+                         // $drawing = new Drawing();
+                         // $drawing->setName('Foto');
+                         // $drawing->setDescription('Foto');
+                         // $drawing->setPath('uploads/peserta/'.$pengguna->foto);
+                         // $drawing->setHeight(50);
+                         // $drawing->setCoordinates('BC' . $kolom);
+                         // $drawing->setWorksheet($spreadsheet->getActiveSheet());
+                         // }
+
+                         // Jika diinginkan, tambahkan juga gambar
+                         // if (file_exists('uploads/ktp/'.$pengguna->ktp)) {
+                         // $ktp = new Drawing();
+                         // $ktp->setName('KTP');
+                         // $ktp->setDescription('KTP');
+                         // $ktp->setPath('uploads/ktp/'.$pengguna->ktp);
+                         // $ktp->setHeight(50);
+                         // $ktp->setCoordinates('BE' . $kolom);
+                         // $ktp->setWorksheet($spreadsheet->getActiveSheet());
+                         // }
+
+               $kolom++;
+               $nomor++;
+               
+          }          
+
+          $writer = new Xlsx($spreadsheet);
+
+          header('Content-Type: application/vnd.ms-excel');
+          header('Content-Disposition: attachment;filename="Pesertakoperasi.xlsx"');
+          header('Cache-Control: max-age=0');
+
+	  $writer->save('php://output');
+     }
+
+     public function exportkoperasifix($kodeunik)
+     {
+          check_not_login();
+          // $kodeunik = $this->uri->segment(3);	
+          // $semua_pengguna = $this->export_model->getAll($kodeunik)->result();      
+          
+          $query = $this->db->query("SELECT 
+          a.id                     AS id,
+          a.id_pelatihan           AS id_pelatihan,
+          a.kodeunik               AS kodeunik,
+          g.nourut                 AS no_urut,
+          g.nik                    AS no_ktp,
+          a.nama_peserta           AS nama_peserta,
+          a.tempat_lahir           AS tempat_lahir,
+          a.tgl_lahir              AS tgl_lahir,
+          a.jk                     AS jk,
+          a.status                 AS status,
+          a.pendidikan             AS pendidikan,
+          a.agama                  AS agama,
+          a.alamat                 AS alamat,
+          a.rt                     AS rt,
+          a.rw                     AS rw,
+          d.name                   AS provinsi,
+          b.name                   AS kabupaten,
+          e.name                   AS kecamatan,
+          f.name                   AS kelurahan,
+          a.no_telp                AS no_telp,
+          a.disabilitas            AS disabilitas,
+          a.jabatan                AS jabatan,
+          a.nama_kop               AS nama_kop,
+          a.nik_koperasi           AS nik_koperasi,
+          a.no_badan_hukum         AS no_badan_hukum,
+          a.tgl_badan_hukum        AS tgl_badan_hukum,
+          a.alamat_kopukm          AS alamat_kopukm,
+          a.rt_kopukm              AS rt_kopukm,
+          a.rw_kopukm              AS rw_kopukm,
+          d.name                   AS prov_kopukm,
+          b.name                   AS kota_kopukm,
+          e.name                   AS kec_kopukm,
+          f.name                   AS kel_kopukm,
+          a.kodepos_kopukm         AS kodepos_kopukm,
+          a.jml_anggota            AS jml_anggota,
+          a.anggota_l              AS anggota_l,
+          a.anggota_p              AS anggota_p,
+          a.calon_anggota          AS calon_anggota,
+          a.bentuk_koperasi        AS bentuk_koperasi,
+          a.jenis_koperasi         AS jenis_koperasi,
+          a.tipe_koperasi          AS tipe_koperasi,
+          a.kelompok_koperasi      AS kelompok_koperasi,
+          a.cabang                 AS cabang,
+          a.kantor_cabang_pembantu AS kantor_cabang_pembantu,
+          a.kantor_kas             AS kantor_kas,
+          a.sektor_usaha           AS sektor_usaha,
+          a.bidang_usaha           AS bidang_usaha,
+          a.jenis_produk           AS jenis_produk,
+          a.volume_usaha           AS volume_usaha,
+          a.status_usaha           AS status_usaha,
+          a.sertifikasi            AS sertifikasi,
+          a.wil_pemasaran          AS wil_pemasaran,
+          a.nama_usaha             AS nama_usaha,
+          a.nib                    AS nib,
+          a.jml_tenaga_kerja       AS jml_tenaga_kerja,
+          a.jml_tenaga_kerjal      AS jml_tenaga_kerjal,
+          a.jml_tenaga_kerjap      AS jml_tenaga_kerjap,
+          a.modal_usaha            AS modal_usaha,
+          a.nilai_modalusaha       AS nilai_modalusaha,
+          a.nilai_modalhutang      AS nilai_modalhutang,
+          a.omzet_usaha            AS omzet_usaha,
+          a.nilai_omzetusaha       AS nilai_omzetusaha,
+          a.nilai_shukoperasi      AS nilai_shukoperasi,
+          a.skala_koperasi         AS skala_koperasi,
+          a.web_usaha              AS web_usaha,
+          a.email_usaha            AS email_usaha,
+          a.sosmed_usaha           AS sosmed_usaha,
+          a.market_usaha           AS market_usaha,
+          a.pengadaan              AS pengadaan,
+          a.izin_usaha             AS izin_usaha,
+          a.pemasaran              AS pemasaran,
+          a.lokasi_pemasaran       AS lokasi_pemasaran,
+          a.idebisnis              AS idebisnis,
+          a.permasalahan           AS permasalahan,
+          a.kebutuhan              AS kebutuhan,
+          a.foto                   AS foto,
+          a.ktp                    AS ktp,
+          c.jenis_pelatihan        AS jenis_pelatihan,
+          c.divisi                 AS divisi,
+          c.program                AS program,
+          c.id                     AS id_pel,
+          c.judul_pelatihan        AS judul_pelatihan,
+          c.alamat_pelatihan       AS alamat_pelatihan,
+          c.kota                   AS kota_pelatihan,
+          c.tgl_mulai              AS tgl_mulai,
+          c.tgl_akhir              AS tgl_akhir
+
+          FROM tb_data_peserta_fix g
+          JOIN tb_data_peserta a ON g.nik = a.no_ktp
+          JOIN regencies b ON a.kabupaten = b.id 
+          JOIN tb_data_pelatihan c ON a.id_pelatihan = c.id
+          JOIN provinces d ON a.provinsi = d.id
+          JOIN districts e ON a.kecamatan = e.id
+          JOIN villages f ON a.kelurahan = f.id
+          
+          WHERE g.kodeunik=$kodeunik
           ORDER BY no_urut ASC");
 
           $semua_pengguna = $query->result();
