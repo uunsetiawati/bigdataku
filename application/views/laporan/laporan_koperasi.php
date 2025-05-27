@@ -824,6 +824,28 @@
     });
 </script>
 
+<script>
+    $.ajax({
+        url: '<?php echo site_url('UploadController/get_filter_options_rapat'); ?>',
+        method: 'GET',
+        dataType: 'json',
+        success: function (response) {
+            // Isi dropdown Asal
+            response.asal.forEach(function (item) {
+                // $('#filterKabupatenRapat').append(`<option value="${item}">${item}</option>`);
+                if (item && item.trim() !== "") {
+                    $('#filterKabupatenRapat').append(`<option value="${item}">${item}</option>`);
+                }
+            });
+
+            // Isi dropdown Tahun
+            response.tahun.forEach(function (item) {
+                $('#filterTahunRapat').append(`<option value="${item}">${item}</option>`);
+            });
+        }
+    });
+</script>
+
 <!-- <script>
     $('#filterTahunTabel').on('change', function () {
     var selectedYear = this.value;
