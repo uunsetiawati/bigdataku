@@ -7,6 +7,8 @@ use PhpOffice\PhpSpreadsheet\Cell\Hyperlink;
 use PhpOffice\PhpSpreadsheet\Spreadsheet;
 use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
 
 class Export extends CI_Controller {
 
@@ -2483,6 +2485,540 @@ class Export extends CI_Controller {
 
           header('Content-Type: application/vnd.ms-excel');
           header('Content-Disposition: attachment;filename="Pesertakoperasi.xlsx"');
+          header('Cache-Control: max-age=0');
+
+	  $writer->save('php://output');
+     }
+
+     public function export_koperasi()
+     {
+          check_not_login();
+          // $kodeunik = $this->uri->segment(3);	
+          $semua_pengguna = $this->export_model->getSemua_Koperasi()->result();
+
+          $spreadsheet = new Spreadsheet;
+                      
+          $sheet = $spreadsheet->getActiveSheet();
+          $sheet->getColumnDimension('A')->setWidth(25); // Set width kolom A
+          $sheet->getColumnDimension('B')->setWidth(25); // Set width kolom A
+          $sheet->getColumnDimension('C')->setWidth(15); // Set width kolom A
+          $sheet->getColumnDimension('D')->setWidth(15); // Set width kolom A
+          $sheet->getColumnDimension('E')->setWidth(30); // Set width kolom A
+          $sheet->getColumnDimension('F')->setWidth(30); // Set width kolom A
+          $sheet->getColumnDimension('G')->setWidth(15); // Set width kolom A
+          $sheet->getColumnDimension('H')->setWidth(15); // Set width kolom A
+          $sheet->getColumnDimension('I')->setWidth(15); // Set width kolom B
+          $sheet->getColumnDimension('J')->setWidth(15); // Set width kolom C
+          $sheet->getColumnDimension('K')->setWidth(15); // Set width kolom D
+          $sheet->getColumnDimension('L')->setWidth(15); // Set width kolom E
+          $sheet->getColumnDimension('M')->setWidth(15); // Set width kolom F
+          $sheet->getColumnDimension('N')->setWidth(25); // Set width kolom G
+          $sheet->getColumnDimension('O')->setWidth(5); // Set width kolom H
+          $sheet->getColumnDimension('P')->setWidth(5); // Set width kolom I
+          $sheet->getColumnDimension('Q')->setWidth(25); // Set width kolom J
+          $sheet->getColumnDimension('R')->setWidth(25); // Set width kolom K
+          $sheet->getColumnDimension('S')->setWidth(25); // Set width kolom L
+          $sheet->getColumnDimension('T')->setWidth(15); // Set width kolom Provinsi
+          $sheet->getColumnDimension('U')->setWidth(15); // Set width kolom Kabupaten
+          $sheet->getColumnDimension('V')->setWidth(20); // Set width kolom Kecamatan
+          $sheet->getColumnDimension('W')->setWidth(25); // Set width kolom Kelurahan
+          $sheet->getColumnDimension('X')->setWidth(15); // Set width kolom NO. telp
+          $sheet->getColumnDimension('Y')->setWidth(15); // Set width kolom Disabilitas
+          $sheet->getColumnDimension('Z')->setWidth(20); // Set width kolom Jabatan
+          $sheet->getColumnDimension('AA')->setWidth(20); // Set width kolom Alamat Kop/UKM
+          $sheet->getColumnDimension('AB')->setWidth(20); // Set width kolom RT Kop/UKM
+          $sheet->getColumnDimension('AC')->setWidth(15); // Set width kolom NIB
+          $sheet->getColumnDimension('AD')->setWidth(15); // Set width kolom Nama usaha
+          $sheet->getColumnDimension('AE')->setWidth(25); // Set width kolom status usaha
+          $sheet->getColumnDimension('AF')->setWidth(10); // Set width kolom sertifikasi
+          $sheet->getColumnDimension('AG')->setWidth(10); // Set width kolom sektor usaha
+          $sheet->getColumnDimension('AH')->setWidth(20); // Set width kolom bidang usaha
+          $sheet->getColumnDimension('AI')->setWidth(20); // Set width kolom alamat usaha
+          $sheet->getColumnDimension('AJ')->setWidth(20); // Set width kolom RT usaha
+          $sheet->getColumnDimension('AK')->setWidth(20); // Set width kolom RW usaha
+          $sheet->getColumnDimension('AL')->setWidth(25); // Set width kolom Kota usaha
+          $sheet->getColumnDimension('AM')->setWidth(25); // Set width kolom Kec usaha
+          $sheet->getColumnDimension('AN')->setWidth(25); // Set width kolom kel usaha
+          $sheet->getColumnDimension('AO')->setWidth(25); // Set width kolom kodepos usaha
+          $sheet->getColumnDimension('AP')->setWidth(25); // Set width kolom modal usaha
+          $sheet->getColumnDimension('AQ')->setWidth(25); // Set width kolom nilai modal usaha
+          $sheet->getColumnDimension('AR')->setWidth(25); // Set width kolom omzet usaha
+          $sheet->getColumnDimension('AS')->setWidth(25); // Set width kolom nilai omzet usaha
+          $sheet->getColumnDimension('AT')->setWidth(25); // Set width kolom tenaga kerja laki
+          $sheet->getColumnDimension('AU')->setWidth(25); // Set width kolom tenaga kerja cewe
+          $sheet->getColumnDimension('AV')->setWidth(15); // Set width kolom wilayah pemasaran
+          $sheet->getColumnDimension('AW')->setWidth(15); // Set width kolom lokasi pemasaran
+          $sheet->getColumnDimension('AX')->setWidth(15); // Set width kolom jabatan
+          $sheet->getColumnDimension('AY')->setWidth(15); // Set width kolom jabatan
+          $sheet->getColumnDimension('AZ')->setWidth(15); // Set width kolom jabatan
+          $sheet->getColumnDimension('BA')->setWidth(15); // Set width kolom jabatan
+          $sheet->getColumnDimension('BB')->setWidth(15); // Set width kolom jabatan
+          $sheet->getColumnDimension('BC')->setWidth(15); // Set width kolom jabatan
+          $sheet->getColumnDimension('BD')->setWidth(15); // Set width kolom jabatan
+          $sheet->getColumnDimension('BE')->setWidth(15); // Set width kolom jabatan
+          $sheet->getColumnDimension('BF')->setWidth(15);
+
+          $sheet->setCellValue('A1', 'KODE SUB KEGIATAN')
+               ->setCellValue('B1', 'JUDUL AKTIFITAS')
+               ->setCellValue('C1', 'TANGGAL MULAI')
+               ->setCellValue('D1', 'TANGGAL AKHIR')
+               ->setCellValue('E1', 'ALAMAT AKTIFITAS')
+               ->setCellValue('F1', 'NO. KTP')
+               ->setCellValue('G1', 'NAMA PESERTA')
+               ->setCellValue('H1', 'TEMPAT LAHIR')
+               ->setCellValue('I1', 'TANGGAL LAHIR')
+               ->setCellValue('J1', 'JENIS KELAMIN')
+               ->setCellValue('K1', 'STATUS PERKAWINAN')
+               ->setCellValue('L1', 'PENDIDIKAN TERAKHIR')
+               ->setCellValue('M1', 'AGAMA')
+               ->setCellValue('N1', 'ALAMAT')
+               ->setCellValue('O1', 'RT')
+               ->setCellValue('P1', 'RW')
+               ->setCellValue('Q1', 'KELURAHAN')
+               ->setCellValue('R1', 'KECAMATAN')
+               ->setCellValue('S1', 'KABUPATEN')
+               ->setCellValue('T1', 'PROVINSI')
+               ->setCellValue('U1', 'NO. TELP')
+               ->setCellValue('V1', 'APAKAH PENYANDANG DISABILITAS')
+               ->setCellValue('W1', 'PERIZINAN USAHA YANG DIMILIKI')
+               ->setCellValue('X1', 'PERMASALAHAN YANG DIHADAPI')
+               ->setCellValue('Y1', 'KEBUTUHAN DIKLAT/PELATIHAN')
+               ->setCellValue('Z1', 'NIK KOPERASI')
+               ->setCellValue('AA1', 'NIB KOPERASI')
+               ->setCellValue('AB1', 'NAMA KOPERASI')
+               ->setCellValue('AC1', 'NOMOR BADAN HUKUM')
+               ->setCellValue('AD1', 'TANGGAL BADAN HUKUM')
+               ->setCellValue('AE1', 'ALAMAT KOPERASI')
+               ->setCellValue('AF1', 'RT KOPERASI')
+               ->setCellValue('AG1', 'RW KOPERASI')
+               ->setCellValue('AH1', 'KELURAHAN KOPERASI')
+               ->setCellValue('AI1', 'KECAMATAN KOPERASI')
+               ->setCellValue('AJ1', 'KABUPATEN KOPERASI')
+               ->setCellValue('AK1', 'PROVINSI KOPERASI')
+               ->setCellValue('AL1', 'KODEPOS KOPERASI')
+               ->setCellValue('AM1', 'BENTUK KOPERASI')
+               ->setCellValue('AN1', 'TIPE KOPERASI')
+               ->setCellValue('AO1', 'JENIS KOPERASI')
+               ->setCellValue('AP1', 'KELOMPOK KOPERASI')
+               ->setCellValue('AQ1', 'SEKTOR USAHA KOPERASI')
+               ->setCellValue('AR1', 'MODAL USAHA KOPERASI (MODAL SENDIRI)')
+               ->setCellValue('AS1', 'MODAL HUTANG KOPERASI')
+               ->setCellValue('AT1', 'OMZET KOPERASI')
+               ->setCellValue('AU1', 'SHU KOPERASI TAHUN BERJALAN/31 DESEMBER')
+               ->setCellValue('AV1', 'JUMLAH ANGGOTA LAKI-LAKI')
+               ->setCellValue('AW1', 'JUMLAH ANGGOTA PEREMPUAN')
+               ->setCellValue('AX1', 'JUMLAH CALON ANGGOTA')
+               ->setCellValue('AY1', 'JUMLAH KARYAWAN / PENGELOLA')
+               ->setCellValue('AZ1', 'SKALA USAHA KOPERASI')
+               ->setCellValue('BA1', 'LOKASI PEMASARAN')
+               ->setCellValue('BB1', 'CABANG KOPERASI')
+               ->setCellValue('BC1', 'KANTOR CABANG PEMBANTU')
+               ->setCellValue('BD1', 'KANTOR KAS')
+               ->setCellValue('BE1', 'JABATAN PESERTA DI KOPERASI')
+               ->setCellValue('BF1', 'DIVISI');
+
+          // Atur tinggi baris 1
+          $sheet->getRowDimension(1)->setRowHeight(60);
+
+          // Terapkan style ke seluruh header sekaligus
+          $sheet->getStyle('A1:BF1')->applyFromArray([
+          'fill' => [
+               'fillType' => Fill::FILL_SOLID,
+               'startColor' => ['rgb' => '7030A0']
+          ],
+          'font' => [
+               'bold' => true,
+               'color' => ['rgb' => 'FFFFFF']
+          ],
+          'alignment' => [
+               'horizontal' => Alignment::HORIZONTAL_CENTER,
+               'vertical' => Alignment::VERTICAL_CENTER,               
+               'wrapText' => true // Ini bagian penting untuk membungkus teks
+          ]
+          ]);
+
+          $kolom = 2;
+          $nomor = 1;
+          // $height = 50;
+          foreach($semua_pengguna as $pengguna) {
+
+               $spreadsheet->getActiveSheet()
+                           ->setCellValue('A' . $kolom, $pengguna->subkegiatan)
+                           ->setCellValue('B' . $kolom, $pengguna->judul)
+                           ->setCellValue('C' . $kolom, !empty($pengguna->tgl_mulai) ? date('d-m-Y',strtotime($pengguna->tgl_mulai)) : '')
+                           ->setCellValue('D' . $kolom, !empty($pengguna->tgl_akhir) ? date('d-m-Y',strtotime($pengguna->tgl_akhir)) : '')
+                           ->setCellValue('E' . $kolom, $pengguna->alamat_kegiatan)
+                           ->setCellValueExplicit('F' . $kolom, $pengguna->no_ktp, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValue('G' . $kolom, $pengguna->nama_peserta)
+                           ->setCellValue('H' . $kolom, $pengguna->tempat_lahir)
+                           ->setCellValue('I' . $kolom, !empty($pengguna->tgl_lahir) ? date('d-m-Y',strtotime($pengguna->tgl_lahir)) : '')
+                           ->setCellValue('J' . $kolom, $pengguna->jk)
+                           ->setCellValue('K' . $kolom, $pengguna->status)
+                           ->setCellValue('L' . $kolom, $pengguna->pendidikan)
+                           ->setCellValue('M' . $kolom, $pengguna->agama)
+                           ->setCellValue('N' . $kolom, $pengguna->alamat)
+                           ->setCellValueExplicit('O' . $kolom, $pengguna->rt, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValueExplicit('P' . $kolom, $pengguna->rw, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValue('Q' . $kolom, $pengguna->kelurahan)
+                           ->setCellValue('R' . $kolom, $pengguna->kecamatan)
+                           ->setCellValue('S' . $kolom, $pengguna->kabupaten)
+                           ->setCellValue('T' . $kolom, $pengguna->provinsi)
+                           ->setCellValueExplicit('U' . $kolom, $pengguna->no_telp, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValue('V' . $kolom, $pengguna->disabilitas)
+                           ->setCellValue('W' . $kolom, $pengguna->izin_usaha)
+                           ->setCellValue('X' . $kolom, $pengguna->permasalahan)
+                           ->setCellValue('Y' . $kolom, $pengguna->kebutuhan_diklat)
+                           ->setCellValueExplicit('Z' . $kolom, $pengguna->nik_koperasi,\PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValueExplicit('AA' . $kolom, $pengguna->nib_koperasi,\PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValue('AB' . $kolom, $pengguna->nama_koperasi)
+                           ->setCellValue('AC' . $kolom, $pengguna->no_bh)
+                           ->setCellValue('AD' . $kolom, !empty($pengguna->tgl_bh) ? date('d-m-Y',strtotime($pengguna->tgl_bh)) : '')
+                           ->setCellValue('AE' . $kolom, $pengguna->alamat_koperasi)
+                           ->setCellValueExplicit('AF' . $kolom, $pengguna->rt_koperasi,\PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValueExplicit('AG' . $kolom, $pengguna->rw_koperasi,\PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValue('AH' . $kolom, $pengguna->kelurahan_koperasi)
+                           ->setCellValue('AI' . $kolom, $pengguna->kecamatan_koperasi)
+                           ->setCellValue('AJ' . $kolom, $pengguna->kabupaten_koperasi)
+                           ->setCellValue('AK' . $kolom, $pengguna->provinsi_koperasi)
+                           ->setCellValue('AL' . $kolom, $pengguna->kodepos_koperasi)
+                           ->setCellValue('AM' . $kolom, $pengguna->bentuk_koperasi)
+                           ->setCellValue('AN' . $kolom, $pengguna->tipe_koperasi)
+                           ->setCellValue('AO' . $kolom, $pengguna->jenis_koperasi)
+                           ->setCellValue('AP' . $kolom, $pengguna->kelompok_koperasi)
+                           ->setCellValue('AQ' . $kolom, $pengguna->sektor_koperasi)
+                           ->setCellValue('AR' . $kolom, $pengguna->modal_koperasi)
+                           ->setCellValue('AS' . $kolom, $pengguna->modal_hutang)
+                           ->setCellValue('AT' . $kolom, $pengguna->omzet_koperasi)
+                           ->setCellValue('AU' . $kolom, $pengguna->shu_koperasi)
+                           ->setCellValueExplicit('AV' . $kolom, $pengguna->jml_anggota_laki,\PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValueExplicit('AW' . $kolom, $pengguna->jml_anggota_perempuan, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValueExplicit('AX' . $kolom, $pengguna->jml_calon_anggota,\PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValueExplicit('AY' . $kolom, $pengguna->jml_karyawan, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValue('AZ' . $kolom, $pengguna->skala_usaha)
+                           ->setCellValue('BA' . $kolom, $pengguna->lokasi_pemasaran)
+                           ->setCellValue('BB' . $kolom, $pengguna->cabang_koperasi)
+                           ->setCellValue('BC' . $kolom, $pengguna->kantor_cabang_pembantu)
+                           ->setCellValue('BD' . $kolom, $pengguna->kantor_kas)
+                           ->setCellValue('BE' . $kolom, $pengguna->jabatan_koperasi)
+                           ->setCellValue('BF' . $kolom, $pengguna->divisi);
+                         
+               $kolom++;
+               $nomor++;
+
+          }          
+
+          $writer = new Xlsx($spreadsheet);
+
+          header('Content-Type: application/vnd.ms-excel');
+          header('Content-Disposition: attachment;filename="KOPERASI.xlsx"');
+          header('Cache-Control: max-age=0');
+
+	  $writer->save('php://output');
+     }
+
+     public function export_ukm()
+     {
+          check_not_login();
+          // $kodeunik = $this->uri->segment(3);	
+          $semua_pengguna = $this->export_model->getSemua_Ukm()->result();
+
+          $spreadsheet = new Spreadsheet;
+                      
+          $sheet = $spreadsheet->getActiveSheet();
+          $sheet->getColumnDimension('A')->setWidth(25); // Set width kolom A
+          $sheet->getColumnDimension('B')->setWidth(25); // Set width kolom A
+          $sheet->getColumnDimension('C')->setWidth(15); // Set width kolom A
+          $sheet->getColumnDimension('D')->setWidth(15); // Set width kolom A
+          $sheet->getColumnDimension('E')->setWidth(30); // Set width kolom A
+          $sheet->getColumnDimension('F')->setWidth(30); // Set width kolom A
+          $sheet->getColumnDimension('G')->setWidth(15); // Set width kolom A
+          $sheet->getColumnDimension('H')->setWidth(15); // Set width kolom A
+          $sheet->getColumnDimension('I')->setWidth(15); // Set width kolom B
+          $sheet->getColumnDimension('J')->setWidth(15); // Set width kolom C
+          $sheet->getColumnDimension('K')->setWidth(15); // Set width kolom D
+          $sheet->getColumnDimension('L')->setWidth(15); // Set width kolom E
+          $sheet->getColumnDimension('M')->setWidth(15); // Set width kolom F
+          $sheet->getColumnDimension('N')->setWidth(25); // Set width kolom G
+          $sheet->getColumnDimension('O')->setWidth(5); // Set width kolom H
+          $sheet->getColumnDimension('P')->setWidth(5); // Set width kolom I
+          $sheet->getColumnDimension('Q')->setWidth(25); // Set width kolom J
+          $sheet->getColumnDimension('R')->setWidth(25); // Set width kolom K
+          $sheet->getColumnDimension('S')->setWidth(25); // Set width kolom L
+          $sheet->getColumnDimension('T')->setWidth(15); // Set width kolom Provinsi
+          $sheet->getColumnDimension('U')->setWidth(15); // Set width kolom Kabupaten
+          $sheet->getColumnDimension('V')->setWidth(20); // Set width kolom Kecamatan
+          $sheet->getColumnDimension('W')->setWidth(25); // Set width kolom Kelurahan
+          $sheet->getColumnDimension('X')->setWidth(15); // Set width kolom NO. telp
+          $sheet->getColumnDimension('Y')->setWidth(15); // Set width kolom Disabilitas
+          $sheet->getColumnDimension('Z')->setWidth(20); // Set width kolom Jabatan
+          $sheet->getColumnDimension('AA')->setWidth(20); // Set width kolom Alamat Kop/UKM
+          $sheet->getColumnDimension('AB')->setWidth(20); // Set width kolom RT Kop/UKM
+          $sheet->getColumnDimension('AC')->setWidth(15); // Set width kolom NIB
+          $sheet->getColumnDimension('AD')->setWidth(15); // Set width kolom Nama usaha
+          $sheet->getColumnDimension('AE')->setWidth(25); // Set width kolom status usaha
+          $sheet->getColumnDimension('AF')->setWidth(10); // Set width kolom sertifikasi
+          $sheet->getColumnDimension('AG')->setWidth(10); // Set width kolom sektor usaha
+          $sheet->getColumnDimension('AH')->setWidth(20); // Set width kolom bidang usaha
+          $sheet->getColumnDimension('AI')->setWidth(20); // Set width kolom alamat usaha
+          $sheet->getColumnDimension('AJ')->setWidth(20); // Set width kolom RT usaha
+          $sheet->getColumnDimension('AK')->setWidth(20); // Set width kolom RW usaha
+          $sheet->getColumnDimension('AL')->setWidth(25); // Set width kolom Kota usaha
+          $sheet->getColumnDimension('AM')->setWidth(25); // Set width kolom Kec usaha
+          $sheet->getColumnDimension('AN')->setWidth(25); // Set width kolom kel usaha
+          $sheet->getColumnDimension('AO')->setWidth(25); // Set width kolom kodepos usaha
+          $sheet->getColumnDimension('AP')->setWidth(25); // Set width kolom modal usaha
+          $sheet->getColumnDimension('AQ')->setWidth(15); // Set width kolom nilai modal usaha
+          $sheet->getColumnDimension('AR')->setWidth(15); // Set width kolom omzet usaha
+          $sheet->getColumnDimension('AS')->setWidth(25); // Set width kolom nilai omzet usaha
+          $sheet->getColumnDimension('AT')->setWidth(25); // Set width kolom tenaga kerja laki
+          $sheet->getColumnDimension('AU')->setWidth(25); // Set width kolom tenaga kerja cewe
+          $sheet->getColumnDimension('AV')->setWidth(15); 
+
+          $sheet->setCellValue('A1', 'KODE SUB KEGIATAN')
+               ->setCellValue('B1', 'JUDUL AKTIFITAS')
+               ->setCellValue('C1', 'TANGGAL MULAI')
+               ->setCellValue('D1', 'TANGGAL AKHIR')
+               ->setCellValue('E1', 'ALAMAT AKTIFITAS')
+               ->setCellValue('F1', 'NO. KTP')
+               ->setCellValue('G1', 'NAMA PESERTA')
+               ->setCellValue('H1', 'TEMPAT LAHIR')
+               ->setCellValue('I1', 'TANGGAL LAHIR')
+               ->setCellValue('J1', 'JENIS KELAMIN')
+               ->setCellValue('K1', 'STATUS PERKAWINAN')
+               ->setCellValue('L1', 'PENDIDIKAN TERAKHIR')
+               ->setCellValue('M1', 'AGAMA')
+               ->setCellValue('N1', 'ALAMAT')
+               ->setCellValue('O1', 'RT')
+               ->setCellValue('P1', 'RW')
+               ->setCellValue('Q1', 'KELURAHAN')
+               ->setCellValue('R1', 'KECAMATAN')
+               ->setCellValue('S1', 'KABUPATEN')
+               ->setCellValue('T1', 'PROVINSI')
+               ->setCellValue('U1', 'NO. TELP')
+               ->setCellValue('V1', 'APAKAH PENYANDANG DISABILITAS')
+               ->setCellValue('W1', 'PERIZINAN USAHA YANG DIMILIKI')
+               ->setCellValue('X1', 'PERMASALAHAN YANG DIHADAPI')
+               ->setCellValue('Y1', 'KEBUTUHAN DIKLAT/PELATIHAN')
+               ->setCellValue('Z1', 'NO. NIB')
+               ->setCellValue('AA1', 'NAMA USAHA')
+               ->setCellValue('AB1', 'STATUS USAHA')
+               ->setCellValue('AC1', 'SERTIFIKASI USAHA')
+               ->setCellValue('AD1', 'SEKTOR USAHA')
+               ->setCellValue('AE1', 'BIDANG USAHA')
+               ->setCellValue('AF1', 'ALAMAT USAHA')
+               ->setCellValue('AG1', 'RT USAHA')
+               ->setCellValue('AH1', 'RW USAHA')
+               ->setCellValue('AI1', 'KELURAHAN USAHA')
+               ->setCellValue('AJ1', 'KECAMATAN USAHA')
+               ->setCellValue('AK1', 'KABUPATEN USAHA')
+               ->setCellValue('AL1', 'KODEPOS USAHA')
+               ->setCellValue('AM1', 'MODAL USAHA PER TAHUN')
+               ->setCellValue('AN1', 'NILAI MODAL USAHA PER TAHUN')
+               ->setCellValue('AO1', 'OMZET USAHA PER TAHUN')
+               ->setCellValue('AP1', 'NILAI OMZET USAHA PER TAHUN')
+               ->setCellValue('AQ1', 'JUMLAH KARYAWAN LAKI-LAKI')
+               ->setCellValue('AR1', 'JUMLAH KARYAWAN PEREMPUAN')
+               ->setCellValue('AS1', 'WILAYAH PEMASARAN')
+               ->setCellValue('AT1', 'LOKASI PEMASARAN')
+               ->setCellValue('AU1', 'JABATAN PESERTA DI USAHA')
+               ->setCellValue('AV1', 'DIVISI');
+
+          // Atur tinggi baris 1
+          $sheet->getRowDimension(1)->setRowHeight(50);
+
+          // Terapkan style ke seluruh header sekaligus
+          $sheet->getStyle('A1:AV1')->applyFromArray([
+          'fill' => [
+               'fillType' => Fill::FILL_SOLID,
+               'startColor' => ['rgb' => 'FFC000']
+          ],
+          'font' => [
+               'bold' => true,
+               'color' => ['rgb' => 'FFFFFF']
+          ],
+          'alignment' => [
+               'horizontal' => Alignment::HORIZONTAL_CENTER,
+               'vertical' => Alignment::VERTICAL_CENTER,               
+               'wrapText' => true // Ini bagian penting untuk membungkus teks
+          ]
+          ]);
+
+          $kolom = 2;
+          $nomor = 1;
+          // $height = 50;
+          foreach($semua_pengguna as $pengguna) {
+
+               $spreadsheet->getActiveSheet()
+                           ->setCellValue('A' . $kolom, $pengguna->subkegiatan)
+                           ->setCellValue('B' . $kolom, $pengguna->judul)
+                           ->setCellValue('C' . $kolom, !empty($pengguna->tgl_mulai) ? date('d-m-Y',strtotime($pengguna->tgl_mulai)) : '')
+                           ->setCellValue('D' . $kolom, !empty($pengguna->tgl_akhir) ? date('d-m-Y',strtotime($pengguna->tgl_akhir)) : '')
+                           ->setCellValue('E' . $kolom, $pengguna->alamat_kegiatan)
+                           ->setCellValueExplicit('F' . $kolom, $pengguna->no_ktp, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValue('G' . $kolom, $pengguna->nama_peserta)
+                           ->setCellValue('H' . $kolom, $pengguna->tempat_lahir)
+                           ->setCellValue('I' . $kolom, !empty($pengguna->tgl_lahir) ? date('d-m-Y',strtotime($pengguna->tgl_lahir)) : '')
+                           ->setCellValue('J' . $kolom, $pengguna->jk)
+                           ->setCellValue('K' . $kolom, $pengguna->status)
+                           ->setCellValue('L' . $kolom, $pengguna->pendidikan)
+                           ->setCellValue('M' . $kolom, $pengguna->agama)
+                           ->setCellValue('N' . $kolom, $pengguna->alamat)
+                           ->setCellValueExplicit('O' . $kolom, $pengguna->rt, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValueExplicit('P' . $kolom, $pengguna->rw, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValue('Q' . $kolom, $pengguna->kelurahan)
+                           ->setCellValue('R' . $kolom, $pengguna->kecamatan)
+                           ->setCellValue('S' . $kolom, $pengguna->kabupaten)
+                           ->setCellValue('T' . $kolom, $pengguna->provinsi)
+                           ->setCellValueExplicit('U' . $kolom, $pengguna->no_telp, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValue('V' . $kolom, $pengguna->disabilitas)
+                           ->setCellValue('W' . $kolom, $pengguna->izin_usaha)
+                           ->setCellValue('X' . $kolom, $pengguna->permasalahan)
+                           ->setCellValue('Y' . $kolom, $pengguna->kebutuhan_diklat)
+                           ->setCellValueExplicit('Z' . $kolom, $pengguna->nib,\PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValue('AA' . $kolom, $pengguna->nama_usaha)
+                           ->setCellValue('AB' . $kolom, $pengguna->status_usaha)
+                           ->setCellValue('AC' . $kolom, $pengguna->sertifikasi_usaha)
+                           ->setCellValue('AD' . $kolom, $pengguna->sektor_usaha)
+                           ->setCellValue('AE' . $kolom, $pengguna->bidang_usaha)
+                           ->setCellValue('AF' . $kolom, $pengguna->alamat_usaha)
+                           ->setCellValueExplicit('AG' . $kolom, $pengguna->rt_usaha,\PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValueExplicit('AH' . $kolom, $pengguna->rw_usaha,\PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValue('AI' . $kolom, $pengguna->kelurahan_usaha)
+                           ->setCellValue('AJ' . $kolom, $pengguna->kecamatan_usaha)
+                           ->setCellValue('AK' . $kolom, $pengguna->kabupaten_usaha)
+                           ->setCellValue('AL' . $kolom, $pengguna->kodepos_usaha)
+                           ->setCellValue('AM' . $kolom, $pengguna->modal_usaha)
+                           ->setCellValue('AN' . $kolom, $pengguna->nilai_modal_usaha)
+                           ->setCellValue('AO' . $kolom, $pengguna->omzet_usaha)
+                           ->setCellValue('AP' . $kolom, $pengguna->nilai_omzet_usaha)
+                           ->setCellValue('AQ' . $kolom, $pengguna->jml_karyawan_laki)
+                           ->setCellValue('AR' . $kolom, $pengguna->jml_karyawan_perempuan)
+                           ->setCellValue('AS' . $kolom, $pengguna->wilayah_pemasaran)
+                           ->setCellValue('AT' . $kolom, $pengguna->lokasi_pemasaran)
+                           ->setCellValue('AU' . $kolom, $pengguna->jabatan)
+                           ->setCellValue('AV' . $kolom, $pengguna->divisi);
+                         
+               $kolom++;
+               $nomor++;
+
+          }          
+
+          $writer = new Xlsx($spreadsheet);
+
+          header('Content-Type: application/vnd.ms-excel');
+          header('Content-Disposition: attachment;filename="UKM.xlsx"');
+          header('Cache-Control: max-age=0');
+
+	  $writer->save('php://output');
+     }
+
+     public function export_rapat()
+     {
+          check_not_login();
+          // $kodeunik = $this->uri->segment(3);	
+          $semua_pengguna = $this->export_model->getSemua_Rapat()->result();
+
+          $spreadsheet = new Spreadsheet;
+                      
+          $sheet = $spreadsheet->getActiveSheet();
+          $sheet->getColumnDimension('A')->setWidth(25); // Set width kolom A
+          $sheet->getColumnDimension('B')->setWidth(25); // Set width kolom A
+          $sheet->getColumnDimension('C')->setWidth(15); // Set width kolom A
+          $sheet->getColumnDimension('D')->setWidth(15); // Set width kolom A
+          $sheet->getColumnDimension('E')->setWidth(30); // Set width kolom A
+          $sheet->getColumnDimension('F')->setWidth(25); // Set width kolom A
+          $sheet->getColumnDimension('G')->setWidth(25); // Set width kolom A
+          $sheet->getColumnDimension('H')->setWidth(15); // Set width kolom A
+          $sheet->getColumnDimension('I')->setWidth(15); // Set width kolom B
+          $sheet->getColumnDimension('J')->setWidth(15); // Set width kolom C
+          $sheet->getColumnDimension('K')->setWidth(15); // Set width kolom D
+          $sheet->getColumnDimension('L')->setWidth(15); // Set width kolom E
+          $sheet->getColumnDimension('M')->setWidth(15); // Set width kolom F
+          $sheet->getColumnDimension('N')->setWidth(20); // Set width kolom G
+          $sheet->getColumnDimension('O')->setWidth(20); // Set width kolom H
+          $sheet->getColumnDimension('P')->setWidth(20); // Set width kolom I
+          $sheet->getColumnDimension('Q')->setWidth(25); // Set width kolom J
+          $sheet->getColumnDimension('R')->setWidth(20); // Set width kolom K
+          $sheet->getColumnDimension('S')->setWidth(20); // Set width kolom L
+          $sheet->getColumnDimension('T')->setWidth(15);
+
+          $sheet->setCellValue('A1', 'KODE SUB KEGIATAN')
+               ->setCellValue('B1', 'JUDUL AKTIFITAS')
+               ->setCellValue('C1', 'TANGGAL MULAI')
+               ->setCellValue('D1', 'TANGGAL AKHIR')
+               ->setCellValue('E1', 'ALAMAT AKTIFITAS')
+               ->setCellValue('F1', 'NO. KTP')
+               ->setCellValue('G1', 'NAMA PESERTA')
+               ->setCellValue('H1', 'TEMPAT LAHIR')
+               ->setCellValue('I1', 'TANGGAL LAHIR')
+               ->setCellValue('J1', 'JENIS KELAMIN')
+               ->setCellValue('K1', 'ALAMAT')
+               ->setCellValue('L1', 'KABUPATEN')
+               ->setCellValue('M1', 'PROVINSI')
+               ->setCellValue('N1', 'NO. TELP')
+               ->setCellValue('O1', 'APAKAH PENYANDANG DISABILITAS')
+               ->setCellValue('P1', 'NAMA INSTANSI')
+               ->setCellValue('Q1', 'ALAMAT INSTANSI')
+               ->setCellValue('R1', 'KABUPATEN INSTANSI')
+               ->setCellValue('S1', 'JABATAN DI INSTANSI')
+               ->setCellValue('T1', 'DIVISI');
+
+          // Atur tinggi baris 1
+          $sheet->getRowDimension(1)->setRowHeight(50);
+
+          // Terapkan style ke seluruh header sekaligus
+          $sheet->getStyle('A1:T1')->applyFromArray([
+          'fill' => [
+               'fillType' => Fill::FILL_SOLID,
+               'startColor' => ['rgb' => 'FF0000']
+          ],
+          'font' => [
+               'bold' => true,
+               'color' => ['rgb' => 'FFFFFF']
+          ],
+          'alignment' => [
+               'horizontal' => Alignment::HORIZONTAL_CENTER,
+               'vertical' => Alignment::VERTICAL_CENTER,               
+               'wrapText' => true // Ini bagian penting untuk membungkus teks
+          ]
+          ]);
+
+          $kolom = 2;
+          $nomor = 1;
+          // $height = 50;
+          foreach($semua_pengguna as $pengguna) {
+
+               $spreadsheet->getActiveSheet()
+                           ->setCellValue('A' . $kolom, $pengguna->subkegiatan)
+                           ->setCellValue('B' . $kolom, $pengguna->judul)
+                           ->setCellValue('C' . $kolom, date('d-m-Y',strtotime($pengguna->tgl_mulai)))
+                           ->setCellValue('D' . $kolom, !empty($pengguna->tgl_akhir) ? date('d-m-Y', strtotime($pengguna->tgl_akhir)) : '')
+                           ->setCellValue('E' . $kolom, $pengguna->alamat_kegiatan)
+                           ->setCellValueExplicit('F' . $kolom, $pengguna->no_ktp, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING)
+                           ->setCellValue('G' . $kolom, $pengguna->nama_peserta)
+                           ->setCellValue('H' . $kolom, $pengguna->tempat_lahir)
+                           ->setCellValue('I' . $kolom, !empty($pengguna->tgl_lahir) ? date('d-m-Y',strtotime($pengguna->tgl_lahir)) : '')
+                           ->setCellValue('J' . $kolom, $pengguna->jk)
+                           ->setCellValue('K' . $kolom, $pengguna->alamat)
+                           ->setCellValue('L' . $kolom, $pengguna->kabupaten)
+                           ->setCellValue('M' . $kolom, $pengguna->provinsi)
+                           ->setCellValue('N' . $kolom, $pengguna->no_telp)
+                           ->setCellValue('O' . $kolom, $pengguna->disabilitas)
+                           ->setCellValue('P' . $kolom, $pengguna->nama_instansi)
+                           ->setCellValue('Q' . $kolom, $pengguna->alamat_instansi)
+                           ->setCellValue('R' . $kolom, $pengguna->kabupaten_instansi)
+                           ->setCellValue('S' . $kolom, $pengguna->jabatan_instansi)
+                           ->setCellValue('T' . $kolom, $pengguna->divisi);
+                         
+               $kolom++;
+               $nomor++;
+
+          }          
+
+          $writer = new Xlsx($spreadsheet);
+
+          header('Content-Type: application/vnd.ms-excel');
+          header('Content-Disposition: attachment;filename="RAPAT.xlsx"');
           header('Cache-Control: max-age=0');
 
 	  $writer->save('php://output');

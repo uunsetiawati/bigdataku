@@ -22,6 +22,7 @@
     <script type="text/javascript"
         src="https://code.jquery.com/jquery-3.5.1.js">
     </script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 
     <!-- DataTables CSS -->
     <link rel="stylesheet" href=
@@ -150,6 +151,17 @@
 						</div>
 					</a>
 				</li>			
+				<li>				
+					<a href="<?=site_url('laporan/laporan')?>" class="list-item" id="accordionParent2">
+						<div class="list-media">	
+							<i class="icon ion-ios-document bg-purple"></i>
+						</div>
+						<div class="list-label">
+							<div class="list-title" data-target="#accordionTwo1">LAPORAN</div>
+							<div class="list-after"><i class="icon ion-ios-arrow-forward"></i></div>
+						</div>
+					</a>
+				</li>
 			</ul>
 		</div>
 

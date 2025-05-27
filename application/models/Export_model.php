@@ -46,4 +46,31 @@ class Export_model extends CI_Model {
           return $this->db->get();
      }
 
+     public function getSemua_Koperasi()
+     {
+          $this->db->select('*');
+          $this->db->from('tb_peserta_koperasi');
+          $this->db->order_by('tgl_mulai','DESC');
+
+          return $this->db->get();
+     }
+
+     public function getSemua_Ukm()
+     {
+          $this->db->select('*');
+          $this->db->from('tb_peserta_ukm');
+          $this->db->order_by('tgl_mulai','DESC');
+
+          return $this->db->get();
+     }
+
+     public function getSemua_Rapat()
+     {
+          $this->db->select('*');
+          $this->db->from('tb_peserta_rapat');
+          $this->db->order_by('tgl_mulai','DESC');
+
+          return $this->db->get();
+     }
+
 }

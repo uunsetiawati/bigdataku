@@ -237,6 +237,21 @@
 		{
 			$this->db->insert('tb_data_peserta_fix', $data); // Sesuaikan 'nama_tabel' dengan nama tabel database Anda
 		}
+
+		public function uploadtDataKoperasi($data)
+		{
+			$this->db->insert('tb_peserta_koperasi', $data); // Sesuaikan 'nama_tabel' dengan nama tabel database Anda
+		}
+
+		public function uploadtDataUkm($data)
+		{
+			$this->db->insert('tb_peserta_ukm', $data); // Sesuaikan 'nama_tabel' dengan nama tabel database Anda
+		}
+
+		public function uploadtDataRapat($data)
+		{
+			$this->db->insert('tb_peserta_rapat', $data); // Sesuaikan 'nama_tabel' dengan nama tabel database Anda
+		}
 	}
 
 ?>
