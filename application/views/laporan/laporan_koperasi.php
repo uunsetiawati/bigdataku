@@ -43,7 +43,7 @@
             </div>
             <div class="col-4 align-self-center">
                 <div class="content statistic text-left">
-                    <h4>belum</h4>
+                    <h4><?=$total_rapat?></h4>
                     <span class="text-small">RAPAT</span>
                 </div>
             </div>
