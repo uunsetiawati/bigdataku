@@ -24,7 +24,7 @@
     <div class="button-default">
         <!-- <a href="uploads/file/uploadexcel.xlsx" class="button4">Download Template Excel</a> -->
             <?php
-        echo anchor('uploads/file/uploadexcel.xlsx', 'Download Template Excel', array('class'=>'button4'));
+        echo anchor('uploads/file/KOPERASI.xlsx', 'Download Template Excel', array('class'=>'button4'));
         ?>
     </div>
 
